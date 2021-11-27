@@ -1,4 +1,24 @@
+@import '../../shared/styles/constants.scss';
+@import '../../shared/styles/colors.scss';
+
+$custom-btn-padding: 10vw;
+
 .landing-page {
-  background-color: red;
   flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &-title {
+    padding: $s3;
+    border: 2px solid $black;
+    width: fit-content;
+    margin-bottom: $s5;
+  }
+
+  &-cta {
+    padding-left: $custom-btn-padding;
+    padding-right: $custom-btn-padding;
+  }
 }
