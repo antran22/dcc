@@ -16,38 +16,75 @@
     width: fit-content;
   }
 
-  &-fill {
+  &-fill-parent {
     width: 100%;
   }
 }
 
-// Colors
-.btn-cyan {
-  color: white;
+// Outlined
+.btn-outline-cyan {
+  color: $white;
+  background-color: $transparent;
+  border: 2px solid $cyan;
+}
+
+.btn-outline-red-soil {
+  color: $red-soil;
+  background-color: $transparent;
+  border: 2px solid $red-soil;
+}
+
+.btn-outline-dark-green {
+  color: $dark-green;
+  background-color: $transparent;
+  border: 2px solid $dark-green;
+}
+
+.btn-outline-nude {
+  color: $nude;
+  background-color: $transparent;
+  border: 2px solid $nude;
+}
+
+.btn-outline-black {
+  color: $black;
+  background-color: $transparent;
+  border: 2px solid $black;
+}
+
+.btn-outline-white {
+  color: $white;
+  background-color: $transparent;
+  border: 2px solid $white;
+}
+
+// Filled
+.btn-fill-cyan {
+  color: $white;
   background-color: $cyan;
 }
 
-.btn-red-soil {
-  color: white;
+.btn-fill-red-soil {
+  color: $white;
   background-color: $red-soil;
 }
 
-.btn-dark-green {
-  color: white;
+.btn-fill-dark-green {
+  color: $white;
   background-color: $dark-green;
 }
 
-.btn-nude {
-  color: white;
+.btn-fill-nude {
+  color: $white;
   background-color: $nude;
 }
 
-.btn-black {
-  color: white;
+.btn-fill-black {
+  color: $white;
   background-color: $black;
 }
 
-.btn-white {
-  color: black;
+.btn-fill-white {
+  color: $black;
   background-color: $white;
 }
