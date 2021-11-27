@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Tab from '../Tab';
 import Image from 'next/image';
 import logo from '../../../assets/Logo.svg';
@@ -6,13 +6,24 @@ import Cart from '../Cart';
 import styles from './Header.module.scss';
 import { c } from '../../utils/classNameParser';
 
+enum TabChoices {
+  SAN_PHAM_LE = 'Sản phẩm lẻ',
+  GOI_QUA = 'Gói quà',
+  VE_CHUNG_TOI = 'Về chúng tôi',
+}
+
 const Header: React.FC = () => {
+  const [selectedTab, setSelectedTab] = useState<TabChoices>(
+    TabChoices.SAN_PHAM_LE
+  );
+
   return (
     <header className={c([styles.header])}>
       <Tab
         color="black"
-        tabItems={['Sản phẩm lẻ', 'Gói quà', 'Về chúng tôi']}
-        selectedItem={'Sản phẩm lẻ'}
+        tabItems={Object.values(TabChoices)}
+        selectedItem={selectedTab}
+        onTabSelect={(tabValue) => setSelectedTab(tabValue as TabChoices)}
       ></Tab>
       <div className={c([styles['header-logo']])}>
         <Image src={logo} alt="DCC LOGO" />
