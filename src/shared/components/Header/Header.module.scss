@@ -1,0 +1,21 @@
+@import '../../styles/constants.scss';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+
+  position: absolute;
+
+  padding: $s3 $s5;
+
+  &-logo {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+  }
+}

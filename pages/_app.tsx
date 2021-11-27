@@ -2,6 +2,7 @@ import '../src/shared/styles/globals.scss';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
+import Header from '../src/shared/components/Header';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Header />
       <Component {...pageProps} />
     </div>
   );
