@@ -5,7 +5,6 @@
     "no-duplicate-imports": "error",
     "no-var": "error",
     "prefer-const": "error",
-    "no-unused-vars": "error",
     "no-unreachable": "error",
 
     // Warn rules
