@@ -1,0 +1,76 @@
+@use 'sass:math';
+
+@import '../../styles/constants.scss';
+@import '../../styles/colors.scss';
+
+$rotation-value: (math.random(6deg) - 3deg);
+
+@mixin pseudo-tilt {
+  content: ' ';
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  z-index: -1;
+
+  transform: rotate($rotation-value);
+}
+
+.special-title {
+  width: fit-content;
+
+  position: relative;
+  overflow: visible;
+
+  margin: $s2;
+}
+
+// Colors
+.special-title-cyan {
+  &::after {
+    @include pseudo-tilt();
+    background-color: lighten($cyan);
+  }
+}
+
+.special-title-red-soil {
+  &::after {
+    @include pseudo-tilt();
+    background-color: lighten($red-soil);
+  }
+}
+
+.special-title-dark-green {
+  &::after {
+    @include pseudo-tilt();
+    background-color: lighten($dark-green);
+  }
+}
+
+.special-title-nude {
+  &::after {
+    @include pseudo-tilt();
+    background-color: lighten($nude);
+  }
+}
+
+.special-title-black {
+  color: $white;
+  &::after {
+    @include pseudo-tilt();
+    background-color: $black;
+  }
+}
+
+.special-title-white {
+  &::after {
+    @include pseudo-tilt();
+    background-color: $white;
+  }
+}

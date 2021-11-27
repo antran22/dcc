@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 $cyan: #5f8fa4;
 $red-soil: #bd7152;
 $dark-green: #33462a;
@@ -5,3 +7,7 @@ $nude: #c9a05a;
 $black: #221f20;
 $white: #ffffff;
 $transparent: rgba(0, 0, 0, 0);
+
+@function lighten($color) {
+  @return color.adjust($color, $lightness: 30%);
+}
