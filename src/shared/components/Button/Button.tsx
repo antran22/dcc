@@ -3,10 +3,11 @@ import { c } from '../../utils/classNameParser';
 import styles from './Button.module.scss';
 
 interface ButtonProps {
-  children: string;
+  children: React.ReactNode;
   color: 'cyan' | 'red-soil' | 'dark-green' | 'nude' | 'black' | 'white';
   mode?: 'fill-parent' | 'contain';
   variant?: 'fill' | 'outline';
+  classNames?: string[];
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -14,6 +15,7 @@ const Button: React.FC<ButtonProps> = ({
   variant = 'fill',
   color,
   children,
+  classNames = [],
 }: ButtonProps) => {
   return (
     <button
@@ -21,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
         styles.btn,
         styles[`btn-${mode}`],
         styles[`btn-${variant}-${color}`],
+        ...classNames,
       ])}
     >
       {children}

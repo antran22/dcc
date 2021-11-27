@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 import Header from '../src/shared/components/Header';
+import AppWrapper from '../src/shared/components/AppWrapper/AppWrapper';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -13,8 +14,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
-      <Component {...pageProps} />
+      <AppWrapper>
+        <Header />
+        <Component {...pageProps} />
+      </AppWrapper>
     </div>
   );
 }
