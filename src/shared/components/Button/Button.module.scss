@@ -1,29 +1,12 @@
 @import '../../styles/colors.scss';
 @import '../../styles/constants.scss';
-
-@mixin reset-button {
-  outline: none;
-  border: none;
-}
+@import '../../styles/mixins.scss';
 
 .btn {
   @include reset-button();
 
-  font-family: 'IBM Plex Mono', monospace;
   font-weight: 600;
   padding: $s3 $s2;
-
-  transition: opacity 0.5s;
-
-  &:hover {
-    cursor: pointer;
-    opacity: 0.6;
-  }
-
-  &:active {
-    cursor: pointer;
-    opacity: 0.8;
-  }
 
   &:focus {
     outline: $s1 solid blue;

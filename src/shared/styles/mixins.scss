@@ -1,0 +1,32 @@
+@mixin reset-button {
+  outline: none;
+  border: none;
+  font-family: 'IBM Plex Mono', monospace;
+  margin: 0;
+
+  transition: opacity 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+
+  &:active {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+@mixin emulate-button {
+  transition: opacity 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+
+  &:active {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}

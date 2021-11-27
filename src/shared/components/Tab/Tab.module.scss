@@ -1,0 +1,24 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
+
+.tab {
+  border-style: solid;
+
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+
+  padding: 0px;
+  margin: 0px;
+  width: fit-content;
+}
+
+// Colors
+.tab-black {
+  border-color: $black;
+}
+
+.tab-white {
+  border-color: $white;
+}

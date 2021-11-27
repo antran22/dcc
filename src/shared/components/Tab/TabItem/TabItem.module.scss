@@ -1,0 +1,41 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/colors.scss';
+@import '../../../styles/constants.scss';
+
+.tab-item {
+  display: inline-block;
+  padding: $s3;
+
+  border-style: solid;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-top-width: 0px;
+  border-bottom-width: 0px;
+
+  @include emulate-button();
+}
+
+// Colors
+.tab-item-black {
+  color: $black;
+  background-color: $transparent;
+  border-left-color: $black;
+  border-right-color: $black;
+
+  &-selected {
+    color: $white;
+    background-color: $black;
+  }
+}
+
+.tab-item-white {
+  color: $white;
+  background-color: $transparent;
+  border-left-color: $white;
+  border-right-color: $white;
+
+  &-selected {
+    color: $black;
+    background-color: $white;
+  }
+}
