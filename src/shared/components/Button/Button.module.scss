@@ -1,0 +1,70 @@
+@import '../../styles/colors.scss';
+@import '../../styles/constants.scss';
+
+@mixin reset-button {
+  outline: none;
+  border: none;
+}
+
+.btn {
+  @include reset-button();
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  padding: $s3 $s2;
+
+  transition: opacity 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+
+  &:active {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline: $s1 solid blue;
+  }
+
+  &-contain {
+    width: fit-content;
+  }
+
+  &-fill {
+    width: 100%;
+  }
+}
+
+// Colors
+.btn-cyan {
+  color: white;
+  background-color: $cyan;
+}
+
+.btn-red-soil {
+  color: white;
+  background-color: $red-soil;
+}
+
+.btn-dark-green {
+  color: white;
+  background-color: $dark-green;
+}
+
+.btn-nude {
+  color: white;
+  background-color: $nude;
+}
+
+.btn-black {
+  color: white;
+  background-color: $black;
+}
+
+.btn-white {
+  color: black;
+  background-color: $white;
+}
