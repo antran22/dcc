@@ -1,7 +1,7 @@
 import '../src/shared/styles/globals.scss';
 import type { AppProps } from 'next/app';
-import React from 'react';
 import Head from 'next/head';
+import React from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write pages/**/*.{tsx,ts}"
+    "format": "prettier --write {src,pages}/**/*.{tsx,ts}"
   },
   "dependencies": {
     "next": "12.0.4",
