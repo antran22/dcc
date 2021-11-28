@@ -1,5 +1,7 @@
 .left-banner {
   background-color: red;
+  background-image: url(../../../assets/img/about-banner.png);
+  background-size: cover;
 
-  flex-grow: 1;
+  flex-basis: 50%;
 }
