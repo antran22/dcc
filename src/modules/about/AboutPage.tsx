@@ -1,11 +1,14 @@
 import { NextPage } from 'next';
 import Text from '../../shared/components/Text';
+import styles from './AboutPage.module.scss';
+import LeftBanner from './LeftBanner';
+import MainContent from './MainContent';
 
 const AboutPage: NextPage = () => {
   return (
-    <div>
-      <main>About us</main>
-      <Text.SpecialTitle color="cyan"></Text.SpecialTitle>
+    <div className={styles['about-page']}>
+      <LeftBanner></LeftBanner>
+      <MainContent></MainContent>
     </div>
   );
 };
