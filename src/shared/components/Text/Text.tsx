@@ -4,9 +4,11 @@ import specialTitleStyles from './SpecialTitle.module.scss';
 
 interface SpecialTitleProps {
   color: 'cyan' | 'red-soil' | 'dark-green' | 'nude' | 'black' | 'white';
+  children: string;
 }
 const SpecialTitle: React.FC<SpecialTitleProps> = ({
   color,
+  children,
 }: SpecialTitleProps) => {
   return (
     <div
@@ -15,7 +17,7 @@ const SpecialTitle: React.FC<SpecialTitleProps> = ({
         specialTitleStyles[`special-title-${color}`],
       ])}
     >
-      Special Title
+      {children}
     </div>
   );
 };
