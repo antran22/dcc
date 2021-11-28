@@ -1,0 +1,24 @@
+@import '../../../shared/styles/constants.scss';
+@import '../../../shared/styles/colors.scss';
+
+.about-page-main-content-section-three {
+  border: 1px solid $black;
+
+  display: flex;
+
+  &-square-content {
+    border: 1px solid $black;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: $s3;
+    text-align: center;
+
+    &-title {
+      margin-bottom: $s3;
+    }
+  }
+}

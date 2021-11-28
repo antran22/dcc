@@ -7,6 +7,8 @@ import { assets } from '../../../assets';
 import { c } from '../../../shared/utils/classNameParser';
 import SectionOne from '../SectionOne';
 import SectionTwo from '../SectionTwo';
+import SectionThree from '../SectionThree';
+import SectionFour from '../SectionFour';
 
 const MainContent: React.FC = () => {
   return (
@@ -19,6 +21,8 @@ const MainContent: React.FC = () => {
 
       <SectionOne></SectionOne>
       <SectionTwo></SectionTwo>
+      <SectionThree></SectionThree>
+      <SectionFour></SectionFour>
     </main>
   );
 };

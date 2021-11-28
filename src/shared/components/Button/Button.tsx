@@ -1,10 +1,11 @@
 import React from 'react';
+import { DCCColors } from '../../types';
 import { c } from '../../utils/classNameParser';
 import styles from './Button.module.scss';
 
 interface ButtonProps {
   children: React.ReactNode;
-  color: 'cyan' | 'red-soil' | 'dark-green' | 'nude' | 'black' | 'white';
+  color: DCCColors;
   mode?: 'fill-parent' | 'contain';
   variant?: 'fill' | 'outline';
   classNames?: string[];
