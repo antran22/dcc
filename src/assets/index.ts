@@ -5,6 +5,7 @@ import aboutContentTwo from './img/about-content-two.png';
 
 // SVG
 import dccFullLong from './svg/dcc-full-long.svg';
+import aboutTitle from './svg/about-title.svg';
 import logo from './svg/logo.svg';
 
 export const assets = {
@@ -15,5 +16,6 @@ export const assets = {
 
   // SVG
   dccFullLong,
+  aboutTitle,
   logo,
 };

@@ -1,4 +1,9 @@
 .about-page {
-  flex-grow: 1;
+  height: 100%;
   display: flex;
+
+  &-main-wrapper {
+    flex-basis: 50%;
+    flex-grow: 0;
+  }
 }

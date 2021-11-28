@@ -8,7 +8,10 @@ const AboutPage: NextPage = () => {
   return (
     <div className={styles['about-page']}>
       <LeftBanner></LeftBanner>
-      <MainContent></MainContent>
+
+      <div className={styles['about-page-main-wrapper']}>
+        <MainContent></MainContent>
+      </div>
     </div>
   );
 };

@@ -1,9 +1,14 @@
 @import '../../../shared/styles/constants.scss';
 
 .about-page-main-content {
-  flex-basis: 50%;
-  flex-grow: 0;
+  height: 100%;
   padding: $s5;
+
+  overflow: scroll;
+
+  &-title {
+    width: 50%;
+  }
 
   &-divider {
     margin: $s5 0;
