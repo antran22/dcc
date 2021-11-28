@@ -1,12 +1,41 @@
 @import '../../../shared/styles/constants.scss';
+@import '../../../shared/styles/colors.scss';
 
 .landing-squares {
-  background-color: red;
-
   position: absolute;
 
   width: 100%;
   height: 100%;
 
   padding: $s5;
+
+  &-block {
+    width: 15vw;
+    height: 25vh;
+    z-index: -10;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  &-cyan {
+    background-color: $cyan;
+  }
+
+  &-grey {
+    background-color: $grey;
+  }
+
+  &-red-soil {
+    background-color: $red-soil;
+  }
+
+  &-dark-green {
+    background-color: $dark-green;
+  }
+
+  &-nude {
+    background-color: $nude;
+  }
 }

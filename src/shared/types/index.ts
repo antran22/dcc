@@ -4,4 +4,5 @@ export type DCCColors =
   | 'dark-green'
   | 'nude'
   | 'black'
-  | 'white';
+  | 'white'
+  | 'grey';
