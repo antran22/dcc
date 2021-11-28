@@ -1,4 +1,5 @@
 @import '../../styles/constants.scss';
+@import '../../styles/mixins.scss';
 
 .header {
   display: flex;
@@ -11,6 +12,7 @@
   padding: $s3 $s5;
 
   &-logo {
+    @include emulate-button();
     position: absolute;
 
     top: 50%;

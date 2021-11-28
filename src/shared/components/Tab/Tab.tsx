@@ -3,11 +3,14 @@ import { c } from '../../utils/classNameParser';
 import styles from './Tab.module.scss';
 import { TabItem } from './TabItem';
 
+export interface TabItemData {
+  label: string;
+}
 interface TabProps {
   color: 'black' | 'white';
-  tabItems: string[];
-  selectedItem: string;
-  onTabSelect: (tabValue: string) => void;
+  tabItems: TabItemData[];
+  selectedItem: TabItemData | null;
+  onTabSelect: (tabValue: TabItemData) => void;
 }
 
 const Tab: React.FC<TabProps> = ({
@@ -22,11 +25,10 @@ const Tab: React.FC<TabProps> = ({
         <TabItem
           key={i}
           color={color}
-          selected={content === selectedItem}
+          selected={content.label === selectedItem?.label}
           onTabSelect={onTabSelect}
-        >
-          {content}
-        </TabItem>
+          tabItem={content}
+        ></TabItem>
       ))}
     </div>
   );

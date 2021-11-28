@@ -5,6 +5,7 @@ import Cart from '../Cart';
 import styles from './Header.module.scss';
 import { c } from '../../utils/classNameParser';
 import { assets } from '../../../assets';
+import { useRouter } from 'next/router';
 
 enum TabChoices {
   SAN_PHAM_LE = 'Sản phẩm lẻ',
@@ -12,20 +13,49 @@ enum TabChoices {
   VE_CHUNG_TOI = 'Về chúng tôi',
 }
 
+interface HeaderItem {
+  label: string;
+  url: string;
+}
+
 const Header: React.FC = () => {
-  const [selectedTab, setSelectedTab] = useState<TabChoices>(
-    TabChoices.SAN_PHAM_LE
-  );
+  const headerItems: HeaderItem[] = [
+    {
+      label: TabChoices.SAN_PHAM_LE,
+      url: '/individual-items',
+    },
+    {
+      label: TabChoices.GOI_QUA,
+      url: '/packages',
+    },
+    {
+      label: TabChoices.VE_CHUNG_TOI,
+      url: '/about',
+    },
+  ];
+
+  const [selectedTab, setSelectedTab] = useState<HeaderItem | null>(null);
+  const router = useRouter();
 
   return (
     <header className={c([styles.header])}>
       <Tab
         color="black"
-        tabItems={Object.values(TabChoices)}
+        tabItems={headerItems}
         selectedItem={selectedTab}
-        onTabSelect={(tabValue) => setSelectedTab(tabValue as TabChoices)}
+        onTabSelect={(tabValue) => {
+          router.push((tabValue as HeaderItem).url);
+          setSelectedTab(tabValue as HeaderItem);
+        }}
       ></Tab>
-      <div className={c([styles['header-logo']])}>
+      <div
+        className={c([styles['header-logo']])}
+        role="button"
+        onClick={() => {
+          router.push('/');
+          setSelectedTab(null);
+        }}
+      >
         <Image src={assets.logo} alt="DCC LOGO" />
       </div>
       <Cart />

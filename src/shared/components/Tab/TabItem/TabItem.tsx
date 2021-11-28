@@ -1,16 +1,17 @@
 import React from 'react';
 import { c } from '../../../utils/classNameParser';
+import { TabItemData } from '../Tab';
 import styles from './TabItem.module.scss';
 
 interface TabItemProps {
-  children: string;
+  tabItem: TabItemData;
   color: 'black' | 'white';
   selected: boolean;
-  onTabSelect: (tabValue: string) => void;
+  onTabSelect: (tabValue: TabItemData) => void;
 }
 
 export const TabItem: React.FC<TabItemProps> = ({
-  children,
+  tabItem,
   color,
   selected,
   onTabSelect,
@@ -25,9 +26,9 @@ export const TabItem: React.FC<TabItemProps> = ({
         styles[`tab-item-${color}`],
         styles[selectedClass],
       ])}
-      onClick={() => onTabSelect(children)}
+      onClick={() => onTabSelect(tabItem)}
     >
-      {children}
+      {tabItem.label}
     </div>
   );
 };
