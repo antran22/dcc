@@ -50,16 +50,25 @@ const IndividualItemsListPage: NextPage = () => {
           />
         </div>
         <div>
-          <IndividualItem showDetails containerStyle={{ height: itemHeight }} />
+          <IndividualItem
+            showDetails
+            containerStyle={{ height: itemHeight }}
+            onCtaClick={() => onCtaClick(10)}
+          />
         </div>
         <div>
-          <IndividualItem showDetails containerStyle={{ height: itemHeight }} />
+          <IndividualItem
+            showDetails
+            containerStyle={{ height: itemHeight }}
+            onCtaClick={() => onCtaClick(10)}
+          />
         </div>
         <div>
-          <IndividualItem showDetails containerStyle={{ height: itemHeight }} />
-        </div>
-        <div>
-          <IndividualItem showDetails containerStyle={{ height: itemHeight }} />
+          <IndividualItem
+            showDetails
+            containerStyle={{ height: itemHeight }}
+            onCtaClick={() => onCtaClick(10)}
+          />
         </div>
       </Slider>
 
