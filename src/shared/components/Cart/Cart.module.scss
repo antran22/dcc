@@ -1,0 +1,16 @@
+@import '../../styles/constants.scss';
+@import '../../styles/colors.scss';
+
+$cart-dimension: 40px;
+.cart {
+  height: $cart-dimension;
+  width: $cart-dimension;
+
+  background-color: $red-soil;
+  color: $white;
+  border-radius: $s5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
