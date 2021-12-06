@@ -1,8 +1,3 @@
-import { NextPage } from 'next';
-import React from 'react';
+import IndividualItemsList from '../src/modules/individual-items/IndividualItemsList/IndividualItemsListPage';
 
-const IndividualItemsPage: NextPage = () => {
-  return <div>TODO</div>;
-};
-
-export default IndividualItemsPage;
+export default IndividualItemsList;
