@@ -1,0 +1,12 @@
+@import '../../../shared/styles/constants.scss';
+
+.quantity-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin: 0 $s5;
+    padding: 0;
+  }
+}

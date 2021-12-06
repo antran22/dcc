@@ -1,31 +1,17 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useAppDispatch } from '../../../redux/hooks';
-import { addItem } from '../../../redux/slices/cart';
-import Button from '../../../shared/components/Button';
 import Text from '../../../shared/components/Text';
 import { colors } from '../../../shared/styles/colors';
-import { CartItem } from '../../../shared/types';
 import IndividualItem from '../IndividualItem';
 import styles from './IndividualItemsDetailsPage.module.scss';
+import ItemQuantityControl from '../ItemQuantityControl';
 
 const IndividualItemsDetailsPage: NextPage = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
 
   // TODO call API to get item data
   const { itemId } = router.query;
-
-  const onAddItemClick = () => {
-    const item: CartItem = {
-      id: '123',
-      name: 'Binh Tinh',
-      price: 250000,
-      quantity: 1,
-    };
-    dispatch(addItem(item));
-  };
 
   return (
     <div className={styles['individual-items-details-page']}>
@@ -46,11 +32,7 @@ const IndividualItemsDetailsPage: NextPage = () => {
         </div>
         <div className={styles['individual-items-details-page-content-footer']}>
           <Text.PLarge>234.000đ</Text.PLarge>
-          <div>
-            <Button color="red-soil" onClick={onAddItemClick}>
-              THÊM VÀO GIỎ
-            </Button>
-          </div>
+          <ItemQuantityControl itemId={itemId as string} />
         </div>
       </div>
     </div>
