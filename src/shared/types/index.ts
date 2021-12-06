@@ -6,3 +6,10 @@ export type DCCColors =
   | 'black'
   | 'white'
   | 'grey';
+
+export interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
