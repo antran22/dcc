@@ -9,6 +9,7 @@ interface ButtonProps {
   mode?: 'fill-parent' | 'contain';
   variant?: 'fill' | 'outline';
   classNames?: string[];
+  onClick: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -16,10 +17,12 @@ const Button: React.FC<ButtonProps> = ({
   variant = 'fill',
   color,
   children,
+  onClick,
   classNames = [],
 }: ButtonProps) => {
   return (
     <button
+      onClick={onClick}
       className={c([
         styles.btn,
         styles[`btn-${mode}`],
