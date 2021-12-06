@@ -2,6 +2,8 @@
 import aboutBanner from './img/about-banner.png';
 import aboutContentOne from './img/about-content-one.png';
 import aboutContentTwo from './img/about-content-two.png';
+import itemBinhAn from './img/item-binh-an.png';
+import itemBinhTinh from './img/item-binh-tinh.png';
 
 // SVG
 import dccFullLong from './svg/dcc-full-long.svg';
@@ -13,6 +15,8 @@ export const assets = {
   aboutBanner,
   aboutContentOne,
   aboutContentTwo,
+  itemBinhAn,
+  itemBinhTinh,
 
   // SVG
   dccFullLong,
