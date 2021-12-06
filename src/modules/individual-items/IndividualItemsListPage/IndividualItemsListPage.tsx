@@ -76,6 +76,8 @@ const CustomPagination = (dots: React.ReactNode) => (
 
       position: 'fixed',
       bottom: 0,
+
+      borderTop: '1px solid rgb(209, 209, 209)',
     }}
   >
     <ul style={{ margin: '0px' }}> {dots} </ul>

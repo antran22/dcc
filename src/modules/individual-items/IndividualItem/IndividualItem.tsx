@@ -34,7 +34,7 @@ const IndividualItem: React.FC<IndividualItemProps> = ({
         <>
           <div className={styles['individual-item-info']}>
             <h1>BINH TINH</h1>
-            <p>234.000đ</p>
+            <h2 className={styles['individual-item-info-price']}>234.000đ</h2>
           </div>
           <div
             className={styles['individual-item-btn-container']}
@@ -42,7 +42,7 @@ const IndividualItem: React.FC<IndividualItemProps> = ({
               visibility: showCta ? 'visible' : 'hidden',
             }}
           >
-            <Button color="white" mode="fill-parent">
+            <Button color="white" mode="fill-parent" onClick={() => {}}>
               CHI TIẾT SẢN PHẨM
             </Button>
           </div>
