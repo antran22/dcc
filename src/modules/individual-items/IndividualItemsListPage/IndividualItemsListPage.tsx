@@ -1,7 +1,9 @@
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import React, { useContext, useRef } from 'react';
 import Slider from 'react-slick';
 import { ViewportDimensionContext } from '../../../shared/contexts/viewportDimensionContext';
+import { colors } from '../../../shared/styles/colors';
 import { HEADER_HEIGHT } from '../../../shared/styles/constants';
 import IndividualItem from '../IndividualItem';
 import SliderArrow from '../SliderArrow';
@@ -9,6 +11,7 @@ import styles from './IndividualItemsListPage.module.scss';
 
 const IndividualItemsListPage: NextPage = () => {
   const { height } = useContext(ViewportDimensionContext);
+  const router = useRouter();
   const sliderRef = useRef<Slider>(null);
   const PAGINATION_HEIGHT = 100;
   const itemHeight = height - HEADER_HEIGHT - PAGINATION_HEIGHT;
@@ -32,11 +35,19 @@ const IndividualItemsListPage: NextPage = () => {
     sliderRef.current?.slickPrev();
   };
 
+  const onCtaClick = (itemId: number) => {
+    router.push(`/individual-items/${itemId}`);
+  };
+
   return (
     <div className={styles['individual-items-list-page']}>
       <Slider {...settings} ref={sliderRef}>
         <div>
-          <IndividualItem showDetails containerStyle={{ height: itemHeight }} />
+          <IndividualItem
+            showDetails
+            containerStyle={{ height: itemHeight }}
+            onCtaClick={() => onCtaClick(10)}
+          />
         </div>
         <div>
           <IndividualItem showDetails containerStyle={{ height: itemHeight }} />
@@ -77,7 +88,7 @@ const CustomPagination = (dots: React.ReactNode) => (
       position: 'fixed',
       bottom: 0,
 
-      borderTop: '1px solid rgb(209, 209, 209)',
+      borderTop: `1px solid ${colors.grey}`,
     }}
   >
     <ul style={{ margin: '0px' }}> {dots} </ul>

@@ -9,6 +9,7 @@ $white: #ffffff;
 $transparent: rgba(0, 0, 0, 0);
 
 $grey: rgb(209, 209, 209);
+$light-grey: #f5f5f5;
 
 @function lighten($color) {
   @return color.adjust($color, $lightness: 30%);
