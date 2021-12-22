@@ -1,5 +1,20 @@
 .cart-sidebar {
-  background-color: red;
-
   height: 100%;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  &-body {
+    height: 70%;
+    overflow: auto;
+  }
+
+  &-footer {
+    &-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
 }

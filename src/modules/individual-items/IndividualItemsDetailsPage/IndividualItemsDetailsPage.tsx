@@ -22,7 +22,7 @@ const IndividualItemsDetailsPage: NextPage = () => {
       />
       <div className={styles['individual-items-details-page-content']}>
         <div className={styles['individual-items-details-page-content-title']}>
-          {/* TODO Change to actual font */}
+          {/* TODO: Change to actual font */}
           <h1 style={{ fontSize: 60 }}>BINH TINH</h1>
         </div>
         <div

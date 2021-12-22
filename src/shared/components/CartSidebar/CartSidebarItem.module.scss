@@ -1,0 +1,27 @@
+@import '../../styles/constants.scss';
+
+.cart-sidebar-item {
+  display: flex;
+
+  h4 {
+    margin: 0;
+  }
+
+  &-image {
+    position: relative;
+    flex: 1;
+  }
+
+  &-description {
+    flex: 2;
+
+    &-price {
+      margin-bottom: $s4;
+    }
+  }
+
+  &-quantity {
+    flex: 1;
+    background-color: blue;
+  }
+}

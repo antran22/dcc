@@ -7,7 +7,7 @@ interface ButtonProps {
   children: React.ReactNode;
   color: DCCColors;
   mode?: 'fill-parent' | 'contain';
-  variant?: 'fill' | 'outline';
+  variant?: 'fill' | 'outline' | 'underscore';
   classNames?: string[];
   onClick: () => void;
 }
