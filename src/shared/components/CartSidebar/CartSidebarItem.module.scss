@@ -21,7 +21,10 @@
   }
 
   &-quantity {
-    flex: 1;
-    background-color: blue;
+    flex-basis: 100px;
+    height: 100px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: $s3;
   }
 }
