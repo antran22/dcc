@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 import React, { useCallback, useContext } from 'react';
 import { useSelector } from 'react-redux';
-import { cartSelector } from '../../../redux/slices/cart';
+import { useAppSelector } from '../../../redux/hooks';
+import { cartSelector, cartSumSelector } from '../../../redux/slices/cart';
 import { SidebarContext } from '../../contexts/SidebarContext';
 import { CartItem } from '../../types';
+import { formatCurrency } from '../../utils/number';
 import Button from '../Button';
 import SidebarContainer from '../SidebarContainer';
 import Text from '../Text';
@@ -53,6 +55,7 @@ interface CartSidebarWithItemProps {
 const CartSidebarWithItem: React.FC<CartSidebarWithItemProps> = ({
   cartItems,
 }) => {
+  const cartTotalSum = useAppSelector(cartSumSelector);
   return (
     <div className={styles['cart-sidebar']}>
       <div className={styles['cart-sidebar-body']}>
@@ -65,7 +68,7 @@ const CartSidebarWithItem: React.FC<CartSidebarWithItemProps> = ({
         <div className={styles['cart-sidebar-footer-total']}>
           <Text.P thickness="thin">Tổng:</Text.P>
           <Text.P thickness="thick" size="large">
-            100.000đ
+            {formatCurrency(cartTotalSum)}
           </Text.P>
         </div>
         <Button color="red-soil" mode="fill-parent" onClick={() => {}}>

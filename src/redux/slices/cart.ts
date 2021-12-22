@@ -39,7 +39,14 @@ export const cartSlice = createSlice({
 });
 
 export const { addItem, removeItem, deleteItem } = cartSlice.actions;
+
+// Selectors
 export const cartSelector = (state: RootState) => state.cart;
+export const cartSumSelector = createSelector([cartSelector], (cart) => {
+  return cart.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+});
 export const cartAmountSelector = createSelector([cartSelector], (cart) => {
   return cart.reduce((total, item) => {
     return total + item.quantity;
