@@ -2,14 +2,14 @@ import React from 'react';
 import { DCCColors } from '../../types';
 import { c } from '../../utils/classNameParser';
 import specialTitleStyles from './SpecialTitle.module.scss';
-import pLargeStyles from './PLarge.module.scss';
+import pStyles from './P.module.scss';
 
 interface TextProps {
   children: string;
+  classNames?: string[];
 }
 interface SpecialTitleProps extends TextProps {
   color: DCCColors;
-  classNames?: string[];
 }
 const SpecialTitle: React.FC<SpecialTitleProps> = ({
   color,
@@ -29,14 +29,32 @@ const SpecialTitle: React.FC<SpecialTitleProps> = ({
   );
 };
 
-interface PLargeProps extends TextProps {}
-const PLarge: React.FC<PLargeProps> = ({ children }) => {
-  return <p className={pLargeStyles['p-large']}>{children}</p>;
+interface PProps extends TextProps {
+  size?: 'large' | 'normal';
+  thickness?: 'thick' | 'normal' | 'thin';
+}
+const P: React.FC<PProps> = ({
+  children,
+  size = 'normal',
+  thickness = 'normal',
+  classNames = [],
+}) => {
+  return (
+    <p
+      className={c([
+        pStyles[`p-thickness-${thickness}`],
+        pStyles[`p-size-${size}`],
+        ...classNames,
+      ])}
+    >
+      {children}
+    </p>
+  );
 };
 
 const Text = {
   SpecialTitle,
-  PLarge,
+  P,
 };
 
 export default Text;

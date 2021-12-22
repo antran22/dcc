@@ -43,7 +43,7 @@ const IndividualItem: React.FC<IndividualItemProps> = ({
         <>
           <div className={styles['individual-item-info']}>
             <h1>BINH TINH</h1>
-            <Text.PLarge>234.000đ</Text.PLarge>
+            <Text.P size="large">234.000đ</Text.P>
           </div>
           <div
             className={styles['individual-item-btn-container']}

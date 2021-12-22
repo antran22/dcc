@@ -29,7 +29,14 @@ const SquareContent: React.FC<SquareContentData> = ({
       >
         {title}
       </Text.SpecialTitle>
-      <p style={{ margin: 0 }}>{details}</p>
+      <Text.P
+        thickness="thin"
+        classNames={[
+          styles['about-page-main-content-section-three-square-content-p'],
+        ]}
+      >
+        {details}
+      </Text.P>
     </div>
   );
 };

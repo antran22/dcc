@@ -2,12 +2,12 @@ import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { BREAKPOINT_MOBILE, BREAKPOINT_TABLET } from '../styles/constants';
 
 export const SidebarContext = createContext<SidebarState>({
-  sidebarIsOpen: true,
+  sidebarIsOpen: false,
   setSidebarIsOpen: () => {},
 });
 
 export function SidebarProvider({ children }: SidebarProviderProps) {
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(true);
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 
   return (
     <SidebarContext.Provider

@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 import Header from '../src/shared/components/Header';
 import AppWrapper from '../src/shared/components/AppWrapper/AppWrapper';
 import store from '../src/redux/store';
-import SidebarContainer from '../src/shared/components/SidebarContainer';
 import ContextWrapper from '../src/shared/components/ContextWrapper';
+import CartSidebar from '../src/shared/components/CartSidebar';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <AppWrapper>
             <Header />
             <Component {...pageProps} />
-            <SidebarContainer />
+            <CartSidebar />
           </AppWrapper>
         </div>
       </ContextWrapper>

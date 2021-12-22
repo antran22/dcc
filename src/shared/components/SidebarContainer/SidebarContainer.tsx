@@ -13,9 +13,17 @@ import { c } from '../../utils/classNameParser';
 
 const CROSS_SIZE = 20;
 
-const SidebarContainer: React.FC = () => {
+interface SidebarContainerProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+const SidebarContainer: React.FC<SidebarContainerProps> = ({
+  title,
+  children,
+}) => {
   const { sidebarIsOpen, setSidebarIsOpen } = useContext(SidebarContext);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handleContainerClick = useCallback(
@@ -63,13 +71,17 @@ const SidebarContainer: React.FC = () => {
         ])}
       >
         <div className={styles['sidebar-container-content-header']}>
-          <p>Gio hang</p>
+          <p>{title}</p>
           <Button
             onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
             color="white"
           >
             <Cross size={CROSS_SIZE} />
           </Button>
+        </div>
+
+        <div className={styles['sidebar-container-content-body']}>
+          {children}
         </div>
       </div>
     </div>

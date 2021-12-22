@@ -12,5 +12,10 @@
     flex-basis: 70%;
     flex-grow: 0;
     line-height: $s4;
+
+    &-p {
+      margin: 0;
+      margin-bottom: 2rem;
+    }
   }
 }

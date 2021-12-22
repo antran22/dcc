@@ -31,7 +31,7 @@ const IndividualItemsDetailsPage: NextPage = () => {
           <h1>BINH TINH</h1>
         </div>
         <div className={styles['individual-items-details-page-content-footer']}>
-          <Text.PLarge>234.000đ</Text.PLarge>
+          <Text.P size="large">234.000đ</Text.P>
           <ItemQuantityControl itemId={itemId as string} />
         </div>
       </div>
