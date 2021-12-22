@@ -1,6 +1,8 @@
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useCallback, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { cartSelector } from '../../../redux/slices/cart';
+import { SidebarContext } from '../../contexts/SidebarContext';
 import { CartItem } from '../../types';
 import Button from '../Button';
 import SidebarContainer from '../SidebarContainer';
@@ -23,13 +25,21 @@ const CartSidebar: React.FC = () => {
 };
 
 const EmptyCartSidebar: React.FC = () => {
+  const router = useRouter();
+  const { setSidebarIsOpen } = useContext(SidebarContext);
+
+  const handleCtaClick = useCallback(() => {
+    router.push('/individual-items');
+    setSidebarIsOpen(false);
+  }, [router, setSidebarIsOpen]);
+
   return (
     <div>
       <Button
         variant="fill"
         color="black"
         mode="fill-parent"
-        onClick={() => {}}
+        onClick={handleCtaClick}
       >
         TIẾP TỤC MUA SẮM
       </Button>
