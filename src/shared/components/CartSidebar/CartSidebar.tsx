@@ -34,7 +34,7 @@ const EmptyCartSidebar: React.FC = () => {
   }, [router, setSidebarIsOpen]);
 
   return (
-    <div>
+    <div className={styles['empty-cart-sidebar']}>
       <Button
         variant="fill"
         color="black"
