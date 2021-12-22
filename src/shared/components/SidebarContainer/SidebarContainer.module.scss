@@ -1,0 +1,56 @@
+@import '../../styles/colors.scss';
+@import '../../styles/constants.scss';
+
+.sidebar-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+
+  transition: background-color 0.5s ease;
+
+  &-open {
+    background-color: opacify($black, 0.85);
+  }
+
+  &-close {
+    background-color: opacify($black, 0);
+  }
+
+  &-content {
+    background-color: $white;
+    height: 100vh;
+
+    position: absolute;
+    right: 0;
+
+    overflow: hidden;
+
+    transition: width 0.5s ease;
+
+    &-open {
+      width: 35vw;
+    }
+
+    &-close {
+      width: 0;
+    }
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: $s3 $s5 0 $s5;
+
+      p {
+        padding: 0;
+        margin: 0;
+
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

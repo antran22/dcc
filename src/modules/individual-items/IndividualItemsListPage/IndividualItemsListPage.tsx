@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useContext, useRef } from 'react';
 import Slider from 'react-slick';
-import { ViewportDimensionContext } from '../../../shared/contexts/viewportDimensionContext';
+import { ViewportDimensionContext } from '../../../shared/contexts/ViewportDimensionContext';
 import { colors } from '../../../shared/styles/colors';
 import { HEADER_HEIGHT } from '../../../shared/styles/constants';
 import IndividualItem from '../IndividualItem';

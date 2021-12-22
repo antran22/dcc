@@ -5,13 +5,14 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import Header from '../src/shared/components/Header';
 import AppWrapper from '../src/shared/components/AppWrapper/AppWrapper';
-import { ViewportDimensionProvider } from '../src/shared/contexts/viewportDimensionContext';
 import store from '../src/redux/store';
+import SidebarContainer from '../src/shared/components/SidebarContainer';
+import ContextWrapper from '../src/shared/components/ContextWrapper';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <ViewportDimensionProvider>
+      <ContextWrapper>
         <div>
           <Head>
             <title>Create Next App</title>
@@ -22,9 +23,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           <AppWrapper>
             <Header />
             <Component {...pageProps} />
+            <SidebarContainer />
           </AppWrapper>
         </div>
-      </ViewportDimensionProvider>
+      </ContextWrapper>
     </Provider>
   );
 }
