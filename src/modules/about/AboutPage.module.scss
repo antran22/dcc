@@ -1,5 +1,7 @@
+@import '../../shared/styles/constants.scss';
+
 .about-page {
-  height: 100%;
+  height: calc(100% - $header-height);
   display: flex;
 
   &-main-wrapper {
