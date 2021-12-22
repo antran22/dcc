@@ -6,11 +6,19 @@ import Text from '../Text';
 import styles from './CartSidebarItem.module.scss';
 import Button from '../Button';
 import { formatCurrency } from '../../utils/number';
+import { useAppDispatch } from '../../../redux/hooks';
+import { deleteItem } from '../../../redux/slices/cart';
 
 interface CartSidebarItemProps {
   cartItem: CartItem;
 }
 const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
+  const dispatch = useAppDispatch();
+
+  const onDeleteItemClick = () => {
+    dispatch(deleteItem(cartItem.id));
+  };
+
   return (
     <div className={styles['cart-sidebar-item']}>
       <div className={styles['cart-sidebar-item-image']}>
@@ -27,7 +35,7 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
         <Text.P classNames={[styles['cart-sidebar-item-description-price']]}>
           {formatCurrency(cartItem.price)}
         </Text.P>
-        <Button variant="underscore" color="black" onClick={() => {}}>
+        <Button variant="underscore" color="black" onClick={onDeleteItemClick}>
           Xoá
         </Button>
       </div>

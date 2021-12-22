@@ -21,15 +21,24 @@ export const cartSlice = createSlice({
     },
     removeItem: (state, action) => {
       const item = state.find((item) => (item.id = action.payload));
-      // Keep item with 0 quantity and remove them from cart later during checkout
       if (item && item.quantity > 0) {
-        item.quantity--;
+        if (item.quantity === 1) {
+          state.filter((_item) => _item.id !== item.id);
+        } else {
+          item.quantity--;
+        }
+      }
+    },
+    deleteItem: (state, action) => {
+      const itemIndex = state.findIndex((item) => (item.id = action.payload));
+      if (itemIndex > -1) {
+        state.splice(itemIndex, 1);
       }
     },
   },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, removeItem, deleteItem } = cartSlice.actions;
 export const cartSelector = (state: RootState) => state.cart;
 export const cartAmountSelector = createSelector([cartSelector], (cart) => {
   return cart.reduce((total, item) => {
