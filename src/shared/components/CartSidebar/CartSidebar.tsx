@@ -16,7 +16,21 @@ import Spacer from '../Spacer';
 
 const CartSidebar: React.FC = () => {
   const cartItems = useSelector(cartSelector);
+  const router = useRouter();
+  const { setSidebarIsOpen } = useContext(SidebarContext);
   const [currentStep, setCurrentStep] = useState(0);
+
+  const handleCheckout = () => {
+    if (currentStep === 0) {
+      setCurrentStep(1);
+    } else {
+      router.push('/checkout');
+      setSidebarIsOpen(false);
+      setTimeout(() => {
+        setCurrentStep(0);
+      }, 600);
+    }
+  };
 
   return (
     <SidebarContainer
@@ -31,7 +45,7 @@ const CartSidebar: React.FC = () => {
         <CartSidebarWithItem
           currentStep={currentStep}
           cartItems={cartItems}
-          onCheckout={() => setCurrentStep(1)}
+          onCheckout={handleCheckout}
         />
       ) : (
         <EmptyCartSidebar />
