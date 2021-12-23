@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiFillQuestionCircle as Question } from 'react-icons/ai';
 import { c } from '../../../shared/utils/classNameParser';
 import styles from './ItemInformation.module.scss';
 import Text from '../../../shared/components/Text';
 import Button from '../../../shared/components/Button';
+import ModalWrapper from '../../../shared/components/ModalWrapper';
 
 const ItemInformation: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div className={styles['item-information']}>
       <div
@@ -23,7 +26,7 @@ const ItemInformation: React.FC = () => {
           classNames={[styles['item-information-box-btn']]}
           color="black"
           variant="underscore"
-          onClick={() => {}}
+          onClick={() => setShowModal(true)}
         >
           Doc Them
         </Button>
@@ -43,7 +46,7 @@ const ItemInformation: React.FC = () => {
         classNames={[styles['item-information-box-small-btn']]}
         color="black"
         variant="outline"
-        onClick={() => {}}
+        onClick={() => setShowModal(true)}
       >
         <div
           className={c([
@@ -55,6 +58,10 @@ const ItemInformation: React.FC = () => {
           <Question color="grey" />
         </div>
       </Button>
+
+      <ModalWrapper visible={showModal} onClose={() => setShowModal(false)}>
+        <div>Hello world</div>
+      </ModalWrapper>
     </div>
   );
 };
