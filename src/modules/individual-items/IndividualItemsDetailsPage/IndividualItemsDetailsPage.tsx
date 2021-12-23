@@ -6,6 +6,7 @@ import { colors } from '../../../shared/styles/colors';
 import IndividualItem from '../IndividualItem';
 import styles from './IndividualItemsDetailsPage.module.scss';
 import ItemQuantityControl from '../ItemQuantityControl';
+import ItemInformation from './ItemInformation';
 
 const IndividualItemsDetailsPage: NextPage = () => {
   const router = useRouter();
@@ -25,11 +26,9 @@ const IndividualItemsDetailsPage: NextPage = () => {
           {/* TODO: Change to actual font */}
           <h1 style={{ fontSize: 60 }}>BINH TINH</h1>
         </div>
-        <div
-          className={styles['individual-items-details-page-content-details']}
-        >
-          <h1>BINH TINH</h1>
-        </div>
+
+        <ItemInformation />
+
         <div className={styles['individual-items-details-page-content-footer']}>
           <Text.P size="large">234.000đ</Text.P>
           <ItemQuantityControl itemId={itemId as string} />

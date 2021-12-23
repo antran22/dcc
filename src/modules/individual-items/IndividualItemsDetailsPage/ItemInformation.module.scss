@@ -1,0 +1,38 @@
+@import '../../../shared/styles/constants.scss';
+@import '../../../shared/styles/colors.scss';
+
+.item-information {
+  flex: 3;
+  padding: $s5;
+
+  &-box {
+    float: left;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-btn {
+      font-weight: 300;
+    }
+
+    &-big {
+      max-width: 45%;
+      min-width: 45%;
+      padding: $s4;
+      border: 2px solid $black;
+      margin: 0 $s1 $s1 $s1;
+    }
+
+    &-small {
+      display: flex;
+      flex-direction: row;
+
+      &-btn {
+        font-weight: 300;
+        margin: 0 $s1 $s1 $s1;
+      }
+    }
+  }
+}
