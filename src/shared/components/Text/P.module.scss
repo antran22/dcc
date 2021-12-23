@@ -1,4 +1,6 @@
 .p {
+  line-height: 10px;
+  margin-bottom: 1rem;
   &-thickness {
     &-thick {
       font-weight: 700;
@@ -20,6 +22,10 @@
 
     &-normal {
       font-size: 1rem;
+    }
+
+    &-small {
+      font-size: 0.8rem;
     }
   }
 }

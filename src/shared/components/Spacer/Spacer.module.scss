@@ -1,0 +1,14 @@
+@import '../../styles/constants.scss';
+.spacer {
+  display: inline-block;
+
+  &-normal {
+    width: $s3;
+  }
+  &-small {
+    width: $s2;
+  }
+  &-big {
+    width: $s4;
+  }
+}

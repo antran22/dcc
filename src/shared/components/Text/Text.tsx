@@ -30,7 +30,7 @@ const SpecialTitle: React.FC<SpecialTitleProps> = ({
 };
 
 interface PProps extends TextProps {
-  size?: 'large' | 'normal';
+  size?: 'large' | 'normal' | 'small';
   thickness?: 'thick' | 'normal' | 'thin';
 }
 const P: React.FC<PProps> = ({
