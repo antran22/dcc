@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppSelector } from '../../../redux/hooks';
 import { cartSelector, cartSumSelector } from '../../../redux/slices/cart';
@@ -11,18 +11,55 @@ import SidebarContainer from '../SidebarContainer';
 import Text from '../Text';
 import styles from './CartSidebar.module.scss';
 import CartSidebarItem from './CartSidebarItem';
+import { AiOutlineArrowLeft as BackIcon } from 'react-icons/ai';
+import Spacer from '../Spacer';
 
 const CartSidebar: React.FC = () => {
   const cartItems = useSelector(cartSelector);
+  const [currentStep, setCurrentStep] = useState(0);
 
   return (
-    <SidebarContainer title="Giỏ hàng">
+    <SidebarContainer
+      title={
+        <CartSidebarHeader
+          onBack={() => setCurrentStep(0)}
+          currentStep={currentStep}
+        />
+      }
+    >
       {cartItems.length > 0 ? (
-        <CartSidebarWithItem cartItems={cartItems} />
+        <CartSidebarWithItem
+          cartItems={cartItems}
+          onCheckout={() => setCurrentStep(1)}
+        />
       ) : (
         <EmptyCartSidebar />
       )}
     </SidebarContainer>
+  );
+};
+
+interface CartSidebarHeaderProps {
+  currentStep: number;
+  onBack: () => void;
+}
+const CartSidebarHeader: React.FC<CartSidebarHeaderProps> = ({
+  currentStep,
+  onBack,
+}) => {
+  const BACK_SIZE = 20;
+  if (currentStep === 0) {
+    return <Text.P>Giỏ hàng</Text.P>;
+  }
+
+  return (
+    <div className={styles['cart-sidebar-header']}>
+      <Button color="white" onClick={onBack}>
+        <BackIcon size={BACK_SIZE} />
+      </Button>
+      <Spacer />
+      <Text.P>Mua thêm</Text.P>
+    </div>
   );
 };
 
@@ -51,9 +88,11 @@ const EmptyCartSidebar: React.FC = () => {
 
 interface CartSidebarWithItemProps {
   cartItems: CartItem[];
+  onCheckout: () => void;
 }
 const CartSidebarWithItem: React.FC<CartSidebarWithItemProps> = ({
   cartItems,
+  onCheckout,
 }) => {
   const cartTotalSum = useAppSelector(cartSumSelector);
   return (
@@ -71,7 +110,7 @@ const CartSidebarWithItem: React.FC<CartSidebarWithItemProps> = ({
             {formatCurrency(cartTotalSum)}
           </Text.P>
         </div>
-        <Button color="red-soil" mode="fill-parent" onClick={() => {}}>
+        <Button color="red-soil" mode="fill-parent" onClick={onCheckout}>
           TIẾN HÀNH THANH TOÁN
         </Button>
       </div>

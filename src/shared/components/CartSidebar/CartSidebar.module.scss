@@ -7,8 +7,14 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 
+  &-header {
+    display: flex;
+    align-items: center;
+  }
+
   &-body {
-    height: 70%;
+    padding-top: $s5;
+    height: 80%;
     overflow: auto;
   }
 

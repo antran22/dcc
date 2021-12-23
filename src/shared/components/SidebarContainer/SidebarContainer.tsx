@@ -14,7 +14,7 @@ import { c } from '../../utils/classNameParser';
 const CROSS_SIZE = 20;
 
 interface SidebarContainerProps {
-  title: string;
+  title: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -71,7 +71,9 @@ const SidebarContainer: React.FC<SidebarContainerProps> = ({
         ])}
       >
         <div className={styles['sidebar-container-content-header']}>
-          <p>{title}</p>
+          <div className={styles['sidebar-container-content-header-title']}>
+            {title}
+          </div>
           <Button
             onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
             color="white"
