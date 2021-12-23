@@ -3,19 +3,19 @@ import { c } from '../../../utils/classNameParser';
 import { TabItemData } from '../Tab';
 import styles from './TabItem.module.scss';
 
-interface TabItemProps {
-  tabItem: TabItemData;
+interface TabItemProps<T extends TabItemData> {
+  tabItem: T;
   color: 'black' | 'white';
   selected: boolean;
-  onTabSelect: (tabValue: TabItemData) => void;
+  onTabSelect: (tabValue: T) => void;
 }
 
-export const TabItem: React.FC<TabItemProps> = ({
+export function TabItem<T extends TabItemData>({
   tabItem,
   color,
   selected,
   onTabSelect,
-}: TabItemProps) => {
+}: TabItemProps<T>) {
   const selectedClass = selected ? `tab-item-${color}-selected` : '';
   return (
     <div
@@ -31,4 +31,4 @@ export const TabItem: React.FC<TabItemProps> = ({
       {tabItem.label}
     </div>
   );
-};
+}

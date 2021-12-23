@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Tab from '../Tab';
 import Image from 'next/image';
 import Cart from '../Cart';
@@ -34,18 +34,23 @@ const Header: React.FC = () => {
     },
   ];
 
-  const [selectedTab, setSelectedTab] = useState<HeaderItem | null>(null);
   const router = useRouter();
+  const [currentPath, setCurrentPath] = useState('');
+
+  useEffect(() => {
+    setCurrentPath(router.pathname);
+  }, [router.pathname]);
 
   return (
     <header className={c([styles.header])}>
       <Tab
         color="black"
         tabItems={headerItems}
-        selectedItem={selectedTab}
+        isItemSelected={(item) => {
+          return currentPath.includes(item.url);
+        }}
         onTabSelect={(tabValue) => {
-          router.push((tabValue as HeaderItem).url);
-          setSelectedTab(tabValue as HeaderItem);
+          router.push(tabValue.url);
         }}
       ></Tab>
       <div
@@ -53,7 +58,6 @@ const Header: React.FC = () => {
         role="button"
         onClick={() => {
           router.push('/');
-          setSelectedTab(null);
         }}
       >
         <Image src={assets.logo} alt="DCC LOGO" />

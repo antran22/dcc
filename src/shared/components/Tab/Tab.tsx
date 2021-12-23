@@ -6,32 +6,32 @@ import { TabItem } from './TabItem';
 export interface TabItemData {
   label: string;
 }
-interface TabProps {
+interface TabProps<T extends TabItemData> {
   color: 'black' | 'white';
-  tabItems: TabItemData[];
-  selectedItem: TabItemData | null;
-  onTabSelect: (tabValue: TabItemData) => void;
+  tabItems: Array<T>;
+  isItemSelected: (tabItem: T) => boolean;
+  onTabSelect: (tabValue: T) => void;
 }
 
-const Tab: React.FC<TabProps> = ({
+function Tab<T extends TabItemData>({
   color,
   tabItems,
-  selectedItem,
+  isItemSelected,
   onTabSelect,
-}: TabProps) => {
+}: TabProps<T>) {
   return (
     <div role="tablist" className={c([styles.tab, styles[`tab-${color}`]])}>
       {tabItems.map((content, i) => (
         <TabItem
           key={i}
           color={color}
-          selected={content.label === selectedItem?.label}
+          selected={isItemSelected(content)}
           onTabSelect={onTabSelect}
           tabItem={content}
         ></TabItem>
       ))}
     </div>
   );
-};
+}
 
 export default Tab;
