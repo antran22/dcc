@@ -29,6 +29,7 @@ const CartSidebar: React.FC = () => {
     >
       {cartItems.length > 0 ? (
         <CartSidebarWithItem
+          currentStep={currentStep}
           cartItems={cartItems}
           onCheckout={() => setCurrentStep(1)}
         />
@@ -87,21 +88,23 @@ const EmptyCartSidebar: React.FC = () => {
 };
 
 interface CartSidebarWithItemProps {
+  currentStep: number;
   cartItems: CartItem[];
   onCheckout: () => void;
 }
 const CartSidebarWithItem: React.FC<CartSidebarWithItemProps> = ({
+  currentStep,
   cartItems,
   onCheckout,
 }) => {
   const cartTotalSum = useAppSelector(cartSumSelector);
   return (
     <div className={styles['cart-sidebar']}>
-      <div className={styles['cart-sidebar-body']}>
-        {cartItems.map((cartItem) => (
-          <CartSidebarItem cartItem={cartItem} key={cartItem.id} />
-        ))}
-      </div>
+      {currentStep === 0 ? (
+        <CartContent cartItems={cartItems} />
+      ) : (
+        <CrossSell />
+      )}
 
       <div className={styles['cart-sidebar-footer']}>
         <div className={styles['cart-sidebar-footer-total']}>
@@ -114,6 +117,29 @@ const CartSidebarWithItem: React.FC<CartSidebarWithItemProps> = ({
           TIẾN HÀNH THANH TOÁN
         </Button>
       </div>
+    </div>
+  );
+};
+
+interface CartContentProps {
+  cartItems: CartItem[];
+}
+const CartContent: React.FC<CartContentProps> = ({ cartItems }) => {
+  return (
+    <div className={styles['cart-sidebar-body']}>
+      {cartItems.map((cartItem) => (
+        <CartSidebarItem cartItem={cartItem} key={cartItem.id} />
+      ))}
+    </div>
+  );
+};
+
+const CrossSell: React.FC = () => {
+  return (
+    <div className={styles['cross-sell']}>
+      <Text.P thickness="thin" classNames={[styles['cross-sell-p']]}>
+        Nếu bạn mua để tặng người ấy thì Đồ Chơi Chữ có thêm lựa chọn cho bạn:
+      </Text.P>
     </div>
   );
 };
