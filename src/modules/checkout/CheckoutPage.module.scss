@@ -1,0 +1,6 @@
+@import '../../shared/styles/constants.scss';
+
+.checkout-page {
+  background-color: red;
+  height: calc(100% - $header-height);
+}

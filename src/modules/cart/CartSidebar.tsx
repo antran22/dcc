@@ -1,19 +1,19 @@
 import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useAppSelector } from '../../../redux/hooks';
-import { cartSelector, cartSumSelector } from '../../../redux/slices/cart';
-import { SidebarContext } from '../../../shared/contexts/SidebarContext';
-import { CartItem } from '../../../shared/types';
-import { formatCurrency } from '../../../shared/utils/number';
-import Button from '../../../shared/components/Button';
-import SidebarContainer from '../../../shared/components/SidebarContainer';
-import Text from '../../../shared/components/Text';
+import { useAppSelector } from '../../redux/hooks';
+import { cartSelector, cartSumSelector } from '../../redux/slices/cart';
+import { SidebarContext } from '../../shared/contexts/SidebarContext';
+import { CartItem } from '../../shared/types';
+import { formatCurrency } from '../../shared/utils/number';
+import Button from '../../shared/components/Button';
+import SidebarContainer from '../../shared/components/SidebarContainer';
+import Text from '../../shared/components/Text';
 import styles from './CartSidebar.module.scss';
-import CartSidebarItem from '../CartSidebarItem';
+import CartSidebarItem from './CartSidebarItem';
 import { AiOutlineArrowLeft as BackIcon } from 'react-icons/ai';
-import Spacer from '../../../shared/components/Spacer';
-import EmptyCartSidebar from '../EmptyCartSidebar';
+import Spacer from '../../shared/components/Spacer';
+import EmptyCartSidebar from './EmptyCartSidebar';
 
 const CartSidebar: React.FC = () => {
   const cartItems = useSelector(cartSelector);

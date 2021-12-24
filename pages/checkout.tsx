@@ -1,8 +1,3 @@
-import { NextPage } from 'next';
-import React from 'react';
+import CheckoutPage from '../src/modules/checkout';
 
-const Checkout: NextPage = () => {
-  return <div>TODO</div>;
-};
-
-export default Checkout;
+export default CheckoutPage;
