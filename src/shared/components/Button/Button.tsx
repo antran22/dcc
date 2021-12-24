@@ -9,20 +9,26 @@ interface ButtonProps {
   mode?: 'fill-parent' | 'contain';
   variant?: 'fill' | 'outline' | 'underscore';
   classNames?: string[];
-  onClick: () => void;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  onClick?: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
   mode = 'contain',
   variant = 'fill',
+  disabled = false,
+  type,
   color,
   children,
-  onClick,
+  onClick = () => {},
   classNames = [],
 }: ButtonProps) => {
   return (
     <button
       onClick={onClick}
+      type={type}
+      disabled={disabled}
       className={c([
         styles.btn,
         styles[`btn-${mode}`],

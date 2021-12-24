@@ -1,6 +1,36 @@
-.checkout-form {
-  background-color: red;
-  height: 100%;
+@import '../../../shared/styles/constants.scss';
 
+.checkout-form {
+  height: 100%;
   overflow-y: auto;
+  padding: $s5 $s3;
+
+  background-color: yellow;
+
+  &-section {
+    padding: $s5;
+
+    &-header {
+      display: flex;
+
+      &-title {
+        margin-left: $s3;
+        h2 {
+          padding-bottom: $s2;
+        }
+      }
+    }
+  }
+
+  &-button {
+    padding: 0 $s5;
+    &-wrapper {
+      display: flex;
+      justify-content: center;
+
+      &-text {
+        margin-right: $s2;
+      }
+    }
+  }
 }
