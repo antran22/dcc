@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { assets } from '../../../assets';
-import { CartItem } from '../../types';
-import Text from '../Text';
+import { CartItem } from '../../../shared/types';
+import Text from '../../../shared/components/Text';
 import styles from './CartSidebarItem.module.scss';
-import Button from '../Button';
-import { formatCurrency } from '../../utils/number';
+import Button from '../../../shared/components/Button';
+import { formatCurrency } from '../../../shared/utils/number';
 import { useAppDispatch } from '../../../redux/hooks';
 import { deleteItem, setQuantity } from '../../../redux/slices/cart';
-import { Form } from '../Form';
+import { Form } from '../../../shared/components/Form';
 import { debounce } from 'lodash';
-import Spacer from '../Spacer';
-import { c } from '../../utils/classNameParser';
+import Spacer from '../../../shared/components/Spacer';
+import { c } from '../../../shared/utils/classNameParser';
 
 interface CartSidebarItemProps {
   cartItem: CartItem;

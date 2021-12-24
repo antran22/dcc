@@ -7,7 +7,7 @@ import Header from '../src/shared/components/Header';
 import AppWrapper from '../src/shared/components/AppWrapper/AppWrapper';
 import store from '../src/redux/store';
 import ContextWrapper from '../src/shared/components/ContextWrapper';
-import CartSidebar from '../src/shared/components/CartSidebar';
+import CartSidebar from '../src/modules/cart/CartSidebar';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
