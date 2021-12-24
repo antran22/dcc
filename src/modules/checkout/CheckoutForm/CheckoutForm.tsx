@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import NumberBullet from '../../../shared/components/NumberBullet';
 import styles from './CheckoutForm.module.scss';
 import Text from '../../../shared/components/Text';
@@ -6,26 +6,33 @@ import { Formik, Field, Form } from 'formik';
 import Button from '../../../shared/components/Button';
 import { AiOutlineArrowRight as ForwardIcon } from 'react-icons/ai';
 import TextInput from '../../../shared/components/Form/TextInput';
+import * as yup from 'yup';
 
 interface CheckoutFormProps {}
 const ICON_SIZE = 20;
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
+  const schema = (() => {
+    const phoneRegExp =
+      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+    const schema = yup.object().shape({
+      email: yup.string().email().required(),
+      name: yup.string().required(),
+      phoneNumber: yup
+        .string()
+        .matches(phoneRegExp, 'Phone number is not valid')
+        .required(),
+      address: yup.string().required(),
+    });
+    return schema;
+  })();
+
   return (
     <div className={styles['checkout-form']}>
       <Formik
         initialValues={{ email: '', name: '', phoneNumber: '', address: '' }}
-        validate={(values) => {
-          const errors: Record<string, string> = {};
-          if (!values.email) {
-            errors.email = 'Required';
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-          ) {
-            errors.email = 'Invalid email address';
-          }
-          return errors;
-        }}
+        validationSchema={schema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
@@ -93,7 +100,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
                 as={TextInput}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.name}
+                value={values.address}
               />
             </section>
 

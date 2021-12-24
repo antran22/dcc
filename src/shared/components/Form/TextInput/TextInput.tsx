@@ -6,12 +6,17 @@ import { c } from '../../../utils/classNameParser';
 
 interface TextInputProps extends FieldConfig<any> {
   label: string;
+  onBlur?: (e: React.FocusEvent) => void;
 }
 
-const TextInput: React.FC<TextInputProps> = ({ label, ...props }) => {
+const TextInput: React.FC<TextInputProps> = ({
+  label,
+  onBlur = () => {},
+  ...props
+}) => {
   const [field, meta] = useField(props);
   const [isFocus, setIsFocus] = useState(false);
-  const shouldShowError = meta.touched && meta.error;
+  const shouldShowError = meta.error && meta.touched;
 
   return (
     <div className={c([styles['text-input-wrapper']])}>
@@ -28,7 +33,10 @@ const TextInput: React.FC<TextInputProps> = ({ label, ...props }) => {
           {...field}
           {...props}
           onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
+          onBlur={(e) => {
+            setIsFocus(false);
+            onBlur(e);
+          }}
         />
       </label>
       {shouldShowError && (
