@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import React from 'react';
 import CartSummary from './CartSummary';
+import CheckoutForm from './CheckoutForm';
 import styles from './CheckoutPage.module.scss';
 import Footer from './Footer';
 
@@ -9,7 +10,7 @@ const CheckoutPage: NextPage = () => {
     <div className={styles['checkout-page']}>
       <div className={styles['checkout-page-content']}>
         <section className={styles['checkout-page-content-section']}>
-          form
+          <CheckoutForm />
         </section>
         <section className={styles['checkout-page-content-section']}>
           <CartSummary />
