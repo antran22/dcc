@@ -9,6 +9,8 @@ import itemBinhTinh from './img/item-binh-tinh.png';
 import dccFullLong from './svg/dcc-full-long.svg';
 import aboutTitle from './svg/about-title.svg';
 import logo from './svg/logo.svg';
+import banking from './svg/banking.svg';
+import cod from './svg/cod.svg';
 
 export const assets = {
   // IMG,
@@ -22,4 +24,6 @@ export const assets = {
   dccFullLong,
   aboutTitle,
   logo,
+  banking,
+  cod,
 };

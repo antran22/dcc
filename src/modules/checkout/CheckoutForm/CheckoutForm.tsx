@@ -7,8 +7,16 @@ import Button from '../../../shared/components/Button';
 import { AiOutlineArrowRight as ForwardIcon } from 'react-icons/ai';
 import TextInput from '../../../shared/components/Form/TextInput';
 import * as yup from 'yup';
+import Radio from '../../../shared/components/Form/Radio';
+import Spacer from '../../../shared/components/Spacer';
+import { assets } from '../../../assets';
 
 interface CheckoutFormProps {}
+enum PaymentOptions {
+  SHIP_COD = 'SHIP_COD',
+  CHUYEN_KHOAN = 'CHUYEN_KHOAN',
+}
+
 const ICON_SIZE = 20;
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
@@ -24,6 +32,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
         .matches(phoneRegExp, 'Phone number is not valid')
         .required(),
       address: yup.string().required(),
+      paymentOption: yup.string().required(),
     });
     return schema;
   })();
@@ -31,7 +40,13 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
   return (
     <div className={styles['checkout-form']}>
       <Formik
-        initialValues={{ email: '', name: '', phoneNumber: '', address: '' }}
+        initialValues={{
+          email: '',
+          name: '',
+          phoneNumber: '',
+          address: '',
+          paymentOption: PaymentOptions.SHIP_COD,
+        }}
         validationSchema={schema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
@@ -115,6 +130,35 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
                   </Text.P>
                 </div>
               </header>
+              <div
+                className={styles['checkout-form-section-radio']}
+                role="group"
+                aria-labelledby="my-radio-group"
+              >
+                <Field
+                  type="radio"
+                  name="paymentOption"
+                  label="SHIP COD"
+                  value={PaymentOptions.SHIP_COD}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  classNames={[styles['checkout-form-section-radio-field']]}
+                  icon={assets.cod}
+                  as={Radio}
+                />
+                <Spacer size="big" />
+                <Field
+                  type="radio"
+                  label="CHUYỂN KHOẢN"
+                  name="paymentOption"
+                  classNames={[styles['checkout-form-section-radio-field']]}
+                  value={PaymentOptions.CHUYEN_KHOAN}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  icon={assets.banking}
+                  as={Radio}
+                />
+              </div>
             </section>
 
             <section className={styles['checkout-form-button']}>

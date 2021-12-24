@@ -10,4 +10,4 @@ const NumberInput: React.FC<
   return <input className={styles['number-input']} type="number" {...props} />;
 };
 
-export { NumberInput };
+export default NumberInput;

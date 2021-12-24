@@ -20,6 +20,14 @@
         }
       }
     }
+
+    &-radio {
+      display: flex;
+
+      &-field {
+        flex: 1;
+      }
+    }
   }
 
   &-button {
