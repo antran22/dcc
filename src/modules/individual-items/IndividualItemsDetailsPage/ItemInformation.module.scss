@@ -23,7 +23,9 @@
       min-width: 45%;
       padding: $s4;
       border: 2px solid $black;
-      margin: 0 $s1 $s1 $s1;
+
+      // Fix border overlap problem
+      margin: -1px;
     }
 
     &-small {
@@ -32,7 +34,9 @@
 
       &-btn {
         font-weight: 300;
-        margin: 0 $s1 $s1 $s1;
+
+        // Fix border overlap problem
+        margin: -1px;
       }
     }
   }
