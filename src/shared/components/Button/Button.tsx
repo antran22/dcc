@@ -33,6 +33,7 @@ const Button: React.FC<ButtonProps> = ({
         styles.btn,
         styles[`btn-${mode}`],
         styles[`btn-${variant}-${color}`],
+        disabled ? styles['btn-disabled'] : '',
         ...classNames,
       ])}
     >

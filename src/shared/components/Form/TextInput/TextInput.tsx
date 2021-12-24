@@ -22,7 +22,7 @@ const TextInput: React.FC<TextInputProps> = ({ label, ...props }) => {
           isFocus ? styles['text-input-focus'] : '',
         ])}
       >
-        {label}
+        <span className={styles['text-input-label']}>{label}</span>
         <input
           className={styles['text-input-main']}
           {...field}

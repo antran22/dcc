@@ -36,7 +36,6 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
         {({
           values,
           errors,
-          touched,
           handleChange,
           handleBlur,
           handleSubmit,
@@ -69,8 +68,28 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
               <Field
                 type="text"
                 name="name"
-                label="Name"
-                placeholder="Name..."
+                label="Họ tên"
+                placeholder="Họ tên..."
+                as={TextInput}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.name}
+              />
+              <Field
+                type="text"
+                name="phoneNumber"
+                label="SĐT"
+                placeholder="SĐT..."
+                as={TextInput}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.phoneNumber}
+              />
+              <Field
+                type="text"
+                name="address"
+                label="Địa chỉ"
+                placeholder="Địa chỉ..."
                 as={TextInput}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -96,7 +115,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
                 color="red-soil"
                 mode="fill-parent"
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || Object.keys(errors).length > 0}
               >
                 <div className={styles['checkout-form-button-wrapper']}>
                   <Text.P

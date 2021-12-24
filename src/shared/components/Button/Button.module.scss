@@ -12,6 +12,20 @@
     outline: $s1 solid $blue;
   }
 
+  &-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
   &-contain {
     width: fit-content;
   }

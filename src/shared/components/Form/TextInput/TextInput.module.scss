@@ -26,6 +26,10 @@
     outline: 2px solid $blue;
   }
 
+  &-label {
+    width: 100px;
+  }
+
   &-main {
     margin-left: $s5;
     background-color: $transparent;
