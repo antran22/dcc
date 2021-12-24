@@ -1,7 +1,12 @@
 @import '../../../shared/styles/constants.scss';
+@import '../../../shared/styles/colors.scss';
 
 .footer {
   padding: $s3;
-  text-align: center;
-  height: $header-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $footer-height;
+
+  border-top: 1px solid $grey;
 }

@@ -2,7 +2,7 @@
 
 .checkout-form {
   padding: $s5 $s3;
-  height: calc(100vh - $header-height - $header-height);
+  height: calc(100vh - $header-height - $footer-height);
   overflow-y: auto;
 
   &-section {
