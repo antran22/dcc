@@ -7,13 +7,11 @@
   flex-direction: column;
 
   &-content {
-    background-color: green;
     flex: 1;
 
     display: flex;
 
     &-section {
-      background-color: yellow;
       flex: 1;
     }
   }

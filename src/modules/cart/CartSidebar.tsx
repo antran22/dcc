@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useAppSelector } from '../../redux/hooks';
 import { cartSelector, cartSumSelector } from '../../redux/slices/cart';
 import { SidebarContext } from '../../shared/contexts/SidebarContext';
@@ -16,7 +15,7 @@ import Spacer from '../../shared/components/Spacer';
 import EmptyCartSidebar from './EmptyCartSidebar';
 
 const CartSidebar: React.FC = () => {
-  const cartItems = useSelector(cartSelector);
+  const cartItems = useAppSelector(cartSelector);
   const router = useRouter();
   const { setSidebarIsOpen } = useContext(SidebarContext);
   const [currentStep, setCurrentStep] = useState(0);

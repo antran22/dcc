@@ -1,3 +1,67 @@
+@import '../../../shared/styles/constants.scss';
+@import '../../../shared/styles/colors.scss';
+
+$border-size: 2px;
+
 .cart-summary {
-  background-color: aqua;
+  height: 100%;
+  padding: $s5;
+
+  &-box {
+    border: $border-size solid $black;
+
+    &-title {
+      border-bottom: $border-size solid $black;
+      padding: $s3 $s3 0 $s4;
+    }
+
+    &-details {
+      padding: $s3 $s5;
+
+      &-items {
+        padding: $s5 0;
+        border-bottom: $border-size solid $black;
+
+        max-height: 45vh;
+        overflow-y: auto;
+
+        &-wrapper {
+          display: flex;
+          justify-content: space-between;
+          padding-bottom: $s5;
+
+          &-image {
+            position: relative;
+            flex: 1;
+          }
+
+          &-details {
+            flex: 2;
+            margin: 0 $s2;
+
+            h2 {
+              padding-bottom: $s2;
+            }
+          }
+
+          &-price {
+            flex: 2;
+            text-align: right;
+          }
+        }
+      }
+
+      &-footer {
+        &-total {
+          display: flex;
+          justify-content: space-between;
+          margin: $s4 0;
+        }
+
+        &-disclaimer {
+          font-style: italic;
+        }
+      }
+    }
+  }
 }
