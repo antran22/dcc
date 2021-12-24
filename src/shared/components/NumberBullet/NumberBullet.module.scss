@@ -1,0 +1,16 @@
+@import '../../styles/colors.scss';
+
+.number-bullet {
+  background-color: $black;
+  width: fit-content;
+
+  color: $white;
+
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
