@@ -12,7 +12,7 @@
   height: 100%;
 
   &:focus {
-    outline: $s1 solid blue;
+    outline: $s1 solid $blue;
   }
 
   &::-webkit-outer-spin-button,

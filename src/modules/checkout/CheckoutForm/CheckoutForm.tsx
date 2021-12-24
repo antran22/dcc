@@ -2,9 +2,10 @@ import React from 'react';
 import NumberBullet from '../../../shared/components/NumberBullet';
 import styles from './CheckoutForm.module.scss';
 import Text from '../../../shared/components/Text';
-import { Formik } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import Button from '../../../shared/components/Button';
 import { AiOutlineArrowRight as ForwardIcon } from 'react-icons/ai';
+import TextInput from '../../../shared/components/Form/TextInput';
 
 interface CheckoutFormProps {}
 const ICON_SIZE = 20;
@@ -13,7 +14,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
   return (
     <div className={styles['checkout-form']}>
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: '', name: '', phoneNumber: '', address: '' }}
         validate={(values) => {
           const errors: Record<string, string> = {};
           if (!values.email) {
@@ -42,7 +43,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
           isSubmitting,
           /* and other goodies */
         }) => (
-          <form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <section className={styles['checkout-form-section']}>
               <header className={styles['checkout-form-section-header']}>
                 <NumberBullet title={1} />
@@ -55,22 +56,26 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
                 </div>
               </header>
 
-              <input
+              <Field
                 type="email"
+                label="Email"
                 name="email"
+                placeholder="Email..."
+                as={TextInput}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.email}
               />
-              {errors.email && touched.email && errors.email}
-              <input
-                type="password"
-                name="password"
+              <Field
+                type="text"
+                name="name"
+                label="Name"
+                placeholder="Name..."
+                as={TextInput}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.password}
+                value={values.name}
               />
-              {errors.password && touched.password && errors.password}
             </section>
 
             <section className={styles['checkout-form-section']}>
@@ -103,7 +108,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
                 </div>
               </Button>
             </section>
-          </form>
+          </Form>
         )}
       </Formik>
     </div>

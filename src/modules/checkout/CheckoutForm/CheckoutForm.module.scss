@@ -5,13 +5,12 @@
   overflow-y: auto;
   padding: $s5 $s3;
 
-  background-color: yellow;
-
   &-section {
     padding: $s5;
 
     &-header {
       display: flex;
+      margin-bottom: $s5;
 
       &-title {
         margin-left: $s3;
