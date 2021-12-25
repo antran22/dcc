@@ -10,16 +10,15 @@ import * as yup from 'yup';
 import Radio from '../../../shared/components/Form/Radio';
 import Spacer from '../../../shared/components/Spacer';
 import { assets } from '../../../assets';
+import { CheckoutFormDetails, PaymentOptions } from '../common/types';
 
-interface CheckoutFormProps {}
-enum PaymentOptions {
-  SHIP_COD = 'SHIP_COD',
-  CHUYEN_KHOAN = 'CHUYEN_KHOAN',
+interface CheckoutFormProps {
+  onCheckout: (formDetails: CheckoutFormDetails) => void;
 }
 
 const ICON_SIZE = 20;
 
-const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
+const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
   const schema = (() => {
     // Match Vietnam's phone number. Source: https://www.regextester.com/106725
     const phoneRegExp = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
@@ -49,10 +48,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
         }}
         validationSchema={schema}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          onCheckout(values);
+          setSubmitting(false);
         }}
       >
         {({

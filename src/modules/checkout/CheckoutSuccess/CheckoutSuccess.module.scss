@@ -1,0 +1,49 @@
+@import '../../../shared/styles/constants.scss';
+@import '../../../shared/styles/colors.scss';
+
+.checkout-success {
+  display: flex;
+  padding: $s4;
+
+  &-icon {
+    padding-top: $s1;
+  }
+
+  &-details {
+    margin-left: $s4;
+
+    &-table {
+      margin-top: $s5;
+      padding-bottom: $s3;
+      border-bottom: 1px solid $grey;
+
+      &-row {
+        display: flex;
+        margin-bottom: $s4;
+      }
+
+      &-cell-small {
+        flex: 1;
+        color: $cyan;
+      }
+
+      &-cell-big {
+        flex: 3;
+      }
+    }
+
+    &-button {
+      padding: $s4;
+
+      &-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &-text {
+          margin-left: $s3;
+        }
+      }
+    }
+  }
+}
