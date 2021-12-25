@@ -19,12 +19,13 @@ const ItemQuantityControl: React.FC<ItemQuantityControlProps> = ({
   const TOGGLE_SIZE = 16;
 
   const onAddItemClick = () => {
-    const item: Omit<CartItem, 'quantity'> = {
+    if (item?.quantity === 30) return null;
+    const _item: Omit<CartItem, 'quantity'> = {
       id: itemId,
       name: 'Binh Tinh',
       price: 250000,
     };
-    dispatch(addItem(item));
+    dispatch(addItem(_item));
   };
 
   const onRemoveItemClick = () => dispatch(removeItem(itemId));
