@@ -21,8 +21,8 @@ const ICON_SIZE = 20;
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
   const schema = (() => {
-    const phoneRegExp =
-      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+    // Match Vietnam's phone number. Source: https://www.regextester.com/106725
+    const phoneRegExp = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
 
     const schema = yup.object().shape({
       email: yup.string().email().required(),
