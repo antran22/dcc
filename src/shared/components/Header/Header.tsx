@@ -25,10 +25,11 @@ const Header: React.FC = () => {
       label: TabChoices.SAN_PHAM_LE,
       url: '/individual-items',
     },
-    {
-      label: TabChoices.GOI_QUA,
-      url: '/packages',
-    },
+    // TODO: Enable when Packages is ready
+    // {
+    //   label: TabChoices.GOI_QUA,
+    //   url: '/packages',
+    // },
     {
       label: TabChoices.VE_CHUNG_TOI,
       url: '/about',
