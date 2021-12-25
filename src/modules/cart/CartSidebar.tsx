@@ -13,6 +13,7 @@ import CartSidebarItem from './CartSidebarItem';
 import { AiOutlineArrowLeft as BackIcon } from 'react-icons/ai';
 import Spacer from '../../shared/components/Spacer';
 import EmptyCartSidebar from './EmptyCartSidebar';
+import CrossSell from './CrossSell';
 
 const CartSidebar: React.FC = () => {
   const cartItems = useAppSelector(cartSelector);
@@ -121,16 +122,6 @@ const CartContent: React.FC<CartContentProps> = ({ cartItems }) => {
       {cartItems.map((cartItem) => (
         <CartSidebarItem cartItem={cartItem} key={cartItem.id} />
       ))}
-    </div>
-  );
-};
-
-const CrossSell: React.FC = () => {
-  return (
-    <div className={styles['cross-sell']}>
-      <Text.P thickness="thin" classNames={[styles['cross-sell-p']]}>
-        Nếu bạn mua để tặng người ấy thì Đồ Chơi Chữ có thêm lựa chọn cho bạn:
-      </Text.P>
     </div>
   );
 };

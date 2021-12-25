@@ -36,7 +36,7 @@ const Radio: React.FC<RadioProps> = ({
           field.checked ? styles['radio-img-checked'] : '',
         ])}
       >
-        <Image src={icon} alt="thoi ban" />
+        <Image src={icon} alt={`${label} icon`} />
       </div>
       <Text.P
         classNames={[

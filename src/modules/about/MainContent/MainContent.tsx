@@ -12,11 +12,7 @@ const MainContent: React.FC = () => {
   return (
     <main className={styles['about-page-main-content']}>
       <div className={styles['about-page-main-content-title']}>
-        <Image
-          src={assets.aboutTitle}
-          alt="Cau Chuyen"
-          layout="responsive"
-        ></Image>
+        <Image src={assets.aboutTitle} alt="Cau Chuyen" layout="responsive" />
       </div>
       <Divider
         classNames={[styles['about-page-main-content-divider']]}

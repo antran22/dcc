@@ -26,7 +26,7 @@ const SectionTwo: React.FC = () => {
         src={assets.aboutContentTwo}
         alt="Do Choi Chu Founders"
         layout="responsive"
-      ></Image>
+      />
     </article>
   );
 };

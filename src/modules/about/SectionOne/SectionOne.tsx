@@ -37,7 +37,7 @@ const SectionOne: React.FC = () => {
           src={assets.aboutContentOne}
           alt="Do Choi Chu Cafe"
           layout="responsive"
-        ></Image>
+        />
       </div>
     </article>
   );

@@ -1,0 +1,19 @@
+@import '../../../shared/styles/constants.scss';
+
+.cross-sell-item {
+  &-image {
+    width: 200px;
+    margin-bottom: $s4;
+  }
+
+  &-description {
+    margin-bottom: $s3;
+    h2 {
+      margin-bottom: $s3;
+    }
+  }
+
+  &-button {
+    padding: 0 $s5;
+  }
+}
