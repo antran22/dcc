@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import NumberBullet from '../../../shared/components/NumberBullet';
 import styles from './CheckoutForm.module.scss';
 import Text from '../../../shared/components/Text';
@@ -57,6 +57,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
       >
         {({
           values,
+          touched,
           errors,
           handleChange,
           handleBlur,
@@ -166,7 +167,11 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({}) => {
                 color="red-soil"
                 mode="fill-parent"
                 type="submit"
-                disabled={isSubmitting || Object.keys(errors).length > 0}
+                disabled={
+                  isSubmitting ||
+                  Object.keys(errors).length > 0 ||
+                  Object.keys(touched).length === 0
+                }
               >
                 <div className={styles['checkout-form-button-wrapper']}>
                   <Text.P
