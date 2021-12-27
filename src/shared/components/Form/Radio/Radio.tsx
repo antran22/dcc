@@ -19,7 +19,7 @@ const Radio: React.FC<RadioProps> = ({
   onBlur = () => {},
   ...props
 }) => {
-  const [field, meta] = useField(props);
+  const [field] = useField(props);
 
   return (
     <label

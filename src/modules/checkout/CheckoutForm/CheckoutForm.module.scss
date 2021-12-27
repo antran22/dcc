@@ -19,6 +19,12 @@
 
       &-title {
         margin-left: $s3;
+        @media screen and (max-width: $breakpoint-mobile) {
+          margin-left: 0;
+        }
+        &-wrapper {
+          display: flex;
+        }
         h2 {
           padding-bottom: $s2;
         }
@@ -27,9 +33,16 @@
 
     &-radio {
       display: flex;
+      @media screen and (max-width: $breakpoint-mobile) {
+        flex-direction: column;
+      }
 
       &-field {
         flex: 1;
+        @media screen and (max-width: $breakpoint-tablet) {
+          width: 100%;
+          margin-bottom: $s3;
+        }
       }
     }
   }

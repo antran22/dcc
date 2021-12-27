@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import NumberBullet from '../../../shared/components/NumberBullet';
 import styles from './CheckoutForm.module.scss';
 import Text from '../../../shared/components/Text';
@@ -11,6 +11,7 @@ import Radio from '../../../shared/components/Form/Radio';
 import Spacer from '../../../shared/components/Spacer';
 import { assets } from '../../../assets';
 import { CheckoutFormDetails, PaymentOptions } from '../common/types';
+import { ViewportDimensionContext } from '../../../shared/contexts/ViewportDimensionContext';
 
 interface CheckoutFormProps {
   onCheckout: (formDetails: CheckoutFormDetails) => void;
@@ -19,6 +20,7 @@ interface CheckoutFormProps {
 const ICON_SIZE = 20;
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
+  const { currentMode } = useContext(ViewportDimensionContext);
   const schema = (() => {
     // Match Vietnam's phone number. Source: https://www.regextester.com/106725
     const phoneRegExp = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
@@ -65,10 +67,22 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
           <Form onSubmit={handleSubmit}>
             <section className={styles['checkout-form-section']}>
               <header className={styles['checkout-form-section-header']}>
-                <NumberBullet title={1} />
+                {currentMode !== 'mobile' && <NumberBullet title={1} />}
 
                 <div className={styles['checkout-form-section-header-title']}>
-                  <h2>Khách hàng</h2>
+                  <div
+                    className={
+                      styles['checkout-form-section-header-title-wrapper']
+                    }
+                  >
+                    {currentMode === 'mobile' && (
+                      <>
+                        <NumberBullet title={1} />
+                        <Spacer />
+                      </>
+                    )}
+                    <h2>Khách hàng</h2>
+                  </div>
                   <Text.P thickness="thin">
                     Điền các thông tin cơ bản sau
                   </Text.P>
@@ -119,10 +133,22 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
 
             <section className={styles['checkout-form-section']}>
               <header className={styles['checkout-form-section-header']}>
-                <NumberBullet title={2} />
+                {currentMode !== 'mobile' && <NumberBullet title={2} />}
 
                 <div className={styles['checkout-form-section-header-title']}>
-                  <h2>Thanh toán</h2>
+                  <div
+                    className={
+                      styles['checkout-form-section-header-title-wrapper']
+                    }
+                  >
+                    {currentMode === 'mobile' && (
+                      <>
+                        <NumberBullet title={2} />
+                        <Spacer />
+                      </>
+                    )}
+                    <h2>Thanh toán</h2>
+                  </div>
                   <Text.P thickness="thin">
                     Chọn hình thức thanh toán (Mặc định COD)
                   </Text.P>
@@ -144,7 +170,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
                   icon={assets.cod}
                   as={Radio}
                 />
-                <Spacer size="big" />
+                {currentMode !== 'mobile' && <Spacer size="big" />}
                 <Field
                   type="radio"
                   label="CHUYỂN KHOẢN"

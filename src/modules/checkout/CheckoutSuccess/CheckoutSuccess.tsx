@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './CheckoutSuccess.module.scss';
 import {
   AiFillCheckCircle as CheckIcon,
@@ -10,6 +10,7 @@ import Spacer from '../../../shared/components/Spacer';
 import { CheckoutFormDetails } from '../common/types';
 import Button from '../../../shared/components/Button';
 import { useRouter } from 'next/router';
+import { ViewportDimensionContext } from '../../../shared/contexts/ViewportDimensionContext';
 
 interface CheckoutSuccessProps {
   checkoutFormDetails: CheckoutFormDetails;
@@ -21,15 +22,26 @@ const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({
   checkoutFormDetails,
 }) => {
   const { email, name, address, phoneNumber } = checkoutFormDetails;
+  const { currentMode } = useContext(ViewportDimensionContext);
   const router = useRouter();
 
   return (
     <div className={styles['checkout-success']}>
-      <div className={styles['checkout-success-icon']}>
-        <CheckIcon size={ICON_SIZE} color={colors.green} />
-      </div>
+      {currentMode !== 'mobile' && (
+        <div className={styles['checkout-success-icon']}>
+          <CheckIcon size={ICON_SIZE} color={colors.green} />
+        </div>
+      )}
       <div className={styles['checkout-success-details']}>
-        <h1 style={{ color: colors.green }}>Đặt hàng thành công</h1>
+        <div className={styles['checkout-success-details-header']}>
+          {currentMode === 'mobile' && (
+            <>
+              <CheckIcon size={ICON_SIZE} color={colors.green} />
+              <Spacer />
+            </>
+          )}
+          <h1 style={{ color: colors.green }}>Đặt hàng thành công</h1>
+        </div>
         <Spacer />
         <Text.P thickness="thin">
           Đồ chơi chữ sẽ liên lạc lại với bạn theo thông tin dưới đây để xác
