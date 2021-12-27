@@ -28,7 +28,14 @@ function Tab<T extends TabItemData>({
           selected={isItemSelected(content)}
           onTabSelect={onTabSelect}
           tabItem={content}
-        ></TabItem>
+          containerStyle={
+            i === 0
+              ? {
+                  marginLeft: 0,
+                }
+              : {}
+          }
+        />
       ))}
     </div>
   );

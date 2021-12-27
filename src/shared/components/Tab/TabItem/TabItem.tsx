@@ -8,6 +8,7 @@ interface TabItemProps<T extends TabItemData> {
   color: 'black' | 'white';
   selected: boolean;
   onTabSelect: (tabValue: T) => void;
+  containerStyle?: React.CSSProperties;
 }
 
 export function TabItem<T extends TabItemData>({
@@ -15,6 +16,7 @@ export function TabItem<T extends TabItemData>({
   color,
   selected,
   onTabSelect,
+  containerStyle,
 }: TabItemProps<T>) {
   const selectedClass = selected ? `tab-item-${color}-selected` : '';
   return (
@@ -27,6 +29,7 @@ export function TabItem<T extends TabItemData>({
         styles[selectedClass],
       ])}
       onClick={() => onTabSelect(tabItem)}
+      style={{ ...containerStyle }}
     >
       {tabItem.label}
     </div>
