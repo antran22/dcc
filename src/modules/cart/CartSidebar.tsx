@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
 import { useAppSelector } from '../../redux/hooks';
 import { cartSelector, cartSumSelector } from '../../redux/slices/cart';
-import { SidebarContext } from '../../shared/contexts/SidebarContext';
+import { CartSidebarContext } from '../../shared/contexts/CartSidebarContext';
 import { CartItem } from '../../shared/types';
 import { formatCurrency } from '../../shared/utils/number';
 import Button from '../../shared/components/Button';
@@ -18,7 +18,7 @@ import CrossSell from './CrossSell';
 const CartSidebar: React.FC = () => {
   const cartItems = useAppSelector(cartSelector);
   const router = useRouter();
-  const { sidebarIsOpen, setSidebarIsOpen } = useContext(SidebarContext);
+  const { sidebarIsOpen, setSidebarIsOpen } = useContext(CartSidebarContext);
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleCheckout = () => {

@@ -8,7 +8,7 @@ import React, {
 import styles from './SidebarContainer.module.scss';
 import { AiOutlineClose as Cross } from 'react-icons/ai';
 import Button from '../Button';
-import { SidebarContext } from '../../contexts/SidebarContext';
+import { CartSidebarContext } from '../../contexts/CartSidebarContext';
 import { c } from '../../utils/classNameParser';
 
 const CROSS_SIZE = 20;
