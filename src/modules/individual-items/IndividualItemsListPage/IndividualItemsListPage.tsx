@@ -22,7 +22,7 @@ const IndividualItemsListPage: NextPage = () => {
     infinite: true,
     adaptiveHeight: true,
     speed: 500,
-    slidesToShow: currentMode === 'mobile' ? 1 : 3,
+    slidesToShow: currentMode === 'tablet' ? 1 : 3,
     slidesToScroll: 1,
     appendDots: CustomPagination,
   };

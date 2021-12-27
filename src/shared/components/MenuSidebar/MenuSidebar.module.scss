@@ -1,0 +1,24 @@
+@import '../../styles/constants.scss';
+@import '../../styles/colors.scss';
+
+.menu-sidebar {
+  &-list {
+    margin: 0;
+    padding: 0;
+
+    &-item {
+      margin-top: $s3;
+
+      &-selected {
+        background-color: $black;
+        color: $white;
+      }
+
+      &-content {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}

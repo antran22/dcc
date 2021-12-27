@@ -10,6 +10,7 @@ import Text from '../Text';
 import { AiOutlineMenu as MenuIcon } from 'react-icons/ai';
 import { ViewportDimensionContext } from '../../contexts/ViewportDimensionContext';
 import Button from '../Button';
+import { MenuSidebarContext } from '../../contexts/MenuSidebarContext';
 
 enum TabChoices {
   SAN_PHAM_LE = 'Sản phẩm lẻ',
@@ -23,24 +24,24 @@ interface HeaderItem {
 }
 
 const MENU_ICON_SIZE = 30;
+export const headerItems: HeaderItem[] = [
+  {
+    label: TabChoices.SAN_PHAM_LE,
+    url: '/individual-items',
+  },
+  // TODO: Enable when Packages is ready
+  // {
+  //   label: TabChoices.GOI_QUA,
+  //   url: '/packages',
+  // },
+  {
+    label: TabChoices.VE_CHUNG_TOI,
+    url: '/about',
+  },
+];
 const Header: React.FC = () => {
-  const headerItems: HeaderItem[] = [
-    {
-      label: TabChoices.SAN_PHAM_LE,
-      url: '/individual-items',
-    },
-    // TODO: Enable when Packages is ready
-    // {
-    //   label: TabChoices.GOI_QUA,
-    //   url: '/packages',
-    // },
-    {
-      label: TabChoices.VE_CHUNG_TOI,
-      url: '/about',
-    },
-  ];
-
   const router = useRouter();
+  const { setMenuSidebarIsOpen } = useContext(MenuSidebarContext);
   const { currentMode } = useContext(ViewportDimensionContext);
   const [currentPath, setCurrentPath] = useState('');
 
@@ -54,7 +55,7 @@ const Header: React.FC = () => {
     <header className={c([styles.header])}>
       {!isOnCheckoutPage &&
         (currentMode !== 'desktop' ? (
-          <Button color="white">
+          <Button color="white" onClick={() => setMenuSidebarIsOpen(true)}>
             <MenuIcon size={MENU_ICON_SIZE} />
           </Button>
         ) : (

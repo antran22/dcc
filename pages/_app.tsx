@@ -8,6 +8,7 @@ import AppWrapper from '../src/shared/components/AppWrapper/AppWrapper';
 import store from '../src/redux/store';
 import ContextWrapper from '../src/shared/components/ContextWrapper';
 import CartSidebar from '../src/modules/cart';
+import MenuSidebar from '../src/shared/components/MenuSidebar';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Header />
             <Component {...pageProps} />
             <CartSidebar />
+            <MenuSidebar />
           </AppWrapper>
         </div>
       </ContextWrapper>
