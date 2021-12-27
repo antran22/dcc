@@ -6,11 +6,20 @@
 
   display: flex;
 
+  @media screen and (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+  }
+
   &-content {
     flex: 1;
 
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      max-height: 50vh;
+      overflow: auto;
+    }
 
     &-title {
       flex: 2;
