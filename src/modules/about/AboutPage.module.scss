@@ -4,6 +4,10 @@
   height: calc(100% - $header-height);
   display: flex;
 
+  @media screen and (max-width: $breakpoint-tablet) {
+    display: block;
+  }
+
   &-main-wrapper {
     flex-basis: 50%;
     flex-grow: 0;
