@@ -6,10 +6,10 @@ import Button from '../Button';
 import styles from './Cart.module.scss';
 
 const Cart: React.FC = () => {
-  const { setSidebarIsOpen } = useContext(CartSidebarContext);
+  const { setCartSidebarIsOpen } = useContext(CartSidebarContext);
   const cartCount = useAppSelector(cartAmountSelector);
   return (
-    <Button color="white" onClick={() => setSidebarIsOpen(true)}>
+    <Button color="white" onClick={() => setCartSidebarIsOpen(true)}>
       <div className={styles['cart']}>{cartCount}</div>
     </Button>
   );

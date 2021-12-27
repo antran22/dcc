@@ -1,18 +1,18 @@
 import React, { createContext, useState } from 'react';
 
 export const CartSidebarContext = createContext<CartSidebarState>({
-  sidebarIsOpen: false,
-  setSidebarIsOpen: () => {},
+  cartSidebarIsOpen: false,
+  setCartSidebarIsOpen: () => {},
 });
 
 export function CartSidebarProvider({ children }: CartSidebarProviderProps) {
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const [cartSidebarIsOpen, setCartSidebarIsOpen] = useState(false);
 
   return (
     <CartSidebarContext.Provider
       value={{
-        sidebarIsOpen,
-        setSidebarIsOpen,
+        cartSidebarIsOpen,
+        setCartSidebarIsOpen,
       }}
     >
       {children}
@@ -25,6 +25,6 @@ interface CartSidebarProviderProps {
 }
 
 interface CartSidebarState {
-  sidebarIsOpen: boolean;
-  setSidebarIsOpen: (sidebarIsOpen: boolean) => void;
+  cartSidebarIsOpen: boolean;
+  setCartSidebarIsOpen: (cartSidebarIsOpen: boolean) => void;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { CartSidebarProvider } from '../../contexts/CartSidebarContext';
+import { MenuSidebarProvider } from '../../contexts/MenuSidebarContext';
 import { ViewportDimensionProvider } from '../../contexts/ViewportDimensionContext';
 
 interface ContextWrapperProps {
@@ -8,7 +9,9 @@ interface ContextWrapperProps {
 const ContextWrapper: React.FC<ContextWrapperProps> = ({ children }) => {
   return (
     <ViewportDimensionProvider>
-      <CartSidebarProvider>{children}</CartSidebarProvider>
+      <MenuSidebarProvider>
+        <CartSidebarProvider>{children}</CartSidebarProvider>
+      </MenuSidebarProvider>
     </ViewportDimensionProvider>
   );
 };

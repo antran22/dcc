@@ -6,12 +6,12 @@ import styles from './EmptyCartSidebar.module.scss';
 
 const EmptyCartSidebar: React.FC = () => {
   const router = useRouter();
-  const { setSidebarIsOpen } = useContext(CartSidebarContext);
+  const { setCartSidebarIsOpen } = useContext(CartSidebarContext);
 
   const handleCtaClick = useCallback(() => {
     router.push('/individual-items');
-    setSidebarIsOpen(false);
-  }, [router, setSidebarIsOpen]);
+    setCartSidebarIsOpen(false);
+  }, [router, setCartSidebarIsOpen]);
 
   return (
     <div className={styles['empty-cart-sidebar']}>
