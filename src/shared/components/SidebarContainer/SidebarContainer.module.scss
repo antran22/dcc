@@ -6,7 +6,9 @@ $sidebar-width: 500px;
 .sidebar-container {
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
+
+  z-index: 10000;
 
   transition: background-color 0.5s ease;
 

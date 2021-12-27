@@ -13,8 +13,6 @@
 
     @media screen and (max-width: $breakpoint-tablet) {
       flex-direction: column-reverse;
-      height: calc(100% - $footer-height);
-      overflow: scroll;
     }
 
     &-section {
