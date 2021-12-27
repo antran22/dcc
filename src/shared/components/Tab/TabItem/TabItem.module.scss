@@ -7,10 +7,7 @@
   padding: $s3;
 
   border-style: solid;
-  border-left-width: 1px;
-  border-right-width: 1px;
-  border-top-width: 0px;
-  border-bottom-width: 0px;
+  border-width: 1px;
 
   @include emulate-button();
 }
@@ -19,8 +16,7 @@
 .tab-item-black {
   color: $black;
   background-color: $transparent;
-  border-left-color: $black;
-  border-right-color: $black;
+  border-color: $black;
 
   &-selected {
     color: $white;
@@ -31,8 +27,7 @@
 .tab-item-white {
   color: $white;
   background-color: $transparent;
-  border-left-color: $white;
-  border-right-color: $white;
+  border-color: $black;
 
   &-selected {
     color: $black;
