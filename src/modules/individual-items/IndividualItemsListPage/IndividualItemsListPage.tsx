@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useContext, useRef } from 'react';
 import Slider from 'react-slick';
@@ -43,6 +44,9 @@ const IndividualItemsListPage: NextPage = () => {
 
   return (
     <div className={styles['individual-items-list-page']}>
+      <Head>
+        <title>Sản Phẩm Lẻ</title>
+      </Head>
       <Slider {...settings} ref={sliderRef}>
         <div>
           <IndividualItem

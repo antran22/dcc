@@ -7,6 +7,7 @@ import IndividualItem from '../IndividualItem';
 import styles from './IndividualItemsDetailsPage.module.scss';
 import ItemQuantityControl from '../ItemQuantityControl';
 import ItemInformation from './ItemInformation';
+import Head from 'next/head';
 
 const IndividualItemsDetailsPage: NextPage = () => {
   const router = useRouter();
@@ -16,6 +17,9 @@ const IndividualItemsDetailsPage: NextPage = () => {
 
   return (
     <div className={styles['individual-items-details-page']}>
+      <Head>
+        <title>Binh Tinh</title>
+      </Head>
       <div className={styles['individual-items-details-page-preview']}>
         <IndividualItem
           containerStyle={{

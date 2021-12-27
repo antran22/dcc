@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import Head from 'next/head';
 import React, { useState } from 'react';
 import CartSummary from './CartSummary';
 import CheckoutForm from './CheckoutForm';
@@ -16,6 +17,9 @@ const CheckoutPage: NextPage = () => {
 
   return (
     <div className={styles['checkout-page']}>
+      <Head>
+        <title>Thanh Toán</title>
+      </Head>
       <div className={styles['checkout-page-content']}>
         <section className={styles['checkout-page-content-section']}>
           {formDetails ? (
