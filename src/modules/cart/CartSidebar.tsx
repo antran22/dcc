@@ -18,7 +18,7 @@ import CrossSell from './CrossSell';
 const CartSidebar: React.FC = () => {
   const cartItems = useAppSelector(cartSelector);
   const router = useRouter();
-  const { setSidebarIsOpen } = useContext(SidebarContext);
+  const { sidebarIsOpen, setSidebarIsOpen } = useContext(SidebarContext);
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleCheckout = () => {
@@ -41,6 +41,8 @@ const CartSidebar: React.FC = () => {
           currentStep={currentStep}
         />
       }
+      sidebarIsOpen={sidebarIsOpen}
+      setSidebarIsOpen={setSidebarIsOpen}
     >
       {cartItems.length > 0 ? (
         <CartSidebarWithItem

@@ -16,13 +16,16 @@ const CROSS_SIZE = 20;
 interface SidebarContainerProps {
   title: React.ReactNode;
   children: React.ReactNode;
+  sidebarIsOpen: boolean;
+  setSidebarIsOpen: (isOpen: boolean) => void;
 }
 
 const SidebarContainer: React.FC<SidebarContainerProps> = ({
   title,
   children,
+  sidebarIsOpen,
+  setSidebarIsOpen,
 }) => {
-  const { sidebarIsOpen, setSidebarIsOpen } = useContext(SidebarContext);
   const [visible, setVisible] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
