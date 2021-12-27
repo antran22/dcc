@@ -1,6 +1,8 @@
 @import '../../styles/colors.scss';
 @import '../../styles/constants.scss';
 
+$sidebar-width: 500px;
+
 .sidebar-container {
   width: 100vw;
   height: 100vh;
@@ -31,7 +33,11 @@
     transition: width 0.5s ease;
 
     &-open {
-      width: 500px;
+      width: $sidebar-width;
+
+      @media screen and (max-width: $breakpoint-mobile) {
+        width: 100vw;
+      }
     }
 
     &-close {
