@@ -1,6 +1,15 @@
 @import '../../../shared/styles/constants.scss';
 @import '../../../shared/styles/colors.scss';
 
+@mixin hover-state {
+  background-color: $nude;
+  color: $white;
+
+  .individual-item-btn-container {
+    visibility: visible;
+  }
+}
+
 .individual-item {
   padding: $s4;
 
@@ -39,8 +48,14 @@
 }
 
 .individual-item-enable-hover {
-  &:hover {
-    background-color: $nude;
-    color: $white;
+  .individual-item-btn-container {
+    visibility: hidden;
   }
+  &:hover {
+    @include hover-state();
+  }
+}
+
+.individual-item-show-hover {
+  @include hover-state();
 }

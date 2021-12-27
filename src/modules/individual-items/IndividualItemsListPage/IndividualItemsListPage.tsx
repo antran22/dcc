@@ -27,6 +27,8 @@ const IndividualItemsListPage: NextPage = () => {
     appendDots: CustomPagination,
   };
 
+  const showHoverState = currentMode !== 'desktop';
+
   const next = () => {
     sliderRef.current?.slickNext();
   };
@@ -47,6 +49,7 @@ const IndividualItemsListPage: NextPage = () => {
             showDetails
             containerStyle={{ height: itemHeight }}
             onCtaClick={() => onCtaClick(10)}
+            showHoverState={showHoverState}
           />
         </div>
         <div>
@@ -54,6 +57,7 @@ const IndividualItemsListPage: NextPage = () => {
             showDetails
             containerStyle={{ height: itemHeight }}
             onCtaClick={() => onCtaClick(10)}
+            showHoverState={showHoverState}
           />
         </div>
         <div>
@@ -61,6 +65,7 @@ const IndividualItemsListPage: NextPage = () => {
             showDetails
             containerStyle={{ height: itemHeight }}
             onCtaClick={() => onCtaClick(10)}
+            showHoverState={showHoverState}
           />
         </div>
         <div>
@@ -68,6 +73,7 @@ const IndividualItemsListPage: NextPage = () => {
             showDetails
             containerStyle={{ height: itemHeight }}
             onCtaClick={() => onCtaClick(10)}
+            showHoverState={showHoverState}
           />
         </div>
       </Slider>

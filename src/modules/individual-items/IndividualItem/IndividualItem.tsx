@@ -9,6 +9,7 @@ import Text from '../../../shared/components/Text';
 interface IndividualItemProps {
   containerStyle?: React.CSSProperties;
   showDetails: boolean;
+  showHoverState?: boolean;
   disableHover?: boolean;
   onCtaClick?: () => void;
 }
@@ -16,20 +17,19 @@ const IndividualItem: React.FC<IndividualItemProps> = ({
   containerStyle,
   showDetails,
   disableHover,
+  showHoverState = false,
   onCtaClick = () => {},
 }) => {
-  const [showCta, setShowCta] = useState(false);
-  const handleItemHover = (isHovering: boolean) => setShowCta(isHovering);
-
   return (
     <div
       className={c([
         styles['individual-item'],
-        disableHover ? '' : styles['individual-item-enable-hover'],
+        disableHover || showHoverState
+          ? ''
+          : styles['individual-item-enable-hover'],
+        showHoverState ? styles['individual-item-show-hover'] : '',
       ])}
       style={{ ...containerStyle }}
-      onMouseEnter={() => handleItemHover(true)}
-      onMouseLeave={() => handleItemHover(false)}
     >
       <div className={styles['individual-item-image']}>
         <Image
@@ -45,12 +45,7 @@ const IndividualItem: React.FC<IndividualItemProps> = ({
             <h1>BINH TINH</h1>
             <Text.P size="large">234.000đ</Text.P>
           </div>
-          <div
-            className={styles['individual-item-btn-container']}
-            style={{
-              visibility: showCta ? 'visible' : 'hidden',
-            }}
-          >
+          <div className={styles['individual-item-btn-container']}>
             <Button color="white" mode="fill-parent" onClick={onCtaClick}>
               CHI TIẾT SẢN PHẨM
             </Button>
