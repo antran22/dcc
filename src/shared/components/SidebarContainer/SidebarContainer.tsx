@@ -16,6 +16,7 @@ const CROSS_SIZE = 20;
 interface SidebarContainerProps {
   title: React.ReactNode;
   children: React.ReactNode;
+  openFrom?: 'left' | 'right';
   sidebarIsOpen: boolean;
   setSidebarIsOpen: (isOpen: boolean) => void;
 }
@@ -23,6 +24,7 @@ interface SidebarContainerProps {
 const SidebarContainer: React.FC<SidebarContainerProps> = ({
   title,
   children,
+  openFrom = 'right',
   sidebarIsOpen,
   setSidebarIsOpen,
 }) => {
@@ -72,6 +74,9 @@ const SidebarContainer: React.FC<SidebarContainerProps> = ({
             `sidebar-container-content-${sidebarIsOpen ? 'open' : 'close'}`
           ],
         ])}
+        style={{
+          [openFrom]: 0,
+        }}
       >
         <div className={styles['sidebar-container-content-header']}>
           <div className={styles['sidebar-container-content-header-title']}>
