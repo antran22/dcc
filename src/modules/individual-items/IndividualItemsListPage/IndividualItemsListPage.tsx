@@ -10,7 +10,7 @@ import SliderArrow from '../SliderArrow';
 import styles from './IndividualItemsListPage.module.scss';
 
 const IndividualItemsListPage: NextPage = () => {
-  const { height } = useContext(ViewportDimensionContext);
+  const { height, currentMode } = useContext(ViewportDimensionContext);
   const router = useRouter();
   const sliderRef = useRef<Slider>(null);
   const PAGINATION_HEIGHT = 100;
@@ -22,7 +22,7 @@ const IndividualItemsListPage: NextPage = () => {
     infinite: true,
     adaptiveHeight: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: currentMode === 'mobile' ? 1 : 3,
     slidesToScroll: 1,
     appendDots: CustomPagination,
   };
