@@ -16,11 +16,16 @@ const IndividualItemsDetailsPage: NextPage = () => {
 
   return (
     <div className={styles['individual-items-details-page']}>
-      <IndividualItem
-        containerStyle={{ flex: 1, backgroundColor: colors.lightGrey }}
-        showDetails={false}
-        disableHover
-      />
+      <div className={styles['individual-items-details-page-preview']}>
+        <IndividualItem
+          containerStyle={{
+            height: '100%',
+            width: '100%',
+          }}
+          showDetails={false}
+          disableHover
+        />
+      </div>
       <div className={styles['individual-items-details-page-content']}>
         <div className={styles['individual-items-details-page-content-title']}>
           {/* TODO: Change to actual font */}
