@@ -7,7 +7,7 @@ import LandingSquares from '../LandingSquares';
 const LandingBanner: React.FC = () => {
   return (
     <div className={styles['landing-banner']}>
-      <LandingSquares></LandingSquares>
+      <LandingSquares />
       <div className={styles['landing-banner-logo']}>
         <Image src={assets.dccFullLong} alt="DCC TITLE" layout="responsive" />
       </div>

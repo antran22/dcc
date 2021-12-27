@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { ViewportDimensionContext } from '../../../shared/contexts/ViewportDimensionContext';
 import { DCCColors } from '../../../shared/types';
 import { c } from '../../../shared/utils/classNameParser';
 import styles from './LandingSquares.module.scss';
@@ -15,17 +16,19 @@ interface LandingSquareData {
   isCenter: boolean;
 }
 const LandingSquares: React.FC = () => {
+  const { currentMode } = useContext(ViewportDimensionContext);
   const [squares, setSquares] = useState<LandingSquareData[]>([]);
   useEffect(() => {
-    const MAX_WIDTH = 25;
-    const MAX_HEIGHT = 25;
-    const MIN_WIDTH = 15;
-    const MIN_HEIGHT = 15;
+    const MAX_WIDTH = currentMode === 'mobile' ? 45 : 25;
+    const MIN_WIDTH = currentMode === 'mobile' ? 25 : 15;
 
-    const MAX_TRANSLATE_X = 35;
-    const MIN_TRANSLATE_X = 5;
+    const MAX_HEIGHT = currentMode === 'mobile' ? 55 : 25;
+    const MIN_HEIGHT = currentMode === 'mobile' ? 35 : 15;
 
-    const MAX_TRANSLATE_Y = 2;
+    const MAX_TRANSLATE_X = currentMode === 'mobile' ? 60 : 35;
+    const MIN_TRANSLATE_X = currentMode === 'mobile' ? 20 : 5;
+
+    const MAX_TRANSLATE_Y = currentMode === 'mobile' ? 5 : 2;
     const MIN_TRANSLATE_Y = 0;
 
     const getMultiplier = (i: number) => {
@@ -40,8 +43,8 @@ const LandingSquares: React.FC = () => {
     const generateSquares = () => {
       const centerSquare: LandingSquareData = {
         id: 0,
-        width: 15,
-        height: 25,
+        width: currentMode === 'mobile' ? 20 : 15,
+        height: currentMode === 'mobile' ? 40 : 25,
         translateX: 0,
         translateY: 0,
 
@@ -75,7 +78,7 @@ const LandingSquares: React.FC = () => {
     }, 1500);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [currentMode]);
 
   return (
     <div className={styles['landing-squares']}>
