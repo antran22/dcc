@@ -5,6 +5,10 @@
   height: calc(100vh - $header-height - $footer-height);
   overflow-y: auto;
 
+  @media screen and (max-width: $breakpoint-tablet) {
+    height: fit-content;
+  }
+
   &-section {
     padding: $s5;
     padding-top: 0;

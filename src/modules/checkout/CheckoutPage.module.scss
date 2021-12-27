@@ -1,7 +1,7 @@
 @import '../../shared/styles/constants.scss';
 
 .checkout-page {
-  height: calc(100% - $footer-height);
+  height: calc(100% - $header-height);
 
   display: flex;
   flex-direction: column;
@@ -10,6 +10,12 @@
     flex: 1;
 
     display: flex;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      flex-direction: column-reverse;
+      height: calc(100% - $footer-height);
+      overflow: scroll;
+    }
 
     &-section {
       flex: 1;
