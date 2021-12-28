@@ -43,7 +43,7 @@ const IndividualItemsListPage: NextPage = () => {
   };
 
   return (
-    <div className={styles['individual-items-list-page']}>
+    <main className={styles['individual-items-list-page']}>
       <Head>
         <title>Sản Phẩm Lẻ</title>
       </Head>
@@ -92,7 +92,7 @@ const IndividualItemsListPage: NextPage = () => {
         className={styles['individual-items-list-page-slider-arrow-right']}
         onClick={next}
       />
-    </div>
+    </main>
   );
 };
 

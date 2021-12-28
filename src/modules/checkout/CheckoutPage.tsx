@@ -20,7 +20,7 @@ const CheckoutPage: NextPage = () => {
       <Head>
         <title>Thanh Toán</title>
       </Head>
-      <div className={styles['checkout-page-content']}>
+      <main className={styles['checkout-page-content']}>
         <section className={styles['checkout-page-content-section']}>
           {formDetails ? (
             <CheckoutSuccess checkoutFormDetails={formDetails} />
@@ -31,7 +31,7 @@ const CheckoutPage: NextPage = () => {
         <section className={styles['checkout-page-content-section']}>
           <CartSummary />
         </section>
-      </div>
+      </main>
       <Footer />
     </div>
   );

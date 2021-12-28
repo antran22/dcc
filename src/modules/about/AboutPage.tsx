@@ -12,9 +12,9 @@ const AboutPage: NextPage = () => {
       </Head>
       <LeftBanner></LeftBanner>
 
-      <div className={styles['about-page-main-wrapper']}>
+      <main className={styles['about-page-main-wrapper']}>
         <MainContent></MainContent>
-      </div>
+      </main>
     </div>
   );
 };

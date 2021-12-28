@@ -20,7 +20,7 @@ const IndividualItemsDetailsPage: NextPage = () => {
       <Head>
         <title>Binh Tinh</title>
       </Head>
-      <div className={styles['individual-items-details-page-preview']}>
+      <aside className={styles['individual-items-details-page-preview']}>
         <IndividualItem
           containerStyle={{
             height: '100%',
@@ -29,8 +29,8 @@ const IndividualItemsDetailsPage: NextPage = () => {
           showDetails={false}
           disableHover
         />
-      </div>
-      <div className={styles['individual-items-details-page-content']}>
+      </aside>
+      <main className={styles['individual-items-details-page-content']}>
         <div className={styles['individual-items-details-page-content-title']}>
           {/* TODO: Change to actual font */}
           <h1 style={{ fontSize: 60 }}>BINH TINH</h1>
@@ -42,7 +42,7 @@ const IndividualItemsDetailsPage: NextPage = () => {
           <Text.P size="large">234.000đ</Text.P>
           <ItemQuantityControl itemId={itemId as string} />
         </div>
-      </div>
+      </main>
     </div>
   );
 };

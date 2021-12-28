@@ -8,7 +8,7 @@ import styles from './LandingPage.module.scss';
 const LandingPage: NextPage = () => {
   const router = useRouter();
   return (
-    <div className={styles['landing-page']}>
+    <main className={styles['landing-page']}>
       <LandingBanner></LandingBanner>
       <div className={styles['landing-page-title']}>
         <p>Cái đồ chơi chữ</p>
@@ -22,7 +22,7 @@ const LandingPage: NextPage = () => {
       >
         Khám phá cửa hàng
       </Button>
-    </div>
+    </main>
   );
 };
 
