@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Tab from '../Tab';
+import Tab from '#/components/Tab';
+import Cart from '#/components/Cart';
+import Text from '#/components/Text';
+import Button from '#/components/Button';
+
 import Image from 'next/image';
-import Cart from '../Cart';
 import styles from './Header.module.scss';
-import { c } from '../../utils/classNameParser';
-import { assets } from '../../../assets';
+import { c } from '#/utils/classNameParser';
+import { assets } from '@/assets';
 import { useRouter } from 'next/router';
-import Text from '../Text';
 import { AiOutlineMenu as MenuIcon } from 'react-icons/ai';
-import { ViewportDimensionContext } from '../../contexts/ViewportDimensionContext';
-import Button from '../Button';
-import { MenuSidebarContext } from '../../contexts/MenuSidebarContext';
+import { ViewportDimensionContext } from '#/contexts/ViewportDimensionContext';
+import { MenuSidebarContext } from '#/contexts/MenuSidebarContext';
 
 enum TabChoices {
   SAN_PHAM_LE = 'Sản phẩm lẻ',

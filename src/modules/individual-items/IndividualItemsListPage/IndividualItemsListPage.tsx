@@ -3,17 +3,24 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useContext, useRef } from 'react';
 import Slider from 'react-slick';
-import { ViewportDimensionContext } from '../../../shared/contexts/ViewportDimensionContext';
-import { colors } from '../../../shared/styles/colors';
-import { HEADER_HEIGHT } from '../../../shared/styles/constants';
+import { ViewportDimensionContext } from '@/shared/contexts/ViewportDimensionContext';
+import { colors } from '@/shared/styles/colors';
+import { HEADER_HEIGHT } from '@/shared/styles/constants';
 import IndividualItem from '../IndividualItem';
 import SliderArrow from '../SliderArrow';
 import styles from './IndividualItemsListPage.module.scss';
+import { useListProductsQuery } from '@/redux/slices/api';
+import Text from '#/components/Text';
 
 const IndividualItemsListPage: NextPage = () => {
   const { height, currentMode } = useContext(ViewportDimensionContext);
   const router = useRouter();
   const sliderRef = useRef<Slider>(null);
+  const { data: products, isLoading } = useListProductsQuery({
+    limit: 10,
+    start: 0,
+  });
+
   const PAGINATION_HEIGHT = 100;
   const itemHeight = height - HEADER_HEIGHT - PAGINATION_HEIGHT;
 
@@ -38,49 +45,26 @@ const IndividualItemsListPage: NextPage = () => {
     sliderRef.current?.slickPrev();
   };
 
-  const onCtaClick = (itemId: number) => {
-    router.push(`/individual-items/${itemId}`);
-  };
-
   return (
     <main className={styles['individual-items-list-page']}>
       <Head>
         <title>Sản Phẩm Lẻ</title>
       </Head>
-      <Slider {...settings} ref={sliderRef}>
-        <div>
-          <IndividualItem
-            showDetails
-            containerStyle={{ height: itemHeight }}
-            onCtaClick={() => onCtaClick(10)}
-            showHoverState={showHoverState}
-          />
-        </div>
-        <div>
-          <IndividualItem
-            showDetails
-            containerStyle={{ height: itemHeight }}
-            onCtaClick={() => onCtaClick(10)}
-            showHoverState={showHoverState}
-          />
-        </div>
-        <div>
-          <IndividualItem
-            showDetails
-            containerStyle={{ height: itemHeight }}
-            onCtaClick={() => onCtaClick(10)}
-            showHoverState={showHoverState}
-          />
-        </div>
-        <div>
-          <IndividualItem
-            showDetails
-            containerStyle={{ height: itemHeight }}
-            onCtaClick={() => onCtaClick(10)}
-            showHoverState={showHoverState}
-          />
-        </div>
-      </Slider>
+      {isLoading || !products ? (
+        <Text.P>Loading</Text.P>
+      ) : (
+        <Slider {...settings} ref={sliderRef}>
+          {products.map((product) => (
+            <IndividualItem
+              key={product.slug}
+              product={product}
+              showDetails
+              containerStyle={{ height: itemHeight }}
+              showHoverState={showHoverState}
+            />
+          ))}
+        </Slider>
+      )}
 
       <SliderArrow
         arrowType="left"

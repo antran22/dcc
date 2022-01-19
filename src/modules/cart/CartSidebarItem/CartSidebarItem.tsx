@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { assets } from '../../../assets';
-import { CartItem } from '../../../shared/types';
-import Text from '../../../shared/components/Text';
+import { assets } from '@/assets';
+import { CartItem } from '#/types';
+import Text from '#/components/Text';
 import styles from './CartSidebarItem.module.scss';
-import Button from '../../../shared/components/Button';
-import { formatCurrency } from '../../../shared/utils/number';
-import { useAppDispatch } from '../../../redux/hooks';
-import { deleteItem, setQuantity } from '../../../redux/slices/cart';
-import { Form } from '../../../shared/components/Form';
+import Button from '#/components/Button';
+import { formatCurrency } from '#/utils/number';
+import { useAppDispatch } from '@/redux/hooks';
+import { deleteItem, setQuantity } from '@/redux/slices/cart';
+import { Form } from '#/components/Form';
 import { debounce } from 'lodash';
-import Spacer from '../../../shared/components/Spacer';
-import { c } from '../../../shared/utils/classNameParser';
+import Spacer from '#/components/Spacer';
+import { c } from '#/utils/classNameParser';
 
 interface CartSidebarItemProps {
   cartItem: CartItem;

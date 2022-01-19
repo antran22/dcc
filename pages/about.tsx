@@ -1,3 +1,3 @@
-import AboutPage from '../src/modules/about';
+import AboutPage from '@/modules/about';
 
 export default AboutPage;

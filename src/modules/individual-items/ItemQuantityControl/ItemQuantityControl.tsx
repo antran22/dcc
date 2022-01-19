@@ -1,8 +1,8 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { addItem, removeItem } from '../../../redux/slices/cart';
-import Button from '../../../shared/components/Button';
-import { CartItem } from '../../../shared/types';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { addItem, removeItem } from '@/redux/slices/cart';
+import Button from '#/components/Button';
+import { CartItem } from '#/types';
 import { AiOutlinePlus as Plus, AiOutlineMinus as Minus } from 'react-icons/ai';
 import styles from './ItemQuantityControl.module.scss';
 

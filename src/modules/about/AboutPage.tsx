@@ -10,10 +10,10 @@ const AboutPage: NextPage = () => {
       <Head>
         <title>Về Chúng Tôi</title>
       </Head>
-      <LeftBanner></LeftBanner>
+      <LeftBanner />
 
       <main className={styles['about-page-main-wrapper']}>
-        <MainContent></MainContent>
+        <MainContent />
       </main>
     </div>
   );

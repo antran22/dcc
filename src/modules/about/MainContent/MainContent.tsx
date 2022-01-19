@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import Divider from '../../../shared/components/Divider';
+import Divider from '#/components/Divider';
 import styles from './MainContent.module.scss';
-import { assets } from '../../../assets';
+import { assets } from '@/assets';
 import SectionOne from '../SectionOne';
 import SectionTwo from '../SectionTwo';
 import SectionThree from '../SectionThree';
@@ -14,14 +14,12 @@ const MainContent: React.FC = () => {
       <div className={styles['about-page-main-content-title']}>
         <Image src={assets.aboutTitle} alt="Cau Chuyen" layout="responsive" />
       </div>
-      <Divider
-        classNames={[styles['about-page-main-content-divider']]}
-      ></Divider>
+      <Divider classNames={[styles['about-page-main-content-divider']]} />
 
-      <SectionOne></SectionOne>
-      <SectionTwo></SectionTwo>
-      <SectionThree></SectionThree>
-      <SectionFour></SectionFour>
+      <SectionOne />
+      <SectionTwo />
+      <SectionThree />
+      <SectionFour />
     </main>
   );
 };

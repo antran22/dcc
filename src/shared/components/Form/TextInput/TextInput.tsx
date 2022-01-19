@@ -1,8 +1,8 @@
 import { FieldConfig, useField } from 'formik';
 import React, { useState } from 'react';
 import styles from './TextInput.module.scss';
-import Text from '../../Text';
-import { c } from '../../../utils/classNameParser';
+import Text from '#/components/Text';
+import { c } from '#/utils/classNameParser';
 
 interface TextInputProps extends FieldConfig<any> {
   label: string;

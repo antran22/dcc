@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 
-import Text from '../../../shared/components/Text';
-import { c } from '../../../shared/utils/classNameParser';
-import { assets } from '../../../assets';
+import Text from '#/components/Text';
+import { c } from '#/utils/classNameParser';
+import { assets } from '@/assets';
 import styles from './SectionOne.module.scss';
 import mainPageStyles from '../MainContent/MainContent.module.scss';
 

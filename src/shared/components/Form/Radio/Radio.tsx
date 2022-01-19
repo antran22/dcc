@@ -1,7 +1,7 @@
 import { FieldConfig, useField } from 'formik';
 import React from 'react';
-import { c } from '../../../utils/classNameParser';
-import Text from '../../Text';
+import { c } from '@/shared/utils/classNameParser';
+import Text from '@/shared/components/Text';
 import styles from './Radio.module.scss';
 import Image from 'next/image';
 

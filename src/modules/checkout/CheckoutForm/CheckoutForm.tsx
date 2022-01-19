@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
-import NumberBullet from '../../../shared/components/NumberBullet';
+import NumberBullet from '#/components/NumberBullet';
 import styles from './CheckoutForm.module.scss';
-import Text from '../../../shared/components/Text';
-import { Formik, Field, Form } from 'formik';
-import Button from '../../../shared/components/Button';
+import Text from '#/components/Text';
+import { Field, Form, Formik } from 'formik';
+import Button from '#/components/Button';
 import { AiOutlineArrowRight as ForwardIcon } from 'react-icons/ai';
-import TextInput from '../../../shared/components/Form/TextInput';
+import TextInput from '#/components/Form/TextInput';
 import * as yup from 'yup';
-import Radio from '../../../shared/components/Form/Radio';
-import Spacer from '../../../shared/components/Spacer';
-import { assets } from '../../../assets';
+import Radio from '#/components/Form/Radio';
+import Spacer from '#/components/Spacer';
+import { assets } from '@/assets';
 import { CheckoutFormDetails, PaymentOptions } from '../common/types';
-import { ViewportDimensionContext } from '../../../shared/contexts/ViewportDimensionContext';
+import { ViewportDimensionContext } from '#/contexts/ViewportDimensionContext';
 
 interface CheckoutFormProps {
   onCheckout: (formDetails: CheckoutFormDetails) => void;
@@ -25,7 +25,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
     // Match Vietnam's phone number. Source: https://www.regextester.com/106725
     const phoneRegExp = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
 
-    const schema = yup.object().shape({
+    return yup.object().shape({
       email: yup.string().email().required(),
       name: yup.string().required(),
       phoneNumber: yup
@@ -35,7 +35,6 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
       address: yup.string().required(),
       paymentOption: yup.string().required(),
     });
-    return schema;
   })();
 
   return (

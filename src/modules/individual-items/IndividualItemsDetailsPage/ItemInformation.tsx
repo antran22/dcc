@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { AiFillQuestionCircle as Question } from 'react-icons/ai';
-import { c } from '../../../shared/utils/classNameParser';
+import { c } from '#/utils/classNameParser';
 import styles from './ItemInformation.module.scss';
-import Text from '../../../shared/components/Text';
-import Button from '../../../shared/components/Button';
-import ModalWrapper from '../../../shared/components/ModalWrapper';
+import Text from '#/components/Text';
+import Button from '#/components/Button';
+import ModalWrapper from '#/components/ModalWrapper';
 
 const ItemInformation: React.FC = () => {
   const [showModal, setShowModal] = useState(false);

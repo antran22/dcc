@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import Text from '../../../shared/components/Text';
-import { colors } from '../../../shared/styles/colors';
+import Text from '#/components/Text';
+import { colors } from '#/styles/colors';
 import IndividualItem from '../IndividualItem';
 import styles from './IndividualItemsDetailsPage.module.scss';
 import ItemQuantityControl from '../ItemQuantityControl';

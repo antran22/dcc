@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { c } from '../../utils/classNameParser';
+import { c } from '#/utils/classNameParser';
 import styles from './ModalWrapper.module.scss';
 
 interface ModalWrapperProps {

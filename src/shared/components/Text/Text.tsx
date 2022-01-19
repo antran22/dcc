@@ -1,6 +1,6 @@
 import React from 'react';
-import { DCCColors } from '../../types';
-import { c } from '../../utils/classNameParser';
+import { DCCColors } from '#/types';
+import { c } from '#/utils/classNameParser';
 import specialTitleStyles from './SpecialTitle.module.scss';
 import pStyles from './P.module.scss';
 

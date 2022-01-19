@@ -1,12 +1,12 @@
 import React from 'react';
-import { useAppSelector } from '../../../redux/hooks';
-import { cartSelector, cartSumSelector } from '../../../redux/slices/cart';
-import Text from '../../../shared/components/Text';
-import { formatCurrency } from '../../../shared/utils/number';
+import { useAppSelector } from '@/redux/hooks';
+import { cartSelector, cartSumSelector } from '@/redux/slices/cart';
+import Text from '#/components/Text';
+import { formatCurrency } from '#/utils/number';
 import styles from './CartSummary.module.scss';
 import Image from 'next/image';
-import { assets } from '../../../assets';
-import { CartItem } from '../../../shared/types';
+import { assets } from '@/assets';
+import { CartItem } from '#/types';
 
 const CartSummary: React.FC = () => {
   const cartTotalSum = useAppSelector(cartSumSelector);

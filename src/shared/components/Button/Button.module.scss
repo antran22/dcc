@@ -1,6 +1,6 @@
-@import '../../styles/colors.scss';
-@import '../../styles/constants.scss';
-@import '../../styles/mixins.scss';
+@import '/src/shared/styles/colors';
+@import '/src/shared/styles/constants';
+@import '/src/shared/styles/mixins';
 
 .btn {
   @include reset-button();

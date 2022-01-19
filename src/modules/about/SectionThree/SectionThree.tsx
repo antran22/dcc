@@ -1,6 +1,6 @@
 import React from 'react';
-import { DCCColors } from '../../../shared/types';
-import { c } from '../../../shared/utils/classNameParser';
+import { DCCColors } from '#/types';
+import { c } from '#/utils/classNameParser';
 import mainPageStyles from '../MainContent/MainContent.module.scss';
 import styles from './SectionThree.module.scss';
 import SquareContent, { SquareContentData } from './SquareContent';

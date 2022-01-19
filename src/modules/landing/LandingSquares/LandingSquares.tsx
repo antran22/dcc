@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ViewportDimensionContext } from '../../../shared/contexts/ViewportDimensionContext';
-import { DCCColors } from '../../../shared/types';
-import { c } from '../../../shared/utils/classNameParser';
+import { ViewportDimensionContext } from '#/contexts/ViewportDimensionContext';
+import { DCCColors } from '#/types';
+import { c } from '#/utils/classNameParser';
 import styles from './LandingSquares.module.scss';
 
 interface LandingSquareData {

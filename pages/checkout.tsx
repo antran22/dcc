@@ -1,3 +1,3 @@
-import CheckoutPage from '../src/modules/checkout';
+import CheckoutPage from '@/modules/checkout';
 
 export default CheckoutPage;

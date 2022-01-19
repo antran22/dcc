@@ -1,5 +1,5 @@
 import React from 'react';
-import { c } from '../../utils/classNameParser';
+import { c } from '#/utils/classNameParser';
 import styles from './Spacer.module.scss';
 
 interface SpacerProps {

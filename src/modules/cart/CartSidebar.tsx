@@ -1,17 +1,17 @@
 import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
-import { useAppSelector } from '../../redux/hooks';
-import { cartSelector, cartSumSelector } from '../../redux/slices/cart';
-import { CartSidebarContext } from '../../shared/contexts/CartSidebarContext';
-import { CartItem } from '../../shared/types';
-import { formatCurrency } from '../../shared/utils/number';
-import Button from '../../shared/components/Button';
-import SidebarContainer from '../../shared/components/SidebarContainer';
-import Text from '../../shared/components/Text';
+import { useAppSelector } from '@/redux/hooks';
+import { cartSelector, cartSumSelector } from '@/redux/slices/cart';
+import { CartSidebarContext } from '#/contexts/CartSidebarContext';
+import { CartItem } from '#/types';
+import { formatCurrency } from '#/utils/number';
+import Button from '#/components/Button';
+import SidebarContainer from '#/components/SidebarContainer';
+import Text from '#/components/Text';
 import styles from './CartSidebar.module.scss';
 import CartSidebarItem from './CartSidebarItem';
 import { AiOutlineArrowLeft as BackIcon } from 'react-icons/ai';
-import Spacer from '../../shared/components/Spacer';
+import Spacer from '#/components/Spacer';
 import EmptyCartSidebar from './EmptyCartSidebar';
 import CrossSell from './CrossSell';
 

@@ -10,6 +10,8 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { cmsAPI } from './slices/api';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
 const persistConfig = {
   key: 'dcc',
@@ -18,6 +20,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
   cart: cartSlice.reducer,
+  [cmsAPI.reducerPath]: cmsAPI.reducer,
 });
 const persistedReducer = persistReducer(persistConfig, reducers);
 
@@ -28,8 +31,10 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(cmsAPI.middleware),
 });
+
+setupListeners(store.dispatch);
 
 export default store;
 

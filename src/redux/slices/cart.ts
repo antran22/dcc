@@ -1,5 +1,5 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
-import { CartItem } from '../../shared/types';
+import { CartItem } from '@/shared/types';
 import { RootState } from '../store';
 
 const initialState: CartItem[] = [];

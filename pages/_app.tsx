@@ -1,14 +1,14 @@
-import '../src/shared/styles/globals.scss';
+import '#/styles/globals.scss';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 import { Provider } from 'react-redux';
-import Header from '../src/shared/components/Header';
-import AppWrapper from '../src/shared/components/AppWrapper/AppWrapper';
-import store from '../src/redux/store';
-import ContextWrapper from '../src/shared/components/ContextWrapper';
-import CartSidebar from '../src/modules/cart';
-import MenuSidebar from '../src/shared/components/MenuSidebar';
+import Header from '#/components/Header';
+import AppWrapper from '#/components/AppWrapper/AppWrapper';
+import store from '@/redux/store';
+import ContextWrapper from '#/components/ContextWrapper';
+import CartSidebar from '@/modules/cart';
+import MenuSidebar from '#/components/MenuSidebar';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 

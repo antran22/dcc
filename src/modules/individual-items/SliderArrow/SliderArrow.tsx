@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import { c } from '../../../shared/utils/classNameParser';
+import { c } from '#/utils/classNameParser';
 import styles from './SliderArrow.module.scss';
 
 type SliderArrowType = 'left' | 'right';
@@ -21,9 +21,10 @@ const SliderArrow: React.FC<SliderArrowProps> = (props) => {
 
   return (
     <div
-      {...props}
-      role="button"
       className={c([props.className ?? '', styles['slider-arrow']])}
+      onClick={props.onClick}
+      style={props.style}
+      role="button"
     >
       {Arrow[props.arrowType]}
     </div>

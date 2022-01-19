@@ -1,6 +1,6 @@
-@import '../../../styles/mixins.scss';
-@import '../../../styles/colors.scss';
-@import '../../../styles/constants.scss';
+@import '/src/shared/styles/mixins';
+@import '/src/shared/styles/colors';
+@import '/src/shared/styles/constants';
 
 .tab-item {
   display: inline-block;

@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from './CrossSell.module.scss';
-import Text from '../../../shared/components/Text';
+import Text from '#/components/Text';
 import CrossSellItem from '../CrossSellItem';
-import { CartItem } from '../../../shared/types';
-import Spacer from '../../../shared/components/Spacer';
+import { CartItem } from '#/types';
 
 interface CrossSellProps {}
 

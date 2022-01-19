@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import Button from '../../../shared/components/Button';
-import Text from '../../../shared/components/Text';
-import { CartItem } from '../../../shared/types';
-import { formatCurrency } from '../../../shared/utils/number';
+import Button from '#/components/Button';
+import Text from '#/components/Text';
+import { CartItem } from '#/types';
+import { formatCurrency } from '#/utils/number';
 import styles from './CrossSellItem.module.scss';
 import Image from 'next/image';
-import { assets } from '../../../assets';
-import { useAppDispatch } from '../../../redux/hooks';
-import { addItem, removeItem } from '../../../redux/slices/cart';
+import { assets } from '@/assets';
+import { useAppDispatch } from '@/redux/hooks';
+import { addItem, removeItem } from '@/redux/slices/cart';
 
 interface CrossSellItemProps {
   crossSellItem: CartItem;

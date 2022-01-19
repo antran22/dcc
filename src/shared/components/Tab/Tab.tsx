@@ -1,5 +1,5 @@
 import React from 'react';
-import { c } from '../../utils/classNameParser';
+import { c } from '@/shared/utils/classNameParser';
 import styles from './Tab.module.scss';
 import { TabItem } from './TabItem';
 

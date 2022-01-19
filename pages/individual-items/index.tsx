@@ -1,3 +1,3 @@
-import IndividualItemsListPage from '../../src/modules/individual-items/IndividualItemsListPage';
+import IndividualItemsListPage from '@/modules/individual-items/IndividualItemsListPage';
 
 export default IndividualItemsListPage;

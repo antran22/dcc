@@ -4,13 +4,13 @@ import {
   AiFillCheckCircle as CheckIcon,
   AiOutlineArrowLeft as BackIcon,
 } from 'react-icons/ai';
-import { colors } from '../../../shared/styles/colors';
-import Text from '../../../shared/components/Text';
-import Spacer from '../../../shared/components/Spacer';
+import { colors } from '#/styles/colors';
+import Text from '#/components/Text';
+import Spacer from '#/components/Spacer';
 import { CheckoutFormDetails } from '../common/types';
-import Button from '../../../shared/components/Button';
+import Button from '#/components/Button';
 import { useRouter } from 'next/router';
-import { ViewportDimensionContext } from '../../../shared/contexts/ViewportDimensionContext';
+import { ViewportDimensionContext } from '#/contexts/ViewportDimensionContext';
 
 interface CheckoutSuccessProps {
   checkoutFormDetails: CheckoutFormDetails;

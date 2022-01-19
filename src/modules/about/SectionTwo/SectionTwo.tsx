@@ -1,10 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
-import { assets } from '../../../assets';
-import { c } from '../../../shared/utils/classNameParser';
+import { assets } from '@/assets';
+import { c } from '#/utils/classNameParser';
 import styles from './SectionTwo.module.scss';
 import mainPageStyles from '../MainContent/MainContent.module.scss';
-import Text from '../../../shared/components/Text';
+import Text from '#/components/Text';
 
 const SectionTwo: React.FC = () => {
   return (

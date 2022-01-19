@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './LandingBanner.module.scss';
-import { assets } from '../../../assets';
+import { assets } from '@/assets';
 import LandingSquares from '../LandingSquares';
 
 const LandingBanner: React.FC = () => {
