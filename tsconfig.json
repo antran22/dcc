@@ -15,6 +15,7 @@
     "jsx": "preserve",
     "incremental": true,
     "rootDir": ".",
+    "baseUrl": "./",
     "paths": {
       "#/*": ["src/shared/*"],
       "@/*": ["src/*"]

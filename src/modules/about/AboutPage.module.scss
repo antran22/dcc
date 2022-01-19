@@ -1,7 +1,7 @@
 @import 'src/shared/styles/constants.scss';
 
 .about-page {
-  height: calc(100% - $header-height);
+  height: calc(100% - #{$header-height});
   display: flex;
 
   @media screen and (max-width: $breakpoint-tablet) {

@@ -2,26 +2,35 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Text from '#/components/Text';
-import { colors } from '#/styles/colors';
 import IndividualItem from '../IndividualItem';
 import styles from './IndividualItemsDetailsPage.module.scss';
 import ItemQuantityControl from '../ItemQuantityControl';
 import ItemInformation from './ItemInformation';
 import Head from 'next/head';
+import { useGetProductBySlugQuery } from '@/redux/slices/api';
 
 const IndividualItemsDetailsPage: NextPage = () => {
   const router = useRouter();
 
-  // TODO call API to get item data
-  const { itemId } = router.query;
+  const itemId = router.query.itemId as string;
 
+  const { data: product, isLoading } = useGetProductBySlugQuery(itemId);
+
+  if (!product) {
+    router.push('/404');
+    return null;
+  }
+  if (isLoading || !product) {
+    return <div />;
+  }
   return (
     <div className={styles['individual-items-details-page']}>
       <Head>
-        <title>Binh Tinh</title>
+        <title>{product.title}</title>
       </Head>
       <aside className={styles['individual-items-details-page-preview']}>
         <IndividualItem
+          product={product}
           containerStyle={{
             height: '100%',
             width: '100%',
@@ -32,15 +41,14 @@ const IndividualItemsDetailsPage: NextPage = () => {
       </aside>
       <main className={styles['individual-items-details-page-content']}>
         <div className={styles['individual-items-details-page-content-title']}>
-          {/* TODO: Change to actual font */}
-          <h1 style={{ fontSize: 60 }}>BINH TINH</h1>
+          <h1 style={{ fontSize: 60 }}>{product.title}</h1>
         </div>
 
         <ItemInformation />
 
         <div className={styles['individual-items-details-page-content-footer']}>
-          <Text.P size="large">234.000đ</Text.P>
-          <ItemQuantityControl itemId={itemId as string} />
+          <Text.P size="large">{`${product.price.toString()}₫`}</Text.P>
+          <ItemQuantityControl itemId={itemId} />
         </div>
       </main>
     </div>
