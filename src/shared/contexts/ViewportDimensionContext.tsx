@@ -1,10 +1,10 @@
-import React, { createContext, useCallback, useEffect, useState } from 'react';
-import { BREAKPOINT_MOBILE, BREAKPOINT_TABLET } from '../styles/constants';
+import React, {createContext, useCallback, useEffect, useState} from "react";
+import {BREAKPOINT_MOBILE, BREAKPOINT_TABLET} from "#/styles/constants";
 
 export const ViewportDimensionContext = createContext<ViewportDimensionState>({
   width: 2000,
   height: 2000,
-  currentMode: 'desktop',
+  currentMode: "desktop",
 });
 
 export function ViewportDimensionProvider({ children }: ViewportProviderProps) {
@@ -12,16 +12,16 @@ export function ViewportDimensionProvider({ children }: ViewportProviderProps) {
     useState<ViewportDimensionState>({
       width: 2000,
       height: 2000,
-      currentMode: 'desktop',
+      currentMode: "desktop",
     });
 
   const getCurrentMode = (width: number): ViewportModes => {
     if (width <= BREAKPOINT_MOBILE) {
-      return 'mobile';
+      return "mobile";
     } else if (width <= BREAKPOINT_TABLET) {
-      return 'tablet';
+      return "tablet";
     } else {
-      return 'desktop';
+      return "desktop";
     }
   };
 
@@ -36,8 +36,8 @@ export function ViewportDimensionProvider({ children }: ViewportProviderProps) {
 
   useEffect(() => {
     handleWindowResize();
-    window.addEventListener('resize', handleWindowResize);
-    return () => window.removeEventListener('resize', handleWindowResize);
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
   }, [handleWindowResize]);
 
   return (
@@ -57,4 +57,4 @@ interface ViewportDimensionState {
   currentMode: ViewportModes;
 }
 
-export type ViewportModes = 'desktop' | 'tablet' | 'mobile';
+export type ViewportModes = "desktop" | "tablet" | "mobile";

@@ -1,14 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IProduct } from '@/redux/apiTypes';
+import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {Product} from "@/redux/apiTypes";
 
 export const cmsAPI = createApi({
-  reducerPath: 'itemApi',
+  reducerPath: "itemApi",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_URL }),
   endpoints: (builder) => ({
-    getProductBySlug: builder.query<IProduct, string>({
+    getProductBySlug: builder.query<Product, string>({
       query: (slug) => `products/${slug}`,
     }),
-    listProducts: builder.query<IProduct[], ListArgs>({
+    listProducts: builder.query<Product[], ListArgs>({
       query: (listArgs) => {
         const queryString = parseListArgsToStrapiQueryString(listArgs);
         return `products?${queryString}`;
@@ -28,7 +28,7 @@ function parseListArgsToStrapiQueryString(args: object): string {
   const objectWithUnderscoreKey: Record<string, string> = {};
 
   Object.entries(args).forEach(([key, value]) => {
-    objectWithUnderscoreKey['_' + key] = value.toString();
+    objectWithUnderscoreKey["_" + key] = value.toString();
   });
 
   const qs = new URLSearchParams(objectWithUnderscoreKey);

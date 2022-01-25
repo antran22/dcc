@@ -1,13 +1,13 @@
-import React from 'react';
-import { c } from '@/shared/utils/classNameParser';
-import styles from './Tab.module.scss';
-import { TabItem } from './TabItem';
+import React from "react";
+import c from "classnames";
+import styles from "./Tab.module.scss";
+import {TabItem} from "./TabItem";
 
 export interface TabItemData {
   label: string;
 }
 interface TabProps<T extends TabItemData> {
-  color: 'black' | 'white';
+  color: "black" | "white";
   tabItems: Array<T>;
   isItemSelected: (tabItem: T) => boolean;
   onTabSelect: (tabValue: T) => void;
@@ -20,7 +20,7 @@ function Tab<T extends TabItemData>({
   onTabSelect,
 }: TabProps<T>) {
   return (
-    <div role="tablist" className={c([styles.tab, styles[`tab-${color}`]])}>
+    <div role="tablist" className={c(styles.tab, styles[`tab-${color}`])}>
       {tabItems.map((content, i) => (
         <TabItem
           key={i}

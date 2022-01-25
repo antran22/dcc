@@ -1,0 +1,29 @@
+@import "src/shared/styles/constants.scss";
+@import "src/shared/styles/colors.scss";
+$arrow-dimension: 40px;
+
+.slider-arrow {
+  width: $arrow-dimension;
+  height: $arrow-dimension;
+  padding: $s1;
+
+  color: $black;
+
+  transition: color 0.5s ease, background-color 0.5s ease;
+
+  &:hover {
+    background-color: $black;
+    color: $white;
+    cursor: pointer;
+  }
+
+  &-icon {
+    height: 100%;
+    width: 100%;
+    color: inherit;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+}

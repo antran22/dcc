@@ -1,6 +1,6 @@
 export enum PaymentOptions {
-  SHIP_COD = 'SHIP_COD',
-  CHUYEN_KHOAN = 'CHUYEN_KHOAN',
+  SHIP_COD = "SHIP_COD",
+  CHUYEN_KHOAN = "CHUYEN_KHOAN",
 }
 
 export interface CheckoutFormDetails {

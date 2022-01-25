@@ -1,6 +1,7 @@
-@import '/src/shared/styles/colors';
-@import '/src/shared/styles/constants';
-@import '/src/shared/styles/mixins';
+@use "sass:color";
+@import "/src/shared/styles/colors";
+@import "/src/shared/styles/constants";
+@import "/src/shared/styles/mixins";
 
 .btn {
   @include reset-button();
@@ -35,113 +36,53 @@
   }
 }
 
-// Outlined
-.btn-outline-cyan {
-  color: $white;
-  background-color: $transparent;
-  border: 2px solid $cyan;
-}
+$highlight-rate: 30%;
 
-.btn-outline-red-soil {
-  color: $red-soil;
-  background-color: $transparent;
-  border: 2px solid $red-soil;
-}
+@each $color-name, $color in $colors {
+  .btn-outline-#{$color-name} {
+    &:hover {
+      @if color.lightness($color) > 50% {
+        color: color.scale($color, $blackness: $highlight-rate);
+      } @else {
+        color: color.scale($color, $lightness: $highlight-rate);
+      }
+    }
 
-.btn-outline-dark-green {
-  color: $dark-green;
-  background-color: $transparent;
-  border: 2px solid $dark-green;
-}
+    color: $color;
+    background-color: $transparent;
+    border: 2px solid $color;
+  }
 
-.btn-outline-nude {
-  color: $nude;
-  background-color: $transparent;
-  border: 2px solid $nude;
-}
+  .btn-fill-#{$color-name} {
+    @if color.lightness($color) > 50% {
+      color: black;
+      &:hover {
+        background-color: color.scale($color, $blackness: $highlight-rate);
+      }
+    } @else {
+      &:hover {
+        background-color: color.scale($color, $lightness: $highlight-rate);
+      }
+      color: white;
+    }
+    background-color: $color;
+  }
 
-.btn-outline-black {
-  color: $black;
-  background-color: $transparent;
-  border: 2px solid $black;
-}
-
-.btn-outline-white {
-  color: $white;
-  background-color: $transparent;
-  border: 2px solid $white;
-}
-
-// Filled
-.btn-fill-cyan {
-  color: $white;
-  background-color: $cyan;
-}
-
-.btn-fill-red-soil {
-  color: $white;
-  background-color: $red-soil;
-}
-
-.btn-fill-dark-green {
-  color: $white;
-  background-color: $dark-green;
-}
-
-.btn-fill-nude {
-  color: $white;
-  background-color: $nude;
-}
-
-.btn-fill-black {
-  color: $white;
-  background-color: $black;
-}
-
-.btn-fill-white {
-  color: $black;
-  background-color: $white;
-}
-
-// Underscore
-.btn-underscore-cyan {
-  color: $cyan;
-  border-bottom: 1px solid $cyan;
-  background-color: $transparent;
-  padding: 0;
-}
-
-.btn-underscore-red-soil {
-  color: $red-soil;
-  border-bottom: 1px solid $red-soil;
-  background-color: $transparent;
-  padding: 0;
-}
-
-.btn-underscore-dark-green {
-  color: $dark-green;
-  border-bottom: 1px solid $dark-green;
-  background-color: $transparent;
-  padding: 0;
-}
-
-.btn-underscore-nude {
-  color: $nude;
-  border-bottom: 1px solid $nude;
-  background-color: $transparent;
-  padding: 0;
-}
-
-.btn-underscore-black {
-  color: $black;
-  border-bottom: 1px solid $black;
-  background-color: $transparent;
-  padding: 0;
-}
-
-.btn-underscore-white {
-  color: $white;
-  border-bottom: 1px solid $white;
-  background-color: $transparent;
-  padding: 0;
+  .btn-underscore-#{$color-name} {
+    &:hover {
+      @if color.lightness($color) > 50% {
+        $new-color: color.scale($color, $blackness: $highlight-rate);
+        color: $new-color;
+        border-bottom: 1px solid $new-color;
+      } @else {
+        $new-color: color.scale($color, $lightness: $highlight-rate);
+        color: $new-color;
+        border-bottom: 1px solid $new-color;
+      }
+    }
+    color: $color;
+    border-bottom: 1px solid $color;
+    background-color: $transparent;
+    padding: 0;
+  }
 }

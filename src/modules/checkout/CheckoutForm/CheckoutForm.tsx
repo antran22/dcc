@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
-import NumberBullet from '#/components/NumberBullet';
-import styles from './CheckoutForm.module.scss';
-import Text from '#/components/Text';
-import { Field, Form, Formik } from 'formik';
-import Button from '#/components/Button';
-import { AiOutlineArrowRight as ForwardIcon } from 'react-icons/ai';
-import TextInput from '#/components/Form/TextInput';
-import * as yup from 'yup';
-import Radio from '#/components/Form/Radio';
-import Spacer from '#/components/Spacer';
-import { assets } from '@/assets';
-import { CheckoutFormDetails, PaymentOptions } from '../common/types';
-import { ViewportDimensionContext } from '#/contexts/ViewportDimensionContext';
+import React, {useContext} from "react";
+import NumberBullet from "#/components/NumberBullet";
+import styles from "./CheckoutForm.module.scss";
+import Text from "#/components/Text";
+import {Field, Form, Formik} from "formik";
+import Button from "#/components/Button";
+import {AiOutlineArrowRight as ForwardIcon} from "react-icons/ai";
+import TextInput from "#/components/Form/TextInput";
+import * as yup from "yup";
+import Radio from "#/components/Form/Radio";
+import Spacer from "#/components/Spacer";
+import {assets} from "@/assets";
+import {CheckoutFormDetails, PaymentOptions} from "../common/types";
+import {ViewportDimensionContext} from "#/contexts/ViewportDimensionContext";
 
 interface CheckoutFormProps {
   onCheckout: (formDetails: CheckoutFormDetails) => void;
@@ -23,14 +23,14 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
   const { currentMode } = useContext(ViewportDimensionContext);
   const schema = (() => {
     // Match Vietnam's phone number. Source: https://www.regextester.com/106725
-    const phoneRegExp = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+    const phoneRegExp = /(84|0[35789])+([0-9]{8})\b/g;
 
     return yup.object().shape({
       email: yup.string().email().required(),
       name: yup.string().required(),
       phoneNumber: yup
         .string()
-        .matches(phoneRegExp, 'Phone number is not valid')
+        .matches(phoneRegExp, "Phone number is not valid")
         .required(),
       address: yup.string().required(),
       paymentOption: yup.string().required(),
@@ -38,13 +38,13 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
   })();
 
   return (
-    <div className={styles['checkout-form']}>
+    <div className={styles["checkout-form"]}>
       <Formik
         initialValues={{
-          email: '',
-          name: '',
-          phoneNumber: '',
-          address: '',
+          email: "",
+          name: "",
+          phoneNumber: "",
+          address: "",
           paymentOption: PaymentOptions.SHIP_COD,
         }}
         validationSchema={schema}
@@ -64,17 +64,17 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
           /* and other goodies */
         }) => (
           <Form onSubmit={handleSubmit}>
-            <section className={styles['checkout-form-section']}>
-              <header className={styles['checkout-form-section-header']}>
-                {currentMode !== 'mobile' && <NumberBullet title={1} />}
+            <section className={styles["checkout-form-section"]}>
+              <header className={styles["checkout-form-section-header"]}>
+                {currentMode !== "mobile" && <NumberBullet title={1} />}
 
-                <div className={styles['checkout-form-section-header-title']}>
+                <div className={styles["checkout-form-section-header-title"]}>
                   <div
                     className={
-                      styles['checkout-form-section-header-title-wrapper']
+                      styles["checkout-form-section-header-title-wrapper"]
                     }
                   >
-                    {currentMode === 'mobile' && (
+                    {currentMode === "mobile" && (
                       <>
                         <NumberBullet title={1} />
                         <Spacer />
@@ -130,17 +130,17 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
               />
             </section>
 
-            <section className={styles['checkout-form-section']}>
-              <header className={styles['checkout-form-section-header']}>
-                {currentMode !== 'mobile' && <NumberBullet title={2} />}
+            <section className={styles["checkout-form-section"]}>
+              <header className={styles["checkout-form-section-header"]}>
+                {currentMode !== "mobile" && <NumberBullet title={2} />}
 
-                <div className={styles['checkout-form-section-header-title']}>
+                <div className={styles["checkout-form-section-header-title"]}>
                   <div
                     className={
-                      styles['checkout-form-section-header-title-wrapper']
+                      styles["checkout-form-section-header-title-wrapper"]
                     }
                   >
-                    {currentMode === 'mobile' && (
+                    {currentMode === "mobile" && (
                       <>
                         <NumberBullet title={2} />
                         <Spacer />
@@ -154,7 +154,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
                 </div>
               </header>
               <div
-                className={styles['checkout-form-section-radio']}
+                className={styles["checkout-form-section-radio"]}
                 role="group"
                 aria-labelledby="my-radio-group"
               >
@@ -165,16 +165,16 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
                   value={PaymentOptions.SHIP_COD}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  classNames={[styles['checkout-form-section-radio-field']]}
+                  classNames={[styles["checkout-form-section-radio-field"]]}
                   icon={assets.cod}
                   as={Radio}
                 />
-                {currentMode !== 'mobile' && <Spacer size="big" />}
+                {currentMode !== "mobile" && <Spacer size="big" />}
                 <Field
                   type="radio"
                   label="CHUYỂN KHOẢN"
                   name="paymentOption"
-                  classNames={[styles['checkout-form-section-radio-field']]}
+                  classNames={[styles["checkout-form-section-radio-field"]]}
                   value={PaymentOptions.CHUYEN_KHOAN}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -184,7 +184,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
               </div>
             </section>
 
-            <section className={styles['checkout-form-button']}>
+            <section className={styles["checkout-form-button"]}>
               <Button
                 color="red-soil"
                 mode="fill-parent"
@@ -195,9 +195,9 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
                   Object.keys(touched).length === 0
                 }
               >
-                <div className={styles['checkout-form-button-wrapper']}>
+                <div className={styles["checkout-form-button-wrapper"]}>
                   <Text.P
-                    classNames={[styles['checkout-form-button-wrapper-text']]}
+                    classNames={[styles["checkout-form-button-wrapper-text"]]}
                   >
                     ĐẶT HÀNG
                   </Text.P>

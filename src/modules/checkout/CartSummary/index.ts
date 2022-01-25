@@ -1,3 +1,3 @@
-import CartSummary from './CartSummary';
+import CartSummary from "./CartSummary";
 
 export default CartSummary;

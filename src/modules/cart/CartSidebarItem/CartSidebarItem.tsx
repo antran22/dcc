@@ -1,17 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
-import { assets } from '@/assets';
-import { CartItem } from '#/types';
-import Text from '#/components/Text';
-import styles from './CartSidebarItem.module.scss';
-import Button from '#/components/Button';
-import { formatCurrency } from '#/utils/number';
-import { useAppDispatch } from '@/redux/hooks';
-import { deleteItem, setQuantity } from '@/redux/slices/cart';
-import { Form } from '#/components/Form';
-import { debounce } from 'lodash';
-import Spacer from '#/components/Spacer';
-import { c } from '#/utils/classNameParser';
+import React, {useEffect, useRef, useState} from "react";
+import Image from "next/image";
+import {assets} from "@/assets";
+import {CartItem} from "#/types";
+import Text from "#/components/Text";
+import styles from "./CartSidebarItem.module.scss";
+import Button from "#/components/Button";
+import {formatCurrency} from "#/utils/number";
+import {useAppDispatch} from "@/redux/hooks";
+import {deleteItem, setQuantity} from "@/redux/slices/cart";
+import {Form} from "#/components/Form";
+import {debounce} from "lodash";
+import Spacer from "#/components/Spacer";
+import c from "classnames";
 
 interface CartSidebarItemProps {
   cartItem: CartItem;
@@ -59,11 +59,11 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
   };
 
   return (
-    <div className={styles['cart-sidebar-item']}>
+    <div className={styles["cart-sidebar-item"]}>
       <div
         className={c([
-          styles['cart-sidebar-item-image'],
-          isDeleting ? styles['cart-sidebar-item-deleting'] : '',
+          styles["cart-sidebar-item-image"],
+          isDeleting ? styles["cart-sidebar-item-deleting"] : "",
         ])}
       >
         <Image
@@ -74,21 +74,21 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
         />
       </div>
 
-      <div className={styles['cart-sidebar-item-description']}>
-        <h4 className={isDeleting ? styles['cart-sidebar-item-deleting'] : ''}>
+      <div className={styles["cart-sidebar-item-description"]}>
+        <h4 className={isDeleting ? styles["cart-sidebar-item-deleting"] : ""}>
           {cartItem.name}
         </h4>
         <Text.P
           classNames={[
-            styles['cart-sidebar-item-description-price'],
-            isDeleting ? styles['cart-sidebar-item-deleting'] : '',
+            styles["cart-sidebar-item-description-price"],
+            isDeleting ? styles["cart-sidebar-item-deleting"] : "",
           ]}
         >
           {formatCurrency(cartItem.price)}
         </Text.P>
         {isDeleting ? (
           <div
-            className={styles['cart-sidebar-item-description-delete-prompt']}
+            className={styles["cart-sidebar-item-description-delete-prompt"]}
           >
             <Text.P size="small" thickness="thin">
               Xoá sản phẩm?
@@ -123,8 +123,8 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
 
       <div
         className={c([
-          styles['cart-sidebar-item-quantity'],
-          isDeleting ? styles['cart-sidebar-item-deleting'] : '',
+          styles["cart-sidebar-item-quantity"],
+          isDeleting ? styles["cart-sidebar-item-deleting"] : "",
         ])}
       >
         <Form.NumberInput

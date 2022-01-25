@@ -1,30 +1,30 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 
-import Text from '#/components/Text';
-import { c } from '#/utils/classNameParser';
-import { assets } from '@/assets';
-import styles from './SectionOne.module.scss';
-import mainPageStyles from '../MainContent/MainContent.module.scss';
+import Text from "#/components/Text";
+import c from "classnames";
+import {assets} from "@/assets";
+import styles from "./SectionOne.module.scss";
+import mainPageStyles from "../MainContent/MainContent.module.scss";
 
 const SectionOne: React.FC = () => {
   return (
     <article
       className={c([
-        styles['about-page-main-content-section-one'],
-        mainPageStyles['about-page-main-content-section'],
+        styles["about-page-main-content-section-one"],
+        mainPageStyles["about-page-main-content-section"],
       ])}
     >
-      <div className={styles['about-page-main-content-section-one-label']}>
+      <div className={styles["about-page-main-content-section-one-label"]}>
         <Text.SpecialTitle color="nude">{'"Chơi chữ"'}</Text.SpecialTitle>
       </div>
 
       <div
-        className={c([styles['about-page-main-content-section-one-content']])}
+        className={c(styles["about-page-main-content-section-one-content"])}
       >
         <Text.P
           thickness="thin"
-          classNames={[styles['about-page-main-content-section-one-content-p']]}
+          classNames={[styles["about-page-main-content-section-one-content-p"]]}
         >
           là một nghệ thuật độc đáo của ngôn từ, lợi dụng sơ hở trong cấu trúc
           ngôn ngữ để tạo ra nhiều lớp nghĩa trong ngữ cảnh cụ thể. Chơi chữ

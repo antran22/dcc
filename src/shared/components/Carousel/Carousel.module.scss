@@ -1,0 +1,22 @@
+@import "src/shared/styles/constants.scss";
+@import "src/shared/styles/colors.scss";
+
+.carousel {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  &-slider-arrow-left {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
+  &-slider-arrow-right {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}

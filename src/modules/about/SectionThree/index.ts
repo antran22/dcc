@@ -1,3 +1,3 @@
-import SectionThree from './SectionThree';
+import SectionThree from "./SectionThree";
 
 export default SectionThree;

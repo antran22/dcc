@@ -1,3 +1,3 @@
-import LandingBanner from './LandingBanner';
+import LandingBanner from "./LandingBanner";
 
 export default LandingBanner;

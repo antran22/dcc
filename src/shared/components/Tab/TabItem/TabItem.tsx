@@ -1,11 +1,11 @@
-import React from 'react';
-import { c } from '@/shared/utils/classNameParser';
-import { TabItemData } from '../Tab';
-import styles from './TabItem.module.scss';
+import React from "react";
+import c from "classnames";
+import {TabItemData} from "../Tab";
+import styles from "./TabItem.module.scss";
 
 interface TabItemProps<T extends TabItemData> {
   tabItem: T;
-  color: 'black' | 'white';
+  color: "black" | "white";
   selected: boolean;
   onTabSelect: (tabValue: T) => void;
   containerStyle?: React.CSSProperties;
@@ -18,13 +18,13 @@ export function TabItem<T extends TabItemData>({
   onTabSelect,
   containerStyle,
 }: TabItemProps<T>) {
-  const selectedClass = selected ? `tab-item-${color}-selected` : '';
+  const selectedClass = selected ? `tab-item-${color}-selected` : "";
   return (
     <div
       role="tab"
       tabIndex={0}
       className={c([
-        styles['tab-item'],
+        styles["tab-item"],
         styles[`tab-item-${color}`],
         styles[selectedClass],
       ])}

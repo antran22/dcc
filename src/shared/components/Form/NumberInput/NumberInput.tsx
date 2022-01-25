@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './NumberInput.module.scss';
+import React from "react";
+import styles from "./NumberInput.module.scss";
 
 const NumberInput: React.FC<
   React.DetailedHTMLProps<
@@ -7,7 +7,7 @@ const NumberInput: React.FC<
     HTMLInputElement
   >
 > = (props) => {
-  return <input className={styles['number-input']} type="number" {...props} />;
+  return <input className={styles["number-input"]} type="number" {...props} />;
 };
 
 export default NumberInput;

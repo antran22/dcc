@@ -1,3 +1,3 @@
-import NumberBullet from './NumberBullet';
+import NumberBullet from "./NumberBullet";
 
 export default NumberBullet;

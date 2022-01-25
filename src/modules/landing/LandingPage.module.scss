@@ -1,5 +1,5 @@
-@import 'src/shared/styles/constants.scss';
-@import 'src/shared/styles/colors.scss';
+@import "src/shared/styles/constants.scss";
+@import "src/shared/styles/colors.scss";
 
 $custom-btn-padding: 10vw;
 
@@ -13,7 +13,7 @@ $custom-btn-padding: 10vw;
   &-title {
     padding: $s3;
     border: 2px solid $black;
-    border-top-width: 0px;
+    border-top-width: 0;
     width: fit-content;
 
     margin-top: $s3;

@@ -1,19 +1,19 @@
-import { useRouter } from 'next/router';
-import React, { useContext, useState } from 'react';
-import { useAppSelector } from '@/redux/hooks';
-import { cartSelector, cartSumSelector } from '@/redux/slices/cart';
-import { CartSidebarContext } from '#/contexts/CartSidebarContext';
-import { CartItem } from '#/types';
-import { formatCurrency } from '#/utils/number';
-import Button from '#/components/Button';
-import SidebarContainer from '#/components/SidebarContainer';
-import Text from '#/components/Text';
-import styles from './CartSidebar.module.scss';
-import CartSidebarItem from './CartSidebarItem';
-import { AiOutlineArrowLeft as BackIcon } from 'react-icons/ai';
-import Spacer from '#/components/Spacer';
-import EmptyCartSidebar from './EmptyCartSidebar';
-import CrossSell from './CrossSell';
+import {useRouter} from "next/router";
+import React, {useContext, useState} from "react";
+import {useAppSelector} from "@/redux/hooks";
+import {cartSelector, cartSumSelector} from "@/redux/slices/cart";
+import {CartSidebarContext} from "#/contexts/CartSidebarContext";
+import {CartItem} from "#/types";
+import {formatCurrency} from "#/utils/number";
+import Button from "#/components/Button";
+import SidebarContainer from "#/components/SidebarContainer";
+import Text from "#/components/Text";
+import styles from "./CartSidebar.module.scss";
+import CartSidebarItem from "./CartSidebarItem";
+import {AiOutlineArrowLeft as BackIcon} from "react-icons/ai";
+import Spacer from "#/components/Spacer";
+import EmptyCartSidebar from "./EmptyCartSidebar";
+import CrossSell from "./CrossSell";
 
 const CartSidebar: React.FC = () => {
   const cartItems = useAppSelector(cartSelector);
@@ -26,7 +26,7 @@ const CartSidebar: React.FC = () => {
     if (currentStep === 0) {
       setCurrentStep(1);
     } else {
-      router.push('/checkout');
+      router.push("/checkout");
       setCartSidebarIsOpen(false);
       setTimeout(() => {
         setCurrentStep(0);
@@ -72,7 +72,7 @@ const CartSidebarHeader: React.FC<CartSidebarHeaderProps> = ({
   }
 
   return (
-    <div className={styles['cart-sidebar-header']}>
+    <div className={styles["cart-sidebar-header"]}>
       <Button color="white" onClick={onBack}>
         <BackIcon size={BACK_SIZE} />
       </Button>
@@ -94,15 +94,15 @@ const CartSidebarWithItem: React.FC<CartSidebarWithItemProps> = ({
 }) => {
   const cartTotalSum = useAppSelector(cartSumSelector);
   return (
-    <div className={styles['cart-sidebar']}>
+    <div className={styles["cart-sidebar"]}>
       {currentStep === 0 ? (
         <CartContent cartItems={cartItems} />
       ) : (
         <CrossSell />
       )}
 
-      <div className={styles['cart-sidebar-footer']}>
-        <div className={styles['cart-sidebar-footer-total']}>
+      <div className={styles["cart-sidebar-footer"]}>
+        <div className={styles["cart-sidebar-footer-total"]}>
           <Text.P thickness="thin">Tổng:</Text.P>
           <Text.P thickness="thick" size="large">
             {formatCurrency(cartTotalSum)}
@@ -121,7 +121,7 @@ interface CartContentProps {
 }
 const CartContent: React.FC<CartContentProps> = ({ cartItems }) => {
   return (
-    <div className={styles['cart-sidebar-body']}>
+    <div className={styles["cart-sidebar-body"]}>
       {cartItems.map((cartItem) => (
         <CartSidebarItem cartItem={cartItem} key={cartItem.id} />
       ))}

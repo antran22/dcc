@@ -1,3 +1,3 @@
-import LeftBanner from './LeftBanner';
+import LeftBanner from "./LeftBanner";
 
 export default LeftBanner;

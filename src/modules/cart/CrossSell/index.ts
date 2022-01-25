@@ -1,3 +1,3 @@
-import CrossSell from './CrossSell';
+import CrossSell from "./CrossSell";
 
 export default CrossSell;

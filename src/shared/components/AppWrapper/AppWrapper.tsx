@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './AppWrapper.module.scss';
+import React from "react";
+import styles from "./AppWrapper.module.scss";
 
 interface AppWrapperProps {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface AppWrapperProps {
 const AppWrapper: React.FC<AppWrapperProps> = ({
   children,
 }: AppWrapperProps) => {
-  return <div className={styles['app-wrapper']}>{children}</div>;
+  return <div className={styles["app-wrapper"]}>{children}</div>;
 };
 
 export default AppWrapper;

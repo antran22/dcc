@@ -1,0 +1,13 @@
+@import "#/styles/constants";
+
+.quantity-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: $s2 0;
+
+  p {
+    margin: 0 $s5;
+    padding: 0;
+  }
+}

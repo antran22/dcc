@@ -1,11 +1,11 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
-import { CartItem } from '@/shared/types';
-import { RootState } from '../store';
+import {createSelector, createSlice} from "@reduxjs/toolkit";
+import {CartItem} from "@/shared/types";
+import {RootState} from "../store";
 
 const initialState: CartItem[] = [];
 
 export const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState,
   reducers: {
     addItem: (state, action) => {

@@ -1,22 +1,22 @@
-import React from 'react';
-import Image from 'next/image';
-import { assets } from '@/assets';
-import { c } from '#/utils/classNameParser';
-import styles from './SectionTwo.module.scss';
-import mainPageStyles from '../MainContent/MainContent.module.scss';
-import Text from '#/components/Text';
+import React from "react";
+import Image from "next/image";
+import {assets} from "@/assets";
+import c from "classnames";
+import styles from "./SectionTwo.module.scss";
+import mainPageStyles from "../MainContent/MainContent.module.scss";
+import Text from "#/components/Text";
 
 const SectionTwo: React.FC = () => {
   return (
     <article
       className={c([
-        styles['about-page-main-content-section-two'],
-        mainPageStyles['about-page-main-content-section'],
+        styles["about-page-main-content-section-two"],
+        mainPageStyles["about-page-main-content-section"],
       ])}
     >
       <Text.P
         thickness="thin"
-        classNames={[styles['about-page-main-content-section-two-p']]}
+        classNames={[styles["about-page-main-content-section-two-p"]]}
       >
         Đồ chơi chữ là những người tìm thấy khoái lạc trong việc mò mẫm ngôn
         ngữ, chúng tôi chơi chữ để thỏa mãn bản thân cũng như đem lại năng lượng

@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { c } from '#/utils/classNameParser';
-import styles from './ModalWrapper.module.scss';
+import React, {useCallback, useEffect, useRef, useState} from "react";
+import c from "classnames";
+import styles from "./ModalWrapper.module.scss";
 
 interface ModalWrapperProps {
+  className?: string;
   visible: boolean;
   children: React.ReactNode;
   onClose: () => void;
@@ -12,6 +13,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   children,
   visible,
   onClose,
+  className,
 }) => {
   const [wrapperVisible, setWrapperVisible] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -29,9 +31,9 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   );
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutsideContent);
+    document.addEventListener("mousedown", handleClickOutsideContent);
     return () =>
-      document.removeEventListener('mousedown', handleClickOutsideContent);
+      document.removeEventListener("mousedown", handleClickOutsideContent);
   }, [handleClickOutsideContent]);
 
   useEffect(() => {
@@ -45,14 +47,17 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   return (
     <div
       style={{
-        visibility: wrapperVisible ? 'visible' : 'hidden',
+        visibility: wrapperVisible ? "visible" : "hidden",
       }}
-      className={c([
-        styles['modal-wrapper'],
-        styles[`modal-wrapper-${visible ? 'show' : 'hide'}`],
-      ])}
+      className={c(
+        styles["modal-wrapper"],
+        styles[`modal-wrapper-${visible ? "show" : "hide"}`]
+      )}
     >
-      <div ref={contentRef} className={styles['modal-wrapper-content']}>
+      <div
+        ref={contentRef}
+        className={c(styles["modal-wrapper-content"], className)}
+      >
         {children}
       </div>
     </div>

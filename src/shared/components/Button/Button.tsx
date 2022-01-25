@@ -1,22 +1,22 @@
-import React from 'react';
-import { DCCColors } from '#/types';
-import { c } from '#/utils/classNameParser';
-import styles from './Button.module.scss';
+import React from "react";
+import {DCCColors} from "#/types";
+import c from "classnames";
+import styles from "./Button.module.scss";
 
 interface ButtonProps {
   children: React.ReactNode;
   color: DCCColors;
-  mode?: 'fill-parent' | 'contain';
-  variant?: 'fill' | 'outline' | 'underscore';
+  mode?: "fill-parent" | "contain";
+  variant?: "fill" | "outline" | "underscore";
   classNames?: string[];
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   disabled?: boolean;
   onClick?: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
-  mode = 'contain',
-  variant = 'fill',
+  mode = "contain",
+  variant = "fill",
   disabled = false,
   type,
   color,
@@ -33,7 +33,7 @@ const Button: React.FC<ButtonProps> = ({
         styles.btn,
         styles[`btn-${mode}`],
         styles[`btn-${variant}-${color}`],
-        disabled ? styles['btn-disabled'] : '',
+        disabled ? styles["btn-disabled"] : "",
         ...classNames,
       ])}
     >

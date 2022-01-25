@@ -1,6 +1,6 @@
-import React from 'react';
-import Text from '../Text';
-import styles from './NumberBullet.module.scss';
+import React from "react";
+import Text from "../Text";
+import styles from "./NumberBullet.module.scss";
 
 interface NumberBulletProps {
   title: number;
@@ -8,7 +8,7 @@ interface NumberBulletProps {
 
 const NumberBullet: React.FC<NumberBulletProps> = ({ title }) => {
   return (
-    <div className={styles['number-bullet']}>
+    <div className={styles["number-bullet"]}>
       <Text.P thickness="thin">{String(title)}</Text.P>
     </div>
   );

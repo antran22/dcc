@@ -1,8 +1,8 @@
-import React from 'react';
-import Text from '#/components/Text';
-import { DCCColors } from '#/types';
-import { c } from '#/utils/classNameParser';
-import styles from './SectionThree.module.scss';
+import React from "react";
+import Text from "#/components/Text";
+import {DCCColors} from "#/types";
+import c from "classnames";
+import styles from "./SectionThree.module.scss";
 
 export interface SquareContentData {
   title: string;
@@ -18,12 +18,12 @@ const SquareContent: React.FC<SquareContentData> = ({
   return (
     <div
       className={c([
-        styles['about-page-main-content-section-three-square-content'],
+        styles["about-page-main-content-section-three-square-content"],
       ])}
     >
       <Text.SpecialTitle
         classNames={[
-          styles['about-page-main-content-section-three-square-content-title'],
+          styles["about-page-main-content-section-three-square-content-title"],
         ]}
         color={titleColor}
       >
@@ -32,7 +32,7 @@ const SquareContent: React.FC<SquareContentData> = ({
       <Text.P
         thickness="thin"
         classNames={[
-          styles['about-page-main-content-section-three-square-content-p'],
+          styles["about-page-main-content-section-three-square-content-p"],
         ]}
       >
         {details}

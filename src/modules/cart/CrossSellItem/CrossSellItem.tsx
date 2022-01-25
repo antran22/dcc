@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import Button from '#/components/Button';
-import Text from '#/components/Text';
-import { CartItem } from '#/types';
-import { formatCurrency } from '#/utils/number';
-import styles from './CrossSellItem.module.scss';
-import Image from 'next/image';
-import { assets } from '@/assets';
-import { useAppDispatch } from '@/redux/hooks';
-import { addItem, removeItem } from '@/redux/slices/cart';
+import React, {useState} from "react";
+import Button from "#/components/Button";
+import Text from "#/components/Text";
+import {CartItem} from "#/types";
+import {formatCurrency} from "#/utils/number";
+import styles from "./CrossSellItem.module.scss";
+import Image from "next/image";
+import {assets} from "@/assets";
+import {useAppDispatch} from "@/redux/hooks";
+import {addItem, removeItem} from "@/redux/slices/cart";
 
 interface CrossSellItemProps {
   crossSellItem: CartItem;
@@ -29,23 +29,23 @@ const CrossSellItem: React.FC<CrossSellItemProps> = ({ crossSellItem }) => {
   };
 
   return (
-    <div className={styles['cross-sell-item']}>
-      <div className={styles['cross-sell-item-image']}>
+    <div className={styles["cross-sell-item"]}>
+      <div className={styles["cross-sell-item-image"]}>
         <Image layout="responsive" src={assets.itemBinhTinh} alt="Binh Tinh" />
       </div>
 
-      <div className={styles['cross-sell-item-description']}>
+      <div className={styles["cross-sell-item-description"]}>
         <h2>{name}</h2>
         <Text.P thickness="thin">{`+${formatCurrency(price)}`}</Text.P>
       </div>
 
-      <div className={styles['cross-sell-item-button']}>
+      <div className={styles["cross-sell-item-button"]}>
         <Button
           onClick={handleCtaClick}
           mode="fill-parent"
-          color={isItemAdded ? 'cyan' : 'black'}
+          color={isItemAdded ? "cyan" : "black"}
         >
-          {isItemAdded ? 'DA THEM' : 'THEM'}
+          {isItemAdded ? "DA THEM" : "THEM"}
         </Button>
       </div>
     </div>

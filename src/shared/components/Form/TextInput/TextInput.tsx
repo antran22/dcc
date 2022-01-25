@@ -1,8 +1,8 @@
-import { FieldConfig, useField } from 'formik';
-import React, { useState } from 'react';
-import styles from './TextInput.module.scss';
-import Text from '#/components/Text';
-import { c } from '#/utils/classNameParser';
+import {FieldConfig, useField} from "formik";
+import React, {useState} from "react";
+import styles from "./TextInput.module.scss";
+import Text from "#/components/Text";
+import c from "classnames";
 
 interface TextInputProps extends FieldConfig<any> {
   label: string;
@@ -19,17 +19,17 @@ const TextInput: React.FC<TextInputProps> = ({
   const shouldShowError = meta.error && meta.touched;
 
   return (
-    <div className={c([styles['text-input-wrapper']])}>
+    <div className={c(styles["text-input-wrapper"])}>
       <label
         className={c([
-          styles['text-input'],
-          shouldShowError && !isFocus ? styles['text-input-error'] : '',
-          isFocus ? styles['text-input-focus'] : '',
+          styles["text-input"],
+          shouldShowError && !isFocus ? styles["text-input-error"] : "",
+          isFocus ? styles["text-input-focus"] : "",
         ])}
       >
-        <span className={styles['text-input-label']}>{label}</span>
+        <span className={styles["text-input-label"]}>{label}</span>
         <input
-          className={styles['text-input-main']}
+          className={styles["text-input-main"]}
           {...field}
           {...props}
           onFocus={() => setIsFocus(true)}
@@ -40,8 +40,8 @@ const TextInput: React.FC<TextInputProps> = ({
         />
       </label>
       {shouldShowError && (
-        <Text.P classNames={[styles['text-input-error-message']]}>
-          {'* ' + meta.error}
+        <Text.P classNames={[styles["text-input-error-message"]]}>
+          {"* " + meta.error}
         </Text.P>
       )}
     </div>

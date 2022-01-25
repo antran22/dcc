@@ -1,3 +1,3 @@
-import CartSidebarItem from './CartSidebarItem';
+import CartSidebarItem from "./CartSidebarItem";
 
 export default CartSidebarItem;

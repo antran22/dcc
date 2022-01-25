@@ -1,14 +1,12 @@
-import React from 'react';
-import { c } from '#/utils/classNameParser';
-import styles from './Spacer.module.scss';
+import React from "react";
+import c from "classnames";
+import styles from "./Spacer.module.scss";
 
 interface SpacerProps {
-  size?: 'normal' | 'small' | 'big';
+  size?: "normal" | "small" | "big";
 }
-const Spacer: React.FC<SpacerProps> = ({ size = 'normal' }) => {
-  return (
-    <span className={c([styles['spacer'], styles[`spacer-${size}`]])}></span>
-  );
+const Spacer: React.FC<SpacerProps> = ({ size = "normal" }) => {
+  return <span className={c(styles["spacer"], styles[`spacer-${size}`])} />;
 };
 
 export default Spacer;

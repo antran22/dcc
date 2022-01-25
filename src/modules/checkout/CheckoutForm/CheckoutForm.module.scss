@@ -1,8 +1,8 @@
-@import 'src/shared/styles/constants.scss';
+@import "src/shared/styles/constants.scss";
 
 .checkout-form {
   padding: $s5 $s3;
-  height: calc(100vh - $header-height - $footer-height);
+  height: calc(100vh - #{$header-height - $footer-height});
   overflow-y: auto;
 
   @media screen and (max-width: $breakpoint-tablet) {

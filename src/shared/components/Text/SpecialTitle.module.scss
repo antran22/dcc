@@ -1,76 +1,44 @@
-@use 'sass:math';
+@use "sass:math";
 
-@import '../../styles/constants.scss';
-@import '../../styles/colors.scss';
+@import "/src/shared/styles/constants";
+@import "/src/shared/styles/colors";
 
-$rotation-value: (math.random(6deg) - 3deg);
-
-@mixin pseudo-tilt {
-  content: ' ';
-
+@mixin title-background {
+  content: " ";
   display: block;
-
   width: 100%;
   height: 100%;
-
   position: absolute;
   top: 0;
   left: 0;
-
   z-index: -1;
+}
 
-  transform: rotate($rotation-value);
+$rotate-scale: 2;
+
+@for $level from -5 through 5 {
+  .special-title-rotate-#{$level} {
+    &::after {
+      transform: rotate(#{$level * $rotate-scale}deg);
+    }
+  }
 }
 
 .special-title {
+  font-weight: 600;
+  display: inline-block;
   width: fit-content;
-
   position: relative;
   overflow: visible;
-
   margin-bottom: 1rem;
 }
 
-// Colors
-.special-title-cyan {
-  &::after {
-    @include pseudo-tilt();
-    background-color: lighten($cyan);
-  }
-}
-
-.special-title-red-soil {
-  &::after {
-    @include pseudo-tilt();
-    background-color: lighten($red-soil);
-  }
-}
-
-.special-title-dark-green {
-  &::after {
-    @include pseudo-tilt();
-    background-color: lighten($dark-green);
-  }
-}
-
-.special-title-nude {
-  &::after {
-    @include pseudo-tilt();
-    background-color: lighten($nude);
-  }
-}
-
-.special-title-black {
-  color: $white;
-  &::after {
-    @include pseudo-tilt();
-    background-color: $black;
-  }
-}
-
-.special-title-white {
-  &::after {
-    @include pseudo-tilt();
-    background-color: $white;
+@each $color-name, $color in $colors {
+  .special-title-#{$color-name} {
+    @extend .special-title;
+    &::after {
+      @include title-background();
+      background-color: lighten($color);
+    }
   }
 }

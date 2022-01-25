@@ -1,3 +1,3 @@
-import SectionFour from './SectionFour';
+import SectionFour from "./SectionFour";
 
 export default SectionFour;

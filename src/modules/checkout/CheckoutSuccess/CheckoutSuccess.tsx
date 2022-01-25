@@ -1,16 +1,13 @@
-import React, { useContext } from 'react';
-import styles from './CheckoutSuccess.module.scss';
-import {
-  AiFillCheckCircle as CheckIcon,
-  AiOutlineArrowLeft as BackIcon,
-} from 'react-icons/ai';
-import { colors } from '#/styles/colors';
-import Text from '#/components/Text';
-import Spacer from '#/components/Spacer';
-import { CheckoutFormDetails } from '../common/types';
-import Button from '#/components/Button';
-import { useRouter } from 'next/router';
-import { ViewportDimensionContext } from '#/contexts/ViewportDimensionContext';
+import React, {useContext} from "react";
+import styles from "./CheckoutSuccess.module.scss";
+import {AiFillCheckCircle as CheckIcon, AiOutlineArrowLeft as BackIcon,} from "react-icons/ai";
+import {colors} from "#/styles/colors";
+import Text from "#/components/Text";
+import Spacer from "#/components/Spacer";
+import {CheckoutFormDetails} from "../common/types";
+import Button from "#/components/Button";
+import {useRouter} from "next/router";
+import {ViewportDimensionContext} from "#/contexts/ViewportDimensionContext";
 
 interface CheckoutSuccessProps {
   checkoutFormDetails: CheckoutFormDetails;
@@ -26,15 +23,15 @@ const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({
   const router = useRouter();
 
   return (
-    <div className={styles['checkout-success']}>
-      {currentMode !== 'mobile' && (
-        <div className={styles['checkout-success-icon']}>
+    <div className={styles["checkout-success"]}>
+      {currentMode !== "mobile" && (
+        <div className={styles["checkout-success-icon"]}>
           <CheckIcon size={ICON_SIZE} color={colors.green} />
         </div>
       )}
-      <div className={styles['checkout-success-details']}>
-        <div className={styles['checkout-success-details-header']}>
-          {currentMode === 'mobile' && (
+      <div className={styles["checkout-success-details"]}>
+        <div className={styles["checkout-success-details-header"]}>
+          {currentMode === "mobile" && (
             <>
               <CheckIcon size={ICON_SIZE} color={colors.green} />
               <Spacer />
@@ -48,64 +45,64 @@ const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({
           nhận đơn:
         </Text.P>
 
-        <div className={styles['checkout-success-details-table']}>
-          <div className={styles['checkout-success-details-table-row']}>
+        <div className={styles["checkout-success-details-table"]}>
+          <div className={styles["checkout-success-details-table-row"]}>
             <div
-              className={styles['checkout-success-details-table-cell-small']}
+              className={styles["checkout-success-details-table-cell-small"]}
             >
               <Text.P thickness="thin">Email</Text.P>
             </div>
-            <div className={styles['checkout-success-details-table-cell-big']}>
+            <div className={styles["checkout-success-details-table-cell-big"]}>
               <Text.P thickness="thin">{email}</Text.P>
             </div>
           </div>
 
-          <div className={styles['checkout-success-details-table-row']}>
+          <div className={styles["checkout-success-details-table-row"]}>
             <div
-              className={styles['checkout-success-details-table-cell-small']}
+              className={styles["checkout-success-details-table-cell-small"]}
             >
               <Text.P thickness="thin">Họ tên</Text.P>
             </div>
-            <div className={styles['checkout-success-details-table-cell-big']}>
+            <div className={styles["checkout-success-details-table-cell-big"]}>
               <Text.P thickness="thin">{name}</Text.P>
             </div>
           </div>
 
-          <div className={styles['checkout-success-details-table-row']}>
+          <div className={styles["checkout-success-details-table-row"]}>
             <div
-              className={styles['checkout-success-details-table-cell-small']}
+              className={styles["checkout-success-details-table-cell-small"]}
             >
               <Text.P thickness="thin">SĐT</Text.P>
             </div>
-            <div className={styles['checkout-success-details-table-cell-big']}>
+            <div className={styles["checkout-success-details-table-cell-big"]}>
               <Text.P thickness="thin">{phoneNumber}</Text.P>
             </div>
           </div>
 
-          <div className={styles['checkout-success-details-table-row']}>
+          <div className={styles["checkout-success-details-table-row"]}>
             <div
-              className={styles['checkout-success-details-table-cell-small']}
+              className={styles["checkout-success-details-table-cell-small"]}
             >
               <Text.P thickness="thin">Địa chỉ</Text.P>
             </div>
-            <div className={styles['checkout-success-details-table-cell-big']}>
+            <div className={styles["checkout-success-details-table-cell-big"]}>
               <Text.P thickness="thin">{address}</Text.P>
             </div>
           </div>
         </div>
 
-        <div className={styles['checkout-success-details-button']}>
+        <div className={styles["checkout-success-details-button"]}>
           <Spacer />
           <Button
             color="black"
             mode="fill-parent"
-            onClick={() => router.push('/')}
+            onClick={() => router.push("/")}
           >
-            <div className={styles['checkout-success-details-button-content']}>
+            <div className={styles["checkout-success-details-button-content"]}>
               <BackIcon />
               <Text.P
                 classNames={[
-                  styles['checkout-success-details-button-content-text'],
+                  styles["checkout-success-details-button-content-text"],
                 ]}
               >
                 QUAY LẠI TRANG CHỦ

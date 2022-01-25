@@ -1,21 +1,15 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import styles from './SidebarContainer.module.scss';
-import { AiOutlineClose as Cross } from 'react-icons/ai';
-import Button from '#/components/Button';
-import { c } from '#/utils/classNameParser';
+import React, {useCallback, useEffect, useRef, useState,} from "react";
+import styles from "./SidebarContainer.module.scss";
+import {AiOutlineClose as Cross} from "react-icons/ai";
+import Button from "#/components/Button";
+import c from "classnames";
 
 const CROSS_SIZE = 20;
 
 interface SidebarContainerProps {
   title: React.ReactNode;
   children: React.ReactNode;
-  openFrom?: 'left' | 'right';
+  openFrom?: "left" | "right";
   sidebarIsOpen: boolean;
   setSidebarIsOpen: (isOpen: boolean) => void;
 }
@@ -23,7 +17,7 @@ interface SidebarContainerProps {
 const SidebarContainer: React.FC<SidebarContainerProps> = ({
   title,
   children,
-  openFrom = 'right',
+  openFrom = "right",
   sidebarIsOpen,
   setSidebarIsOpen,
 }) => {
@@ -49,36 +43,36 @@ const SidebarContainer: React.FC<SidebarContainerProps> = ({
   }, [sidebarIsOpen]);
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleContainerClick);
+    document.addEventListener("mousedown", handleContainerClick);
 
     return () =>
-      document.removeEventListener('mousedown', handleContainerClick);
+      document.removeEventListener("mousedown", handleContainerClick);
   }, [handleContainerClick]);
 
   return (
     <div
       className={c([
-        styles['sidebar-container'],
-        styles[`sidebar-container-${sidebarIsOpen ? 'open' : 'close'}`],
+        styles["sidebar-container"],
+        styles[`sidebar-container-${sidebarIsOpen ? "open" : "close"}`],
       ])}
       style={{
-        visibility: visible ? 'visible' : 'hidden',
+        visibility: visible ? "visible" : "hidden",
       }}
     >
       <div
         ref={contentRef}
         className={c([
-          styles['sidebar-container-content'],
+          styles["sidebar-container-content"],
           styles[
-            `sidebar-container-content-${sidebarIsOpen ? 'open' : 'close'}`
+            `sidebar-container-content-${sidebarIsOpen ? "open" : "close"}`
           ],
         ])}
         style={{
           [openFrom]: 0,
         }}
       >
-        <div className={styles['sidebar-container-content-header']}>
-          <div className={styles['sidebar-container-content-header-title']}>
+        <div className={styles["sidebar-container-content-header"]}>
+          <div className={styles["sidebar-container-content-header-title"]}>
             {title}
           </div>
           <Button
@@ -89,7 +83,7 @@ const SidebarContainer: React.FC<SidebarContainerProps> = ({
           </Button>
         </div>
 
-        <div className={styles['sidebar-container-content-body']}>
+        <div className={styles["sidebar-container-content-body"]}>
           {children}
         </div>
       </div>
