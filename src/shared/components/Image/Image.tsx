@@ -1,7 +1,7 @@
-import React from "react";
-import NextImage, {ImageProps as NextImageProps} from "next/image";
 import {getUrlFromAPIPath} from "#/utils/resolveAPIPath";
 import _ from "lodash";
+import NextImage, {ImageProps as NextImageProps} from "next/image";
+import React from "react";
 
 interface ImageProps extends NextImageProps {}
 

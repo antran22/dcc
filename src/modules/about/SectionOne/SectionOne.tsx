@@ -1,11 +1,10 @@
-import React from "react";
-import Image from "next/image";
-
 import Text from "#/components/Text";
-import c from "classnames";
 import {assets} from "@/assets";
-import styles from "./SectionOne.module.scss";
+import c from "classnames";
+import Image from "next/image";
+import React from "react";
 import mainPageStyles from "../MainContent/MainContent.module.scss";
+import styles from "./SectionOne.module.scss";
 
 const SectionOne: React.FC = () => {
   return (

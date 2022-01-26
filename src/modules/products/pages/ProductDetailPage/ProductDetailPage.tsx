@@ -1,21 +1,17 @@
-import React, { useEffect } from "react";
-import { NextPage } from "next";
-import { useRouter } from "next/router";
 import Text from "#/components/Text";
-import styles from "./ProductDetailPage.module.scss";
-import QuantityControl from "../../components/QuantityControl";
-import ProductInformation from "../../components/ProductInformation/ProductInformation";
-import Head from "next/head";
-import { useGetProductBySlugQuery } from "@/redux/slices/api";
 import { formatCurrency } from "#/utils/number";
 import ProductPreview from "@/modules/products/pages/ProductDetailPage/ProductPreview";
+import { useAppDispatch } from "@/redux/hooks";
+import { useGetProductBySlugQuery } from "@/redux/slices/api";
+import { resetProduct, setProduct } from "@/redux/slices/productView";
 import c from "classnames";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  previewImageSelector,
-  resetProduct,
-  setProduct,
-} from "@/redux/slices/productView";
+import { NextPage } from "next";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import ProductInformation from "../../components/ProductInformation/ProductInformation";
+import QuantityControl from "../../components/QuantityControl";
+import styles from "./ProductDetailPage.module.scss";
 
 const ProductDetailPage: NextPage = () => {
   const router = useRouter();
@@ -25,21 +21,19 @@ const ProductDetailPage: NextPage = () => {
   const { data: product, isLoading } = useGetProductBySlugQuery(itemId ?? "1");
 
   const dispatch = useAppDispatch();
-  const previewImages = useAppSelector(previewImageSelector);
 
   useEffect(() => {
+    if (!isLoading && !product) {
+      router.push("/404").then();
+    }
     if (!isLoading && product) {
       dispatch(setProduct(product));
     }
     return () => {
       dispatch(resetProduct());
     };
-  }, [dispatch, isLoading, product]);
+  }, [router, dispatch, isLoading, product]);
 
-  if (!isLoading && !product) {
-    router.push("/404");
-    return null;
-  }
   if (isLoading || !product) {
     return <div />;
   }
@@ -54,7 +48,7 @@ const ProductDetailPage: NextPage = () => {
         className={styles.productsDetailsPagePreview}
         style={{ backgroundColor: product.theme_color_code }}
       >
-        <ProductPreview images={previewImages} />
+        <ProductPreview />
       </aside>
 
       <main className={styles.productsDetailsPageContent}>
@@ -69,7 +63,7 @@ const ProductDetailPage: NextPage = () => {
 
         <div className={styles.productsDetailsPageContentFooter}>
           <Text.P size="large">{formatCurrency(product.price)}</Text.P>
-          <QuantityControl productId={itemId} />
+          <QuantityControl />
         </div>
       </main>
     </div>

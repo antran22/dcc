@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
-import styles from "./SingleCarousel.module.scss";
 import {useInterval} from "#/hooks";
 import c from "classnames";
+import React, {useEffect, useState} from "react";
+import styles from "./SingleCarousel.module.scss";
 
 interface SingleCarouselProps {
   time: number;

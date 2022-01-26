@@ -1,8 +1,9 @@
-import React, { useMemo } from "react";
 import { DCCColors } from "#/types";
 import c from "classnames";
-import specialTitleStyles from "./SpecialTitle.module.scss";
+import dynamic from "next/dynamic";
+import React, { useMemo } from "react";
 import pStyles from "./P.module.scss";
+import specialTitleStyles from "./SpecialTitle.module.scss";
 
 interface TextProps {
   children: string | React.ReactNode[];
@@ -41,6 +42,10 @@ const SpecialTitle: React.FC<SpecialTitleProps> = ({
   );
 };
 
+const SpecialTitleWithNoSSR = dynamic(() => Promise.resolve(SpecialTitle), {
+  ssr: false,
+});
+
 interface PProps extends TextProps {
   size?: "large" | "normal" | "small";
   thickness?: "thick" | "normal" | "thin";
@@ -68,7 +73,7 @@ const P: React.FC<PProps> = ({
 };
 
 const Text = {
-  SpecialTitle,
+  SpecialTitle: SpecialTitleWithNoSSR,
   P,
 };
 

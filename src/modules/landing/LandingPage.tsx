@@ -1,7 +1,7 @@
+import Button from "#/components/Button";
 import {NextPage} from "next";
 import {useRouter} from "next/router";
 import React from "react";
-import Button from "#/components/Button";
 import LandingBanner from "./LandingBanner";
 import styles from "./LandingPage.module.scss";
 

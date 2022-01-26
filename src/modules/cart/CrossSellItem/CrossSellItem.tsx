@@ -1,29 +1,34 @@
-import React, {useState} from "react";
 import Button from "#/components/Button";
 import Text from "#/components/Text";
-import {CartItem} from "#/types";
-import {formatCurrency} from "#/utils/number";
-import styles from "./CrossSellItem.module.scss";
+import { Product } from "#/types";
+import { formatCurrency } from "#/utils/number";
+import { assets } from "@/assets";
+import { useAppDispatch } from "@/redux/hooks";
+import { addVariantToCart, reduceVariantFromCart } from "@/redux/slices/cart";
 import Image from "next/image";
-import {assets} from "@/assets";
-import {useAppDispatch} from "@/redux/hooks";
-import {addItem, removeItem} from "@/redux/slices/cart";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import styles from "./CrossSellItem.module.scss";
 
 interface CrossSellItemProps {
-  crossSellItem: CartItem;
+  product: Product;
 }
 
-const CrossSellItem: React.FC<CrossSellItemProps> = ({ crossSellItem }) => {
+const CrossSellItem: React.FC<CrossSellItemProps> = ({ product }) => {
   const dispatch = useAppDispatch();
   const [isItemAdded, setIsItemAdded] = useState(false);
-  const { name, price } = crossSellItem;
+  const router = useRouter();
 
   const handleCtaClick = () => {
+    if (product.colors.length > 0 || product.sizes.length > 0) {
+      // Todo: show redirection modal
+      return router.push(`/products/${product.slug}`);
+    }
     if (isItemAdded) {
-      dispatch(removeItem(crossSellItem.id));
+      dispatch(reduceVariantFromCart({ product }));
       setIsItemAdded(false);
     } else {
-      dispatch(addItem(crossSellItem));
+      dispatch(addVariantToCart({ product }));
       setIsItemAdded(true);
     }
   };
@@ -35,8 +40,8 @@ const CrossSellItem: React.FC<CrossSellItemProps> = ({ crossSellItem }) => {
       </div>
 
       <div className={styles["cross-sell-item-description"]}>
-        <h2>{name}</h2>
-        <Text.P thickness="thin">{`+${formatCurrency(price)}`}</Text.P>
+        <h2>{product.title}</h2>
+        <Text.P thickness="thin">{`+${formatCurrency(product.price)}`}</Text.P>
       </div>
 
       <div className={styles["cross-sell-item-button"]}>
@@ -45,7 +50,7 @@ const CrossSellItem: React.FC<CrossSellItemProps> = ({ crossSellItem }) => {
           mode="fill-parent"
           color={isItemAdded ? "cyan" : "black"}
         >
-          {isItemAdded ? "DA THEM" : "THEM"}
+          {isItemAdded ? "ĐÃ THÊM" : "THÊM"}
         </Button>
       </div>
     </div>

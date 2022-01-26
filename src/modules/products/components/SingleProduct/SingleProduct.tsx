@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
-import styles from "./SingleProduct.module.scss";
-import Text from "#/components/Text";
-import { Product } from "@/redux/apiTypes";
 import ButtonLink from "#/components/Button/ButtonLink";
 import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
-import { formatCurrency } from "#/utils/number";
-import { colors } from "#/styles/colors";
-import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
-import { HEADER_HEIGHT } from "#/styles/constants";
+import Text from "#/components/Text";
+import {ViewportDimensionContext} from "#/contexts/ViewportDimensionContext";
+import {colors} from "#/styles/colors";
+import {HEADER_HEIGHT} from "#/styles/constants";
+import {Product} from "#/types";
+import {formatCurrency} from "#/utils/number";
+import React, {useContext} from "react";
+import styles from "./SingleProduct.module.scss";
 
 interface SingleProductProps {
   product: Product;

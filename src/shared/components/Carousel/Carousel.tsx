@@ -1,10 +1,10 @@
-import React, {useRef} from "react";
-import c from "classnames";
-import Slider from "react-slick";
 import {colors} from "#/styles/colors";
-import SliderArrow from "./SliderArrow";
+import c from "classnames";
+import React, {useRef} from "react";
+import Slider from "react-slick";
 
 import styles from "./Carousel.module.scss";
+import SliderArrow from "./SliderArrow";
 
 interface CarouselProps {
   children: React.ReactNode[] | React.ReactNode;

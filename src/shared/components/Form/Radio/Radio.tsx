@@ -1,9 +1,9 @@
-import {FieldConfig, useField} from "formik";
-import React from "react";
-import c from "classnames";
 import Text from "@/shared/components/Text";
-import styles from "./Radio.module.scss";
+import c from "classnames";
+import {FieldConfig, useField} from "formik";
 import Image from "next/image";
+import React from "react";
+import styles from "./Radio.module.scss";
 
 interface RadioProps extends FieldConfig<any> {
   label: string;

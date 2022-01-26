@@ -1,6 +1,6 @@
-import React from "react";
 import {DCCColors} from "#/types";
 import c from "classnames";
+import React from "react";
 import styles from "./Button.module.scss";
 
 interface ButtonProps {

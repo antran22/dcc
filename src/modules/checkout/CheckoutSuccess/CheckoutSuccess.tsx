@@ -1,13 +1,13 @@
-import React, {useContext} from "react";
-import styles from "./CheckoutSuccess.module.scss";
-import {AiFillCheckCircle as CheckIcon, AiOutlineArrowLeft as BackIcon,} from "react-icons/ai";
-import {colors} from "#/styles/colors";
-import Text from "#/components/Text";
-import Spacer from "#/components/Spacer";
-import {CheckoutFormDetails} from "../common/types";
 import Button from "#/components/Button";
-import {useRouter} from "next/router";
+import Spacer from "#/components/Spacer";
+import Text from "#/components/Text";
 import {ViewportDimensionContext} from "#/contexts/ViewportDimensionContext";
+import {colors} from "#/styles/colors";
+import {useRouter} from "next/router";
+import React, {useContext} from "react";
+import {AiFillCheckCircle as CheckIcon, AiOutlineArrowLeft as BackIcon,} from "react-icons/ai";
+import {CheckoutFormDetails} from "../common/types";
+import styles from "./CheckoutSuccess.module.scss";
 
 interface CheckoutSuccessProps {
   checkoutFormDetails: CheckoutFormDetails;

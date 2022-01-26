@@ -1,9 +1,8 @@
+import {getLargestImageFormat, StrapiImage} from "#/types";
+import _ from "lodash";
+import {ImageProps as NextImageProps} from "next/image";
 import React from "react";
 import Image from "./Image";
-import _ from "lodash";
-
-import {getLargestImageFormat, StrapiImage} from "@/redux/apiTypes";
-import {ImageProps as NextImageProps} from "next/image";
 
 interface StrapiResponsiveImageProps
   extends Omit<NextImageProps, "src" | "alt"> {

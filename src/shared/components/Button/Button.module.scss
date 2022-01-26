@@ -59,20 +59,14 @@ $highlight-rate: 30%;
       &:hover {
         transition: 0.5s;
         color: black;
-        $shadow-color: color.scale($color, $blackness: $highlight-rate);
-        box-shadow: 10px 10px 0px -6px $shadow-color;
-        -webkit-box-shadow: 10px 10px 0px -6px $shadow-color;
-        -moz-box-shadow: 10px 10px 0px -6px $shadow-color;
+        background-color: color.scale($color, $blackness: $highlight-rate);
       }
     } @else {
       color: white;
       &:hover {
         transition: 0.5s;
         color: white;
-        $shadow-color: color.scale($color, $lightness: $highlight-rate);
-        box-shadow: 10px 10px 0px -6px $shadow-color;
-        -webkit-box-shadow: 10px 10px 0px -6px $shadow-color;
-        -moz-box-shadow: 10px 10px 0px -6px $shadow-color;
+        background-color: color.scale($color, $lightness: $highlight-rate);
       }
     }
     transition: 0.5s;

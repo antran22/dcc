@@ -1,10 +1,10 @@
-import React from "react";
-import Image from "next/image";
+import Text from "#/components/Text";
 import {assets} from "@/assets";
 import c from "classnames";
-import styles from "./SectionTwo.module.scss";
+import Image from "next/image";
+import React from "react";
 import mainPageStyles from "../MainContent/MainContent.module.scss";
-import Text from "#/components/Text";
+import styles from "./SectionTwo.module.scss";
 
 const SectionTwo: React.FC = () => {
   return (

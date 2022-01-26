@@ -1,17 +1,16 @@
-import React, {useEffect, useRef, useState} from "react";
-import Image from "next/image";
-import {assets} from "@/assets";
-import {CartItem} from "#/types";
-import Text from "#/components/Text";
-import styles from "./CartSidebarItem.module.scss";
 import Button from "#/components/Button";
-import {formatCurrency} from "#/utils/number";
-import {useAppDispatch} from "@/redux/hooks";
-import {deleteItem, setQuantity} from "@/redux/slices/cart";
-import {Form} from "#/components/Form";
-import {debounce} from "lodash";
+import { Form } from "#/components/Form";
+import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
 import Spacer from "#/components/Spacer";
+import Text from "#/components/Text";
+import { CartItem, getProductVariantThumbnail } from "#/types";
+import { formatCurrency } from "#/utils/number";
+import { useAppDispatch } from "@/redux/hooks";
+import { deleteVariantFromCart, setVariantQuantity } from "@/redux/slices/cart";
 import c from "classnames";
+import { debounce } from "lodash";
+import React, { useEffect, useRef, useState } from "react";
+import styles from "./CartSidebarItem.module.scss";
 
 interface CartSidebarItemProps {
   cartItem: CartItem;
@@ -25,29 +24,31 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
     setCartItemQuantity(cartItem.quantity);
   }, [cartItem.quantity]);
 
-  const MIN_QUANTITY = 0;
   const MAX_QUANTITY = 30;
 
   const onDeleteItemClick = () => {
-    dispatch(deleteItem(cartItem.id));
+    dispatch(deleteVariantFromCart(cartItem.productVariant));
   };
 
   const debounceUpdateStore = useRef(
     debounce((quantity: number) => {
       dispatch(
-        setQuantity({
-          id: cartItem.id,
-          quantity,
+        setVariantQuantity({
+          productVariant: cartItem.productVariant,
+          newQuantity: quantity,
         })
       );
     }, 500)
   );
 
+  const productVariant = cartItem.productVariant;
+  const product = productVariant.product;
+
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = +event.target.value;
 
     let quantity = inputValue > MAX_QUANTITY ? MAX_QUANTITY : inputValue;
-    quantity = quantity < MIN_QUANTITY ? MIN_QUANTITY : quantity;
+    quantity = quantity < 0 ? 0 : quantity;
 
     if (quantity === 0) {
       setIsDeleting(true);
@@ -58,6 +59,8 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
     }
   };
 
+  const productVariantImage = getProductVariantThumbnail(productVariant);
+
   return (
     <div className={styles["cart-sidebar-item"]}>
       <div
@@ -66,25 +69,33 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
           isDeleting ? styles["cart-sidebar-item-deleting"] : "",
         ])}
       >
-        <Image
-          objectFit="contain"
-          layout="fill"
-          src={assets.itemBinhTinh}
-          alt="Binh Tinh"
-        />
+        {productVariantImage && (
+          <StrapiResponsiveImage
+            objectFit="contain"
+            layout="fill"
+            image={productVariantImage}
+          />
+        )}
       </div>
 
       <div className={styles["cart-sidebar-item-description"]}>
         <h4 className={isDeleting ? styles["cart-sidebar-item-deleting"] : ""}>
-          {cartItem.name}
+          {product.title}
         </h4>
+        {productVariant?.color && (
+          <Text.P>Màu: {productVariant.color.name}</Text.P>
+        )}
+        {productVariant?.size && (
+          <Text.P>Size: {productVariant.size.name}</Text.P>
+        )}
+
         <Text.P
           classNames={[
             styles["cart-sidebar-item-description-price"],
             isDeleting ? styles["cart-sidebar-item-deleting"] : "",
           ]}
         >
-          {formatCurrency(cartItem.price)}
+          {formatCurrency(product.price)}
         </Text.P>
         {isDeleting ? (
           <div

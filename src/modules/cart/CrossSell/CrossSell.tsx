@@ -1,18 +1,14 @@
-import React from "react";
-import styles from "./CrossSell.module.scss";
 import Text from "#/components/Text";
+import {Product} from "#/types";
+import React from "react";
 import CrossSellItem from "../CrossSellItem";
-import {CartItem} from "#/types";
+import styles from "./CrossSell.module.scss";
 
-interface CrossSellProps {}
+interface CrossSellProps {
+}
 
 const CrossSell: React.FC<CrossSellProps> = ({}) => {
-  const crossSellItems: CartItem[] = [...Array(2)].map((_, i) => ({
-    id: String(i * 20),
-    name: "Thiep",
-    price: 30000,
-    quantity: 1,
-  }));
+  const crossSellProduct: Product[] = [];
 
   return (
     <div className={styles["cross-sell"]}>
@@ -21,8 +17,8 @@ const CrossSell: React.FC<CrossSellProps> = ({}) => {
       </Text.P>
 
       <div className={styles["cross-sell-items-wrapper"]}>
-        {crossSellItems.map((item) => (
-          <CrossSellItem key={item.id} crossSellItem={item} />
+        {crossSellProduct.map((product) => (
+          <CrossSellItem key={product.id} product={product}/>
         ))}
       </div>
     </div>

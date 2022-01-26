@@ -1,8 +1,8 @@
-import React from "react";
-import Image from "next/image";
-import styles from "./LandingBanner.module.scss";
 import {assets} from "@/assets";
+import Image from "next/image";
+import React from "react";
 import LandingSquares from "../LandingSquares";
+import styles from "./LandingBanner.module.scss";
 
 const LandingBanner: React.FC = () => {
   return (

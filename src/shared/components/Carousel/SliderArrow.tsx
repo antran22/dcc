@@ -1,6 +1,6 @@
+import c from "classnames";
 import React from "react";
 import {AiOutlineArrowLeft, AiOutlineArrowRight} from "react-icons/ai";
-import c from "classnames";
 import styles from "./SliderArrow.module.scss";
 
 type SliderArrowType = "left" | "right";

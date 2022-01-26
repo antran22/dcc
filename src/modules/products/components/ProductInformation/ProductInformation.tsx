@@ -1,15 +1,15 @@
-import React, {useState} from "react";
-import {AiFillQuestionCircle as Question} from "react-icons/ai";
-import styles from "./ProductInformation.module.scss";
-import Text from "#/components/Text";
 import Button from "#/components/Button";
 import ModalWrapper from "#/components/ModalWrapper";
-import {Product} from "@/redux/apiTypes";
+import Text from "#/components/Text";
+import {Product} from "#/types";
+import ProductSizePicker from "@/modules/products/components/ProductInformation/ProductSizePicker";
+import c from "classnames";
+import React, {useState} from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import c from "classnames";
+import {AiFillQuestionCircle as Question} from "react-icons/ai";
 import ColorPicker from "./ProductColorPicker";
-import ProductSizePicker from "@/modules/products/components/ProductInformation/ProductSizePicker";
+import styles from "./ProductInformation.module.scss";
 
 interface ItemInformationProps {
   product: Product;

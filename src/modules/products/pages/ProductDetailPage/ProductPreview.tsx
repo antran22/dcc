@@ -1,17 +1,15 @@
-import React from "react";
-import styles from "./ProductPreview.module.scss";
-import { StrapiImage } from "@/redux/apiTypes";
 import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
 import SingleCarousel from "#/components/SingleCarousel";
+import { useAppSelector } from "@/redux/hooks";
+import { previewImageSelector } from "@/redux/slices/productView";
+import React from "react";
+import styles from "./ProductPreview.module.scss";
 
-interface ItemPreviewProps {
-  images: StrapiImage[];
-}
-
-const ProductPreview: React.FC<ItemPreviewProps> = ({ images }) => {
+const ProductPreview: React.FC = () => {
+  const previewImages = useAppSelector(previewImageSelector);
   return (
     <SingleCarousel time={3000} className={styles.itemPreview}>
-      {images.map((image, index) => (
+      {previewImages.map((image, index) => (
         <div key={index} className={styles["item-preview-image-wrapper"]}>
           <StrapiResponsiveImage
             image={image}

@@ -9,9 +9,6 @@ export type DCCColors =
   | "dark-grey"
   | "light-grey";
 
-export interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
+export * from "./product";
+export * from "./image";
+export * from "./cart";

@@ -1,8 +1,8 @@
-import React from "react";
 import c from "classnames";
+import React from "react";
 import mainPageStyles from "../MainContent/MainContent.module.scss";
 import styles from "./SectionThree.module.scss";
-import SquareContent, { SquareContentData } from "./SquareContent";
+import SquareContent, {SquareContentData} from "./SquareContent";
 
 const SectionThree: React.FC = () => {
   const data: SquareContentData[] = [

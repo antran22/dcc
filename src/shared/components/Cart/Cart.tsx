@@ -1,7 +1,7 @@
-import React, {useContext} from "react";
+import {CartSidebarContext} from "#/contexts/CartSidebarContext";
 import {useAppSelector} from "@/redux/hooks";
 import {cartAmountSelector} from "@/redux/slices/cart";
-import {CartSidebarContext} from "#/contexts/CartSidebarContext";
+import React, {useContext} from "react";
 import Button from "../Button";
 import styles from "./Cart.module.scss";
 

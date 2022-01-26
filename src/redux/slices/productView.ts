@@ -1,11 +1,12 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
 import {
   Product,
   ProductColor,
   ProductSize,
+  ProductVariant,
   StrapiImage,
-} from "@/redux/apiTypes";
+} from "@/shared/types/";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 interface ProductViewState {
   product?: Product;
@@ -81,21 +82,50 @@ export const productViewSelector = (state: RootState) => state.productView;
 
 export const previewImageSelector = createSelector(
   [productViewSelector],
-  (productView) => {
-    return productView.previewImages;
+  (productViewState) => {
+    return productViewState.previewImages;
   }
 );
 
 export const currentColorSelector = createSelector(
   [productViewSelector],
-  (productView) => {
-    return productView.selectedColor;
+  (productViewState) => {
+    return productViewState.selectedColor;
   }
 );
 
 export const currentSizeSelector = createSelector(
   [productViewSelector],
-  (productView) => {
-    return productView.selectedSize;
+  (productViewState) => {
+    return productViewState.selectedSize;
+  }
+);
+
+export const currentProductVariantSelector = createSelector(
+  [productViewSelector],
+  (productViewState): ProductVariant | undefined => {
+    if (!productViewState.product) {
+      return undefined;
+    }
+
+    if (
+      productViewState.product.colors.length > 0 &&
+      !productViewState.selectedColor
+    ) {
+      return undefined;
+    }
+
+    if (
+      productViewState.product.sizes.length > 0 &&
+      !productViewState.selectedSize
+    ) {
+      return undefined;
+    }
+
+    return {
+      product: productViewState.product,
+      color: productViewState.selectedColor,
+      size: productViewState.selectedSize,
+    };
   }
 );

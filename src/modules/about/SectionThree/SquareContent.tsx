@@ -1,7 +1,7 @@
-import React from "react";
 import Text from "#/components/Text";
 import {DCCColors} from "#/types";
 import c from "classnames";
+import React from "react";
 import styles from "./SectionThree.module.scss";
 
 export interface SquareContentData {

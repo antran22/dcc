@@ -1,12 +1,12 @@
-import { NextPage } from "next";
+import Carousel from "#/components/Carousel";
+import Text from "#/components/Text";
+import {ViewportDimensionContext} from "#/contexts/ViewportDimensionContext";
+import {useListProductsQuery} from "@/redux/slices/api";
+import {NextPage} from "next";
 import Head from "next/head";
-import React, { useContext } from "react";
-import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
+import React, {useContext} from "react";
 import SingleProduct from "../../components/SingleProduct";
 import styles from "./ProductListPage.module.scss";
-import { useListProductsQuery } from "@/redux/slices/api";
-import Text from "#/components/Text";
-import Carousel from "#/components/Carousel";
 
 const ProductListPage: NextPage = () => {
   const { data: products, isLoading } = useListProductsQuery({

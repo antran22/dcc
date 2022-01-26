@@ -1,6 +1,6 @@
-import {createSelector, createSlice} from "@reduxjs/toolkit";
-import {CartItem} from "@/shared/types";
-import {RootState} from "../store";
+import { CartItem, ProductVariant, sameProductVariant } from "@/shared/types";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 const initialState: CartItem[] = [];
 
@@ -8,40 +8,59 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItem: (state, action) => {
-      const item = state.find((item) => item.id === action.payload.id);
+    addVariantToCart: (state, action: PayloadAction<ProductVariant>) => {
+      const item = state.find((item) =>
+        sameProductVariant(item.productVariant, action.payload)
+      );
       if (item) {
         item.quantity++;
       } else {
         state.push({
-          ...action.payload,
           quantity: 1,
+          productVariant: action.payload,
         });
       }
     },
-    removeItem: (state, action) => {
-      const item = state.find((item) => item.id === action.payload);
+    reduceVariantFromCart: (state, action: PayloadAction<ProductVariant>) => {
+      const item = state.find((item) =>
+        sameProductVariant(item.productVariant, action.payload)
+      );
       if (item && item.quantity > 0) {
         if (item.quantity === 1) {
-          return state.filter((_item) => _item.id !== item.id);
+          return state.filter(
+            (_item) =>
+              !sameProductVariant(item.productVariant, _item.productVariant)
+          );
         } else {
           item.quantity--;
         }
       }
     },
-    setQuantity: (state, action) => {
-      const item = state.find((item) => item.id === action.payload.id);
+    setVariantQuantity: (
+      state,
+      action: PayloadAction<{
+        productVariant: ProductVariant;
+        newQuantity: number;
+      }>
+    ) => {
+      const item = state.find((item) =>
+        sameProductVariant(item.productVariant, action.payload.productVariant)
+      );
       if (item) {
-        if (action.payload.quantity === 0) {
-          return state.filter((_item) => _item.id !== item.id);
+        if (action.payload.newQuantity === 0) {
+          return state.filter((_item) =>
+            sameProductVariant(_item.productVariant, item.productVariant)
+          );
         } else {
-          item.quantity = action.payload.quantity;
+          item.quantity = action.payload.newQuantity;
         }
       }
     },
 
-    deleteItem: (state, action) => {
-      const itemIndex = state.findIndex((item) => (item.id = action.payload));
+    deleteVariantFromCart: (state, action: PayloadAction<ProductVariant>) => {
+      const itemIndex = state.findIndex((item) =>
+        sameProductVariant(item.productVariant, action.payload)
+      );
       if (itemIndex > -1) {
         state.splice(itemIndex, 1);
       }
@@ -49,18 +68,33 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, deleteItem, setQuantity } =
-  cartSlice.actions;
+export const {
+  addVariantToCart,
+  deleteVariantFromCart,
+  reduceVariantFromCart,
+  setVariantQuantity,
+} = cartSlice.actions;
 
 // Selectors
 export const cartSelector = (state: RootState) => state.cart;
 export const cartSumSelector = createSelector([cartSelector], (cart) => {
   return cart.reduce((total, item) => {
-    return total + item.price * item.quantity;
+    return total + item.productVariant.product.price * item.quantity;
   }, 0);
 });
+
 export const cartAmountSelector = createSelector([cartSelector], (cart) => {
   return cart.reduce((total, item) => {
     return total + item.quantity;
   }, 0);
 });
+
+export const getCartItemSelector = (variant?: ProductVariant) =>
+  createSelector([cartSelector], (cart) => {
+    if (!variant) {
+      return undefined;
+    }
+    return cart.find((item) =>
+      sameProductVariant(item.productVariant, variant)
+    );
+  });

@@ -1,8 +1,8 @@
-import React from "react";
+import Text from "#/components/Text";
 import c from "classnames";
+import React from "react";
 import mainPageStyles from "../MainContent/MainContent.module.scss";
 import styles from "./SectionFour.module.scss";
-import Text from "#/components/Text";
 
 const SectionFour: React.FC = () => {
   return (

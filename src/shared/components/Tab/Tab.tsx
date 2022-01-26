@@ -1,5 +1,5 @@
-import React from "react";
 import c from "classnames";
+import React from "react";
 import styles from "./Tab.module.scss";
 import {TabItem} from "./TabItem";
 

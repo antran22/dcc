@@ -1,4 +1,4 @@
-import { StrapiImage } from "./image";
+import {StrapiImage} from "./image";
 
 export interface Product {
   id: string;

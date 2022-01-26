@@ -1,12 +1,11 @@
-import React from "react";
-import {useAppSelector} from "@/redux/hooks";
-import {cartSelector, cartSumSelector} from "@/redux/slices/cart";
+import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
 import Text from "#/components/Text";
-import {formatCurrency} from "#/utils/number";
+import { CartItem, getProductVariantThumbnail } from "#/types";
+import { formatCurrency } from "#/utils/number";
+import { useAppSelector } from "@/redux/hooks";
+import { cartSelector, cartSumSelector } from "@/redux/slices/cart";
+import React from "react";
 import styles from "./CartSummary.module.scss";
-import Image from "next/image";
-import {assets} from "@/assets";
-import {CartItem} from "#/types";
 
 const CartSummary: React.FC = () => {
   const cartTotalSum = useAppSelector(cartSumSelector);
@@ -20,8 +19,8 @@ const CartSummary: React.FC = () => {
         </div>
         <div className={styles["cart-summary-box-details"]}>
           <div className={styles["cart-summary-box-details-items"]}>
-            {cartItems.map((item) => (
-              <CartSummaryItem cartItem={item} key={item.id} />
+            {cartItems.map((item, index) => (
+              <CartSummaryItem cartItem={item} key={index} />
             ))}
           </div>
 
@@ -50,25 +49,28 @@ interface CartSummaryItemProps {
   cartItem: CartItem;
 }
 const CartSummaryItem: React.FC<CartSummaryItemProps> = ({ cartItem }) => {
+  const productVariantImage = getProductVariantThumbnail(
+    cartItem.productVariant
+  );
   return (
-    <div
-      key={cartItem.id}
-      className={styles["cart-summary-box-details-items-wrapper"]}
-    >
+    <div className={styles["cart-summary-box-details-items-wrapper"]}>
       <div className={styles["cart-summary-box-details-items-wrapper-image"]}>
-        <Image
-          objectFit="contain"
-          layout="fill"
-          src={assets.itemBinhTinh}
-          alt="Binh Tinh"
-        />
+        {productVariantImage && (
+          <StrapiResponsiveImage
+            objectFit="contain"
+            layout="fill"
+            image={productVariantImage}
+          />
+        )}
       </div>
       <div className={styles["cart-summary-box-details-items-wrapper-details"]}>
-        <h2>{cartItem.name}</h2>
+        <h2>{cartItem.productVariant.product.title}</h2>
         <Text.P thickness="thin">{`Slg: ${cartItem.quantity}`}</Text.P>
       </div>
       <div className={styles["cart-summary-box-details-items-wrapper-price"]}>
-        <Text.P thickness="thin">{formatCurrency(cartItem.price)}</Text.P>
+        <Text.P thickness="thin">
+          {formatCurrency(cartItem.productVariant.product.price)}
+        </Text.P>
       </div>
     </div>
   );

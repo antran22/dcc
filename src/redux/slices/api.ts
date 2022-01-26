@@ -1,5 +1,5 @@
+import {Product} from "#/types";
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {Product} from "@/redux/apiTypes";
 
 export const cmsAPI = createApi({
   reducerPath: "itemApi",

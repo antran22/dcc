@@ -1,12 +1,12 @@
-import React from "react";
-import Image from "next/image";
 import Divider from "#/components/Divider";
-import styles from "./MainContent.module.scss";
 import {assets} from "@/assets";
-import SectionOne from "../SectionOne";
-import SectionTwo from "../SectionTwo";
-import SectionThree from "../SectionThree";
+import Image from "next/image";
+import React from "react";
 import SectionFour from "../SectionFour";
+import SectionOne from "../SectionOne";
+import SectionThree from "../SectionThree";
+import SectionTwo from "../SectionTwo";
+import styles from "./MainContent.module.scss";
 
 const MainContent: React.FC = () => {
   return (

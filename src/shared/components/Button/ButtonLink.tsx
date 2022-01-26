@@ -1,7 +1,7 @@
-import React from "react";
-import Link from "next/link";
 import {DCCColors} from "#/types";
 import c from "classnames";
+import Link from "next/link";
+import React from "react";
 import styles from "./Button.module.scss";
 
 interface ButtonLinkProps {

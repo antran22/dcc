@@ -1,17 +1,17 @@
-import React, {useContext} from "react";
-import NumberBullet from "#/components/NumberBullet";
-import styles from "./CheckoutForm.module.scss";
-import Text from "#/components/Text";
-import {Field, Form, Formik} from "formik";
 import Button from "#/components/Button";
-import {AiOutlineArrowRight as ForwardIcon} from "react-icons/ai";
-import TextInput from "#/components/Form/TextInput";
-import * as yup from "yup";
 import Radio from "#/components/Form/Radio";
+import TextInput from "#/components/Form/TextInput";
+import NumberBullet from "#/components/NumberBullet";
 import Spacer from "#/components/Spacer";
-import {assets} from "@/assets";
-import {CheckoutFormDetails, PaymentOptions} from "../common/types";
+import Text from "#/components/Text";
 import {ViewportDimensionContext} from "#/contexts/ViewportDimensionContext";
+import {assets} from "@/assets";
+import {Field, Form, Formik} from "formik";
+import React, {useContext} from "react";
+import {AiOutlineArrowRight as ForwardIcon} from "react-icons/ai";
+import * as yup from "yup";
+import {CheckoutFormDetails, PaymentOptions} from "../common/types";
+import styles from "./CheckoutForm.module.scss";
 
 interface CheckoutFormProps {
   onCheckout: (formDetails: CheckoutFormDetails) => void;

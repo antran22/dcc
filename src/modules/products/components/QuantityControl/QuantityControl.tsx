@@ -1,34 +1,34 @@
-import React from "react";
-import {useAppDispatch, useAppSelector} from "@/redux/hooks";
-import {addItem, removeItem} from "@/redux/slices/cart";
 import Button from "#/components/Button";
-import {CartItem} from "#/types";
-import {AiOutlineMinus as Minus, AiOutlinePlus as Plus} from "react-icons/ai";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {
+  addVariantToCart,
+  getCartItemSelector,
+  reduceVariantFromCart,
+} from "@/redux/slices/cart";
+import { currentProductVariantSelector } from "@/redux/slices/productView";
+import React from "react";
+import { AiOutlineMinus as Minus, AiOutlinePlus as Plus } from "react-icons/ai";
 import styles from "./QuantityControl.module.scss";
 
-interface QuantityControlProps {
-  productId: string;
-}
-const QuantityControl: React.FC<QuantityControlProps> = ({
-  productId,
-}) => {
+const QuantityControl: React.FC = ({}) => {
   const dispatch = useAppDispatch();
-  const item = useAppSelector((state) =>
-    state.cart.find((item) => item.id === productId)
-  );
+
+  const currentProductVariant = useAppSelector(currentProductVariantSelector);
+
+  const item = useAppSelector(getCartItemSelector(currentProductVariant));
   const TOGGLE_SIZE = 16;
 
+  if (!currentProductVariant) {
+    return null;
+  }
+
   const onAddItemClick = () => {
-    if (item?.quantity === 30) return null;
-    const _item: Omit<CartItem, "quantity"> = {
-      id: productId,
-      name: "Binh Tinh",
-      price: 250000,
-    };
-    dispatch(addItem(_item));
+    dispatch(addVariantToCart(currentProductVariant));
   };
 
-  const onRemoveItemClick = () => dispatch(removeItem(productId));
+  const onRemoveItemClick = () => {
+    dispatch(reduceVariantFromCart(currentProductVariant));
+  };
 
   return (
     <div className={styles["quantity-control"]}>

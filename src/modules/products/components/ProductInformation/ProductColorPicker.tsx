@@ -1,8 +1,5 @@
-import {Product, ProductColor} from "@/redux/apiTypes";
-import React from "react";
+import {Product, ProductColor} from "#/types";
 import {useAppDispatch} from "@/redux/hooks";
-import c from "classnames";
-import styles from "./ProductInformation.module.scss";
 import {
   currentColorSelector,
   resetPreviewImages,
@@ -10,9 +7,12 @@ import {
   setPreviewImages,
   unselectColor,
 } from "@/redux/slices/productView";
-import {useSelector} from "react-redux";
+import c from "classnames";
+import React from "react";
 import {AiOutlineCheck} from "react-icons/ai";
+import {useSelector} from "react-redux";
 import tinycolor from "tinycolor2";
+import styles from "./ProductInformation.module.scss";
 
 interface ColorPickerProps {
   product: Product;

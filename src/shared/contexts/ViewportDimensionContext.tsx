@@ -1,5 +1,5 @@
-import React, {createContext, useCallback, useEffect, useState} from "react";
 import {BREAKPOINT_MOBILE, BREAKPOINT_TABLET} from "#/styles/constants";
+import React, {createContext, useCallback, useEffect, useState} from "react";
 
 export const ViewportDimensionContext = createContext<ViewportDimensionState>({
   width: 2000,

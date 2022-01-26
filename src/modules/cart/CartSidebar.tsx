@@ -1,19 +1,19 @@
-import {useRouter} from "next/router";
-import React, {useContext, useState} from "react";
-import {useAppSelector} from "@/redux/hooks";
-import {cartSelector, cartSumSelector} from "@/redux/slices/cart";
-import {CartSidebarContext} from "#/contexts/CartSidebarContext";
-import {CartItem} from "#/types";
-import {formatCurrency} from "#/utils/number";
 import Button from "#/components/Button";
 import SidebarContainer from "#/components/SidebarContainer";
+import Spacer from "#/components/Spacer";
 import Text from "#/components/Text";
+import { CartSidebarContext } from "#/contexts/CartSidebarContext";
+import { CartItem } from "#/types";
+import { formatCurrency } from "#/utils/number";
+import { useAppSelector } from "@/redux/hooks";
+import { cartSelector, cartSumSelector } from "@/redux/slices/cart";
+import { useRouter } from "next/router";
+import React, { useContext, useState } from "react";
+import { AiOutlineArrowLeft as BackIcon } from "react-icons/ai";
 import styles from "./CartSidebar.module.scss";
 import CartSidebarItem from "./CartSidebarItem";
-import {AiOutlineArrowLeft as BackIcon} from "react-icons/ai";
-import Spacer from "#/components/Spacer";
-import EmptyCartSidebar from "./EmptyCartSidebar";
 import CrossSell from "./CrossSell";
+import EmptyCartSidebar from "./EmptyCartSidebar";
 
 const CartSidebar: React.FC = () => {
   const cartItems = useAppSelector(cartSelector);
@@ -122,8 +122,8 @@ interface CartContentProps {
 const CartContent: React.FC<CartContentProps> = ({ cartItems }) => {
   return (
     <div className={styles["cart-sidebar-body"]}>
-      {cartItems.map((cartItem) => (
-        <CartSidebarItem cartItem={cartItem} key={cartItem.id} />
+      {cartItems.map((cartItem, index) => (
+        <CartSidebarItem cartItem={cartItem} key={index} />
       ))}
     </div>
   );

@@ -1,8 +1,8 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import {cartSlice} from "./slices/cart";
-import {cmsAPI} from "./slices/api";
-import {setupListeners} from "@reduxjs/toolkit/query";
 import {productViewSlice} from "@/redux/slices/productView";
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
+import {setupListeners} from "@reduxjs/toolkit/query";
+import {cmsAPI} from "./slices/api";
+import {cartSlice} from "./slices/cart";
 
 const reducers = combineReducers({
   cart: cartSlice.reducer,

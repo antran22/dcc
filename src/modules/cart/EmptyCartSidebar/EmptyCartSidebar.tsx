@@ -1,7 +1,7 @@
-import {useRouter} from "next/router";
-import React, {useCallback, useContext} from "react";
 import Button from "#/components/Button";
 import {CartSidebarContext} from "#/contexts/CartSidebarContext";
+import {useRouter} from "next/router";
+import React, {useCallback, useContext} from "react";
 import styles from "./EmptyCartSidebar.module.scss";
 
 const EmptyCartSidebar: React.FC = () => {

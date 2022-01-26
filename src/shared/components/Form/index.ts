@@ -1,6 +1,6 @@
 import NumberInput from "./NumberInput";
-import TextInput from "./TextInput";
 import Radio from "./Radio";
+import TextInput from "./TextInput";
 
 const Form = {
   NumberInput,
