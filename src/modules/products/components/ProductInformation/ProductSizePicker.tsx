@@ -1,10 +1,14 @@
-import {Product, ProductSize} from "@/redux/apiTypes";
+import { Product, ProductSize } from "@/redux/apiTypes";
 import React from "react";
-import {useAppDispatch} from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import c from "classnames";
 import styles from "./ProductInformation.module.scss";
-import {currentSizeSelector, selectSize, unselectSize,} from "@/redux/slices/productView";
-import {useSelector} from "react-redux";
+import {
+  currentSizeSelector,
+  selectSize,
+  unselectSize,
+} from "@/redux/slices/productView";
+import { useSelector } from "react-redux";
 import Text from "#/components/Text";
 import Button from "#/components/Button";
 
@@ -30,8 +34,13 @@ const ProductSizePicker: React.FC<SizePickerProps> = ({
 
   return (
     <div className={c(className, styles.sizePicker)}>
-      <div className={c(styles.sizePickerHeader, "p-4")}>
-        <Text.SpecialTitle color="nude" classNames={[styles.sizePickerHeaderTitle]}>Size</Text.SpecialTitle>
+      <div className={c(styles.sizePickerHeader)}>
+        <Text.SpecialTitle
+          color="nude"
+          classNames={[styles.sizePickerHeaderTitle]}
+        >
+          Size
+        </Text.SpecialTitle>
         <Button color="dark-grey" variant="underscore">
           Hướng dẫn
         </Button>

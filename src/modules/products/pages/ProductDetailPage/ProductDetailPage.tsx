@@ -9,8 +9,6 @@ import Head from "next/head";
 import { useGetProductBySlugQuery } from "@/redux/slices/api";
 import { formatCurrency } from "#/utils/number";
 import ProductPreview from "@/modules/products/pages/ProductDetailPage/ProductPreview";
-import { Row } from "react-bootstrap";
-import Col from "react-bootstrap/Col";
 import c from "classnames";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
@@ -47,46 +45,31 @@ const ProductDetailPage: NextPage = () => {
   }
 
   return (
-    <>
+    <div className={styles.productsDetailsPage}>
       <Head>
         <title>{product.title}</title>
       </Head>
 
-      <Row className="h-100">
-        <Col
-          as="aside"
-          xs={12}
-          lg={5}
-          className={styles.productsDetailsPagePreview}
+      <aside className={styles.productsDetailsPagePreview}>
+        <ProductPreview images={previewImages} />
+      </aside>
+
+      <main className={styles.productsDetailsPageContent}>
+        <h1
+          className={c(styles.productsDetailsPageContentTitle, "my-lg-5")}
+          style={{ fontSize: 60 }}
         >
-          <ProductPreview images={previewImages} />
-        </Col>
+          {product.title}
+        </h1>
 
-        <Col
-          as="main"
-          xs={12}
-          lg={7}
-          className="d-flex flex-column justify-content-between px-2"
-        >
-          <h1
-            className={c(
-              styles["products-details-page-content-title"],
-              "my-lg-5"
-            )}
-            style={{ fontSize: 60 }}
-          >
-            {product.title}
-          </h1>
+        <ProductInformation product={product} />
 
-          <ProductInformation product={product} />
-
-          <div className={styles.productsDetailsPageContentFooter}>
-            <Text.P size="large">{formatCurrency(product.price)}</Text.P>
-            <QuantityControl productId={itemId} />
-          </div>
-        </Col>
-      </Row>
-    </>
+        <div className={styles.productsDetailsPageContentFooter}>
+          <Text.P size="large">{formatCurrency(product.price)}</Text.P>
+          <QuantityControl productId={itemId} />
+        </div>
+      </main>
+    </div>
   );
 };
 

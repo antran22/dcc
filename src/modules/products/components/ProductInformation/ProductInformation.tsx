@@ -29,7 +29,7 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
         )}
 
         <Col xs={{ span: 10, offset: 1 }} lg={{ span: 5, offset: 0 }}>
-          <div className={styles["item-information-box"]}>
+          <div className={styles.itemInformationBox}>
             <Text.SpecialTitle color="cyan">Ý nghĩa</Text.SpecialTitle>
             <Text.P thickness="thin">{product.meaning_short}</Text.P>
             <Button

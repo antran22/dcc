@@ -1,11 +1,22 @@
+
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+) !default;
+
 // Width units
-$s0: 0rem;
-$s1: 0.25rem;
-$s2: 0.5rem;
-$s3: 1rem;
-$s4: 1.5rem;
-$s5: 2rem;
-$s6: 4rem;
+$s0: map-get($spacers, 0);
+$s1: map-get($spacers, 1);
+$s2: map-get($spacers, 2);
+$s3: map-get($spacers, 3);
+$s4: map-get($spacers, 4);
+$s5: map-get($spacers, 5);
+$s6: map-get($spacers, 6);
 
 // Header height
 $header-height: 80px;

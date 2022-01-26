@@ -2,18 +2,42 @@
 @import "/src/shared/styles/colors";
 
 .products-details-page {
+  flex: 1;
+
+  display: flex;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+  }
+
   &-preview {
-    min-height: 50vh;
-    height: 100%;
+    display: flex;
+    flex: 1;
+    background-color: $light-grey;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      min-height: 50vh;
+    }
   }
 
   &-content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
     @media screen and (max-width: $breakpoint-tablet) {
       overflow: visible;
     }
 
     &-title {
+      flex: 2;
       text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin-top: $s3;
     }
 

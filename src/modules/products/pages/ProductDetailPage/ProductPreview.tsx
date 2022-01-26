@@ -10,7 +10,7 @@ interface ItemPreviewProps {
 
 const ProductPreview: React.FC<ItemPreviewProps> = ({ images }) => {
   return (
-    <SingleCarousel time={3000} className={styles["item-preview"]}>
+    <SingleCarousel time={3000} className={styles.itemPreview}>
       {images.map((image, index) => (
         <div key={index} className={styles["item-preview-image-wrapper"]}>
           <StrapiResponsiveImage

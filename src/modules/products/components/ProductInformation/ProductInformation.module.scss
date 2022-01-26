@@ -26,9 +26,9 @@
   }
 
   &-box {
+    padding: $s4;
     text-align: center;
     border: 2px solid $black;
-    padding: $s2;
 
     &-btn {
       font-weight: 300;
@@ -81,6 +81,7 @@
   padding: 0;
 
   &-header {
+    padding: $s4;
     text-align: left;
     display: flex;
     flex-direction: row;
