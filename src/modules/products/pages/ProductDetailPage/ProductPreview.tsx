@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ProductPreview.module.scss";
-import {StrapiImage} from "@/redux/apiTypes";
+import { StrapiImage } from "@/redux/apiTypes";
 import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
 import SingleCarousel from "#/components/SingleCarousel";
 

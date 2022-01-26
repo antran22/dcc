@@ -42,6 +42,12 @@ function MyApp({ Component, pageProps }: AppProps) {
               charSet="UTF-8"
             />
             <link rel="icon" href="/logo.svg" />
+            <link
+              rel="preload"
+              href="/Do-Choi-Chu.otf"
+              as="font"
+              crossOrigin=""
+            />
           </Head>
 
           <AppWrapper>

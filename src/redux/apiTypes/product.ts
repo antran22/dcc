@@ -1,4 +1,4 @@
-import {StrapiImage} from "./image";
+import { StrapiImage } from "./image";
 
 export interface Product {
   id: string;
@@ -6,6 +6,7 @@ export interface Product {
   title: string;
   price: number;
   thumbnails: StrapiImage[];
+  theme_color_code?: string;
   meaning: string;
   meaning_short: string;
   usage: string;

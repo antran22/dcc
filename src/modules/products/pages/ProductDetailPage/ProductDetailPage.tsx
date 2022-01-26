@@ -50,7 +50,10 @@ const ProductDetailPage: NextPage = () => {
         <title>{product.title}</title>
       </Head>
 
-      <aside className={styles.productsDetailsPagePreview}>
+      <aside
+        className={styles.productsDetailsPagePreview}
+        style={{ backgroundColor: product.theme_color_code }}
+      >
         <ProductPreview images={previewImages} />
       </aside>
 

@@ -1,61 +1,70 @@
-@import "../../../../shared/styles/constants";
-@import "../../../../shared/styles/colors";
-
-@mixin hover-state {
-  background-color: $nude;
-  color: $white;
-
-  .product-btn-container {
-    visibility: visible;
-  }
-}
+@import "/src/shared/styles/constants";
+@import "/src/shared/styles/colors";
 
 .product {
   padding: $s4;
-
   text-align: center;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  transition: 0.5s;
 
-  transition: background-color 0.5s;
+  &:hover {
+    color: $white;
+    transition: 0.5s;
+
+    .product-btn-container {
+      visibility: visible;
+      transition: 0.5s;
+    }
+
+    .product-background {
+      opacity: 1;
+      transition: 0.5s;
+    }
+  }
 
   &-image {
     flex-basis: 60%;
     flex-grow: 0;
     width: 100%;
+    height: 100%;
     position: relative;
+    margin-top: $s4;
+    margin-bottom: $s4;
+  }
+
+  &-title {
+    font-size: 50px;
+    margin-bottom: $s4;
   }
 
   &-info {
     flex: 1;
-
     color: inherit;
+  }
+
+  &-background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -10;
+    opacity: 0;
+    transition: 0.5s;
   }
 
   &-btn-container {
     width: 100%;
     flex: 1;
+    visibility: hidden;
 
     padding: 0 $s4;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: 0.5s;
   }
-}
-
-.product-enable-hover {
-  .product-btn-container {
-    visibility: hidden;
-  }
-  &:hover {
-    @include hover-state();
-  }
-}
-
-.product-show-hover {
-  @include hover-state();
 }

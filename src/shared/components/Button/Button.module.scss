@@ -57,14 +57,25 @@ $highlight-rate: 30%;
     @if color.lightness($color) > 50% {
       color: black;
       &:hover {
-        background-color: color.scale($color, $blackness: $highlight-rate);
+        transition: 0.5s;
+        color: black;
+        $shadow-color: color.scale($color, $blackness: $highlight-rate);
+        box-shadow: 10px 10px 0px -6px $shadow-color;
+        -webkit-box-shadow: 10px 10px 0px -6px $shadow-color;
+        -moz-box-shadow: 10px 10px 0px -6px $shadow-color;
       }
     } @else {
-      &:hover {
-        background-color: color.scale($color, $lightness: $highlight-rate);
-      }
       color: white;
+      &:hover {
+        transition: 0.5s;
+        color: white;
+        $shadow-color: color.scale($color, $lightness: $highlight-rate);
+        box-shadow: 10px 10px 0px -6px $shadow-color;
+        -webkit-box-shadow: 10px 10px 0px -6px $shadow-color;
+        -moz-box-shadow: 10px 10px 0px -6px $shadow-color;
+      }
     }
+    transition: 0.5s;
     background-color: $color;
   }
 

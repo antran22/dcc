@@ -12,4 +12,6 @@ export const colors = {
 
   grey: "rgb(209, 209, 209)",
   lightGrey: "#f5f5f5",
+
+  darkGrey: "#221F20",
 };
