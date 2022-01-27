@@ -2,7 +2,7 @@ import Button from "#/components/Button";
 import Text from "#/components/Text";
 import {useAppDispatch} from "@/redux/hooks";
 import {currentSizeSelector, selectSize, unselectSize,} from "@/redux/slices/productView";
-import {Product, ProductSize} from "@/shared/types";
+import {Product, ProductSize} from "#/types";
 import c from "classnames";
 import React from "react";
 import {useSelector} from "react-redux";

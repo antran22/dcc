@@ -1,4 +1,4 @@
-import {StrapiImage} from "./image";
+import { StrapiImage } from "./image";
 
 export interface Product {
   id: string;
@@ -14,6 +14,7 @@ export interface Product {
   specifications_short: string;
   sizes: ProductSize[];
   colors: ProductColor[];
+  cross_sell: Product[];
 }
 
 export interface ProductSize {
@@ -28,4 +29,8 @@ export interface ProductColor {
   color_code: string;
   description: string;
   images: StrapiImage[];
+}
+
+export function getProductThumbnail(product: Product): StrapiImage | undefined {
+  return product.thumbnails[0];
 }

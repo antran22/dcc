@@ -1,7 +1,7 @@
 import Button from "#/components/Button";
 import c from "classnames";
-import React, {useCallback, useEffect, useRef, useState,} from "react";
-import {AiOutlineClose as Cross} from "react-icons/ai";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { AiOutlineClose as Cross } from "react-icons/ai";
 import styles from "./SidebarContainer.module.scss";
 
 const CROSS_SIZE = 20;

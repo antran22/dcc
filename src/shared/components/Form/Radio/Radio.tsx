@@ -1,4 +1,4 @@
-import Text from "@/shared/components/Text";
+import Text from "#/components/Text";
 import c from "classnames";
 import {FieldConfig, useField} from "formik";
 import Image from "next/image";

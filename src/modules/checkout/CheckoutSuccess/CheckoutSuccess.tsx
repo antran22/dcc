@@ -1,27 +1,35 @@
 import Button from "#/components/Button";
 import Spacer from "#/components/Spacer";
 import Text from "#/components/Text";
-import {ViewportDimensionContext} from "#/contexts/ViewportDimensionContext";
-import {colors} from "#/styles/colors";
-import {useRouter} from "next/router";
-import React, {useContext} from "react";
-import {AiFillCheckCircle as CheckIcon, AiOutlineArrowLeft as BackIcon,} from "react-icons/ai";
-import {CheckoutFormDetails} from "../common/types";
+import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
+import { colors } from "#/styles/colors";
+import { useAppDispatch } from "@/redux/hooks";
+import { clearCart } from "@/redux/slices/cart";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import {
+  AiFillCheckCircle as CheckIcon,
+  AiOutlineArrowLeft as BackIcon,
+} from "react-icons/ai";
+import { Order } from "#/types";
 import styles from "./CheckoutSuccess.module.scss";
 
 interface CheckoutSuccessProps {
-  checkoutFormDetails: CheckoutFormDetails;
+  order: Order;
 }
 
 const ICON_SIZE = 25;
 
-const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({
-  checkoutFormDetails,
-}) => {
-  const { email, name, address, phoneNumber } = checkoutFormDetails;
+const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({ order }) => {
+  const { email, name, address, phoneNumber } = order;
   const { currentMode } = useContext(ViewportDimensionContext);
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
+  const handleGoBack = () => {
+    dispatch(clearCart());
+    return router.push("/");
+  };
   return (
     <div className={styles["checkout-success"]}>
       {currentMode !== "mobile" && (
@@ -93,11 +101,7 @@ const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({
 
         <div className={styles["checkout-success-details-button"]}>
           <Spacer />
-          <Button
-            color="black"
-            mode="fill-parent"
-            onClick={() => router.push("/")}
-          >
+          <Button color="black" mode="fill-parent" onClick={handleGoBack}>
             <div className={styles["checkout-success-details-button-content"]}>
               <BackIcon />
               <Text.P

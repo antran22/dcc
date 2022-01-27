@@ -5,10 +5,16 @@ import Text from "#/components/Text";
 import { CartSidebarContext } from "#/contexts/CartSidebarContext";
 import { CartItem } from "#/types";
 import { formatCurrency } from "#/utils/number";
-import { useAppSelector } from "@/redux/hooks";
-import { cartSelector, cartSumSelector } from "@/redux/slices/cart";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {
+  cartItemsSelector,
+  cartSumSelector,
+  crossSellProductSelector,
+  hasCrossSoldSelector,
+  visitCrossSellPage,
+} from "@/redux/slices/cart";
 import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { AiOutlineArrowLeft as BackIcon } from "react-icons/ai";
 import styles from "./CartSidebar.module.scss";
 import CartSidebarItem from "./CartSidebarItem";
@@ -16,18 +22,22 @@ import CrossSell from "./CrossSell";
 import EmptyCartSidebar from "./EmptyCartSidebar";
 
 const CartSidebar: React.FC = () => {
-  const cartItems = useAppSelector(cartSelector);
+  const cartItems = useAppSelector(cartItemsSelector);
   const router = useRouter();
-  const { cartSidebarIsOpen, setCartSidebarIsOpen } =
+  const { currentStep, setCurrentStep, setOpenCartBar, openCartBar } =
     useContext(CartSidebarContext);
-  const [currentStep, setCurrentStep] = useState(0);
+  const dispatch = useAppDispatch();
+
+  const crossSellProducts = useAppSelector(crossSellProductSelector);
+  const hasCrossSold = useAppSelector(hasCrossSoldSelector);
 
   const handleCheckout = () => {
-    if (currentStep === 0) {
+    if (currentStep === 0 && crossSellProducts.length > 0 && !hasCrossSold) {
+      dispatch(visitCrossSellPage());
       setCurrentStep(1);
     } else {
       router.push("/checkout");
-      setCartSidebarIsOpen(false);
+      setOpenCartBar(false);
       setTimeout(() => {
         setCurrentStep(0);
       }, 600);
@@ -42,12 +52,11 @@ const CartSidebar: React.FC = () => {
           currentStep={currentStep}
         />
       }
-      sidebarIsOpen={cartSidebarIsOpen}
-      setSidebarIsOpen={setCartSidebarIsOpen}
+      setSidebarIsOpen={setOpenCartBar}
+      sidebarIsOpen={openCartBar}
     >
       {cartItems.length > 0 ? (
         <CartSidebarWithItem
-          currentStep={currentStep}
           cartItems={cartItems}
           onCheckout={handleCheckout}
         />
@@ -83,15 +92,14 @@ const CartSidebarHeader: React.FC<CartSidebarHeaderProps> = ({
 };
 
 interface CartSidebarWithItemProps {
-  currentStep: number;
   cartItems: CartItem[];
   onCheckout: () => void;
 }
 const CartSidebarWithItem: React.FC<CartSidebarWithItemProps> = ({
-  currentStep,
   cartItems,
   onCheckout,
 }) => {
+  const { currentStep } = useContext(CartSidebarContext);
   const cartTotalSum = useAppSelector(cartSumSelector);
   return (
     <div className={styles["cart-sidebar"]}>

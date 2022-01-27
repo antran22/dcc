@@ -1,17 +1,14 @@
 import Button from "#/components/Button";
-import {CartSidebarContext} from "#/contexts/CartSidebarContext";
-import {useRouter} from "next/router";
-import React, {useCallback, useContext} from "react";
+import { CartSidebarContext } from "#/contexts/CartSidebarContext";
+import React, { useCallback, useContext } from "react";
 import styles from "./EmptyCartSidebar.module.scss";
 
 const EmptyCartSidebar: React.FC = () => {
-  const router = useRouter();
-  const { setCartSidebarIsOpen } = useContext(CartSidebarContext);
+  const { setOpenCartBar } = useContext(CartSidebarContext);
 
   const handleCtaClick = useCallback(() => {
-    router.push("/products");
-    setCartSidebarIsOpen(false);
-  }, [router, setCartSidebarIsOpen]);
+    setOpenCartBar(false);
+  }, [setOpenCartBar]);
 
   return (
     <div className={styles["empty-cart-sidebar"]}>

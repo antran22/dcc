@@ -4,7 +4,7 @@ import {
   ProductSize,
   ProductVariant,
   StrapiImage,
-} from "@/shared/types/";
+} from "#/types/";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 

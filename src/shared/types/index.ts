@@ -12,3 +12,4 @@ export type DCCColors =
 export * from "./product";
 export * from "./image";
 export * from "./cart";
+export * from "./order";

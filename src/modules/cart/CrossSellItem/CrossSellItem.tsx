@@ -1,13 +1,13 @@
 import Button from "#/components/Button";
+import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
 import Text from "#/components/Text";
-import { Product } from "#/types";
+import { CartSidebarContext } from "#/contexts/CartSidebarContext";
+import { getProductThumbnail, Product } from "#/types";
 import { formatCurrency } from "#/utils/number";
-import { assets } from "@/assets";
 import { useAppDispatch } from "@/redux/hooks";
 import { addVariantToCart, reduceVariantFromCart } from "@/redux/slices/cart";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./CrossSellItem.module.scss";
 
 interface CrossSellItemProps {
@@ -19,9 +19,13 @@ const CrossSellItem: React.FC<CrossSellItemProps> = ({ product }) => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const router = useRouter();
 
+  const { setOpenCartBar, setCurrentStep } = useContext(CartSidebarContext);
+
   const handleCtaClick = () => {
     if (product.colors.length > 0 || product.sizes.length > 0) {
       // Todo: show redirection modal
+      setOpenCartBar(false);
+      setCurrentStep(0);
       return router.push(`/products/${product.slug}`);
     }
     if (isItemAdded) {
@@ -33,10 +37,12 @@ const CrossSellItem: React.FC<CrossSellItemProps> = ({ product }) => {
     }
   };
 
+  const thumbnail = getProductThumbnail(product);
+
   return (
     <div className={styles["cross-sell-item"]}>
-      <div className={styles["cross-sell-item-image"]}>
-        <Image layout="responsive" src={assets.itemBinhTinh} alt="Binh Tinh" />
+      <div className={styles.crossSellItemImage}>
+        <StrapiResponsiveImage image={thumbnail} layout="fill" />
       </div>
 
       <div className={styles["cross-sell-item-description"]}>

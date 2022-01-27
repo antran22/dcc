@@ -1,19 +1,19 @@
 import {productViewSlice} from "@/redux/slices/productView";
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {setupListeners} from "@reduxjs/toolkit/query";
-import {cmsAPI} from "./slices/api";
+import {productAPI} from "./slices/product";
 import {cartSlice} from "./slices/cart";
 
 const reducers = combineReducers({
   cart: cartSlice.reducer,
   productView: productViewSlice.reducer,
-  [cmsAPI.reducerPath]: cmsAPI.reducer,
+  [productAPI.reducerPath]: productAPI.reducer,
 });
 
 const store = configureStore({
   reducer: reducers,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(cmsAPI.middleware),
+    getDefaultMiddleware().concat(productAPI.middleware),
 });
 
 setupListeners(store.dispatch);

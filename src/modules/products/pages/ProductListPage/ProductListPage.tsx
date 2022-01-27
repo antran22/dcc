@@ -1,7 +1,7 @@
 import Carousel from "#/components/Carousel";
 import Text from "#/components/Text";
 import {ViewportDimensionContext} from "#/contexts/ViewportDimensionContext";
-import {useListProductsQuery} from "@/redux/slices/api";
+import {useListProductsQuery} from "@/redux/slices/product";
 import {NextPage} from "next";
 import Head from "next/head";
 import React, {useContext} from "react";

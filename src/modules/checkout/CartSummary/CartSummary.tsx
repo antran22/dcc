@@ -3,13 +3,13 @@ import Text from "#/components/Text";
 import { CartItem, getProductVariantThumbnail } from "#/types";
 import { formatCurrency } from "#/utils/number";
 import { useAppSelector } from "@/redux/hooks";
-import { cartSelector, cartSumSelector } from "@/redux/slices/cart";
+import { cartItemsSelector, cartSumSelector } from "@/redux/slices/cart";
 import React from "react";
 import styles from "./CartSummary.module.scss";
 
 const CartSummary: React.FC = () => {
   const cartTotalSum = useAppSelector(cartSumSelector);
-  const cartItems = useAppSelector(cartSelector);
+  const cartItems = useAppSelector(cartItemsSelector);
 
   return (
     <div className={styles["cart-summary"]}>

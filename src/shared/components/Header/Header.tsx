@@ -2,7 +2,7 @@ import Button from "#/components/Button";
 import Cart from "#/components/Cart";
 import Tab from "#/components/Tab";
 import Text from "#/components/Text";
-import {MenuSidebarContext} from "#/contexts/MenuSidebarContext";
+import { MenuSidebarContext } from "#/contexts/MenuSidebarContext";
 import {ViewportDimensionContext} from "#/contexts/ViewportDimensionContext";
 import {assets} from "@/assets";
 import c from "classnames";

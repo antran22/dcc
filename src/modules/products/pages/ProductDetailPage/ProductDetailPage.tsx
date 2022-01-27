@@ -2,7 +2,7 @@ import Text from "#/components/Text";
 import { formatCurrency } from "#/utils/number";
 import ProductPreview from "@/modules/products/pages/ProductDetailPage/ProductPreview";
 import { useAppDispatch } from "@/redux/hooks";
-import { useGetProductBySlugQuery } from "@/redux/slices/api";
+import { useGetProductBySlugQuery } from "@/redux/slices/product";
 import { resetProduct, setProduct } from "@/redux/slices/productView";
 import c from "classnames";
 import { NextPage } from "next";

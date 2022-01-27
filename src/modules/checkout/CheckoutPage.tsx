@@ -1,18 +1,30 @@
-import {NextPage} from "next";
+import { Order, transformOrderForUploading } from "#/types";
+import { axiosInstance } from "#/utils/axios";
+import { NextPage } from "next";
 import Head from "next/head";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import CartSummary from "./CartSummary";
-import CheckoutForm from "./CheckoutForm";
+import CheckoutForm, { CheckoutHandler } from "./CheckoutForm";
 import styles from "./CheckoutPage.module.scss";
 import CheckoutSuccess from "./CheckoutSuccess";
-import {CheckoutFormDetails} from "./common/types";
 import Footer from "./Footer";
 
 const CheckoutPage: NextPage = () => {
-  const [formDetails, setFormDetails] = useState<CheckoutFormDetails>();
+  const [order, setOrder] = useState<Order>();
 
-  const onCheckout = (formDetails: CheckoutFormDetails) => {
-    setFormDetails(formDetails);
+  const onCheckout: CheckoutHandler = (order, done) => {
+    const transformedOrder = transformOrderForUploading(order);
+    axiosInstance
+      .post("/orders", transformedOrder)
+      .then(() => {
+        setOrder(order);
+      })
+      .catch(() => {
+        alert("error");
+      })
+      .finally(() => {
+        done();
+      });
   };
 
   return (
@@ -22,10 +34,10 @@ const CheckoutPage: NextPage = () => {
       </Head>
       <main className={styles["checkout-page-content"]}>
         <section className={styles["checkout-page-content-section"]}>
-          {formDetails ? (
-            <CheckoutSuccess checkoutFormDetails={formDetails} />
+          {order ? (
+            <CheckoutSuccess order={order} />
           ) : (
-            <CheckoutForm onCheckout={onCheckout} />
+            <CheckoutForm handleCheckout={onCheckout} />
           )}
         </section>
         <section className={styles["checkout-page-content-section"]}>

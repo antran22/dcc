@@ -1,7 +1,7 @@
-import {Product} from "#/types";
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import { Product } from "#/types";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const cmsAPI = createApi({
+export const productAPI = createApi({
   reducerPath: "itemApi",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_URL }),
   endpoints: (builder) => ({
@@ -17,7 +17,7 @@ export const cmsAPI = createApi({
   }),
 });
 
-export const { useGetProductBySlugQuery, useListProductsQuery } = cmsAPI;
+export const { useGetProductBySlugQuery, useListProductsQuery } = productAPI;
 
 export interface ListArgs {
   start: number;
