@@ -53,7 +53,7 @@ const ProductDetailPage: NextPage = () => {
 
       <main className={styles.productsDetailsPageContent}>
         <h1
-          className={c(styles.productsDetailsPageContentTitle, "my-lg-5")}
+          className={c(styles.productsDetailsPageContentTitle)}
           style={{ fontSize: 60 }}
         >
           {product.title}

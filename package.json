@@ -22,9 +22,17 @@
     "react-icons": "^4.3.1",
     "react-redux": "^7.2.6",
     "react-slick": "^0.28.1",
+    "rehype-parse": "^8.0.3",
+    "rehype-react": "^7.0.4",
+    "remark": "^14.0.2",
+    "remark-gfm": "^3.0.1",
+    "remark-parse": "^10.0.1",
+    "remark-react": "^9.0.1",
+    "remark-rehype": "^10.1.0",
     "sass": "^1.43.5",
     "slick-carousel": "^1.8.1",
     "tinycolor2": "^1.4.2",
+    "unified": "^10.1.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {

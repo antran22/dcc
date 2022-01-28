@@ -1,5 +1,5 @@
 import c from "classnames";
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./ModalWrapper.module.scss";
 
 interface ModalWrapperProps {
@@ -43,6 +43,10 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
       setTimeout(() => setWrapperVisible(visible), 550);
     }
   }, [visible]);
+
+  if (!visible) {
+    return null;
+  }
 
   return (
     <div

@@ -6,7 +6,7 @@ import pStyles from "./P.module.scss";
 import specialTitleStyles from "./SpecialTitle.module.scss";
 
 interface TextProps {
-  children: string | React.ReactNode[];
+  children: string | React.ReactNode;
   classNames?: string[];
 }
 

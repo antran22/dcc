@@ -3,6 +3,7 @@
 
 .item-information {
   display: flex;
+  flex: 2;
 
   & > * {
     padding: 0;
@@ -29,6 +30,14 @@
     padding: $s4;
     text-align: center;
     border: 2px solid $black;
+    max-height: 300px;
+
+    & p {
+      max-height: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: break-spaces;
+    }
 
     &-btn {
       font-weight: 300;
@@ -46,6 +55,12 @@
 
 .item-modal {
   width: 50%;
+  padding: $s4;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .color-picker {
@@ -110,10 +125,13 @@
     border-bottom: none;
     border-left: 1px solid black;
     border-right: 1px solid black;
+    padding: $s3;
+    transition: 0.5s;
   }
 
   &-node-active {
     background: black;
     color: white;
+    transition: 0.5s;
   }
 }

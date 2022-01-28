@@ -13,6 +13,7 @@ export interface Product {
   specifications: string;
   specifications_short: string;
   sizes: ProductSize[];
+  size_guidance: string;
   colors: ProductColor[];
   cross_sell: Product[];
 }

@@ -31,7 +31,7 @@ const QuantityControl: React.FC = ({}) => {
   };
 
   return (
-    <div className={styles["quantity-control"]}>
+    <div className={styles.quantityControl}>
       {item && item.quantity > 0 ? (
         <>
           <Button onClick={onRemoveItemClick} color="white">

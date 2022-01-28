@@ -1,21 +1,27 @@
 import Button from "#/components/Button";
 import Text from "#/components/Text";
-import {useAppDispatch} from "@/redux/hooks";
-import {currentSizeSelector, selectSize, unselectSize,} from "@/redux/slices/productView";
-import {Product, ProductSize} from "#/types";
+import { useAppDispatch } from "@/redux/hooks";
+import {
+  currentSizeSelector,
+  selectSize,
+  unselectSize,
+} from "@/redux/slices/productView";
+import { Product, ProductSize } from "#/types";
 import c from "classnames";
 import React from "react";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import styles from "./ProductInformation.module.scss";
 
 interface SizePickerProps {
   product: Product;
   className?: string;
+  handleOpenGuidance: () => void;
 }
 
 const ProductSizePicker: React.FC<SizePickerProps> = ({
   product,
   className,
+  handleOpenGuidance,
 }) => {
   const dispatch = useAppDispatch();
   const currentlySelectedSize = useSelector(currentSizeSelector);
@@ -37,7 +43,11 @@ const ProductSizePicker: React.FC<SizePickerProps> = ({
         >
           Size
         </Text.SpecialTitle>
-        <Button color="dark-grey" variant="underscore">
+        <Button
+          color="dark-grey"
+          variant="underscore"
+          onClick={handleOpenGuidance}
+        >
           Hướng dẫn
         </Button>
       </div>

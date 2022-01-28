@@ -1,13 +1,14 @@
 import Button from "#/components/Button";
 import ModalWrapper from "#/components/ModalWrapper";
 import Text from "#/components/Text";
-import {Product} from "#/types";
+import { Product } from "#/types";
+import { useMarkdownProcessor } from "#/utils/markdown";
 import ProductSizePicker from "@/modules/products/components/ProductInformation/ProductSizePicker";
 import c from "classnames";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import {AiFillQuestionCircle as Question} from "react-icons/ai";
+import { AiFillQuestionCircle as Question } from "react-icons/ai";
 import ColorPicker from "./ProductColorPicker";
 import styles from "./ProductInformation.module.scss";
 
@@ -17,7 +18,12 @@ interface ItemInformationProps {
 
 const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
   const [showMeaningModal, setShowMeaningModal] = useState(false);
+  const [showSizeGuidanceModal, setShowSizeGuidanceModal] = useState(false);
   const [showSpecModal, setShowSpecModal] = useState(false);
+  const productMeaningContent = useMarkdownProcessor(product.meaning);
+  const productUsageContent = useMarkdownProcessor(product.usage);
+  const productSpecContent = useMarkdownProcessor(product.specifications);
+  const sizeGuidanceContent = useMarkdownProcessor(product.size_guidance);
 
   return (
     <>
@@ -52,12 +58,13 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
               )}
             >
               <Text.SpecialTitle color="nude">Công năng</Text.SpecialTitle>
-              <Text.P thickness="thin">{product.usage}</Text.P>
+              <Text.P thickness="thin">{productUsageContent}</Text.P>
             </div>
 
             {product.sizes.length > 0 && (
               <ProductSizePicker
                 product={product}
+                handleOpenGuidance={() => setShowSizeGuidanceModal(true)}
                 className={c(
                   styles.itemInformationBox,
                   styles.itemInformationFixBorderTop,
@@ -84,20 +91,29 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
           </div>
         </Col>
       </Row>
+
+      <ModalWrapper
+        className={styles["item-modal"]}
+        visible={showSizeGuidanceModal}
+        onClose={() => setShowSizeGuidanceModal(false)}
+      >
+        {sizeGuidanceContent}
+      </ModalWrapper>
+
       <ModalWrapper
         className={styles["item-modal"]}
         visible={showMeaningModal}
         onClose={() => setShowMeaningModal(false)}
       >
-        <div>{product.meaning}</div>
+        {productMeaningContent}
       </ModalWrapper>
 
       <ModalWrapper
-        className={styles["item-modal"]}
+        className={styles.itemModal}
         visible={showSpecModal}
         onClose={() => setShowSpecModal(false)}
       >
-        <div>{product.specifications}</div>
+        {productSpecContent}
       </ModalWrapper>
     </>
   );
