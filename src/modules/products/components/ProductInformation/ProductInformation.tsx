@@ -29,7 +29,11 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
     <>
       <Row className={c("m-3", "px-3", styles.itemInformation)}>
         {product.colors.length > 0 && (
-          <Col xs={{ offset: 3, span: 6 }} lg={{ offset: 4, span: 4 }}>
+          <Col
+            xs={{ offset: 3, span: 6 }}
+            lg={{ offset: 2, span: 8 }}
+            xl={{ offset: 4, span: 4 }}
+          >
             <ColorPicker product={product} />
           </Col>
         )}
