@@ -9,18 +9,14 @@ $custom-btn-padding: 10vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
-  &-title {
-    padding: $s3;
-    border: 2px solid $black;
-    border-top-width: 0;
-    width: fit-content;
-
-    margin-top: $s3;
-    margin-bottom: $s5;
+  @media screen and (max-width: $breakpoint-tablet) {
+    justify-content: start;
   }
 
   &-cta {
+    color: white;
     padding-left: $custom-btn-padding;
     padding-right: $custom-btn-padding;
   }

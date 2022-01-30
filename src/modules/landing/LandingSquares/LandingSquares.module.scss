@@ -1,44 +1,89 @@
+@use "sass:list";
+@use "sass:math";
 @import "src/shared/styles/constants.scss";
 @import "src/shared/styles/colors.scss";
+@import "src/shared/styles/mixins.scss";
 
-.landing-squares {
-  position: absolute;
-
-  width: 100%;
+.landing-square-container {
+  position: relative;
   height: 100%;
+  width: 100%;
+}
 
-  padding: $s5;
-  overflow: hidden;
+@mixin keyframe-options($row) {
+  left: list.nth($row, 1);
+  top: list.nth($row, 2);
+  width: list.nth($row, 3);
+  height: list.nth($row, 4);
+  background-color: list.nth($row, 5);
+}
 
-  &-block {
-    width: 15vw;
-    height: 25vh;
-    z-index: -10;
+@mixin square-keyframe($name, $square-keyframes) {
+  @include keyframes($name) {
+    $frame-count: list.length($square-keyframes);
+    $step: math.div(100%, $frame-count);
+    $step-action-duration: $step * 0.3;
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    @for $i from 1 through $frame-count {
+      $row: list.nth($square-keyframes, $i);
+      $next-row: list.nth($square-keyframes, ($i % $frame-count) + 1);
 
-    transition: transform 500ms ease, background-color 500ms ease;
+      #{($i - 1) * $step} {
+        @include keyframe-options($row);
+      }
+      #{($i - 1) * $step + $step-action-duration} {
+        @include keyframe-options($next-row);
+      }
+    }
+
+    100% {
+      @include keyframe-options(list.nth($square-keyframes, 1));
+    }
   }
 
-  &-cyan {
-    background-color: $cyan;
-  }
+  @include animation(
+    "#{$name} 6s infinite cubic-bezier(.45,.05,.03,1) forwards"
+  );
+}
 
-  &-grey {
-    background-color: $grey;
-  }
+$landing-page-keyframes: (
+  1: (
+    (20%, 20%, 16vw, 90%, $red-soil),
+    (30%, 40%, 12vw, 110%, $red-soil),
+    (20%, 40%, 10vw, 100%, $red-soil),
+  ),
+  2: (
+    (30%, 80%, 16vw, 80%, $grey),
+    (20%, 80%, 10vw, 90%, $grey),
+    (70%, 20%, 12vw, 90%, $red-soil),
+  ),
+  3: (
+    (50%, 70%, 14vw, 120%, $cyan),
+    (49%, 75%, 14vw, 110%, $cyan),
+    (30%, 60%, 14vw, 100%, $grey),
+  ),
+  4: (
+    (80%, 10%, 6vw, 100%, $dark-green),
+    (82%, 8%, 4vw, 100%, $dark-green),
+    (50%, 70%, 14vw, 120%, $cyan),
+  ),
+  5: (
+    (80%, 80%, 16vw, 100%, $grey),
+    (75%, 85%, 14vw, 100%, $grey),
+    (80%, 100%, 18vw, 90%, $grey),
+  ),
+);
 
-  &-red-soil {
-    background-color: $red-soil;
-  }
+.landing-square {
+  position: absolute;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+}
 
-  &-dark-green {
-    background-color: $dark-green;
-  }
+@each $i, $data in $landing-page-keyframes {
+  .landing-square-#{$i} {
+    @extend .landing-square;
 
-  &-nude {
-    background-color: $nude;
+    @include square-keyframe("landing-square-#{$i}", $data);
   }
 }
