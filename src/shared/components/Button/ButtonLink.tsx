@@ -1,4 +1,4 @@
-import {DCCColors} from "#/types";
+import { DCCColors } from "#/types";
 import c from "classnames";
 import Link from "next/link";
 import React from "react";
@@ -11,6 +11,7 @@ interface ButtonLinkProps {
   mode?: "fill-parent" | "contain";
   variant?: "fill" | "outline" | "underscore";
   classNames?: string[];
+  onClick?: () => void;
 }
 
 const ButtonLink: React.FC<ButtonLinkProps> = ({
@@ -19,11 +20,13 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   variant = "fill",
   color,
   children,
+  onClick,
   classNames = [],
 }: ButtonLinkProps) => {
   return (
     <Link href={href}>
       <a
+        onClick={onClick}
         className={c([
           styles.btn,
           styles[`btn-${mode}`],

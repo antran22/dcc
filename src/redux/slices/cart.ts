@@ -6,15 +6,14 @@ interface CartState {
   items: CartItem[];
   hasAlreadyCrossSold: boolean;
 }
-
-const initialState: CartState = {
+export const initialCartState: CartState = {
   items: [],
   hasAlreadyCrossSold: false,
 };
 
 export const cartSlice = createSlice({
   name: "cart",
-  initialState,
+  initialState: initialCartState,
   reducers: {
     clearCart: (state) => {
       state.items = [];

@@ -15,13 +15,13 @@ interface ProductViewState {
   selectedSize?: ProductSize;
 }
 
-const initialState: ProductViewState = {
+export const initialProductViewState: ProductViewState = {
   previewImages: [],
 };
 
 export const productViewSlice = createSlice({
   name: "productView",
-  initialState,
+  initialState: initialProductViewState,
   reducers: {
     setProduct: (state, action: PayloadAction<Product>) => {
       state.product = action.payload;

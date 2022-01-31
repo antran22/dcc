@@ -2,7 +2,7 @@ import { Product } from "#/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const productAPI = createApi({
-  reducerPath: "itemApi",
+  reducerPath: "productAPI",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_URL }),
   endpoints: (builder) => ({
     getProductBySlug: builder.query<Product, string>({

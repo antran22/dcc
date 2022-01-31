@@ -1,7 +1,7 @@
+import ButtonLink from "#/components/Button/ButtonLink";
 import { MenuSidebarContext } from "#/contexts/MenuSidebarContext";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import Button from "../Button";
 import { headerItems } from "../Header/Header";
 import SidebarContainer from "../SidebarContainer";
 import styles from "./MenuSidebar.module.scss";
@@ -16,11 +16,6 @@ const MenuSidebar: React.FC = () => {
     setCurrentPath(router.pathname);
   }, [router.pathname]);
 
-  const handleMenuItemClick = (url: string) => {
-    router.push(url);
-    setMenuSidebarIsOpen(false);
-  };
-
   const checkCurrentPathSelected = (url: string) => currentPath.includes(url);
 
   return (
@@ -31,27 +26,24 @@ const MenuSidebar: React.FC = () => {
       openFrom="left"
     >
       <nav className={styles["menu-sidebar"]}>
-        <ul className={styles["menu-sidebar-list"]}>
-          {headerItems.map((item) => (
-            <Button
-              mode="fill-parent"
-              variant="outline"
-              onClick={() => handleMenuItemClick(item.url)}
-              key={item.url}
-              color="black"
-              classNames={[
-                styles["menu-sidebar-list-item"],
-                checkCurrentPathSelected(item.url)
-                  ? styles["menu-sidebar-list-item-selected"]
-                  : "",
-              ]}
-            >
-              <li className={styles["menu-sidebar-list-item-content"]}>
-                {item.label}
-              </li>
-            </Button>
-          ))}
-        </ul>
+        {headerItems.map((item) => (
+          <ButtonLink
+            href={item.url}
+            mode="fill-parent"
+            variant="outline"
+            onClick={() => setMenuSidebarIsOpen(false)}
+            key={item.url}
+            color="black"
+            classNames={[
+              styles.menuSidebarListItem,
+              checkCurrentPathSelected(item.url)
+                ? styles["menu-sidebar-list-item-selected"]
+                : "",
+            ]}
+          >
+            {item.label}
+          </ButtonLink>
+        ))}
       </nav>
     </SidebarContainer>
   );

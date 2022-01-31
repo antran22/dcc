@@ -1,3 +1,4 @@
+import LoadingScreen from "#/components/LoadingScreen";
 import Text from "#/components/Text";
 import { formatCurrency } from "#/utils/number";
 import ProductPreview from "@/modules/products/pages/ProductDetailPage/ProductPreview";
@@ -35,7 +36,7 @@ const ProductDetailPage: NextPage = () => {
   }, [router, dispatch, isLoading, product]);
 
   if (isLoading || !product) {
-    return <div />;
+    return <LoadingScreen />;
   }
 
   return (

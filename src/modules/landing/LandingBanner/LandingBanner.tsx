@@ -1,6 +1,7 @@
 import { useInterval } from "#/hooks";
 import LandingSquares from "@/modules/landing/LandingSquares";
 import c from "classnames";
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import { Flipped, Flipper } from "react-flip-toolkit";
 import styles from "./LandingBanner.module.scss";
@@ -55,4 +56,4 @@ const LandingBanner: React.FC = () => {
   );
 };
 
-export default LandingBanner;
+export default dynamic(() => Promise.resolve(LandingBanner), { ssr: false });

@@ -1,8 +1,22 @@
-import {productViewSlice} from "@/redux/slices/productView";
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import {setupListeners} from "@reduxjs/toolkit/query";
-import {productAPI} from "./slices/product";
-import {cartSlice} from "./slices/cart";
+import {
+  initialProductViewState,
+  productViewSlice,
+} from "@/redux/slices/productView";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from "redux-persist";
+// @ts-ignore
+import expireReducer from "redux-persist-expire";
+import storage from "redux-persist/lib/storage";
+import { cartSlice, initialCartState } from "./slices/cart";
+import { productAPI } from "./slices/product";
 
 const reducers = combineReducers({
   cart: cartSlice.reducer,
@@ -10,13 +24,36 @@ const reducers = combineReducers({
   [productAPI.reducerPath]: productAPI.reducer,
 });
 
-const store = configureStore({
-  reducer: reducers,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(productAPI.middleware),
-});
+const persistedReducer = persistReducer(
+  {
+    key: "dcc",
+    storage,
+    blacklist: [productAPI.reducerPath],
+    transforms: [
+      expireReducer("cart", {
+        expireSeconds: 3600,
+        autoExpire: true,
+        expiredState: initialCartState,
+      }),
+      expireReducer("productView", {
+        expireSeconds: 3600,
+        autoExpire: true,
+        expiredState: initialProductViewState,
+      }),
+    ],
+  },
+  reducers
+);
 
-setupListeners(store.dispatch);
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(productAPI.middleware),
+});
 
 export default store;
 

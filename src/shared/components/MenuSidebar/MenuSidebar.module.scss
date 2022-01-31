@@ -1,5 +1,5 @@
-@import "../../styles/constants.scss";
-@import "../../styles/colors.scss";
+@import "/src/shared/styles/constants";
+@import "/src/shared/styles/colors";
 
 .menu-sidebar {
   &-list {
@@ -7,6 +7,9 @@
     padding: 0;
 
     &-item {
+      width: 100%;
+      display: block;
+      text-align: center;
       margin-top: $s3;
 
       &-selected {

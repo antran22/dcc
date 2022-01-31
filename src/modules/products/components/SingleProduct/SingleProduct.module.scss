@@ -11,12 +11,23 @@
   position: relative;
   transition: 0.5s;
 
+  &-text-white {
+    &:hover {
+      color: $white;
+    }
+  }
+
+  &-text-black {
+    &:hover {
+      color: $black;
+    }
+  }
+
   &:hover {
-    color: $white;
     transition: 0.5s;
 
     .product-btn-container {
-      visibility: visible;
+      opacity: 1;
       transition: 0.5s;
     }
 
@@ -44,6 +55,7 @@
   &-info {
     flex: 1;
     color: inherit;
+    margin-bottom: $s5;
   }
 
   &-background {
@@ -58,7 +70,7 @@
   &-btn-container {
     width: 100%;
     flex: 1;
-    visibility: hidden;
+    opacity: 0;
 
     padding: 0 $s4;
 
