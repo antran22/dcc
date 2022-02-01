@@ -1,5 +1,5 @@
-import {Product, ProductColor} from "#/types";
-import {useAppDispatch} from "@/redux/hooks";
+import { Product, ProductColor } from "#/types";
+import { useAppDispatch } from "@/redux/hooks";
 import {
   currentColorSelector,
   resetPreviewImages,
@@ -9,8 +9,9 @@ import {
 } from "@/redux/slices/productView";
 import c from "classnames";
 import React from "react";
-import {AiOutlineCheck} from "react-icons/ai";
-import {useSelector} from "react-redux";
+import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import { AiOutlineCheck } from "react-icons/ai";
+import { useSelector } from "react-redux";
 import tinycolor from "tinycolor2";
 import styles from "./ProductInformation.module.scss";
 
@@ -74,18 +75,26 @@ const ColorNode: React.FC<ColorNodeProps> = ({
   const highlightColor = isColorBright ? "black" : "white";
 
   return (
-    <div
-      onClick={onClick}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      style={{
-        backgroundColor: color.color_code,
-      }}
-      className={c(styles.colorPickerNode, "mx-1", {
-        [styles.colorPickerNodeActive]: color.id === currentlySelectedColor?.id,
-      })}
+    <OverlayTrigger
+      transition
+      delay={100}
+      placement="top"
+      overlay={<Tooltip className={styles.colorPickerTooltip}>{color.name}</Tooltip>}
     >
-      <AiOutlineCheck color={highlightColor} />
-    </div>
+      <div
+        onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        style={{
+          backgroundColor: color.color_code,
+        }}
+        className={c(styles.colorPickerNode, "mx-1", {
+          [styles.colorPickerNodeActive]:
+            color.id === currentlySelectedColor?.id,
+        })}
+      >
+        <AiOutlineCheck color={highlightColor} />
+      </div>
+    </OverlayTrigger>
   );
 };

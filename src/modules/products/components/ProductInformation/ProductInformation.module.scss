@@ -61,6 +61,11 @@
 }
 
 .color-picker {
+  &-tooltip {
+    transform: translateY(-50px);
+    font-family: "IBM Plex Mono", monospace;
+  }
+
   &-node {
     width: 30px;
     height: 30px;

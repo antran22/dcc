@@ -18,12 +18,20 @@
   background-color: list.nth($row, 5);
 }
 
-@mixin square-keyframe($name, $square-keyframes) {
-  @include keyframes($name) {
-    $frame-count: list.length($square-keyframes);
-    $step: math.div(100%, $frame-count);
-    $step-action-duration: $step * 0.3;
+@mixin keyframe-options-for-tablet($row) {
+  left: list.nth($row, 1);
+  top: list.nth($row, 2) * 0.8;
+  width: list.nth($row, 3) * 2;
+  height: list.nth($row, 4) * 0.7;
+  background-color: list.nth($row, 5);
+}
 
+@mixin square-keyframe($name, $square-keyframes) {
+  $frame-count: list.length($square-keyframes);
+  $step: math.div(100%, $frame-count);
+  $step-action-duration: $step * 0.3;
+
+  @include keyframes($name) {
     @for $i from 1 through $frame-count {
       $row: list.nth($square-keyframes, $i);
       $next-row: list.nth($square-keyframes, ($i % $frame-count) + 1);
@@ -41,9 +49,23 @@
     }
   }
 
-  @include animation(
-    "#{$name} 6s infinite cubic-bezier(.45,.05,.03,1) forwards"
-  );
+  @include keyframes("#{$name}-tablet") {
+    @for $i from 1 through $frame-count {
+      $row: list.nth($square-keyframes, $i);
+      $next-row: list.nth($square-keyframes, ($i % $frame-count) + 1);
+
+      #{($i - 1) * $step} {
+        @include keyframe-options-for-tablet($row);
+      }
+      #{($i - 1) * $step + $step-action-duration} {
+        @include keyframe-options-for-tablet($next-row);
+      }
+    }
+
+    100% {
+      @include keyframe-options-for-tablet(list.nth($square-keyframes, 1));
+    }
+  }
 }
 
 $landing-page-keyframes: (
@@ -63,14 +85,14 @@ $landing-page-keyframes: (
     (30%, 60%, 14vw, 100%, $grey),
   ),
   4: (
-    (80%, 10%, 6vw, 100%, $dark-green),
-    (82%, 8%, 4vw, 100%, $dark-green),
-    (50%, 70%, 14vw, 120%, $cyan),
-  ),
-  5: (
     (80%, 80%, 16vw, 100%, $grey),
     (75%, 85%, 14vw, 100%, $grey),
     (80%, 100%, 18vw, 90%, $grey),
+  ),
+  5: (
+    (80%, 10%, 6vw, 100%, $dark-green),
+    (82%, 8%, 4vw, 100%, $dark-green),
+    (50%, 70%, 14vw, 120%, $cyan),
   ),
 );
 
@@ -85,5 +107,15 @@ $landing-page-keyframes: (
     @extend .landing-square;
 
     @include square-keyframe("landing-square-#{$i}", $data);
+
+    @include animation(
+      "landing-square-#{$i} 6s infinite cubic-bezier(.45,.05,.03,1) forwards"
+    );
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      @include animation(
+        "landing-square-#{$i}-tablet 6s infinite cubic-bezier(.45,.05,.03,1) forwards"
+      );
+    }
   }
 }
