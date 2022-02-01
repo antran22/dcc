@@ -1,6 +1,17 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 @import "~bootstrap/scss/bootstrap";
+@import "./mixins.scss";
+
+html {
+  font-size: 16px;
+}
+
+@include tablet-downward {
+  html {
+    font-size: 14px;
+  }
+}
 
 html,
 body,
@@ -47,7 +58,8 @@ tbody td {
   text-align: center;
 }
 
-tbody thead,th {
+tbody thead,
+th {
   padding: 30px;
   background-color: #c4c4c4;
 }

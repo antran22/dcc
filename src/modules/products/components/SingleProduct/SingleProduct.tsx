@@ -15,8 +15,8 @@ interface SingleProductProps {
   product: Product;
 }
 const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
-  const { height } = useContext(ViewportDimensionContext);
-  const PAGINATION_HEIGHT = 100;
+  const { height, currentMode } = useContext(ViewportDimensionContext);
+  const PAGINATION_HEIGHT = currentMode === "desktop" ? 100 : 0;
   const itemHeight = height - HEADER_HEIGHT - PAGINATION_HEIGHT;
   const themeColor = tinycolor(product.theme_color_code ?? colors.darkGrey);
   return (

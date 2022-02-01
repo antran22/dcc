@@ -1,6 +1,7 @@
-import {colors} from "#/styles/colors";
+import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
+import { colors } from "#/styles/colors";
 import c from "classnames";
-import React, {useRef} from "react";
+import React, { useContext, useRef } from "react";
 import Slider from "react-slick";
 
 import styles from "./Carousel.module.scss";
@@ -25,6 +26,7 @@ const Carousel: React.FC<CarouselProps> = ({
   slidesToScroll,
   slidesToShow,
 }) => {
+  const { currentMode } = useContext(ViewportDimensionContext);
   const sliderRef = useRef<Slider>(null);
 
   const next = () => {
@@ -45,11 +47,10 @@ const Carousel: React.FC<CarouselProps> = ({
         className={c(styles["carousel-slick"], {
           [styles["carousel-slick-limit-height"]]: limitInnerHeight,
         })}
-        dots
+        dots={currentMode === "desktop"}
         arrows={false}
         infinite
         autoplay={autoplay}
-        adaptiveHeight
         slidesToShow={slidesToShow}
         slidesToScroll={slidesToScroll}
         speed={500}

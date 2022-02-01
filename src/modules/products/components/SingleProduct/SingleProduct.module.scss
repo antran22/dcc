@@ -1,4 +1,5 @@
 @import "/src/shared/styles/constants";
+@import "/src/shared/styles/mixins";
 @import "/src/shared/styles/colors";
 
 .product {
@@ -15,11 +16,29 @@
     &:hover {
       color: $white;
     }
+
+    @include tablet-downward {
+      color: $white;
+    }
   }
 
   &-text-black {
     &:hover {
       color: $black;
+    }
+
+    @include tablet-downward {
+      color: $black;
+    }
+  }
+
+  @include tablet-downward {
+    .product-btn-container {
+      opacity: 1;
+    }
+
+    .product-background {
+      opacity: 1;
     }
   }
 

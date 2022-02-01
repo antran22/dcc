@@ -1,4 +1,5 @@
 @import "src/shared/styles/constants.scss";
+@import "src/shared/styles/mixins.scss";
 @import "src/shared/styles/colors.scss";
 
 .checkout-success {
@@ -11,7 +12,8 @@
 
   &-details {
     margin-left: $s4;
-    @media screen and (max-width: $breakpoint-mobile) {
+
+    @include mobile-downward {
       margin-left: 0;
     }
 

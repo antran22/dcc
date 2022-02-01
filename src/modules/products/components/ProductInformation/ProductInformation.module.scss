@@ -1,4 +1,5 @@
 @import "/src/shared/styles/constants";
+@import "/src/shared/styles/mixins";
 @import "/src/shared/styles/colors";
 
 .item-information {
@@ -9,14 +10,12 @@
     margin-top: -2px;
   }
 
-  &-fix-border-left {
-    @media only screen and (min-width: $breakpoint-tablet) {
+  @include tablet-upward {
+    &-fix-border-left {
       margin-left: -2px;
     }
-  }
 
-  &-fix-border-right {
-    @media only screen and (min-width: $breakpoint-tablet) {
+    &-fix-border-right {
       margin-right: -2px;
     }
   }
@@ -44,7 +43,7 @@
 }
 
 .item-button-center {
-  @media only screen and (max-width: $breakpoint-tablet) {
+  @include tablet-downward {
     margin-left: auto;
     margin-right: auto;
   }

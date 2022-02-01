@@ -1,3 +1,5 @@
+@import "./constants";
+
 @mixin reset-button {
   outline: none;
   border: none;
@@ -53,4 +55,28 @@
   -ms-animation: #{$str};
   -o-animation: #{$str};
   animation: #{$str};
+}
+
+@mixin mobile-downward {
+  @media only screen and (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin mobile-upward {
+  @media only screen and (min-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet-upward {
+  @media only screen and (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin tablet-downward {
+  @media only screen and (max-width: $breakpoint-tablet) {
+    @content;
+  }
 }

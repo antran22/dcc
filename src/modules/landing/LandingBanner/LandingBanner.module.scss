@@ -19,11 +19,11 @@
   &-title {
     font-size: 2.5rem;
 
-    @media screen and (min-width: $breakpoint-mobile) {
+    @include mobile-upward {
       font-size: 3rem;
     }
 
-    @media screen and (min-width: $breakpoint-tablet) {
+    @include tablet-upward {
       font-size: 5rem;
     }
 
@@ -33,6 +33,9 @@
 
     &-span {
       margin: 0 $s3;
+      @include mobile-downward {
+        margin: 0 $s2;
+      }
     }
   }
 
