@@ -10,6 +10,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+import tinycolor from "tinycolor2";
 import ProductInformation from "../../components/ProductInformation/ProductInformation";
 import QuantityControl from "../../components/QuantityControl";
 import styles from "./ProductDetailPage.module.scss";
@@ -38,7 +39,7 @@ const ProductDetailPage: NextPage = () => {
   if (isLoading || !product) {
     return <LoadingScreen />;
   }
-
+  const textColor = tinycolor(product.theme_color_code);
   return (
     <div className={styles.productsDetailsPage}>
       <Head>
@@ -53,12 +54,19 @@ const ProductDetailPage: NextPage = () => {
       </aside>
 
       <main className={styles.productsDetailsPageContent}>
-        <h1
-          className={c(styles.productsDetailsPageContentTitle)}
-          style={{ fontSize: 60 }}
-        >
-          {product.title}
-        </h1>
+        <div className={styles.productsDetailsPageContentTitleContainer}>
+          <h1
+            className={c(styles.productsDetailsPageContentTitle)}
+            style={{
+              color:
+                textColor.getBrightness() > 0.8
+                  ? "black"
+                  : product.theme_color_code,
+            }}
+          >
+            {product.title}
+          </h1>
+        </div>
 
         <ProductInformation product={product} />
 

@@ -1,6 +1,8 @@
+import Button from "#/components/Button";
 import c from "classnames";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./ModalWrapper.module.scss";
+import { AiOutlineClose } from "react-icons/ai";
 
 interface ModalWrapperProps {
   className?: string;
@@ -54,7 +56,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
         visibility: wrapperVisible ? "visible" : "hidden",
       }}
       className={c(
-        styles["modal-wrapper"],
+        styles.modalWrapper,
         styles[`modal-wrapper-${visible ? "show" : "hide"}`]
       )}
     >
@@ -62,7 +64,18 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
         ref={contentRef}
         className={c(styles["modal-wrapper-content"], className)}
       >
-        {children}
+        <div>{children}</div>
+
+        <div className={styles.modalWrapperButtonContainer}>
+          <Button
+            color="black"
+            variant="fill"
+            classNames={[styles.modalWrapperButton]}
+            onClick={onClose}
+          >
+            <AiOutlineClose />
+          </Button>
+        </div>
       </div>
     </div>
   );

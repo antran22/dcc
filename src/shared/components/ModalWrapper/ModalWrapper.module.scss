@@ -30,6 +30,23 @@
     background-color: $white;
 
     overflow: hidden;
-    padding: $s4;
+    padding: $s6 $s6 $s4;
+  }
+
+  &-button-container {
+    margin-top: $s5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

@@ -1,5 +1,6 @@
 @import "/src/shared/styles/constants";
 @import "/src/shared/styles/colors";
+@import "/src/shared/styles/mixins";
 
 .products-details-page {
   flex: 1;
@@ -29,17 +30,24 @@
     flex-direction: column;
     justify-content: space-between;
 
-    @media screen and (max-width: $breakpoint-tablet) {
+    @include tablet-downward {
       overflow: visible;
     }
 
-    &-title {
-      flex: 1;
-      text-align: center;
+    &-title-container {
+      flex-grow: 1;
       display: flex;
       justify-content: center;
       align-items: center;
       margin-top: $s3;
+    }
+
+    &-title {
+      font-size: 5rem;
+      @include tablet-upward {
+        max-width: 50%;
+      }
+      text-align: center;
     }
 
     &-footer {

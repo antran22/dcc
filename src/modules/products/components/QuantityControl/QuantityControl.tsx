@@ -43,7 +43,7 @@ const QuantityControl: React.FC = ({}) => {
           </Button>
         </>
       ) : (
-        <Button color="red-soil" onClick={onAddItemClick}>
+        <Button classNames={[ styles.quantityControlButton ]} color="red-soil" onClick={onAddItemClick}>
           THÊM VÀO GIỎ
         </Button>
       )}

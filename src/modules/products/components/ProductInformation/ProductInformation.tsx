@@ -26,7 +26,7 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
   const sizeGuidanceContent = useMarkdownProcessor(product.size_guidance);
 
   return (
-    <>
+    <div className={styles.itemInformationContainer}>
       <Row className={c("m-3", "px-3", styles.itemInformation)}>
         {product.colors.length > 0 && (
           <Col
@@ -62,7 +62,7 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
               )}
             >
               <Text.SpecialTitle color="nude">Công năng</Text.SpecialTitle>
-              <Text.P thickness="thin">{productUsageContent}</Text.P>
+              <div className={styles.itemInformationUsage}>{productUsageContent}</div>
             </div>
 
             {product.sizes.length > 0 && (
@@ -97,7 +97,7 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
       </Row>
 
       <ModalWrapper
-        className={styles["item-modal"]}
+        className={styles.itemModal}
         visible={showSizeGuidanceModal}
         onClose={() => setShowSizeGuidanceModal(false)}
       >
@@ -105,7 +105,7 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
       </ModalWrapper>
 
       <ModalWrapper
-        className={styles["item-modal"]}
+        className={styles.itemModal}
         visible={showMeaningModal}
         onClose={() => setShowMeaningModal(false)}
       >
@@ -119,7 +119,7 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
       >
         {productSpecContent}
       </ModalWrapper>
-    </>
+    </div>
   );
 };
 
