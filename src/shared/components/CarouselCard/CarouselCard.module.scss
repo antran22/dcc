@@ -2,7 +2,7 @@
 @import "/src/shared/styles/mixins";
 @import "/src/shared/styles/colors";
 
-.product {
+.carousel-card {
   padding: $s4;
   text-align: center;
   display: flex;
@@ -45,12 +45,12 @@
   &:hover {
     transition: 0.5s;
 
-    .product-btn-container {
+    .carousel-card-btn-container {
       opacity: 1;
       transition: 0.5s;
     }
 
-    .product-background {
+    .carousel-card-background {
       opacity: 1;
       transition: 0.5s;
     }
