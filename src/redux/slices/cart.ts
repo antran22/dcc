@@ -1,5 +1,6 @@
 import { CartItem, ProductVariant, sameProductVariant } from "#/types";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import _ from "lodash";
 import { RootState } from "../store";
 
 interface CartState {
@@ -122,9 +123,11 @@ export const crossSellProductSelector = createSelector(
       (item) => item.productVariant.product.cross_sell
     );
 
-    return allCrossSellProducts.filter(
+    const filteredCrossSellProducts = allCrossSellProducts.filter(
       (product) => product && !allProductIdInCart.includes(product.id)
     );
+
+    return _.uniqBy(filteredCrossSellProducts, (product) => product.id);
   }
 );
 

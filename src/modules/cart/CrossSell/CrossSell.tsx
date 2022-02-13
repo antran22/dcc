@@ -17,7 +17,7 @@ const CrossSell: React.FC<CrossSellProps> = ({}) => {
       </Text.P>
 
       <div className={styles.crossSellItemsWrapper}>
-        {crossSellProducts.slice(0, 2).map((product) => (
+        {crossSellProducts.map((product) => (
           <CrossSellItem key={product.id} product={product} />
         ))}
       </div>
