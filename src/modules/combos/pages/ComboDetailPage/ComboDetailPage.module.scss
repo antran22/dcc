@@ -1,0 +1,68 @@
+@import "/src/shared/styles/constants";
+@import "/src/shared/styles/colors";
+@import "/src/shared/styles/mixins";
+
+.products-details-page {
+  flex: 1;
+
+  display: flex;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+  }
+
+  &-preview {
+    display: flex;
+    flex: 1;
+    background-color: $light-grey;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      min-height: 50vh;
+    }
+  }
+
+  &-content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include tablet-downward {
+      overflow: visible;
+    }
+
+    &-title-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: $s3;
+    }
+
+    &-title {
+      font-size: 5rem;
+      @include tablet-upward {
+        max-width: 50%;
+      }
+      text-align: center;
+    }
+
+    &-footer {
+      display: flex;
+      height: 80px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 $s5;
+      border-top: 1px solid $grey;
+
+      @media screen and (max-width: $breakpoint-tablet) {
+        position: sticky;
+        bottom: 0;
+        background-color: $white;
+      }
+    }
+  }
+}

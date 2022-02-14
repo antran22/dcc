@@ -1,6 +1,6 @@
 import ListingLayout from "#/layout/ListingLayout";
 import SingleProduct from "@/modules/products/components/SingleProduct";
-import { useListProductsQuery } from "@/redux/slices/product";
+import { useListProductsQuery } from "@/redux/slices/strapi";
 import { NextPage } from "next";
 import React from "react";
 

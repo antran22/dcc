@@ -1,7 +1,7 @@
-import { Product } from "#/types";
+import { Combo, Product } from "#/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const productAPI = createApi({
+export const strapiAPI = createApi({
   reducerPath: "productAPI",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_URL }),
   endpoints: (builder) => ({
@@ -14,17 +14,30 @@ export const productAPI = createApi({
         return `products?${queryString}`;
       },
     }),
+    getComboById: builder.query<Combo, string>({
+      query: (id) => `combos/${id}`,
+    }),
+    listCombos: builder.query<Combo[], ListArgs>({
+      query: (listArgs) => {
+        const queryString = parseListArgsToStrapiQueryString(listArgs);
+        return `combos?${queryString}`;
+      },
+    }),
   }),
 });
 
-export const { useGetProductBySlugQuery, useListProductsQuery } = productAPI;
+export const {
+  useGetProductBySlugQuery,
+  useListProductsQuery,
+  useGetComboByIdQuery,
+  useListCombosQuery,
+} = strapiAPI;
 
 export interface ListArgs {
   start: number;
   limit: number;
 }
-
-function parseListArgsToStrapiQueryString(args: object): string {
+export function parseListArgsToStrapiQueryString(args: object): string {
   const objectWithUnderscoreKey: Record<string, string> = {};
 
   Object.entries(args).forEach(([key, value]) => {

@@ -3,7 +3,7 @@ import Text from "#/components/Text";
 import DetailLayout from "#/layout/DetailLayout";
 import { formatCurrency } from "#/utils/number";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useGetProductBySlugQuery } from "@/redux/slices/product";
+import { useGetProductBySlugQuery } from "@/redux/slices/strapi";
 import {
   currentProductVariantSelector,
   previewImageSelector,
@@ -28,7 +28,7 @@ const ProductDetailPage: NextPage = () => {
 
   useEffect(() => {
     if (!isLoading && !product) {
-      router.push("/404").then();
+      router.replace("/404").then();
     }
     if (!isLoading && product) {
       dispatch(setViewingProduct(product));

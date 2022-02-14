@@ -23,7 +23,10 @@ const ListingLayout: React.FC<ListingLayoutProps> = ({ title, children }) => {
         <LoadingScreen />
       ) : (
         <Carousel
-          slidesToShow={currentMode === "desktop" ? 3 : 1}
+          slidesToShow={Math.min(
+            currentMode === "desktop" ? 3 : 1,
+            React.Children.count(children)
+          )}
           slidesToScroll={1}
           autoplay
         >

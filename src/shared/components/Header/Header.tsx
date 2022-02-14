@@ -3,14 +3,15 @@ import Cart from "#/components/Cart";
 import Tab from "#/components/Tab";
 import Text from "#/components/Text";
 import { MenuSidebarContext } from "#/contexts/MenuSidebarContext";
-import {ViewportDimensionContext} from "#/contexts/ViewportDimensionContext";
-import {assets} from "@/assets";
+import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
+import { assets } from "@/assets";
 import c from "classnames";
 
 import Image from "next/image";
-import {useRouter} from "next/router";
-import React, {useContext, useEffect, useState} from "react";
-import {AiOutlineMenu as MenuIcon} from "react-icons/ai";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useContext, useEffect, useState } from "react";
+import { AiOutlineMenu as MenuIcon } from "react-icons/ai";
 import styles from "./Header.module.scss";
 
 enum TabChoices {
@@ -30,11 +31,10 @@ export const headerItems: HeaderItem[] = [
     label: TabChoices.SAN_PHAM_LE,
     url: "/products",
   },
-  // TODO: Enable when Packages is ready
-  // {
-  //   label: TabChoices.GOI_QUA,
-  //   url: '/packages',
-  // },
+  {
+    label: TabChoices.GOI_QUA,
+    url: "/combos",
+  },
   {
     label: TabChoices.VE_CHUNG_TOI,
     url: "/about",
@@ -71,18 +71,16 @@ const Header: React.FC = () => {
             }}
           />
         ))}
-      <div
-        className={c([
-          styles["header-logo"],
-          isOnCheckoutPage ? "" : styles["header-logo-normal"],
-        ])}
-        role="button"
-        onClick={() => {
-          router.push("/");
-        }}
-      >
-        <Image src={assets.logo} alt="DCC LOGO" />
-      </div>
+      <Link href="/" passHref>
+        <div
+          className={c([
+            styles["header-logo"],
+            isOnCheckoutPage ? "" : styles["header-logo-normal"],
+          ])}
+        >
+          <Image src={assets.logo} alt="DCC LOGO" />
+        </div>
+      </Link>
 
       {!isOnCheckoutPage ? (
         <Cart />

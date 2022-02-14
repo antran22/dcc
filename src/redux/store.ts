@@ -16,19 +16,18 @@ import {
 import expireReducer from "redux-persist-expire";
 import storage from "redux-persist/lib/storage";
 import { cartSlice, initialCartState } from "./slices/cart";
-import { productAPI } from "./slices/product";
-
+import { strapiAPI } from "./slices/strapi";
 const reducers = combineReducers({
   cart: cartSlice.reducer,
   productView: productViewSlice.reducer,
-  [productAPI.reducerPath]: productAPI.reducer,
+  [strapiAPI.reducerPath]: strapiAPI.reducer,
 });
 
 const persistedReducer = persistReducer(
   {
     key: "dcc",
     storage,
-    blacklist: [productAPI.reducerPath],
+    blacklist: [strapiAPI.reducerPath],
     transforms: [
       expireReducer("cart", {
         expireSeconds: 3600,
@@ -52,7 +51,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(productAPI.middleware),
+    }).concat(strapiAPI.middleware),
 });
 
 export default store;
