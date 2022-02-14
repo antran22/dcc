@@ -1,33 +1,35 @@
 import Button from "#/components/Button";
+import { CartSelection } from "#/types";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
-  addVariantToCart,
+  addSelectionToCart,
   getCartItemSelector,
-  reduceVariantFromCart,
+  reduceSelectionFromCart,
 } from "@/redux/slices/cart";
-import { currentProductVariantSelector } from "@/redux/slices/productView";
 import React from "react";
 import { AiOutlineMinus as Minus, AiOutlinePlus as Plus } from "react-icons/ai";
 import styles from "./QuantityControl.module.scss";
 
-const QuantityControl: React.FC = ({}) => {
+interface QuantityControlProps {
+  cartSelection?: CartSelection;
+}
+
+const QuantityControl: React.FC<QuantityControlProps> = ({ cartSelection }) => {
   const dispatch = useAppDispatch();
 
-  const currentProductVariant = useAppSelector(currentProductVariantSelector);
-
-  const item = useAppSelector(getCartItemSelector(currentProductVariant));
+  const item = useAppSelector(getCartItemSelector(cartSelection));
   const TOGGLE_SIZE = 16;
 
-  if (!currentProductVariant) {
+  if (!cartSelection) {
     return null;
   }
 
   const onAddItemClick = () => {
-    dispatch(addVariantToCart(currentProductVariant));
+    dispatch(addSelectionToCart(cartSelection));
   };
 
   const onRemoveItemClick = () => {
-    dispatch(reduceVariantFromCart(currentProductVariant));
+    dispatch(reduceSelectionFromCart(cartSelection));
   };
 
   return (
@@ -43,7 +45,11 @@ const QuantityControl: React.FC = ({}) => {
           </Button>
         </>
       ) : (
-        <Button classNames={[ styles.quantityControlButton ]} color="red-soil" onClick={onAddItemClick}>
+        <Button
+          classNames={[styles.quantityControlButton]}
+          color="red-soil"
+          onClick={onAddItemClick}
+        >
           THÊM VÀO GIỎ
         </Button>
       )}

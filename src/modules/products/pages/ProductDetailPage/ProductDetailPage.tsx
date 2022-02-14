@@ -5,6 +5,7 @@ import { formatCurrency } from "#/utils/number";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useGetProductBySlugQuery } from "@/redux/slices/product";
 import {
+  currentProductVariantSelector,
   previewImageSelector,
   resetPreviewProduct,
   setViewingProduct,
@@ -12,8 +13,8 @@ import {
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+import QuantityControl from "#/components/QuantityControl";
 import ProductInformation from "../../components/ProductInformation/ProductInformation";
-import QuantityControl from "../../components/QuantityControl";
 import styles from "./ProductDetailPage.module.scss";
 
 const ProductDetailPage: NextPage = () => {
@@ -38,6 +39,7 @@ const ProductDetailPage: NextPage = () => {
   }, [router, dispatch, isLoading, product]);
 
   const previewProductImage = useAppSelector(previewImageSelector);
+  const currentProductVariant = useAppSelector(currentProductVariantSelector);
 
   if (isLoading || !product) {
     return <LoadingScreen />;
@@ -51,7 +53,7 @@ const ProductDetailPage: NextPage = () => {
       footer={
         <div className={styles.productsDetailsPageContentFooter}>
           <Text.P size="large">{formatCurrency(product.price)}</Text.P>
-          <QuantityControl />
+          <QuantityControl cartSelection={currentProductVariant} />
         </div>
       }
     >

@@ -1,7 +1,6 @@
 @import "src/shared/styles/constants.scss";
 
 .cart-sidebar-item {
-  display: flex;
   margin-bottom: $s5;
 
   h4 {
@@ -9,28 +8,36 @@
   }
 
   &-image {
+    height: 100%;
     position: relative;
-    flex: 1;
   }
 
   &-description {
-    flex: 2;
-
     &-price {
       margin-bottom: $s4;
     }
 
     &-delete-prompt {
+      & > p {
+        width: 100%;
+      }
       display: flex;
     }
   }
 
   &-quantity {
-    flex-basis: 100px;
     height: 100px;
-    flex-grow: 0;
-    flex-shrink: 0;
     padding: $s3;
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
   }
 
   &-deleting {

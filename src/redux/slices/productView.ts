@@ -2,7 +2,7 @@ import {
   Product,
   ProductColor,
   ProductSize,
-  ProductVariant,
+  ProductVariantSelection,
   StrapiImage,
 } from "#/types/";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -103,7 +103,7 @@ export const currentSizeSelector = createSelector(
 
 export const currentProductVariantSelector = createSelector(
   [productViewSelector],
-  (productViewState): ProductVariant | undefined => {
+  (productViewState): ProductVariantSelection | undefined => {
     if (!productViewState.product) {
       return undefined;
     }
@@ -123,9 +123,10 @@ export const currentProductVariantSelector = createSelector(
     }
 
     return {
+      type: "product_variant",
       product: productViewState.product,
-      color: productViewState.selectedColor,
       size: productViewState.selectedSize,
+      color: productViewState.selectedColor,
     };
   }
 );

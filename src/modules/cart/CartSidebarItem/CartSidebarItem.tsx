@@ -3,18 +3,30 @@ import { Form } from "#/components/Form";
 import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
 import Spacer from "#/components/Spacer";
 import Text from "#/components/Text";
-import { CartItem, getProductVariantThumbnail } from "#/types";
+import {
+  CartItem,
+  CartSelection,
+  getSelectionPrice,
+  getSelectionThumbnail,
+  getSelectionTitle,
+} from "#/types";
 import { formatCurrency } from "#/utils/number";
 import { useAppDispatch } from "@/redux/hooks";
-import { deleteVariantFromCart, setVariantQuantity } from "@/redux/slices/cart";
+import {
+  deleteSelectionFromCart,
+  setSelectionQuantity,
+} from "@/redux/slices/cart";
 import c from "classnames";
 import { debounce } from "lodash";
 import React, { useEffect, useRef, useState } from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import styles from "./CartSidebarItem.module.scss";
 
 interface CartSidebarItemProps {
   cartItem: CartItem;
 }
+
 const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
   const [cartItemQuantity, setCartItemQuantity] = useState<number>(0);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
@@ -27,22 +39,19 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
   const MAX_QUANTITY = 30;
 
   const onDeleteItemClick = () => {
-    dispatch(deleteVariantFromCart(cartItem.productVariant));
+    dispatch(deleteSelectionFromCart(cartItem.selection));
   };
 
   const debounceUpdateStore = useRef(
     debounce((quantity: number) => {
       dispatch(
-        setVariantQuantity({
-          productVariant: cartItem.productVariant,
+        setSelectionQuantity({
+          selection: cartItem.selection,
           newQuantity: quantity,
         })
       );
     }, 500)
   );
-
-  const productVariant = cartItem.productVariant;
-  const product = productVariant.product;
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = +event.target.value;
@@ -59,92 +68,117 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
     }
   };
 
-  const productVariantImage = getProductVariantThumbnail(productVariant);
+  const selection = cartItem.selection;
+  const productVariantImage = getSelectionThumbnail(selection);
 
   return (
-    <div className={styles["cart-sidebar-item"]}>
-      <div
-        className={c([
-          styles["cart-sidebar-item-image"],
-          isDeleting ? styles["cart-sidebar-item-deleting"] : "",
-        ])}
-      >
-        {productVariantImage && (
-          <StrapiResponsiveImage
-            objectFit="contain"
-            layout="fill"
-            image={productVariantImage}
-          />
-        )}
-      </div>
-
-      <div className={styles["cart-sidebar-item-description"]}>
-        <h4 className={isDeleting ? styles["cart-sidebar-item-deleting"] : ""}>
-          {product.title}
-        </h4>
-        {productVariant?.color && (
-          <Text.P>Màu: {productVariant.color.name}</Text.P>
-        )}
-        {productVariant?.size && (
-          <Text.P>Size: {productVariant.size.name}</Text.P>
-        )}
-
-        <Text.P
-          classNames={[
-            styles["cart-sidebar-item-description-price"],
-            isDeleting ? styles["cart-sidebar-item-deleting"] : "",
-          ]}
+    <Row className={styles.cartSidebarItem}>
+      <Col xs={3}>
+        <div
+          className={c([
+            styles.cartSidebarItemImage,
+            isDeleting ? styles.cartSidebarItemDeleting : "",
+          ])}
         >
-          {formatCurrency(product.price)}
-        </Text.P>
-        {isDeleting ? (
-          <div
-            className={styles["cart-sidebar-item-description-delete-prompt"]}
-          >
-            <Text.P size="small" thickness="thin">
-              Xoá sản phẩm?
-            </Text.P>
-            <Spacer />
-            <Button
-              variant="underscore"
-              color="black"
-              onClick={onDeleteItemClick}
-            >
-              Đồng ý
-            </Button>
-            <Spacer />
-            <Button
-              variant="underscore"
-              color="black"
-              onClick={() => setIsDeleting(false)}
-            >
-              Huỷ
-            </Button>
-          </div>
-        ) : (
-          <Button
-            variant="underscore"
-            color="black"
-            onClick={() => setIsDeleting(true)}
-          >
-            Xoá
-          </Button>
-        )}
-      </div>
+          {productVariantImage && (
+            <StrapiResponsiveImage
+              objectFit="contain"
+              layout="fill"
+              image={productVariantImage}
+            />
+          )}
+        </div>
+      </Col>
+      <Col xs={9}>
+        <Row>
+          <Col xs={7}>
+            <CartSelectionDescription
+              selection={selection}
+              className={isDeleting ? styles.cartSidebarItemDeleting : ""}
+            />
+          </Col>
 
-      <div
-        className={c([
-          styles["cart-sidebar-item-quantity"],
-          isDeleting ? styles["cart-sidebar-item-deleting"] : "",
-        ])}
-      >
-        <Form.NumberInput
-          value={cartItemQuantity}
-          onChange={handleQuantityChange}
-          min={0}
-          max={30}
-        />
-      </div>
+          <Col xs={5}>
+            <div
+              className={c(
+                styles.cartSidebarItemQuantity,
+                isDeleting ? styles.cartSidebarItemDeleting : ""
+              )}
+            >
+              <Form.NumberInput
+                value={cartItemQuantity}
+                onChange={handleQuantityChange}
+                min={0}
+                max={30}
+              />
+            </div>
+          </Col>
+
+          <Col xs={12}>
+            {isDeleting ? (
+              <div className={styles.cartSidebarItemDescriptionDeletePrompt}>
+                <Text.P size="small" thickness="thin">
+                  Xoá sản phẩm?
+                </Text.P>
+                <Spacer />
+                <Button
+                  variant="underscore"
+                  color="black"
+                  onClick={onDeleteItemClick}
+                >
+                  Đồng ý
+                </Button>
+                <Spacer />
+                <Button
+                  variant="underscore"
+                  color="black"
+                  onClick={() => setIsDeleting(false)}
+                >
+                  Huỷ
+                </Button>
+              </div>
+            ) : (
+              <Button
+                variant="underscore"
+                color="black"
+                onClick={() => setIsDeleting(true)}
+              >
+                Xoá
+              </Button>
+            )}
+          </Col>
+        </Row>
+      </Col>
+    </Row>
+  );
+};
+
+interface CartSelectionDescriptionProps {
+  selection: CartSelection;
+  className: string;
+}
+
+const CartSelectionDescription: React.FC<CartSelectionDescriptionProps> = ({
+  selection,
+  className,
+}) => {
+  const details =
+    selection.type === "product_variant" ? (
+      <>
+        {selection.color && <Text.P>Màu: {selection.color.name}</Text.P>}
+        {selection.size && <Text.P>Size: {selection.size.name}</Text.P>}
+      </>
+    ) : (
+      <></>
+    );
+
+  return (
+    <div className={c(styles.cartSidebarItemDescription, className)}>
+      <h4>{getSelectionTitle(selection)}</h4>
+      {details}
+      <Text.P classNames={[styles.cartSidebarItemDescriptionPrice]}>
+        {formatCurrency(getSelectionPrice(selection))}
+      </Text.P>
     </div>
   );
 };

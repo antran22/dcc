@@ -11,6 +11,7 @@ import styles from "./DetailLayout.module.scss";
 interface DetailLayoutProps {
   title: string;
   children?: React.ReactNode;
+  header?: React.ReactNode;
   footer?: React.ReactNode;
   themeColorCode?: string | undefined;
   previewImages: StrapiImage[];
@@ -19,6 +20,7 @@ interface DetailLayoutProps {
 const DetailLayout: React.FC<DetailLayoutProps> = ({
   title,
   children,
+  header,
   footer,
   themeColorCode,
   previewImages,
@@ -28,7 +30,7 @@ const DetailLayout: React.FC<DetailLayoutProps> = ({
   }
   const textColor = tinycolor(themeColorCode);
 
-  const titleColor = textColor.getBrightness() > 0.8 ? "black" : themeColorCode;
+  const titleColor = textColor.getLuminance() > 0.9 ? "black" : themeColorCode;
 
   return (
     <div className={styles.detailLayout}>
@@ -47,14 +49,18 @@ const DetailLayout: React.FC<DetailLayoutProps> = ({
           </aside>
 
           <main className={styles.detailLayoutMain}>
-            <h1
-              className={c(styles.detailLayoutTitle)}
-              style={{
-                color: titleColor,
-              }}
-            >
-              {title}
-            </h1>
+            {!header ? (
+              <h1
+                className={c(styles.detailLayoutTitle)}
+                style={{
+                  color: titleColor,
+                }}
+              >
+                {title}
+              </h1>
+            ) : (
+              header
+            )}
 
             <div className={styles.detailLayoutContentAndFooter}>
               <div className={styles.detailLayoutContent}>{children}</div>

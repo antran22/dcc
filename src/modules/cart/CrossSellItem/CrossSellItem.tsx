@@ -5,7 +5,10 @@ import { CartSidebarContext } from "#/contexts/CartSidebarContext";
 import { getProductThumbnail, Product } from "#/types";
 import { formatCurrency } from "#/utils/number";
 import { useAppDispatch } from "@/redux/hooks";
-import { addVariantToCart, reduceVariantFromCart } from "@/redux/slices/cart";
+import {
+  addSelectionToCart,
+  reduceSelectionFromCart,
+} from "@/redux/slices/cart";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
 import styles from "./CrossSellItem.module.scss";
@@ -29,10 +32,10 @@ const CrossSellItem: React.FC<CrossSellItemProps> = ({ product }) => {
       return router.push(`/products/${product.slug}`);
     }
     if (isItemAdded) {
-      dispatch(reduceVariantFromCart({ product }));
+      dispatch(reduceSelectionFromCart({ type: "product_variant", product }));
       setIsItemAdded(false);
     } else {
-      dispatch(addVariantToCart({ product }));
+      dispatch(addSelectionToCart({ type: "product_variant", product }));
       setIsItemAdded(true);
     }
   };

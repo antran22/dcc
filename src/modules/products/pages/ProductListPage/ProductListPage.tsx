@@ -1,4 +1,4 @@
-import ListingLayout from "#/layout/ListingLayout/ListingLayout";
+import ListingLayout from "#/layout/ListingLayout";
 import SingleProduct from "@/modules/products/components/SingleProduct";
 import { useListProductsQuery } from "@/redux/slices/product";
 import { NextPage } from "next";

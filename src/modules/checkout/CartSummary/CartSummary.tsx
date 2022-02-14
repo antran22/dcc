@@ -1,6 +1,11 @@
 import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
 import Text from "#/components/Text";
-import { CartItem, getProductVariantThumbnail } from "#/types";
+import {
+  CartItem,
+  getSelectionPrice,
+  getSelectionThumbnail,
+  getSelectionTitle,
+} from "#/types";
 import { formatCurrency } from "#/utils/number";
 import { useAppSelector } from "@/redux/hooks";
 import { cartItemsSelector, cartSumSelector } from "@/redux/slices/cart";
@@ -49,27 +54,25 @@ interface CartSummaryItemProps {
   cartItem: CartItem;
 }
 const CartSummaryItem: React.FC<CartSummaryItemProps> = ({ cartItem }) => {
-  const productVariantImage = getProductVariantThumbnail(
-    cartItem.productVariant
-  );
+  const selectionImage = getSelectionThumbnail(cartItem.selection);
   return (
     <div className={styles["cart-summary-box-details-items-wrapper"]}>
       <div className={styles["cart-summary-box-details-items-wrapper-image"]}>
-        {productVariantImage && (
+        {selectionImage && (
           <StrapiResponsiveImage
             objectFit="contain"
             layout="fill"
-            image={productVariantImage}
+            image={selectionImage}
           />
         )}
       </div>
       <div className={styles["cart-summary-box-details-items-wrapper-details"]}>
-        <h2>{cartItem.productVariant.product.title}</h2>
+        <h2>{getSelectionTitle(cartItem.selection)}</h2>
         <Text.P thickness="thin">{`Slg: ${cartItem.quantity}`}</Text.P>
       </div>
       <div className={styles["cart-summary-box-details-items-wrapper-price"]}>
         <Text.P thickness="thin">
-          {formatCurrency(cartItem.productVariant.product.price)}
+          {formatCurrency(getSelectionPrice(cartItem.selection))}
         </Text.P>
       </div>
     </div>

@@ -1,30 +1,102 @@
+import { Combo } from "#/types/combo";
 import { StrapiImage } from "#/types/image";
+import _ from "lodash";
 import { Product, ProductColor, ProductSize } from "./product";
 
+export interface ProductVariantSelection {
+  type: "product_variant";
+  product: Product;
+  color?: ProductColor;
+  size?: ProductSize;
+}
+
+export function newProductVariantSelection(
+  product: Product,
+  color?: ProductColor,
+  size?: ProductSize
+): ProductVariantSelection {
+  return {
+    type: "product_variant",
+    product,
+    color,
+    size,
+  };
+}
+
+export interface ComboSelection {
+  type: "combo";
+  combo: Combo;
+}
+
+export function newComboSelection(combo: Combo): ComboSelection {
+  return {
+    type: "combo",
+    combo,
+  };
+}
+export type CartSelection = ProductVariantSelection | ComboSelection;
 export interface CartItem {
   quantity: number;
-  productVariant: ProductVariant;
+  selection: CartSelection;
 }
 
-export interface ProductVariant {
-  product: Product;
-  size?: ProductSize;
-  color?: ProductColor;
-}
-
-export function sameProductVariant(
-  variant1: ProductVariant,
-  variant2: ProductVariant
+export function isEqualSelection(
+  selection1: CartSelection,
+  selection2: CartSelection
 ): boolean {
-  return (
-    variant1.product.id === variant2.product.id &&
-    variant1.size?.id === variant2.size?.id &&
-    variant1.color?.id === variant2.color?.id
-  );
+  if (selection1.type === "combo" && selection2.type === "combo") {
+    return selection1.combo.id === selection2.combo.id;
+  }
+  if (
+    selection1.type === "product_variant" &&
+    selection2.type === "product_variant"
+  ) {
+    return (
+      selection1.product.id === selection2.product.id &&
+      selection1.size?.id === selection2.size?.id &&
+      selection1.color?.id === selection2.color?.id
+    );
+  }
+  return false;
 }
 
-export function getProductVariantThumbnail(
-  productVariant: ProductVariant
+export function getSelectionTitle(selection: CartSelection): string {
+  if (selection.type === "combo") {
+    return selection.combo.name;
+  }
+  return selection.product.title;
+}
+
+export function getSelectionThumbnail(
+  selection: CartSelection
 ): StrapiImage | undefined {
-  return productVariant?.color?.images[0] ?? productVariant.product.thumbnails[0];
+  if (selection.type === "combo") {
+    return selection.combo.images[0];
+  }
+  return selection.color?.images[0] ?? selection.product.thumbnails[0];
+}
+
+export function getSelectionPrice(selection: CartSelection): number {
+  if (selection.type === "combo") {
+    return selection.combo.price;
+  }
+  return selection.product.price;
+}
+
+export function getSelectionCrossSell(selection: CartSelection): Product[] {
+  if (selection.type === "combo") {
+    return _.uniqBy(
+      selection.combo.products.flatMap((product) => product.cross_sell),
+      "id"
+    );
+  }
+
+  return selection.product.cross_sell;
+}
+
+export function getSelectionProductIds(selection: CartSelection): string[] {
+  if (selection.type === "combo") {
+    return selection.combo.products.map((product) => product.id);
+  }
+  return [selection.product.id];
 }
