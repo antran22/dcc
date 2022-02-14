@@ -10,30 +10,11 @@ export interface ProductVariantSelection {
   size?: ProductSize;
 }
 
-export function newProductVariantSelection(
-  product: Product,
-  color?: ProductColor,
-  size?: ProductSize
-): ProductVariantSelection {
-  return {
-    type: "product_variant",
-    product,
-    color,
-    size,
-  };
-}
-
 export interface ComboSelection {
   type: "combo";
   combo: Combo;
 }
 
-export function newComboSelection(combo: Combo): ComboSelection {
-  return {
-    type: "combo",
-    combo,
-  };
-}
 export type CartSelection = ProductVariantSelection | ComboSelection;
 export interface CartItem {
   quantity: number;

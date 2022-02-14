@@ -5,16 +5,17 @@
 .tab-item {
   display: inline-block;
   padding: $s3;
+  &:hover {
+    text-decoration: none;
+    color: initial;
+  }
 
   border-style: solid;
   border-width: 2px;
   margin-left: -2px;
 
   @include emulate-button();
-}
 
-// Colors
-.tab-item-black {
   color: $black;
   background-color: $transparent;
   border-color: $black;
@@ -22,16 +23,16 @@
   &-selected {
     color: $white;
     background-color: $black;
-  }
-}
 
-.tab-item-white {
-  color: $white;
-  background-color: $transparent;
-  border-color: $black;
+    &:hover {
+      cursor: pointer;
+      opacity: 1;
+      color: white;
+    }
 
-  &-selected {
-    color: $black;
-    background-color: $white;
+    &:active {
+      cursor: pointer;
+      opacity: 1;
+    }
   }
 }

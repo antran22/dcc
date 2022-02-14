@@ -1,37 +1,31 @@
 import c from "classnames";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
-import {TabItemData} from "../Tab";
+import { TabItemData } from "../Tab";
 import styles from "./TabItem.module.scss";
 
-interface TabItemProps<T extends TabItemData> {
-  tabItem: T;
-  color: "black" | "white";
-  selected: boolean;
-  onTabSelect: (tabValue: T) => void;
+interface TabItemProps {
+  tabItem: TabItemData;
   containerStyle?: React.CSSProperties;
 }
 
-export function TabItem<T extends TabItemData>({
+export const TabItem: React.FC<TabItemProps> = ({
   tabItem,
-  color,
-  selected,
-  onTabSelect,
   containerStyle,
-}: TabItemProps<T>) {
-  const selectedClass = selected ? `tab-item-${color}-selected` : "";
+}) => {
+  const router = useRouter();
+  const selected = router.pathname.includes(tabItem.url);
   return (
-    <div
-      role="tab"
-      tabIndex={0}
-      className={c([
-        styles["tab-item"],
-        styles[`tab-item-${color}`],
-        styles[selectedClass],
-      ])}
-      onClick={() => onTabSelect(tabItem)}
-      style={{ ...containerStyle }}
-    >
-      {tabItem.label}
-    </div>
+    <Link href={tabItem.url} passHref>
+      <a
+        role="tab"
+        tabIndex={0}
+        className={c(styles.tabItem, selected ? styles.tabItemSelected : "")}
+        style={{ ...containerStyle }}
+      >
+        {tabItem.label}
+      </a>
+    </Link>
   );
-}
+};

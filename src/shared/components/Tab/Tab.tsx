@@ -1,33 +1,23 @@
-import c from "classnames";
 import React from "react";
 import styles from "./Tab.module.scss";
-import {TabItem} from "./TabItem";
+import { TabItem } from "./TabItem";
 
 export interface TabItemData {
   label: string;
-}
-interface TabProps<T extends TabItemData> {
-  color: "black" | "white";
-  tabItems: Array<T>;
-  isItemSelected: (tabItem: T) => boolean;
-  onTabSelect: (tabValue: T) => void;
+  url: string;
 }
 
-function Tab<T extends TabItemData>({
-  color,
-  tabItems,
-  isItemSelected,
-  onTabSelect,
-}: TabProps<T>) {
+interface TabProps {
+  tabItems: TabItemData[];
+}
+
+export const Tab: React.FC<TabProps> = ({ tabItems }) => {
   return (
-    <div role="tablist" className={c(styles.tab, styles[`tab-${color}`])}>
-      {tabItems.map((content, i) => (
+    <div role="tablist" className={styles.tab}>
+      {tabItems.map((tabItem, i) => (
         <TabItem
           key={i}
-          color={color}
-          selected={isItemSelected(content)}
-          onTabSelect={onTabSelect}
-          tabItem={content}
+          tabItem={tabItem}
           containerStyle={
             i === 0
               ? {
@@ -39,6 +29,6 @@ function Tab<T extends TabItemData>({
       ))}
     </div>
   );
-}
+};
 
 export default Tab;

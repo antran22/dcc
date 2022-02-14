@@ -10,7 +10,7 @@ import c from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { AiOutlineMenu as MenuIcon } from "react-icons/ai";
 import styles from "./Header.module.scss";
 
@@ -20,13 +20,9 @@ enum TabChoices {
   VE_CHUNG_TOI = "Về chúng tôi",
 }
 
-interface HeaderItem {
-  label: string;
-  url: string;
-}
-
 const MENU_ICON_SIZE = 30;
-export const headerItems: HeaderItem[] = [
+
+export const headerItems = [
   {
     label: TabChoices.SAN_PHAM_LE,
     url: "/products",
@@ -40,17 +36,12 @@ export const headerItems: HeaderItem[] = [
     url: "/about",
   },
 ];
+
 const Header: React.FC = () => {
   const router = useRouter();
   const { setMenuSidebarIsOpen } = useContext(MenuSidebarContext);
   const { currentMode } = useContext(ViewportDimensionContext);
-  const [currentPath, setCurrentPath] = useState("");
-
-  useEffect(() => {
-    setCurrentPath(router.pathname);
-  }, [router.pathname]);
-
-  const isOnCheckoutPage = currentPath.includes("checkout");
+  const isOnCheckoutPage = router.pathname.includes("checkout");
 
   return (
     <header className={c(styles.header)}>
@@ -60,26 +51,17 @@ const Header: React.FC = () => {
             <MenuIcon size={MENU_ICON_SIZE} />
           </Button>
         ) : (
-          <Tab
-            color="black"
-            tabItems={headerItems}
-            isItemSelected={(item) => {
-              return currentPath.includes(item.url);
-            }}
-            onTabSelect={(tabValue) => {
-              router.push(tabValue.url);
-            }}
-          />
+          <Tab tabItems={headerItems} />
         ))}
       <Link href="/" passHref>
-        <div
+        <a
           className={c([
             styles["header-logo"],
             isOnCheckoutPage ? "" : styles["header-logo-normal"],
           ])}
         >
           <Image src={assets.logo} alt="DCC LOGO" />
-        </div>
+        </a>
       </Link>
 
       {!isOnCheckoutPage ? (
