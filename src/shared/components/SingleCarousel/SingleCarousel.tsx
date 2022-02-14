@@ -1,6 +1,7 @@
-import {useInterval} from "#/hooks";
+import { useInterval } from "#/hooks";
 import c from "classnames";
-import React, {useEffect, useState} from "react";
+import _ from "lodash";
+import React, { useEffect, useState } from "react";
 import styles from "./SingleCarousel.module.scss";
 
 interface SingleCarouselProps {
@@ -18,6 +19,7 @@ const SingleCarousel: React.FC<SingleCarouselProps> = ({
   useEffect(() => {
     setIndex(0);
   }, [children]);
+
   useInterval(
     () => {
       setIndex((index + 1) % children.length);
@@ -36,6 +38,42 @@ const SingleCarousel: React.FC<SingleCarouselProps> = ({
           )}
         >
           {child}
+        </div>
+      ))}
+      {children.length > 1 && (
+        <CarouselPagination
+          currentIndex={index}
+          count={children.length}
+          setCurrentIndex={setIndex}
+        />
+      )}
+    </div>
+  );
+};
+
+interface PaginationProps {
+  setCurrentIndex: (x: number) => void;
+  currentIndex: number;
+  count: number;
+}
+
+const CarouselPagination: React.FC<PaginationProps> = ({
+  currentIndex,
+  setCurrentIndex,
+  count,
+}) => {
+  return (
+    <div className={styles.pagination}>
+      {_.times(count, (index) => (
+        <div
+          onClick={() => setCurrentIndex(index)}
+          key={index}
+          className={c(
+            styles.paginationDot,
+            index === currentIndex ? styles.paginationDotActive : ""
+          )}
+        >
+          ·
         </div>
       ))}
     </div>

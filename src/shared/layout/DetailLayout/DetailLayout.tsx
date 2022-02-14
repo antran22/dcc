@@ -62,11 +62,9 @@ const DetailLayout: React.FC<DetailLayoutProps> = ({
               header
             )}
 
-            <div className={styles.detailLayoutContentAndFooter}>
-              <div className={styles.detailLayoutContent}>{children}</div>
+            <div className={styles.detailLayoutContent}>{children}</div>
 
-              <div className={styles.detailLayoutFooter}>{footer}</div>
-            </div>
+            <div className={styles.detailLayoutFooter}>{footer}</div>
           </main>
         </>
       )}

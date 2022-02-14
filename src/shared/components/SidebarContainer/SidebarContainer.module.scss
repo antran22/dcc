@@ -4,7 +4,6 @@
 $sidebar-width: 500px;
 
 .sidebar-container {
-  width: 100vw;
   height: 100vh;
   position: fixed;
 
@@ -37,7 +36,6 @@ $sidebar-width: 500px;
       width: $sidebar-width;
 
       @media screen and (max-width: $breakpoint-mobile) {
-        width: 100vw;
       }
     }
 

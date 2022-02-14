@@ -5,22 +5,22 @@
 .landing-banner {
   flex-basis: 60%;
   flex-grow: 0;
+  width: 100vw;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
 
-  padding: $s3;
+  padding: $s3 0;
 
   position: relative;
-  width: 100vw;
 
   &-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
 
     @include mobile-upward {
-      font-size: 3rem;
+      font-size: 4rem;
     }
 
     @include tablet-upward {
@@ -41,7 +41,7 @@
 
   &-subtitle-container {
     position: relative;
-    width: 100vw;
+    width: 100%;
     height: 200px;
     display: flex;
     justify-content: center;

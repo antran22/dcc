@@ -4,8 +4,8 @@
 
 .detail-layout {
   flex: 1;
-
   display: flex;
+  height: 100%;
 
   @media screen and (max-width: $breakpoint-tablet) {
     flex-direction: column;
@@ -41,13 +41,17 @@
     padding: 0 25%;
   }
 
-  &-content-and-footer {
+  &-content {
     display: flex;
     flex: 1;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
   }
 
-  &-content {
+  &-footer {
+    position: sticky;
+    bottom: 0;
+    background-color: white;
   }
 }

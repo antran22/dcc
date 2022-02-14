@@ -1,6 +1,7 @@
 .carousel {
   position: relative;
 }
+
 .carousel-item {
   position: absolute;
   height: 100%;
@@ -15,4 +16,26 @@
 .hidden {
   opacity: 0;
   transition: opacity 0.5s;
+}
+
+.pagination {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.pagination-dot {
+  &:hover {
+    cursor: pointer;
+  }
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 10%;
+  font-size: 40px;
+}
+
+.pagination-dot-active {
+  opacity: 100%;
 }

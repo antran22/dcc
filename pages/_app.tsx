@@ -18,43 +18,41 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ContextWrapper>
-          <div>
-            <Head>
-              <title>Đồ chơi chữ</title>
-              <meta
-                name="description"
-                content="Đồ Chơi Chữ web store ecommerce"
-              />
-              <meta httpEquiv="content-language" content="vi" />
-              <meta name="ROBOTS" content="INDEX, FOLLOW" />
-              <meta name="author" content="Đồ chơi chữ" />
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0"
-              />
-              <meta name="copyright" content="Đồ chơi chữ" />
-              <meta
-                name="keywords"
-                content="ecommerce, dcc, Đồ chơi chữ, fashion, quần áo, linh kiện"
-              />
-              <meta property="og:type" content="website" />
-              <meta property="og:site_name" content="Đồ Chơi Chữ" />
-              <meta name="geo.region" content="VN" />
-              <meta
-                httpEquiv="Content-Type"
-                content="text/html"
-                charSet="UTF-8"
-              />
-              <link rel="icon" href="/logo.svg" />
-            </Head>
+          <Head>
+            <title>Đồ chơi chữ</title>
+            <meta
+              name="description"
+              content="Đồ Chơi Chữ web store ecommerce"
+            />
+            <meta httpEquiv="content-language" content="vi" />
+            <meta name="ROBOTS" content="INDEX, FOLLOW" />
+            <meta name="author" content="Đồ chơi chữ" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0"
+            />
+            <meta name="copyright" content="Đồ chơi chữ" />
+            <meta
+              name="keywords"
+              content="ecommerce, dcc, Đồ chơi chữ, fashion, quần áo, linh kiện"
+            />
+            <meta property="og:type" content="website" />
+            <meta property="og:site_name" content="Đồ Chơi Chữ" />
+            <meta name="geo.region" content="VN" />
+            <meta
+              httpEquiv="Content-Type"
+              content="text/html"
+              charSet="UTF-8"
+            />
+            <link rel="icon" href="/logo.svg" />
+          </Head>
 
-            <AppWrapper>
-              <Header />
-              <Component {...pageProps} />
-              <CartSidebar />
-              <MenuSidebar />
-            </AppWrapper>
-          </div>
+          <AppWrapper>
+            <Header />
+            <Component {...pageProps} />
+            <CartSidebar />
+            <MenuSidebar />
+          </AppWrapper>
         </ContextWrapper>
       </PersistGate>
     </Provider>
