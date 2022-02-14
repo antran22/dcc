@@ -3,7 +3,7 @@ import LoadingScreen from "#/components/LoadingScreen";
 import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
 import Head from "next/head";
 import React, { useContext } from "react";
-import styles from "./Listing.module.scss";
+import styles from "./ListingLayout.module.scss";
 
 interface ListingLayoutProps {
   title: string;

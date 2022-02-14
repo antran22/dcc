@@ -23,7 +23,7 @@ export const productViewSlice = createSlice({
   name: "productView",
   initialState: initialProductViewState,
   reducers: {
-    setProduct: (state, action: PayloadAction<Product>) => {
+    setViewingProduct: (state, action: PayloadAction<Product>) => {
       state.product = action.payload;
       state.previewImages = action.payload.thumbnails;
       state.selectedColor = undefined;
@@ -58,7 +58,7 @@ export const productViewSlice = createSlice({
       state.selectedSize = undefined;
     },
 
-    resetProduct: (state) => {
+    resetPreviewProduct: (state) => {
       state.product = undefined;
       state.selectedColor = undefined;
       state.selectedSize = undefined;
@@ -68,12 +68,12 @@ export const productViewSlice = createSlice({
 });
 
 export const {
-  setProduct,
+  setViewingProduct,
   selectColor,
   selectSize,
   setPreviewImages,
   resetPreviewImages,
-  resetProduct,
+  resetPreviewProduct,
   unselectColor,
   unselectSize,
 } = productViewSlice.actions;

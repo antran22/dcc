@@ -1,0 +1,53 @@
+@import "/src/shared/styles/constants";
+@import "/src/shared/styles/colors";
+@import "/src/shared/styles/mixins";
+
+.detail-layout {
+  flex: 1;
+
+  display: flex;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+  }
+
+  &-sidebar {
+    display: flex;
+    flex: 1;
+    background-color: $light-grey;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      min-height: 50vh;
+    }
+  }
+
+  &-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-title {
+    font-size: 5rem;
+
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: $s3;
+    height: 250px;
+    padding: 0 25%;
+  }
+
+  &-content-and-footer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &-content {
+  }
+}
