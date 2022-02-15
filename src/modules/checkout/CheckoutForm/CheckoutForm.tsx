@@ -28,14 +28,17 @@ const FORM_SCHEMA = (() => {
   const phoneRegExp = /(84|0[35789])+([0-9]{8})\b/g;
 
   return yup.object().shape({
-    email: yup.string().email().required(),
-    name: yup.string().required(),
+    email: yup
+      .string()
+      .email("Email không hợp lệ")
+      .required("Yêu cầu nhập email"),
+    name: yup.string().required("Yêu cầu nhập tên"),
     phoneNumber: yup
       .string()
-      .matches(phoneRegExp, "Phone number is not valid")
-      .required(),
-    address: yup.string().required(),
-    paymentOption: yup.string().required(),
+      .matches(phoneRegExp, "Số điện thoại không hợp lệ")
+      .required("Yêu cầu nhập số điện thoại"),
+    address: yup.string().required("Yêu cầu nhập địa chỉ"),
+    paymentOption: yup.string().required("Yêu cầu chọn phương thức thanh toán"),
   });
 })();
 

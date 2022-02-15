@@ -3,8 +3,6 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
 import { Provider } from "react-redux";
-import Header from "#/components/Header";
-import AppWrapper from "#/components/AppWrapper/AppWrapper";
 import store from "@/redux/store";
 import ContextWrapper from "#/components/ContextWrapper";
 import CartSidebar from "@/modules/cart";
@@ -47,12 +45,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             <link rel="icon" href="/logo.svg" />
           </Head>
 
-          <AppWrapper>
-            <Header />
-            <Component {...pageProps} />
-            <CartSidebar />
-            <MenuSidebar />
-          </AppWrapper>
+          <Component {...pageProps} />
+          <CartSidebar />
+          <MenuSidebar />
         </ContextWrapper>
       </PersistGate>
     </Provider>

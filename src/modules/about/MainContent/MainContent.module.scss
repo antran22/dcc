@@ -1,13 +1,28 @@
 @import "src/shared/styles/constants.scss";
+@import "src/shared/styles/colors.scss";
+@import "src/shared/styles/mixins.scss";
 
-.about-page-main-content {
+.main-content {
+  flex-basis: 50%;
   height: 100%;
   padding: $s5;
 
-  overflow: scroll;
+  & > *,
+  & p {
+    margin-bottom: $s4;
+  }
+
+  &-image {
+    margin-bottom: $s6;
+  }
+
+  @include tablet-upward {
+    overflow-y: scroll;
+  }
 
   &-title {
     width: 50%;
+    letter-spacing: 6px;
   }
 
   &-divider {
@@ -16,5 +31,20 @@
 
   &-section {
     margin-bottom: $s6;
+  }
+}
+
+.content-square-container {
+  display: flex;
+  flex-direction: row;
+  @include mobile-downward {
+    flex-direction: column;
+  }
+
+  border: 1px solid $dark-grey;
+
+  & > div {
+    padding: $s3;
+    border: 1px solid $dark-grey;
   }
 }

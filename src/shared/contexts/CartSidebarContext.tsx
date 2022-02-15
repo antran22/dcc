@@ -17,7 +17,9 @@ export function CartSidebarProvider({ children }: CartSidebarProviderProps) {
         openCartBar,
         setOpenCartBar: (value) => {
           setOpenCartBar(value);
-          setCurrentStep(0);
+          if (!value) {
+            setCurrentStep(0);
+          }
         },
         currentStep,
         setCurrentStep,

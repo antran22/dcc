@@ -1,21 +1,17 @@
-import {NextPage} from "next";
-import Head from "next/head";
+import PlainLayout from "#/layout/PlainLayout";
+import MainContent from "@/modules/about/MainContent";
+import { NextPage } from "next";
+import React from "react";
 import styles from "./AboutPage.module.scss";
-import LeftBanner from "./LeftBanner";
-import MainContent from "./MainContent";
 
 const AboutPage: NextPage = () => {
   return (
-    <div className={styles["about-page"]}>
-      <Head>
-        <title>Về Chúng Tôi</title>
-      </Head>
-      <LeftBanner />
-
-      <main className={styles["about-page-main-wrapper"]}>
+    <PlainLayout title="Về chúng tôi">
+      <div className={styles.aboutPage}>
+        <aside className={styles.leftBanner} />
         <MainContent />
-      </main>
-    </div>
+      </div>
+    </PlainLayout>
   );
 };
 

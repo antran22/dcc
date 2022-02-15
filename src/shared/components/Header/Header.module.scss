@@ -1,19 +1,19 @@
-@import "../../styles/constants.scss";
-@import "../../styles/colors.scss";
-@import "../../styles/mixins.scss";
+@import "/src/shared/styles/constants";
+@import "/src/shared/styles/colors";
+@import "/src/shared/styles/mixins";
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: $header-height;
 
   position: sticky;
   background-color: $white;
   top: 0;
   z-index: 9999;
+  height: $header-height;
 
-  padding: $s3 $s5;
+  padding: $header-vertical-padding $s5;
 
   &-logo {
     @include emulate-button();

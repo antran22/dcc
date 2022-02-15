@@ -1,17 +1,13 @@
-import Button from "#/components/Button";
+import ButtonLink from "#/components/Button/ButtonLink";
 import Spacer from "#/components/Spacer";
 import Text from "#/components/Text";
 import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
 import { colors } from "#/styles/colors";
+import { Order } from "#/types";
 import { useAppDispatch } from "@/redux/hooks";
 import { clearCart } from "@/redux/slices/cart";
-import { useRouter } from "next/router";
 import React, { useContext } from "react";
-import {
-  AiFillCheckCircle as CheckIcon,
-  AiOutlineArrowLeft as BackIcon,
-} from "react-icons/ai";
-import { Order } from "#/types";
+import { AiFillCheckCircle as CheckIcon, AiOutlineArrowLeft as BackIcon } from "react-icons/ai";
 import styles from "./CheckoutSuccess.module.scss";
 
 interface CheckoutSuccessProps {
@@ -23,12 +19,10 @@ const ICON_SIZE = 25;
 const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({ order }) => {
   const { email, name, address, phoneNumber } = order;
   const { currentMode } = useContext(ViewportDimensionContext);
-  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const handleGoBack = () => {
     dispatch(clearCart());
-    return router.push("/");
   };
   return (
     <div className={styles["checkout-success"]}>
@@ -101,7 +95,12 @@ const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({ order }) => {
 
         <div className={styles["checkout-success-details-button"]}>
           <Spacer />
-          <Button color="black" mode="fill-parent" onClick={handleGoBack}>
+          <ButtonLink
+            href="/"
+            color="black"
+            mode="fill-parent"
+            onClick={handleGoBack}
+          >
             <div className={styles["checkout-success-details-button-content"]}>
               <BackIcon />
               <Text.P
@@ -112,7 +111,7 @@ const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({ order }) => {
                 QUAY LẠI TRANG CHỦ
               </Text.P>
             </div>
-          </Button>
+          </ButtonLink>
         </div>
       </div>
     </div>

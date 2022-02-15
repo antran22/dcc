@@ -45,7 +45,9 @@ const ComboInformation: React.FC<ComboInformationProps> = ({ combo }) => {
               )}
             >
               <Text.SpecialTitle color="nude">Bao gồm</Text.SpecialTitle>
-              <Text.P thickness="thin">{contentProcessed}</Text.P>
+              <Text.P as="div" thickness="thin">
+                {contentProcessed}
+              </Text.P>
             </div>
           </div>
         </Col>

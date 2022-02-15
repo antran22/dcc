@@ -3,23 +3,25 @@
 @import "/src/shared/styles/mixins";
 
 .detail-layout {
-  flex: 1;
   display: flex;
-  height: 100%;
+  @include tablet-upward {
+    height: calc(100vh - #{$header-height});
+  }
 
-  @media screen and (max-width: $breakpoint-tablet) {
+  @include tablet-downward {
     flex-direction: column;
   }
 
   &-sidebar {
+    @include tablet-upward {
+      flex: 1;
+    }
     display: flex;
-    flex: 1;
-    background-color: $light-grey;
     justify-content: center;
     align-items: center;
-
-    @media screen and (max-width: $breakpoint-tablet) {
-      min-height: 50vh;
+    background-color: $light-grey;
+    @include tablet-downward {
+      height: 500px;
     }
   }
 
@@ -27,6 +29,11 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    @include tablet-upward {
+      height: 100%;
+      overflow-y: scroll;
+      @include no-scrollbar;
+    }
   }
 
   &-title {
@@ -46,10 +53,11 @@
     flex: 1;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    padding-bottom: 100px;
   }
 
   &-footer {
+    max-height: 100px;
     position: sticky;
     bottom: 0;
     background-color: white;

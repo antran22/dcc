@@ -24,7 +24,7 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   classNames = [],
 }: ButtonLinkProps) => {
   return (
-    <Link href={href}>
+    <Link href={href} passHref>
       <a
         onClick={onClick}
         className={c([

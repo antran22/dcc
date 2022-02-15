@@ -4,6 +4,7 @@
 @import "/src/shared/styles/mixins";
 
 .btn {
+  display: block;
   @include reset-button();
 
   font-weight: 600;

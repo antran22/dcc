@@ -1,3 +1,4 @@
+import Header from "#/components/Header";
 import LoadingScreen from "#/components/LoadingScreen";
 import Preview from "#/layout/DetailLayout/Preview";
 import { colors } from "#/styles/colors";
@@ -33,42 +34,42 @@ const DetailLayout: React.FC<DetailLayoutProps> = ({
   const titleColor = textColor.getLuminance() > 0.9 ? "black" : themeColorCode;
 
   return (
-    <div className={styles.detailLayout}>
+    <article>
       <Head>
         <title>{title}</title>
       </Head>
-      {!children ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <aside
-            className={styles.detailLayoutSidebar}
-            style={{ backgroundColor: themeColorCode }}
-          >
-            <Preview previewImages={previewImages} />
-          </aside>
 
-          <main className={styles.detailLayoutMain}>
-            {!header ? (
-              <h1
-                className={c(styles.detailLayoutTitle)}
-                style={{
-                  color: titleColor,
-                }}
-              >
-                {title}
-              </h1>
-            ) : (
-              header
-            )}
+      <Header />
+      <div className={styles.detailLayout}>
+        <aside
+          className={styles.detailLayoutSidebar}
+          style={{ backgroundColor: themeColorCode }}
+        >
+          <Preview previewImages={previewImages} />
+        </aside>
 
-            <div className={styles.detailLayoutContent}>{children}</div>
+        <main className={styles.detailLayoutMain}>
+          {!header ? (
+            <h1
+              className={c(styles.detailLayoutTitle)}
+              style={{
+                color: titleColor,
+              }}
+            >
+              {title}
+            </h1>
+          ) : (
+            header
+          )}
 
-            <div className={styles.detailLayoutFooter}>{footer}</div>
-          </main>
-        </>
-      )}
-    </div>
+          <div className={styles.detailLayoutContent}>
+            {children || <LoadingScreen />}
+          </div>
+
+          <div className={styles.detailLayoutFooter}>{footer}</div>
+        </main>
+      </div>
+    </article>
   );
 };
 

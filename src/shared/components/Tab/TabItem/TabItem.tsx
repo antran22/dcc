@@ -17,7 +17,7 @@ export const TabItem: React.FC<TabItemProps> = ({
   const router = useRouter();
   const selected = router.pathname.includes(tabItem.url);
   return (
-    <Link href={tabItem.url} passHref>
+    <Link as={tabItem.url} href={tabItem.url} passHref>
       <a
         role="tab"
         tabIndex={0}

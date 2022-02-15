@@ -9,7 +9,6 @@ import c from "classnames";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import { AiOutlineMenu as MenuIcon } from "react-icons/ai";
 import styles from "./Header.module.scss";
@@ -37,15 +36,17 @@ export const headerItems = [
   },
 ];
 
-const Header: React.FC = () => {
-  const router = useRouter();
+interface HeaderProps {
+  simple?: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({ simple }) => {
   const { setMenuSidebarIsOpen } = useContext(MenuSidebarContext);
   const { currentMode } = useContext(ViewportDimensionContext);
-  const isOnCheckoutPage = router.pathname.includes("checkout");
 
   return (
     <header className={c(styles.header)}>
-      {!isOnCheckoutPage &&
+      {!simple &&
         (currentMode !== "desktop" ? (
           <Button color="white" onClick={() => setMenuSidebarIsOpen(true)}>
             <MenuIcon size={MENU_ICON_SIZE} />
@@ -57,14 +58,14 @@ const Header: React.FC = () => {
         <a
           className={c([
             styles["header-logo"],
-            isOnCheckoutPage ? "" : styles["header-logo-normal"],
+            simple ? "" : styles["header-logo-normal"],
           ])}
         >
           <Image src={assets.logo} alt="DCC LOGO" />
         </a>
       </Link>
 
-      {!isOnCheckoutPage ? (
+      {!simple ? (
         <Cart />
       ) : (
         <Text.P thickness="thin">Liên hệ: 098 395 1997</Text.P>

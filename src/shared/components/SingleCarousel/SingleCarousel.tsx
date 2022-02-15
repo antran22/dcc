@@ -1,4 +1,3 @@
-import { useInterval } from "#/hooks";
 import c from "classnames";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
@@ -20,12 +19,17 @@ const SingleCarousel: React.FC<SingleCarouselProps> = ({
     setIndex(0);
   }, [children]);
 
-  useInterval(
-    () => {
+  useEffect(() => {
+    if (children.length < 2) {
+      return;
+    }
+    const timer = setTimeout(() => {
       setIndex((index + 1) % children.length);
-    },
-    children.length < 2 ? null : time
-  );
+    }, time);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [children, index, time]);
 
   return (
     <div className={c(className, styles.carousel)}>
