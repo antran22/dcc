@@ -1,3 +1,5 @@
+import { getUrlFromAPIPath } from "#/utils/resolveAPIPath";
+
 export interface StrapiImageFormat {
   ext: string;
   url: string;
@@ -35,7 +37,10 @@ export interface StrapiImage {
   updated_by: string;
 }
 
-export function getLargestImageFormat(image: StrapiImage): StrapiImageFormat {
-  const { large, medium, small, thumbnail } = image.formats;
-  return large ?? medium ?? small ?? thumbnail;
+export function getLargestImageUrl(image: StrapiImage): string {
+  return getUrlFromAPIPath(image.url);
+}
+
+export function getSmallestImageUrl(image: StrapiImage): string {
+  return getUrlFromAPIPath(image.formats.thumbnail.url);
 }

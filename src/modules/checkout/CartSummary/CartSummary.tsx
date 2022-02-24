@@ -1,4 +1,4 @@
-import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
+import StrapiResponsiveImage from "#/components/Image";
 import Text from "#/components/Text";
 import {
   CartItem,

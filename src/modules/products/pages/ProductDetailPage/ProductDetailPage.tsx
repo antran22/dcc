@@ -1,47 +1,44 @@
 import LoadingScreen from "#/components/LoadingScreen";
+import QuantityControl from "#/components/QuantityControl";
 import Text from "#/components/Text";
 import DetailLayout from "#/layout/DetailLayout";
+import { Product } from "#/types";
+import { axiosInstance } from "#/utils/axios";
 import { formatCurrency } from "#/utils/number";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useGetProductBySlugQuery } from "@/redux/slices/strapi";
 import {
   currentProductVariantSelector,
   previewImageSelector,
   resetPreviewProduct,
   setViewingProduct,
 } from "@/redux/slices/productView";
-import { NextPage } from "next";
-import { useRouter } from "next/router";
+import { GetServerSideProps, NextPage } from "next";
 import React, { useEffect } from "react";
-import QuantityControl from "#/components/QuantityControl";
 import ProductInformation from "../../components/ProductInformation/ProductInformation";
 import styles from "./ProductDetailPage.module.scss";
 
-const ProductDetailPage: NextPage = () => {
-  const router = useRouter();
+interface ProductDetailPageProps {
+  product: Product;
+}
 
-  const itemId = router.query.itemId as string;
-
-  const { data: product, isLoading } = useGetProductBySlugQuery(itemId ?? "1");
-
+export const ProductDetailPage: NextPage<ProductDetailPageProps> = ({
+  product,
+}) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!isLoading && !product) {
-      router.replace("/404").then();
-    }
-    if (!isLoading && product) {
+    if (product) {
       dispatch(setViewingProduct(product));
     }
     return () => {
       dispatch(resetPreviewProduct());
     };
-  }, [router, dispatch, isLoading, product]);
+  }, [dispatch, product]);
 
   const previewProductImage = useAppSelector(previewImageSelector);
   const currentProductVariant = useAppSelector(currentProductVariantSelector);
 
-  if (isLoading || !product) {
+  if (!product) {
     return <LoadingScreen />;
   }
 
@@ -62,4 +59,22 @@ const ProductDetailPage: NextPage = () => {
   );
 };
 
-export default ProductDetailPage;
+export const getServerSideProps: GetServerSideProps<
+  ProductDetailPageProps
+> = async (context) => {
+  const itemId = context.params?.itemId;
+  if (!itemId) {
+    return {
+      notFound: true,
+    };
+  }
+  const { data: product } = await axiosInstance.get<Product>(
+    `products/${itemId}`
+  );
+
+  return {
+    props: {
+      product,
+    },
+  };
+};

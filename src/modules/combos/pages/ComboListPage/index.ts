@@ -1,3 +1,1 @@
-import ComboListPage from "./ComboListPage";
-
-export default ComboListPage;
+export { ComboListPage, getStaticProps } from "./ComboListPage";

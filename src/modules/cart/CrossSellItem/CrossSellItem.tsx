@@ -1,5 +1,5 @@
 import Button from "#/components/Button";
-import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
+import StrapiResponsiveImage from "#/components/Image";
 import Text from "#/components/Text";
 import { CartSidebarContext } from "#/contexts/CartSidebarContext";
 import { getProductThumbnail, Product } from "#/types";

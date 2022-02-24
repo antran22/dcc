@@ -1,5 +1,5 @@
 import ButtonLink from "#/components/Button/ButtonLink";
-import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
+import StrapiResponsiveImage from "#/components/Image";
 import Text from "#/components/Text";
 import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
 import { colors } from "#/styles/colors";

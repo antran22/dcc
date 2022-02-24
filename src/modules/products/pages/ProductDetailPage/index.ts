@@ -1,3 +1,1 @@
-import ProductDetailPage from "./ProductDetailPage";
-
-export default ProductDetailPage;
+export { ProductDetailPage, getServerSideProps } from "./ProductDetailPage";

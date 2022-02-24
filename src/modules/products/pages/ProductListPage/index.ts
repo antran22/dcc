@@ -1,3 +1,1 @@
-import ProductListPage from "./ProductListPage";
-
-export default ProductListPage;
+export { ProductListPage, getStaticProps } from "./ProductListPage";

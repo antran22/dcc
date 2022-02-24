@@ -1,6 +1,6 @@
 import Button from "#/components/Button";
 import { Form } from "#/components/Form";
-import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
+import StrapiResponsiveImage from "#/components/Image";
 import Spacer from "#/components/Spacer";
 import Text from "#/components/Text";
 import {

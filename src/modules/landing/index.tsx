@@ -1,3 +1,4 @@
-import LandingPage from "./LandingPage";
+import LandingPage, { LandingPageProps } from "./LandingPage";
 
 export default LandingPage;
+export type { LandingPageProps };

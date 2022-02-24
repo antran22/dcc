@@ -1,3 +1,3 @@
-import Image from "./Image";
+import StrapiResponsiveImage from "./StrapiResponsiveImage";
 
-export default Image;
+export default StrapiResponsiveImage;

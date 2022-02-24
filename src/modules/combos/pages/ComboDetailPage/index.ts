@@ -1,3 +1,1 @@
-import ComboDetailPage from "./ComboDetailPage";
-
-export default ComboDetailPage;
+export { getServerSideProps, ComboDetailPage } from "./ComboDetailPage";

@@ -18,6 +18,15 @@ export interface Product {
   cross_sell: Product[];
 }
 
+export interface ProductListing {
+  id: string;
+  slug: string;
+  title: string;
+  price: number;
+  thumbnail?: StrapiImage;
+  theme_color_code?: string;
+}
+
 export interface ProductSize {
   id: string;
   name: string;
@@ -34,4 +43,15 @@ export interface ProductColor {
 
 export function getProductThumbnail(product: Product): StrapiImage | undefined {
   return product.thumbnails[0];
+}
+
+export function stripDownProductForListing(product: Product): ProductListing {
+  return {
+    id: product.id,
+    slug: product.slug,
+    title: product.title,
+    price: product.price,
+    thumbnail: product.thumbnails[0],
+    theme_color_code: product.theme_color_code,
+  };
 }

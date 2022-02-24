@@ -1,4 +1,4 @@
-import StrapiResponsiveImage from "#/components/Image/StrapiResponsiveImage";
+import StrapiResponsiveImage from "#/components/Image";
 import LoadingScreen from "#/components/LoadingScreen";
 import SingleCarousel from "#/components/SingleCarousel";
 import { StrapiImage } from "#/types";
