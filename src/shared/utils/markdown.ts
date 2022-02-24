@@ -16,13 +16,15 @@ const processor = unified()
     createElement,
   });
 
-export function useMarkdownProcessor(text: string) {
+export function useMarkdownProcessor(text?: string) {
   const [Content, setContent] = useState<React.ReactNode>(Fragment);
 
   useEffect(() => {
-    processor.process(text).then((file) => {
-      setContent(file.result);
-    });
+    if (text) {
+      processor.process(text).then((file) => {
+        setContent(file.result);
+      });
+    }
   }, [text]);
 
   return Content;

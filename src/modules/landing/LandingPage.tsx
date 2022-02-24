@@ -1,9 +1,12 @@
 import ButtonLink from "#/components/Button/ButtonLink";
 import StrapiResponsiveImage from "#/components/Image";
+import Text from "#/components/Text";
 import PlainLayout from "#/layout/PlainLayout";
 import { FrontPageConfig, StrapiImage } from "#/types";
+import { axiosInstance } from "#/utils/axios";
+import { useMarkdownProcessor } from "#/utils/markdown";
 import c from "classnames";
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import React from "react";
 import LandingBanner from "./LandingBanner";
 import styles from "./LandingPage.module.scss";
@@ -34,6 +37,7 @@ const PromotionalLandingPage: React.FC<PromotionalLandingPage> = ({
   image,
   title,
 }) => {
+  const subtitleProcessed = useMarkdownProcessor(subtitle);
   return (
     <main className={c(styles.landingPage, styles.landingPagePromotional)}>
       <div className={styles.landingPagePromotionalImage}>
@@ -49,7 +53,9 @@ const PromotionalLandingPage: React.FC<PromotionalLandingPage> = ({
 
       <div className={styles.landingPagePromotionalDetail}>
         <h1 className={styles.landingPagePromotionalTitle}>{title}</h1>
-        <p className={styles.landingPagePromotionalSubtitle}>{subtitle}</p>
+        <Text.P as="div" classNames={[styles.landingPagePromotionalSubtitle]}>
+          {subtitleProcessed}
+        </Text.P>
         <ButtonLink
           color="nude"
           classNames={[styles.landingPageBannerCta]}
@@ -62,10 +68,13 @@ const PromotionalLandingPage: React.FC<PromotionalLandingPage> = ({
   );
 };
 
-export interface LandingPageProps {
+interface LandingPageProps {
   frontPageConfig: FrontPageConfig;
 }
-const LandingPage: NextPage<LandingPageProps> = ({ frontPageConfig }) => {
+
+export const LandingPage: NextPage<LandingPageProps> = ({
+  frontPageConfig,
+}) => {
   let landingPageContent;
   if (!frontPageConfig || !frontPageConfig.promotional_title) {
     landingPageContent = <LandingPageWithBanner />;
@@ -81,4 +90,23 @@ const LandingPage: NextPage<LandingPageProps> = ({ frontPageConfig }) => {
   return <PlainLayout title="Đồ Chơi Chữ">{landingPageContent}</PlainLayout>;
 };
 
-export default LandingPage;
+export const getStaticProps: GetStaticProps<LandingPageProps> = async () => {
+  try {
+    const { data: frontPageConfig } = await axiosInstance.get<FrontPageConfig>(
+      "/front-page"
+    );
+    return {
+      props: {
+        frontPageConfig,
+      },
+      revalidate: 60,
+    };
+  } catch (e) {
+    return {
+      props: {
+        frontPageConfig: {},
+      },
+      revalidate: 60,
+    };
+  }
+};
