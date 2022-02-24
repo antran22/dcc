@@ -31,7 +31,11 @@ $custom-btn-padding: 10vw;
 
   &-title {
     font-size: 8rem;
-    width: 50%;
+    transform: translateX(-4px);
+    @include mobile-upward {
+      width: 50%;
+    }
+    width: 100%;
   }
 
   &-subtitle {
