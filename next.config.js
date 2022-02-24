@@ -31,5 +31,7 @@ module.exports = {
   },
   images: {
     domains: ["cms.dochoichu.com"],
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 3600,
   },
 };

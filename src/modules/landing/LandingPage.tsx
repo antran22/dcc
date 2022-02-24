@@ -37,7 +37,12 @@ const PromotionalLandingPage: React.FC<PromotionalLandingPage> = ({
   return (
     <main className={c(styles.landingPage, styles.landingPagePromotional)}>
       <div className={styles.landingPagePromotionalImage}>
-        <StrapiResponsiveImage image={image} layout="fill" objectFit="cover" />
+        <StrapiResponsiveImage
+          image={image}
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+        />
       </div>
 
       <div className={styles.landingPagePromotionalOverlay} />
