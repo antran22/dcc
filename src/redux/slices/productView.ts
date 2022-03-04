@@ -1,48 +1,32 @@
 import {
-  Product,
-  ProductColor,
-  ProductSize,
-  ProductVariantSelection,
-  StrapiImage,
-} from "#/types/";
+  AttributeValue,
+  getVariantByColorAndSize,
+  ProductMedia,
+  ProductVariant,
+  SingleProductDetail,
+} from "@/graphql/products/getProductDetail";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 interface ProductViewState {
-  product?: Product;
-  previewImages: StrapiImage[];
-  selectedColor?: ProductColor;
-  selectedSize?: ProductSize;
+  product?: SingleProductDetail;
+  selectedColor?: AttributeValue;
+  selectedSize?: AttributeValue;
 }
 
-export const initialProductViewState: ProductViewState = {
-  previewImages: [],
-};
+export const initialProductViewState: ProductViewState = {};
 
 export const productViewSlice = createSlice({
   name: "productView",
   initialState: initialProductViewState,
   reducers: {
-    setViewingProduct: (state, action: PayloadAction<Product>) => {
+    setViewingProduct: (state, action: PayloadAction<SingleProductDetail>) => {
       state.product = action.payload;
-      state.previewImages = action.payload.thumbnails;
       state.selectedColor = undefined;
       state.selectedSize = undefined;
     },
 
-    setPreviewImages: (state, action: PayloadAction<StrapiImage[]>) => {
-      state.previewImages = action.payload;
-    },
-
-    resetPreviewImages: (state) => {
-      if (state.selectedColor) {
-        state.previewImages = state.selectedColor.images;
-      } else {
-        state.previewImages = state.product?.thumbnails ?? [];
-      }
-    },
-
-    selectColor: (state, action: PayloadAction<ProductColor>) => {
+    selectColor: (state, action: PayloadAction<AttributeValue>) => {
       state.selectedColor = action.payload;
     },
 
@@ -50,7 +34,7 @@ export const productViewSlice = createSlice({
       state.selectedColor = undefined;
     },
 
-    selectSize: (state, action: PayloadAction<ProductSize>) => {
+    selectSize: (state, action: PayloadAction<AttributeValue>) => {
       state.selectedSize = action.payload;
     },
 
@@ -62,7 +46,6 @@ export const productViewSlice = createSlice({
       state.product = undefined;
       state.selectedColor = undefined;
       state.selectedSize = undefined;
-      state.previewImages = [];
     },
   },
 });
@@ -71,8 +54,6 @@ export const {
   setViewingProduct,
   selectColor,
   selectSize,
-  setPreviewImages,
-  resetPreviewImages,
   resetPreviewProduct,
   unselectColor,
   unselectSize,
@@ -82,8 +63,28 @@ export const productViewSelector = (state: RootState) => state.productView;
 
 export const previewImageSelector = createSelector(
   [productViewSelector],
-  (productViewState) => {
-    return productViewState.previewImages;
+  ({ product, selectedColor, selectedSize }): ProductMedia[] => {
+    if (selectedColor && selectedSize) {
+      if (!product) {
+        return [];
+      }
+
+      const variant = getVariantByColorAndSize(
+        product,
+        selectedColor,
+        selectedSize
+      );
+
+      if (!variant) {
+        return product.media ?? [];
+      }
+
+      return variant.media ?? [];
+    }
+    if (product) {
+      return product.media ?? [];
+    }
+    return [];
   }
 );
 
@@ -103,30 +104,10 @@ export const currentSizeSelector = createSelector(
 
 export const currentProductVariantSelector = createSelector(
   [productViewSelector],
-  (productViewState): ProductVariantSelection | undefined => {
-    if (!productViewState.product) {
+  ({ product, selectedColor, selectedSize }): ProductVariant | undefined => {
+    if (!product || !selectedColor || !selectedSize) {
       return undefined;
     }
-
-    if (
-      productViewState.product.colors.length > 0 &&
-      !productViewState.selectedColor
-    ) {
-      return undefined;
-    }
-
-    if (
-      productViewState.product.sizes.length > 0 &&
-      !productViewState.selectedSize
-    ) {
-      return undefined;
-    }
-
-    return {
-      type: "product_variant",
-      product: productViewState.product,
-      size: productViewState.selectedSize,
-      color: productViewState.selectedColor,
-    };
+    return getVariantByColorAndSize(product, selectedColor, selectedSize);
   }
 );

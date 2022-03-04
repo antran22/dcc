@@ -1,30 +1,28 @@
-import { Product, ProductColor } from "#/types";
+import { AttributeValue } from "@/graphql/products";
 import { useAppDispatch } from "@/redux/hooks";
 import {
   currentColorSelector,
-  resetPreviewImages,
   selectColor,
-  setPreviewImages,
   unselectColor,
 } from "@/redux/slices/productView";
 import c from "classnames";
 import React from "react";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { AiOutlineCheck } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import tinycolor from "tinycolor2";
 import styles from "./ProductInformation.module.scss";
 
 interface ColorPickerProps {
-  product: Product;
+  colors: AttributeValue[];
 }
 
-const ColorPicker: React.FC<ColorPickerProps> = ({ product }) => {
+const ColorPicker: React.FC<ColorPickerProps> = ({ colors }) => {
   const dispatch = useAppDispatch();
 
   const currentColor = useSelector(currentColorSelector);
 
-  const handleColorNodeClicked = (color: ProductColor) => {
+  const handleColorNodeClicked = (color: AttributeValue) => {
     if (currentColor?.id !== color.id) {
       dispatch(selectColor(color));
     } else {
@@ -41,13 +39,11 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ product }) => {
         "py-4"
       )}
     >
-      {product.colors.map((color) => (
+      {colors.map((color) => (
         <ColorNode
           key={color.id}
           color={color}
           onClick={() => handleColorNodeClicked(color)}
-          onMouseEnter={() => dispatch(setPreviewImages(color.images))}
-          onMouseLeave={() => dispatch(resetPreviewImages())}
         />
       ))}
     </div>
@@ -57,21 +53,14 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ product }) => {
 export default ColorPicker;
 
 interface ColorNodeProps {
-  color: ProductColor;
+  color: AttributeValue;
   onClick: () => void;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
 }
 
-const ColorNode: React.FC<ColorNodeProps> = ({
-  color,
-  onClick,
-  onMouseEnter,
-  onMouseLeave,
-}) => {
+const ColorNode: React.FC<ColorNodeProps> = ({ color, onClick }) => {
   const currentlySelectedColor = useSelector(currentColorSelector);
-
-  const isColorBright = tinycolor(color.color_code).getBrightness() >= 128;
+  const colorCode = color.value ?? "#ffffff";
+  const isColorBright = tinycolor(colorCode).getBrightness() >= 128;
   const highlightColor = isColorBright ? "black" : "white";
 
   return (
@@ -79,14 +68,14 @@ const ColorNode: React.FC<ColorNodeProps> = ({
       transition
       delay={100}
       placement="top"
-      overlay={<Tooltip className={styles.colorPickerTooltip}>{color.name}</Tooltip>}
+      overlay={
+        <Tooltip className={styles.colorPickerTooltip}>{color.name}</Tooltip>
+      }
     >
       <div
         onClick={onClick}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
         style={{
-          backgroundColor: color.color_code,
+          backgroundColor: colorCode,
         }}
         className={c(styles.colorPickerNode, "mx-1", {
           [styles.colorPickerNodeActive]:

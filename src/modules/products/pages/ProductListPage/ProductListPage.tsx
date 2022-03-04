@@ -1,12 +1,16 @@
 import ListingLayout from "#/layout/ListingLayout";
-import { Product, ProductListing, stripDownProductForListing } from "#/types";
-import { axiosInstance } from "#/utils/axios";
-import SingleProduct from "@/modules/products/components/SingleProduct";
+import {
+  getPriceStringFromProduct,
+  getProductAttributeMap,
+  getProductList,
+  ProductListItem,
+} from "@/graphql/products";
+import ProductCard from "@/modules/products/components/ProductCard";
 import { GetStaticProps, NextPage } from "next";
 import React from "react";
 
 interface ProductListPageProps {
-  products: ProductListing[];
+  products: ProductListItem[];
 }
 
 export const ProductListPage: NextPage<ProductListPageProps> = ({
@@ -14,9 +18,25 @@ export const ProductListPage: NextPage<ProductListPageProps> = ({
 }) => {
   return (
     <ListingLayout title="Sản Phẩm Lẻ">
-      {products.map((product) => (
-        <SingleProduct key={product.slug} product={product} />
-      ))}
+      {products.map((productListItem) => {
+        const firstImage = productListItem.media?.at(0);
+        const productAttributes = getProductAttributeMap(productListItem);
+        const price = getPriceStringFromProduct(productListItem);
+        const themeColorCode =
+          productAttributes["theme-color"][0].value ?? undefined;
+
+        return (
+          <ProductCard
+            key={productListItem.slug}
+            slug={productListItem.slug}
+            name={productListItem.name}
+            price={price}
+            imageUrl={firstImage?.url}
+            imageAlt={firstImage?.alt}
+            themeColorCode={themeColorCode}
+          />
+        );
+      })}
     </ListingLayout>
   );
 };
@@ -24,11 +44,10 @@ export const ProductListPage: NextPage<ProductListPageProps> = ({
 export const getStaticProps: GetStaticProps<
   ProductListPageProps
 > = async () => {
-  const { data: products } = await axiosInstance.get<Product[]>("/products");
-  const strippedDownProducts = products.map(stripDownProductForListing);
+  const products = await getProductList();
   return {
     props: {
-      products: strippedDownProducts,
+      products,
     },
     revalidate: 60,
   };

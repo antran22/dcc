@@ -30,7 +30,7 @@ module.exports = {
     return config;
   },
   images: {
-    domains: ["cms.dochoichu.com"],
+    domains: ["cms.dochoichu.com", "ecom.dochoichu.com"],
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 3600,
   },

@@ -1,5 +1,5 @@
 import ButtonLink from "#/components/Button/ButtonLink";
-import StrapiResponsiveImage from "#/components/Image";
+import Image from "next/image";
 import Text from "#/components/Text";
 import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
 import { colors } from "#/styles/colors";
@@ -8,21 +8,22 @@ import c from "classnames";
 import React, { useContext } from "react";
 import tinycolor from "tinycolor2";
 import styles from "./CarouselCard.module.scss";
-import { StrapiImage } from "#/types";
 
 interface CarouselCardProps {
   title: string;
   subtitle: string;
   href: string;
   themeColorCode?: string;
-  image?: StrapiImage;
+  imageUrl?: string;
+  imageAlt?: string;
 }
 const CarouselCard: React.FC<CarouselCardProps> = ({
   title,
   subtitle,
   href,
   themeColorCode,
-  image,
+  imageUrl,
+  imageAlt,
 }) => {
   if (!themeColorCode) {
     themeColorCode = colors.darkGrey;
@@ -48,11 +49,12 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
         }}
       />
       <div className={styles.carouselCardImage}>
-        {image && (
-          <StrapiResponsiveImage
+        {imageUrl && (
+          <Image
             objectFit="contain"
             layout="fill"
-            image={image}
+            src={imageUrl}
+            alt={imageAlt}
           />
         )}
       </div>

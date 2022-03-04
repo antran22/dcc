@@ -1,8 +1,7 @@
 import Header from "#/components/Header";
 import LoadingScreen from "#/components/LoadingScreen";
-import Preview from "#/layout/DetailLayout/Preview";
+import Preview, { PreviewImage } from "#/layout/DetailLayout/Preview";
 import { colors } from "#/styles/colors";
-import { StrapiImage } from "#/types";
 import c from "classnames";
 import Head from "next/head";
 import React from "react";
@@ -15,7 +14,7 @@ interface DetailLayoutProps {
   header?: React.ReactNode;
   footer?: React.ReactNode;
   themeColorCode?: string | undefined;
-  previewImages: StrapiImage[];
+  previewImages: PreviewImage[];
 }
 
 const DetailLayout: React.FC<DetailLayoutProps> = ({

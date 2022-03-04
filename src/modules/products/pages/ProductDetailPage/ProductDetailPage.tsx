@@ -1,10 +1,12 @@
 import LoadingScreen from "#/components/LoadingScreen";
-import QuantityControl from "#/components/QuantityControl";
 import Text from "#/components/Text";
 import DetailLayout from "#/layout/DetailLayout";
-import { Product } from "#/types";
-import { axiosInstance } from "#/utils/axios";
-import { formatCurrency } from "#/utils/number";
+import {
+  getPriceStringFromProduct,
+  getProductAttributeMap,
+  getProductDetail,
+  SingleProductDetail,
+} from "@/graphql/products";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   currentProductVariantSelector,
@@ -12,13 +14,14 @@ import {
   resetPreviewProduct,
   setViewingProduct,
 } from "@/redux/slices/productView";
+import _ from "lodash";
 import { GetServerSideProps, NextPage } from "next";
 import React, { useEffect } from "react";
 import ProductInformation from "../../components/ProductInformation/ProductInformation";
 import styles from "./ProductDetailPage.module.scss";
 
 interface ProductDetailPageProps {
-  product: Product;
+  product: SingleProductDetail;
 }
 
 export const ProductDetailPage: NextPage<ProductDetailPageProps> = ({
@@ -36,21 +39,24 @@ export const ProductDetailPage: NextPage<ProductDetailPageProps> = ({
   }, [dispatch, product]);
 
   const previewProductImage = useAppSelector(previewImageSelector);
-  const currentProductVariant = useAppSelector(currentProductVariantSelector);
 
   if (!product) {
     return <LoadingScreen />;
   }
 
+  const attributes = getProductAttributeMap(product);
+
+  const color = _.first(attributes["theme-color"])?.value ?? "#ffffff";
+
   return (
     <DetailLayout
-      title={product.title}
-      themeColorCode={product.theme_color_code}
+      title={product.name}
+      themeColorCode={color}
       previewImages={previewProductImage}
       footer={
         <div className={styles.productsDetailsPageContentFooter}>
-          <Text.P size="large">{formatCurrency(product.price)}</Text.P>
-          <QuantityControl cartSelection={currentProductVariant} />
+          <Text.P size="large">{getPriceStringFromProduct(product)}</Text.P>
+          {/*<QuantityControl cartSelection={currentProductVariant} />*/}
         </div>
       }
     >
@@ -62,15 +68,20 @@ export const ProductDetailPage: NextPage<ProductDetailPageProps> = ({
 export const getServerSideProps: GetServerSideProps<
   ProductDetailPageProps
 > = async (context) => {
-  const itemId = context.params?.itemId;
-  if (!itemId) {
+  const productSlug = context.params?.productSlug;
+  if (!productSlug) {
     return {
       notFound: true,
     };
   }
-  const { data: product } = await axiosInstance.get<Product>(
-    `products/${itemId}`
-  );
+
+  const product = await getProductDetail(productSlug as string);
+
+  if (!product) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {

@@ -13,7 +13,7 @@ const SingleCombo: React.FC<SingleComboProps> = ({ combo }) => {
       title={combo.name}
       subtitle={formatCurrency(combo.price)}
       href={`combos/${combo.id}`}
-      image={combo.images.length > 0 ? combo.images[0] : undefined}
+      imageUrl={combo.images.length > 0 ? combo.images[0].url : undefined}
       themeColorCode={combo.theme_color_code}
     />
   );

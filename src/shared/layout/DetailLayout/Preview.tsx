@@ -1,12 +1,11 @@
-import StrapiResponsiveImage from "#/components/Image";
 import LoadingScreen from "#/components/LoadingScreen";
 import SingleCarousel from "#/components/SingleCarousel";
-import { StrapiImage } from "#/types";
+import Image from "next/image";
 import React from "react";
 import styles from "./Preview.module.scss";
 
 interface PreviewProps {
-  previewImages: StrapiImage[];
+  previewImages: PreviewImage[];
 }
 
 const Preview: React.FC<PreviewProps> = ({ previewImages }) => {
@@ -17,8 +16,9 @@ const Preview: React.FC<PreviewProps> = ({ previewImages }) => {
     <SingleCarousel time={3000} className={styles.preview}>
       {previewImages.map((image, index) => (
         <div key={index} className={styles.previewImageWrapper}>
-          <StrapiResponsiveImage
-            image={image}
+          <Image
+            src={image.url}
+            alt={image.alt}
             objectFit="contain"
             layout="fill"
           />
@@ -29,3 +29,8 @@ const Preview: React.FC<PreviewProps> = ({ previewImages }) => {
 };
 
 export default Preview;
+
+export interface PreviewImage {
+  url: string;
+  alt: string;
+}

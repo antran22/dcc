@@ -1,32 +1,32 @@
 import Button from "#/components/Button";
 import Text from "#/components/Text";
+import { AttributeValue } from "@/graphql/products";
 import { useAppDispatch } from "@/redux/hooks";
 import {
   currentSizeSelector,
   selectSize,
   unselectSize,
 } from "@/redux/slices/productView";
-import { Product, ProductSize } from "#/types";
 import c from "classnames";
 import React from "react";
 import { useSelector } from "react-redux";
 import styles from "./ProductInformation.module.scss";
 
 interface SizePickerProps {
-  product: Product;
+  sizes: AttributeValue[];
   className?: string;
   handleOpenGuidance: () => void;
 }
 
 const ProductSizePicker: React.FC<SizePickerProps> = ({
-  product,
+  sizes,
   className,
   handleOpenGuidance,
 }) => {
   const dispatch = useAppDispatch();
   const currentlySelectedSize = useSelector(currentSizeSelector);
 
-  const handleSelectSize = (size: ProductSize) => {
+  const handleSelectSize = (size: AttributeValue) => {
     if (size.id !== currentlySelectedSize?.id) {
       dispatch(selectSize(size));
     } else {
@@ -52,7 +52,7 @@ const ProductSizePicker: React.FC<SizePickerProps> = ({
         </Button>
       </div>
       <div className={styles.sizePickerList}>
-        {product.sizes.map((size) => (
+        {sizes.map((size) => (
           <div
             key={size.id}
             onClick={() => handleSelectSize(size)}
