@@ -1,3 +1,4 @@
+import { ProductSelection } from "#/types";
 import { formatCurrency } from "#/utils/number";
 import { ProductPricing } from "@/graphql/products/__generated__/ProductPricing";
 import { AttributeValue } from "./__generated__/AttributeValue";
@@ -47,4 +48,13 @@ export function getPriceStringFromProduct(product: ProductPriceInput): string {
   }
 
   return `${formatCurrency(priceStart)} - ${formatCurrency(priceStop)}`;
+}
+
+export function productSelectionName(selection: ProductSelection): string {
+  const variant = selection.variant;
+  const productName = selection.product.name;
+  if (variant.name !== variant.id) {
+    return `${productName} - ${variant.name}`;
+  }
+  return productName;
 }

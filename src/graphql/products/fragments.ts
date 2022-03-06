@@ -2,6 +2,8 @@ import { AttributeValue } from "./__generated__/AttributeValue";
 import { ProductAttribute } from "./__generated__/ProductAttribute";
 import { gql } from "@apollo/client";
 import { ProductPricing } from "./__generated__/ProductPricing";
+import { ProductMedia } from "./__generated__/ProductMedia";
+import { ProductBase } from "./__generated__/ProductBase";
 
 const attributeValueFragment = gql`
   fragment AttributeValue on AttributeValue {
@@ -45,4 +47,53 @@ export const productPricingFragment = gql`
   }
 `;
 
-export type { AttributeValue, ProductAttribute, ProductPricing };
+export const productMediaFragment = gql`
+  fragment ProductMedia on ProductMedia {
+    url
+    alt
+  }
+`;
+
+export const productVariantFragment = gql`
+  fragment ProductVariant on ProductVariant {
+    id
+    name
+    attributes {
+      ...ProductAttribute
+    }
+
+    pricing {
+      price {
+        gross {
+          amount
+        }
+      }
+    }
+
+    media {
+      ...ProductMedia
+    }
+  }
+  ${productAttributeFragment}
+  ${productAttributeFragment}
+`;
+
+export const productBaseFragment = gql`
+  fragment ProductBase on Product {
+    id
+    slug
+    name
+    media {
+      ...ProductMedia
+    }
+  }
+  ${productMediaFragment}
+`;
+
+export type {
+  AttributeValue,
+  ProductAttribute,
+  ProductPricing,
+  ProductMedia,
+  ProductBase,
+};

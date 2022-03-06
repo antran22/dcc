@@ -1,4 +1,4 @@
-import { CartItem, ProductSelection } from "#/types";
+import { CartItem, ProductSelection, ProductSelectionBrowse } from "#/types";
 import {
   getProductCrossSellIds,
   getProductVariantPrice,
@@ -106,7 +106,7 @@ export const cartSlice = createSlice({
     },
 
     visitCrossSellPage: (state) => {
-      state.hasAlreadyCrossSold = true;
+      state.hasAlreadyCrossSold = false;
     },
   },
 });
@@ -146,8 +146,15 @@ export const crossSellProductIdsSelector = createSelector(
       (item) => item.selection.product.id
     );
 
-    const allCrossSellProductIds = state.items.flatMap((item) =>
-      getProductCrossSellIds(item.selection.product)
+    const allBrowseProductSelections = state.items
+      .map((item) => item.selection)
+      .filter(
+        (selection): selection is ProductSelectionBrowse =>
+          selection.type === "browse"
+      );
+
+    const allCrossSellProductIds = allBrowseProductSelections.flatMap(
+      (selection) => getProductCrossSellIds(selection.product)
     );
 
     const uniqueCrossSellProductIds = _.uniq(allCrossSellProductIds);

@@ -129,6 +129,7 @@ export const currentProductSelectionSelector = createSelector(
     return {
       product,
       variant,
+      type: "browse",
     };
   }
 );

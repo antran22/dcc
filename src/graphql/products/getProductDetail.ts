@@ -1,20 +1,21 @@
+import { getProductAttributeMap } from "@/graphql/products/utils";
 import { gql } from "@apollo/client";
 import _ from "lodash";
 import client from "../apolloClient";
 import {
   ProductDetail,
   ProductDetail_product,
-  ProductDetail_product_media,
   ProductDetail_product_variants,
 } from "./__generated__/ProductDetail";
 import {
   AttributeValue,
   productAttributeFragment,
+  productBaseFragment,
   productPricingFragment,
+  productVariantFragment,
 } from "./fragments";
 
 export type Product = ProductDetail_product;
-export type ProductMedia = ProductDetail_product_media;
 
 export async function getProductDetail(
   productSlug: string
@@ -23,16 +24,9 @@ export async function getProductDetail(
     query: gql`
       query ProductDetail($slug: String) {
         product(slug: $slug) {
-          id
-          slug
-          name
+          ...ProductBase
 
           description
-
-          media {
-            url
-            alt
-          }
 
           attributes {
             ...ProductAttribute
@@ -43,29 +37,14 @@ export async function getProductDetail(
           }
 
           variants {
-            id
-            name
-            attributes {
-              ...ProductAttribute
-            }
-
-            pricing {
-              price {
-                gross {
-                  amount
-                }
-              }
-            }
-
-            media {
-              url
-              alt
-            }
+            ...ProductVariant
           }
         }
       }
 
+      ${productBaseFragment}
       ${productAttributeFragment}
+      ${productVariantFragment}
       ${productPricingFragment}
     `,
     variables: {
@@ -78,14 +57,14 @@ export async function getProductDetail(
 export type ProductVariant = ProductDetail_product_variants;
 
 export function getProductColors(product: Product) {
-  return getProductAttributeValue(product, "color");
+  return getAllUniqueVariantAttributeValues(product, "color");
 }
 
 export function getProductSizes(product: Product) {
-  return getProductAttributeValue(product, "size");
+  return getAllUniqueVariantAttributeValues(product, "size");
 }
 
-export function getProductAttributeValue(
+export function getAllUniqueVariantAttributeValues(
   product: Product,
   attributeSlug: string
 ): AttributeValue[] {
@@ -138,8 +117,13 @@ export function getProductVariantPrice(productVariant: ProductVariant): number {
 }
 
 export function getProductCrossSellIds(product: Product): string[] {
-  const attributeValues = getProductAttributeValue(product, "cross-sell");
-  return attributeValues
+  const attributeMap = getProductAttributeMap(product);
+  const crossSell = attributeMap["cross-sell"];
+  if (!crossSell) {
+    return [];
+  }
+
+  return crossSell
     .map((value) => value.reference)
     .filter((id): id is string => !!id);
 }

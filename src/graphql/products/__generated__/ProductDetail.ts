@@ -230,11 +230,11 @@ export interface ProductDetail_product {
   id: string;
   slug: string;
   name: string;
-  description: any | null;
   /**
    * List of media for the product.
    */
   media: ProductDetail_product_media[] | null;
+  description: any | null;
   /**
    * List of attributes assigned to this product.
    */

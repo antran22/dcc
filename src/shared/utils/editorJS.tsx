@@ -1,4 +1,5 @@
 import { AttributeValue } from "@/graphql/products";
+// @ts-ignore
 import editorJSHTML from "editorjs-html";
 import _ from "lodash";
 import React from "react";

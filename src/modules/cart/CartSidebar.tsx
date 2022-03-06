@@ -106,7 +106,7 @@ const CartSidebarWithItem: React.FC<CartSidebarWithItemProps> = ({
       {currentStep === 0 ? (
         <CartContent cartItems={cartItems} />
       ) : (
-        <CrossSell />
+        <CrossSell handleCheckout={onCheckout} />
       )}
 
       <div className={styles["cart-sidebar-footer"]}>

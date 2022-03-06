@@ -1,5 +1,5 @@
 import Button from "#/components/Button";
-import { useQuantityAvailable } from "#/components/QuantityControl/useQuantityAvailable";
+import { useQuantityAvailable } from "@/graphql/products/useQuantityAvailable";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   addSelectionToCart,

@@ -1,7 +1,10 @@
 import Text from "#/components/Text";
 import { CartItem, getProductSelectionThumbnail } from "#/types";
 import { formatCurrency } from "#/utils/number";
-import { getProductVariantPrice } from "@/graphql/products";
+import {
+  getProductVariantPrice,
+  productSelectionName,
+} from "@/graphql/products";
 import { useAppSelector } from "@/redux/hooks";
 import { cartItemsSelector, cartSumSelector } from "@/redux/slices/cart";
 import React from "react";
@@ -64,12 +67,12 @@ const CartSummaryItem: React.FC<CartSummaryItemProps> = ({ cartItem }) => {
         )}
       </div>
       <div className={styles["cart-summary-box-details-items-wrapper-details"]}>
-        <h2>{cartItemName(cartItem)}</h2>
+        <h2>{productSelectionName(cartItem.selection)}</h2>
         <Text.P thickness="thin">{`Số lượng: ${cartItem.quantity}`}</Text.P>
       </div>
       <div className={styles["cart-summary-box-details-items-wrapper-price"]}>
         <Text.P thickness="thin">
-        {formatCurrency(getProductVariantPrice(cartItem.selection.variant))}
+          {formatCurrency(getProductVariantPrice(cartItem.selection.variant))}
         </Text.P>
       </div>
     </div>
@@ -77,12 +80,3 @@ const CartSummaryItem: React.FC<CartSummaryItemProps> = ({ cartItem }) => {
 };
 
 export default CartSummary;
-
-function cartItemName(cartItem: CartItem): string {
-  const variant = cartItem.selection.variant;
-  const productName = cartItem.selection.product.name;
-  if (variant.name !== variant.id) {
-    return `${productName} - ${variant.name}`;
-  }
-  return productName;
-}

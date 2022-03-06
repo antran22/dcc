@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write {src,pages}/**/*.{tsx,ts}",
-    "codegen": "apollo codegen:generate --target=typescript --tagName=gql --localSchemaFile=schema.graphql --globalTypesFile globalTypes.d.ts"
+    "codegen": "apollo codegen:generate --target=typescript --tagName=gql --localSchemaFile=schema.graphql --globalTypesFile __generated__/globalTypes.d.ts"
   },
   "resolutions": {
     "graphql": "^15.5.3"

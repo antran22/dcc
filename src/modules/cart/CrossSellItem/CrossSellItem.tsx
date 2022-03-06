@@ -1,56 +1,80 @@
 import Button from "#/components/Button";
-import StrapiResponsiveImage from "#/components/Image";
 import Text from "#/components/Text";
-import { CartSidebarContext } from "#/contexts/CartSidebarContext";
-import { getProductThumbnail, Product } from "#/types";
-import { formatCurrency } from "#/utils/number";
+import {
+  getProductSelectionThumbnail,
+  ProductSelectionCrossSell,
+} from "#/types";
+import {
+  CrossSellProductVariant,
+  getProductVariantPrice,
+  productSelectionName,
+} from "@/graphql/products";
+import { CrossSellProduct } from "@/graphql/products/useCrossSellProducts";
 import { useAppDispatch } from "@/redux/hooks";
 import {
   addSelectionToCart,
   reduceSelectionFromCart,
 } from "@/redux/slices/cart";
-import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import Image from "next/image";
+import React, { useState } from "react";
 import styles from "./CrossSellItem.module.scss";
 
 interface CrossSellItemProps {
-  product: Product;
+  product: CrossSellProduct;
+}
+
+function getFirstAvailableVariant(
+  product: CrossSellProduct
+): CrossSellProductVariant | undefined {
+  if (!product.variants) {
+    return undefined;
+  }
+
+  for (const variant of product.variants) {
+    if (variant?.quantityAvailable && variant.quantityAvailable > 0) {
+      return variant;
+    }
+  }
 }
 
 const CrossSellItem: React.FC<CrossSellItemProps> = ({ product }) => {
   const dispatch = useAppDispatch();
   const [isItemAdded, setIsItemAdded] = useState(false);
-  const router = useRouter();
 
-  const { setOpenCartBar, setCurrentStep } = useContext(CartSidebarContext);
-
+  const firstAvailableVariant = getFirstAvailableVariant(product);
+  if (!firstAvailableVariant) {
+    return null;
+  }
+  const selection: ProductSelectionCrossSell = {
+    product,
+    variant: firstAvailableVariant,
+    type: "cross_sell",
+  };
   const handleCtaClick = () => {
-    if (product.colors.length > 0 || product.sizes.length > 0) {
-      // Todo: show redirection modal
-      setOpenCartBar(false);
-      setCurrentStep(0);
-      return router.push(`/products/${product.slug}`);
-    }
     if (isItemAdded) {
-      dispatch(reduceSelectionFromCart({ type: "product_variant", product }));
+      dispatch(reduceSelectionFromCart(selection));
       setIsItemAdded(false);
     } else {
-      dispatch(addSelectionToCart({ type: "product_variant", product }));
+      dispatch(addSelectionToCart(selection));
       setIsItemAdded(true);
     }
   };
 
-  const thumbnail = getProductThumbnail(product);
+  const thumbnail = getProductSelectionThumbnail(selection);
 
   return (
-    <div className={styles["cross-sell-item"]}>
+    <div className={styles.crossSellItem}>
       <div className={styles.crossSellItemImage}>
-        <StrapiResponsiveImage image={thumbnail} layout="fill" />
+        {thumbnail && (
+          <Image src={thumbnail.url} alt={thumbnail.alt} layout="fill" />
+        )}
       </div>
 
       <div className={styles["cross-sell-item-description"]}>
-        <h2>{product.title}</h2>
-        <Text.P thickness="thin">{`+${formatCurrency(product.price)}`}</Text.P>
+        <h2>{productSelectionName(selection)}</h2>
+        <Text.P thickness="thin">{`+${getProductVariantPrice(
+          firstAvailableVariant
+        )}`}</Text.P>
       </div>
 
       <div className={styles["cross-sell-item-button"]}>

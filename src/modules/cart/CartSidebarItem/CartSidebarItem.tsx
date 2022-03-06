@@ -1,6 +1,6 @@
 import Button from "#/components/Button";
 import { Form } from "#/components/Form";
-import { useQuantityAvailable } from "#/components/QuantityControl/useQuantityAvailable";
+import { useQuantityAvailable } from "@/graphql/products/useQuantityAvailable";
 import Spacer from "#/components/Spacer";
 import Text from "#/components/Text";
 import {

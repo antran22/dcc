@@ -1,7 +1,8 @@
 import {
+  CrossSellProduct,
+  Product,
   ProductMedia,
   ProductVariant,
-  Product,
 } from "@/graphql/products";
 
 export interface CartItem {
@@ -9,8 +10,19 @@ export interface CartItem {
   selection: ProductSelection;
 }
 
-export interface ProductSelection {
+export type ProductSelection =
+  | ProductSelectionCrossSell
+  | ProductSelectionBrowse;
+
+export interface ProductSelectionCrossSell {
+  product: CrossSellProduct;
+  type: "cross_sell";
+  variant: ProductVariant;
+}
+
+export interface ProductSelectionBrowse {
   product: Product;
+  type: "browse";
   variant: ProductVariant;
 }
 
