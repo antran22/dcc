@@ -1,47 +1,86 @@
 import Button from "#/components/Button";
-import { CartSelection } from "#/types";
+import { useQuantityAvailable } from "#/components/QuantityControl/useQuantityAvailable";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   addSelectionToCart,
   getCartItemSelector,
   reduceSelectionFromCart,
+  setSelectionQuantity,
 } from "@/redux/slices/cart";
-import React from "react";
+import { currentProductSelectionSelector } from "@/redux/slices/productView";
+import _ from "lodash";
+import React, { useEffect } from "react";
+import { Spinner } from "react-bootstrap";
 import { AiOutlineMinus as Minus, AiOutlinePlus as Plus } from "react-icons/ai";
 import styles from "./QuantityControl.module.scss";
 
-interface QuantityControlProps {
-  cartSelection?: CartSelection;
-}
+interface QuantityControlProps {}
 
-const QuantityControl: React.FC<QuantityControlProps> = ({ cartSelection }) => {
+const QuantityControl: React.FC<QuantityControlProps> = ({}) => {
   const dispatch = useAppDispatch();
 
-  const item = useAppSelector(getCartItemSelector(cartSelection));
-  const TOGGLE_SIZE = 16;
+  const productSelection = useAppSelector(currentProductSelectionSelector);
+  const cartItem = useAppSelector(getCartItemSelector(productSelection));
 
-  if (!cartSelection) {
+  const { quantityAvailable, loading } = useQuantityAvailable(productSelection);
+
+  useEffect(() => {
+    if (!loading && !_.isNil(quantityAvailable) && cartItem) {
+      if (cartItem.quantity > quantityAvailable) {
+        dispatch(
+          setSelectionQuantity({
+            selection: cartItem.selection,
+            newQuantity: quantityAvailable,
+          })
+        );
+      }
+    }
+  }, [cartItem, dispatch, loading, quantityAvailable]);
+
+  if (!productSelection) {
     return null;
   }
 
   const onAddItemClick = () => {
-    dispatch(addSelectionToCart(cartSelection));
+    if (productSelection) {
+      dispatch(addSelectionToCart(productSelection));
+    }
   };
 
   const onRemoveItemClick = () => {
-    dispatch(reduceSelectionFromCart(cartSelection));
+    if (productSelection) {
+      dispatch(reduceSelectionFromCart(productSelection));
+    }
   };
 
   return (
     <div className={styles.quantityControl}>
-      {item && item.quantity > 0 ? (
+      <p>
+        <span>Có thể mua: </span>
+        <span style={{ width: 20 }}>
+          {loading ? (
+            <Spinner as="span" animation="border" size="sm" />
+          ) : (
+            quantityAvailable
+          )}
+        </span>
+      </p>
+      {cartItem && cartItem.quantity > 0 ? (
         <>
           <Button onClick={onRemoveItemClick} color="white">
-            <Minus size={TOGGLE_SIZE} />
+            <Minus size={16} />
           </Button>
-          <p>{item.quantity}</p>
-          <Button onClick={onAddItemClick} color="white">
-            <Plus size={TOGGLE_SIZE} />
+          <p>{cartItem.quantity}</p>
+          <Button
+            onClick={onAddItemClick}
+            color="white"
+            disabled={
+              !loading &&
+              !_.isNil(quantityAvailable) &&
+              quantityAvailable <= cartItem.quantity
+            }
+          >
+            <Plus size={16} />
           </Button>
         </>
       ) : (

@@ -1,67 +1,20 @@
-import LoadingScreen from "#/components/LoadingScreen";
-import Text from "#/components/Text";
-import DetailLayout from "#/layout/DetailLayout";
-import {
-  getPriceStringFromProduct,
-  getProductAttributeMap,
-  getProductDetail,
-  SingleProductDetail,
-} from "@/graphql/products";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  currentProductVariantSelector,
-  previewImageSelector,
-  resetPreviewProduct,
-  setViewingProduct,
-} from "@/redux/slices/productView";
-import _ from "lodash";
+import { getProductDetail, Product } from "@/graphql/products";
+import { ProductDetailPageTemplate } from "../../components/ProductDetailPageTemplate";
 import { GetServerSideProps, NextPage } from "next";
-import React, { useEffect } from "react";
+import React from "react";
 import ProductInformation from "../../components/ProductInformation/ProductInformation";
-import styles from "./ProductDetailPage.module.scss";
 
 interface ProductDetailPageProps {
-  product: SingleProductDetail;
+  product: Product;
 }
 
 export const ProductDetailPage: NextPage<ProductDetailPageProps> = ({
   product,
 }) => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (product) {
-      dispatch(setViewingProduct(product));
-    }
-    return () => {
-      dispatch(resetPreviewProduct());
-    };
-  }, [dispatch, product]);
-
-  const previewProductImage = useAppSelector(previewImageSelector);
-
-  if (!product) {
-    return <LoadingScreen />;
-  }
-
-  const attributes = getProductAttributeMap(product);
-
-  const color = _.first(attributes["theme-color"])?.value ?? "#ffffff";
-
   return (
-    <DetailLayout
-      title={product.name}
-      themeColorCode={color}
-      previewImages={previewProductImage}
-      footer={
-        <div className={styles.productsDetailsPageContentFooter}>
-          <Text.P size="large">{getPriceStringFromProduct(product)}</Text.P>
-          {/*<QuantityControl cartSelection={currentProductVariant} />*/}
-        </div>
-      }
-    >
+    <ProductDetailPageTemplate product={product}>
       <ProductInformation product={product} />
-    </DetailLayout>
+    </ProductDetailPageTemplate>
   );
 };
 

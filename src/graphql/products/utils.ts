@@ -1,13 +1,9 @@
 import { formatCurrency } from "#/utils/number";
-
-interface ProductAttributeValue {
-  name: string | null;
-  value: string | null;
-  richText?: any | null;
-}
+import { ProductPricing } from "@/graphql/products/__generated__/ProductPricing";
+import { AttributeValue } from "./__generated__/AttributeValue";
 
 export interface ProductAttributeMap {
-  [slug: string]: ProductAttributeValue[];
+  [slug: string]: AttributeValue[];
 }
 
 interface ProductAttributeMapInput {
@@ -15,7 +11,7 @@ interface ProductAttributeMapInput {
     attribute: {
       slug: string | null;
     };
-    values: (ProductAttributeValue | null)[];
+    values: (AttributeValue | null)[];
   }[];
 }
 
@@ -27,7 +23,7 @@ export function getProductAttributeMap(
     const slug = attribute.attribute.slug;
     if (slug) {
       attributeMap[slug] = attribute.values.filter(
-        (value): value is ProductAttributeValue => !!value
+        (value): value is AttributeValue => !!value
       );
     }
   });
@@ -35,20 +31,7 @@ export function getProductAttributeMap(
 }
 
 interface ProductPriceInput {
-  pricing: {
-    priceRange: {
-      start: {
-        gross: {
-          amount: number;
-        };
-      } | null;
-      stop: {
-        gross: {
-          amount: number;
-        };
-      } | null;
-    } | null;
-  } | null;
+  pricing: ProductPricing | null;
 }
 
 export function getPriceStringFromProduct(product: ProductPriceInput): string {

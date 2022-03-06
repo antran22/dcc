@@ -3,15 +3,17 @@ import Spacer from "#/components/Spacer";
 import Text from "#/components/Text";
 import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
 import { colors } from "#/styles/colors";
-import { Order } from "#/types";
 import { useAppDispatch } from "@/redux/hooks";
 import { clearCart } from "@/redux/slices/cart";
 import React, { useContext } from "react";
-import { AiFillCheckCircle as CheckIcon, AiOutlineArrowLeft as BackIcon } from "react-icons/ai";
+import {
+  AiFillCheckCircle as CheckIcon,
+  AiOutlineArrowLeft as BackIcon,
+} from "react-icons/ai";
 import styles from "./CheckoutSuccess.module.scss";
 
 interface CheckoutSuccessProps {
-  order: Order;
+  order: any;
 }
 
 const ICON_SIZE = 25;

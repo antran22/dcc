@@ -1,15 +1,17 @@
+import { ProductSelection } from "#/types";
 import {
   AttributeValue,
+  getProductColors,
+  getProductSizes,
   getVariantByColorAndSize,
+  Product,
   ProductMedia,
-  ProductVariant,
-  SingleProductDetail,
-} from "@/graphql/products/getProductDetail";
+} from "@/graphql/products";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 interface ProductViewState {
-  product?: SingleProductDetail;
+  product?: Product;
   selectedColor?: AttributeValue;
   selectedSize?: AttributeValue;
 }
@@ -20,10 +22,18 @@ export const productViewSlice = createSlice({
   name: "productView",
   initialState: initialProductViewState,
   reducers: {
-    setViewingProduct: (state, action: PayloadAction<SingleProductDetail>) => {
+    setViewingProduct: (state, action: PayloadAction<Product>) => {
       state.product = action.payload;
+      const colors = getProductColors(action.payload);
+      const sizes = getProductSizes(action.payload);
       state.selectedColor = undefined;
       state.selectedSize = undefined;
+      if (colors.length === 1) {
+        state.selectedColor = colors[0];
+      }
+      if (sizes.length === 1) {
+        state.selectedSize = sizes[0];
+      }
     },
 
     selectColor: (state, action: PayloadAction<AttributeValue>) => {
@@ -102,12 +112,23 @@ export const currentSizeSelector = createSelector(
   }
 );
 
-export const currentProductVariantSelector = createSelector(
+export const currentProductSelectionSelector = createSelector(
   [productViewSelector],
-  ({ product, selectedColor, selectedSize }): ProductVariant | undefined => {
-    if (!product || !selectedColor || !selectedSize) {
+  ({ product, selectedColor, selectedSize }): ProductSelection | undefined => {
+    if (!product) {
       return undefined;
     }
-    return getVariantByColorAndSize(product, selectedColor, selectedSize);
+    const variant = getVariantByColorAndSize(
+      product,
+      selectedColor,
+      selectedSize
+    );
+    if (!variant) {
+      return undefined;
+    }
+    return {
+      product,
+      variant,
+    };
   }
 );

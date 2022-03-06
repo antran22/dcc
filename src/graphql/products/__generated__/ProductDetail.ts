@@ -19,17 +19,18 @@ export interface ProductDetail_product_media {
 export interface ProductDetail_product_attributes_attribute {
   __typename: "Attribute";
   /**
-   * Name of an attribute displayed in the interface.
-   */
-  name: string | null;
-  /**
    * Internal representation of an attribute name.
    */
   slug: string | null;
+  /**
+   * Name of an attribute displayed in the interface.
+   */
+  name: string | null;
 }
 
 export interface ProductDetail_product_attributes_values {
   __typename: "AttributeValue";
+  id: string;
   /**
    * Name of a value displayed in the interface.
    */
@@ -42,6 +43,18 @@ export interface ProductDetail_product_attributes_values {
    * Represents the text (JSON) of the attribute value.
    */
   richText: any | null;
+  /**
+   * Represents the boolean value of the attribute value.
+   */
+  boolean: boolean | null;
+  /**
+   * Represents the date time value of the attribute value.
+   */
+  dateTime: any | null;
+  /**
+   * The ID of the attribute reference.
+   */
+  reference: string | null;
 }
 
 export interface ProductDetail_product_attributes {
@@ -111,13 +124,13 @@ export interface ProductDetail_product_pricing {
 export interface ProductDetail_product_variants_attributes_attribute {
   __typename: "Attribute";
   /**
-   * Name of an attribute displayed in the interface.
-   */
-  name: string | null;
-  /**
    * Internal representation of an attribute name.
    */
   slug: string | null;
+  /**
+   * Name of an attribute displayed in the interface.
+   */
+  name: string | null;
 }
 
 export interface ProductDetail_product_variants_attributes_values {
@@ -135,6 +148,18 @@ export interface ProductDetail_product_variants_attributes_values {
    * Represents the text (JSON) of the attribute value.
    */
   richText: any | null;
+  /**
+   * Represents the boolean value of the attribute value.
+   */
+  boolean: boolean | null;
+  /**
+   * Represents the date time value of the attribute value.
+   */
+  dateTime: any | null;
+  /**
+   * The ID of the attribute reference.
+   */
+  reference: string | null;
 }
 
 export interface ProductDetail_product_variants_attributes {
@@ -149,6 +174,30 @@ export interface ProductDetail_product_variants_attributes {
   values: (ProductDetail_product_variants_attributes_values | null)[];
 }
 
+export interface ProductDetail_product_variants_pricing_price_gross {
+  __typename: "Money";
+  /**
+   * Amount of money.
+   */
+  amount: number;
+}
+
+export interface ProductDetail_product_variants_pricing_price {
+  __typename: "TaxedMoney";
+  /**
+   * Amount of money including taxes.
+   */
+  gross: ProductDetail_product_variants_pricing_price_gross;
+}
+
+export interface ProductDetail_product_variants_pricing {
+  __typename: "VariantPricingInfo";
+  /**
+   * The price, with any discount subtracted.
+   */
+  price: ProductDetail_product_variants_pricing_price | null;
+}
+
 export interface ProductDetail_product_variants_media {
   __typename: "ProductMedia";
   /**
@@ -160,17 +209,16 @@ export interface ProductDetail_product_variants_media {
 
 export interface ProductDetail_product_variants {
   __typename: "ProductVariant";
+  id: string;
+  name: string;
   /**
    * List of attributes assigned to this variant.
    */
   attributes: ProductDetail_product_variants_attributes[];
-  id: string;
-  name: string;
-  sku: string | null;
   /**
-   * Quantity of a product available for sale in one checkout. Field value will be `null` when no `limitQuantityPerCheckout` in global settings has been set, and `productVariant` stocks are not tracked.
+   * Lists the storefront variant's pricing, the current price and discounts, only meant for displaying.
    */
-  quantityAvailable: number | null;
+  pricing: ProductDetail_product_variants_pricing | null;
   /**
    * List of media for the product variant.
    */

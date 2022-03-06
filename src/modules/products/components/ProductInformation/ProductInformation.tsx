@@ -1,56 +1,54 @@
-import React, { useState } from "react";
 import Button from "#/components/Button";
 import ModalWrapper from "#/components/ModalWrapper";
 import Text from "#/components/Text";
 import {
+  extractRichTextAttributeValue,
+  RichTextRenderer,
+} from "#/utils/editorJS";
+import {
   getProductAttributeMap,
   getProductColors,
   getProductSizes,
-  SingleProductDetail,
+  Product,
 } from "@/graphql/products";
+import { useAppDispatch } from "@/redux/hooks";
 import c from "classnames";
-import _ from "lodash";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 // @ts-ignore
 import editorJSHTML from "editorjs-html";
+import React, { useState } from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import { AiFillQuestionCircle as Question } from "react-icons/ai";
 import ColorPicker from "./ProductColorPicker";
-import ProductSizePicker from "./ProductSizePicker";
 import styles from "./ProductInformation.module.scss";
+import ProductSizePicker from "./ProductSizePicker";
 
 interface ItemInformationProps {
-  product: SingleProductDetail;
+  product: Product;
 }
-
-const edJSParser = editorJSHTML();
-
-interface RichTextRendererProps {
-  input: string;
-}
-const RichTextRenderer: React.FC<RichTextRendererProps> = ({ input }) => {
-  if (input) {
-    const edJSData = JSON.parse(input);
-    const html = edJSParser.parse({ blocks: edJSData.blocks ?? [] });
-    return <div dangerouslySetInnerHTML={{ __html: html.join("") }} />;
-  }
-  return null;
-};
 
 const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
   const [showMeaningModal, setShowMeaningModal] = useState(false);
   const [showSizeGuidanceModal, setShowSizeGuidanceModal] = useState(false);
   const [showSpecModal, setShowSpecModal] = useState(false);
 
+  const dispatch = useAppDispatch();
+
   const productAttribute = getProductAttributeMap(product);
 
-  const productUsage = _.first(productAttribute["usage"])?.richText;
+  const productDescriptionBrief = extractRichTextAttributeValue(
+    productAttribute["description-brief"]
+  );
+  const productUsage = extractRichTextAttributeValue(productAttribute["usage"]);
 
-  const productSpec = _.first(productAttribute["spec"])?.richText;
+  const productSpecs = extractRichTextAttributeValue(productAttribute["specs"]);
+  const productSpecsBrief = extractRichTextAttributeValue(
+    productAttribute["specs-brief"]
+  );
 
-  const productSizeGuidance = _.first(
+  const productSizeGuidance = extractRichTextAttributeValue(
     productAttribute["size-guidance"]
-  )?.richText;
+  );
 
   const colors = getProductColors(product);
   const sizes = getProductSizes(product);
@@ -58,7 +56,7 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
   return (
     <div className={styles.itemInformationContainer}>
       <Row className={c("m-3", "px-3", styles.itemInformation)}>
-        {colors.length > 0 && (
+        {colors.length > 1 && (
           <Col
             xs={{ offset: 3, span: 6 }}
             lg={{ offset: 2, span: 8 }}
@@ -72,7 +70,7 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
           <div className={styles.itemInformationBox}>
             <Text.SpecialTitle color="cyan">Ý nghĩa</Text.SpecialTitle>
             <Text.P thickness="thin" as="div">
-              <RichTextRenderer input={product.description} />
+              <RichTextRenderer input={productDescriptionBrief} />
             </Text.P>
             <Button
               classNames={[styles["item-information-box-btn"]]}
@@ -99,7 +97,7 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
               </div>
             </div>
 
-            {sizes.length > 0 && (
+            {sizes.length > 1 && (
               <ProductSizePicker
                 sizes={sizes}
                 handleOpenGuidance={() => setShowSizeGuidanceModal(true)}
@@ -123,7 +121,7 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
             >
               <div className="d-flex justify-content-center flex-row align-items-center">
                 <Text.P thickness="thin" as="div">
-                  <RichTextRenderer input={productSpec} />
+                  <RichTextRenderer input={productSpecsBrief} />
                 </Text.P>
                 <Question color="grey" />
               </div>
@@ -153,7 +151,7 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
         visible={showSpecModal}
         onClose={() => setShowSpecModal(false)}
       >
-        <RichTextRenderer input={productSpec} />
+        <RichTextRenderer input={productSpecs} />
       </ModalWrapper>
     </div>
   );

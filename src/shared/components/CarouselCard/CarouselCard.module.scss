@@ -33,11 +33,11 @@
   }
 
   @include tablet-downward {
-    .product-btn-container {
+    .carousel-card-btn-container {
       opacity: 1;
     }
 
-    .product-background {
+    .carousel-card-background {
       opacity: 1;
     }
   }

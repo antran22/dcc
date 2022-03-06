@@ -1,20 +1,28 @@
+import {
+  ProductList,
+  ProductList_category_products_edges_node,
+} from "@/graphql/products/__generated__/ProductList";
+import {
+  productAttributeFragment,
+  productPricingFragment,
+} from "@/graphql/products/fragments";
 import { gql } from "@apollo/client";
 import client from "../apolloClient";
-import {
-  SingleProductList,
-  SingleProductList_category_products_edges_node,
-} from "./__generated__/SingleProductList";
 
-export type ProductListItem = SingleProductList_category_products_edges_node;
+export type ProductListItem = ProductList_category_products_edges_node;
 
-export async function getProductList(): Promise<ProductListItem[]> {
+export type ProductCategory = "single-product" | "combo";
+
+export async function getProductList(
+  category: ProductCategory
+): Promise<ProductListItem[]> {
   let allProducts: ProductListItem[] = [];
   let currentCursor = null;
   while (true) {
-    const queryResponse = await client.query<SingleProductList>({
+    const queryResponse = await client.query<ProductList>({
       query: gql`
-        query SingleProductList($after: String) {
-          category(slug: "single-product") {
+        query ProductList($category: String, $after: String) {
+          category(slug: $category) {
             products(channel: "online-vn", first: 10, after: $after) {
               totalCount
               pageInfo {
@@ -27,33 +35,14 @@ export async function getProductList(): Promise<ProductListItem[]> {
                   slug
                   name
                   attributes {
-                    attribute {
-                      name
-                      slug
-                    }
-                    values {
-                      name
-                      value
-                    }
+                    ...ProductAttribute
                   }
 
                   pricing {
-                    priceRange {
-                      start {
-                        gross {
-                          amount
-                        }
-                      }
-                      stop {
-                        gross {
-                          amount
-                        }
-                      }
-                    }
+                    ...ProductPricing
                   }
 
                   media {
-                    type
                     url
                     alt
                   }
@@ -62,13 +51,16 @@ export async function getProductList(): Promise<ProductListItem[]> {
             }
           }
         }
+        ${productAttributeFragment}
+        ${productPricingFragment}
       `,
       variables: {
         after: currentCursor,
+        category,
       },
     });
 
-    const data: SingleProductList = queryResponse.data;
+    const data: ProductList = queryResponse.data;
     const productInThisPage = data.category?.products?.edges.map(
       (edge) => edge.node
     );

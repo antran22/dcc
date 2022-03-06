@@ -48,7 +48,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ handleCheckout }) => {
   const cartItems = useAppSelector(cartItemsSelector);
 
   return (
-    <div className={styles["checkout-form"]}>
+    <div className={styles.checkoutForm}>
       <Formik
         initialValues={{
           email: "",

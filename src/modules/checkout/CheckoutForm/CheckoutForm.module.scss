@@ -2,7 +2,6 @@
 
 .checkout-form {
   padding: $s5 $s3;
-  height: calc(100vh - #{$header-height - $footer-height});
   overflow-y: auto;
 
   @media screen and (max-width: $breakpoint-tablet) {
@@ -10,8 +9,7 @@
   }
 
   &-section {
-    padding: $s5;
-    padding-top: 0;
+    padding: 0 $s5 $s5;
 
     &-header {
       display: flex;

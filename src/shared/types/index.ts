@@ -9,9 +9,7 @@ export type DCCColors =
   | "dark-grey"
   | "light-grey";
 
-export * from "./product";
 export * from "./image";
 export * from "./cart";
-export * from "./combo";
-export * from "./order";
 export * from "./config";
+export * from "./order";

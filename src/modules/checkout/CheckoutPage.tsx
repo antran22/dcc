@@ -1,6 +1,5 @@
 import PlainLayout from "#/layout/PlainLayout";
-import { Order, transformOrderForUploading } from "#/types";
-import { axiosInstance } from "#/utils/axios";
+import { Order } from "#/types";
 import { NextPage } from "next";
 import React, { useState } from "react";
 import CartSummary from "./CartSummary";
@@ -12,38 +11,23 @@ import Footer from "./Footer";
 const CheckoutPage: NextPage = () => {
   const [order, setOrder] = useState<Order>();
 
-  const onCheckout: CheckoutHandler = (order, done) => {
-    const transformedOrder = transformOrderForUploading(order);
-    axiosInstance
-      .post("/orders", transformedOrder)
-      .then(() => {
-        setOrder(order);
-      })
-      .catch(() => {
-        alert("error");
-      })
-      .finally(() => {
-        done();
-      });
-  };
+  const onCheckout: CheckoutHandler = (order, done) => {};
 
   return (
     <PlainLayout title="Thanh toán" headerSimple>
-      <div className={styles["checkout-page"]}>
-        <main className={styles["checkout-page-content"]}>
-          <section className={styles["checkout-page-content-section"]}>
-            {order ? (
-              <CheckoutSuccess order={order} />
-            ) : (
-              <CheckoutForm handleCheckout={onCheckout} />
-            )}
-          </section>
-          <section className={styles["checkout-page-content-section"]}>
-            <CartSummary />
-          </section>
-        </main>
-        <Footer />
+      <div className={styles.checkoutPageContent}>
+        <section className={styles.checkoutPageContentSection}>
+          {order ? (
+            <CheckoutSuccess order={order} />
+          ) : (
+            <CheckoutForm handleCheckout={onCheckout} />
+          )}
+        </section>
+        <section className={styles.checkoutPageContentSection}>
+          <CartSummary />
+        </section>
       </div>
+      <Footer />
     </PlainLayout>
   );
 };

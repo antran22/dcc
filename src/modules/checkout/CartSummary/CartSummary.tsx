@@ -1,16 +1,12 @@
-import StrapiResponsiveImage from "#/components/Image";
 import Text from "#/components/Text";
-import {
-  CartItem,
-  getSelectionPrice,
-  getSelectionThumbnail,
-  getSelectionTitle,
-} from "#/types";
+import { CartItem, getProductSelectionThumbnail } from "#/types";
 import { formatCurrency } from "#/utils/number";
+import { getProductVariantPrice } from "@/graphql/products";
 import { useAppSelector } from "@/redux/hooks";
 import { cartItemsSelector, cartSumSelector } from "@/redux/slices/cart";
 import React from "react";
 import styles from "./CartSummary.module.scss";
+import Image from "next/image";
 
 const CartSummary: React.FC = () => {
   const cartTotalSum = useAppSelector(cartSumSelector);
@@ -54,25 +50,26 @@ interface CartSummaryItemProps {
   cartItem: CartItem;
 }
 const CartSummaryItem: React.FC<CartSummaryItemProps> = ({ cartItem }) => {
-  const selectionImage = getSelectionThumbnail(cartItem.selection);
+  const selectionImage = getProductSelectionThumbnail(cartItem.selection);
   return (
     <div className={styles["cart-summary-box-details-items-wrapper"]}>
       <div className={styles["cart-summary-box-details-items-wrapper-image"]}>
         {selectionImage && (
-          <StrapiResponsiveImage
+          <Image
             objectFit="contain"
             layout="fill"
-            image={selectionImage}
+            src={selectionImage.url}
+            alt={selectionImage.alt}
           />
         )}
       </div>
       <div className={styles["cart-summary-box-details-items-wrapper-details"]}>
-        <h2>{getSelectionTitle(cartItem.selection)}</h2>
-        <Text.P thickness="thin">{`Slg: ${cartItem.quantity}`}</Text.P>
+        <h2>{cartItemName(cartItem)}</h2>
+        <Text.P thickness="thin">{`Số lượng: ${cartItem.quantity}`}</Text.P>
       </div>
       <div className={styles["cart-summary-box-details-items-wrapper-price"]}>
         <Text.P thickness="thin">
-          {formatCurrency(getSelectionPrice(cartItem.selection))}
+        {formatCurrency(getProductVariantPrice(cartItem.selection.variant))}
         </Text.P>
       </div>
     </div>
@@ -80,3 +77,12 @@ const CartSummaryItem: React.FC<CartSummaryItemProps> = ({ cartItem }) => {
 };
 
 export default CartSummary;
+
+function cartItemName(cartItem: CartItem): string {
+  const variant = cartItem.selection.variant;
+  const productName = cartItem.selection.product.name;
+  if (variant.name !== variant.id) {
+    return `${productName} - ${variant.name}`;
+  }
+  return productName;
+}

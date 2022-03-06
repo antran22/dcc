@@ -1,23 +1,23 @@
 import Button from "#/components/Button";
 import { Form } from "#/components/Form";
-import StrapiResponsiveImage from "#/components/Image";
+import { useQuantityAvailable } from "#/components/QuantityControl/useQuantityAvailable";
 import Spacer from "#/components/Spacer";
 import Text from "#/components/Text";
 import {
   CartItem,
-  CartSelection,
-  getSelectionPrice,
-  getSelectionThumbnail,
-  getSelectionTitle,
+  getProductSelectionThumbnail,
+  ProductSelection,
 } from "#/types";
-import { formatCurrency } from "#/utils/number";
+import { clamp, formatCurrency } from "#/utils/number";
+import { getProductVariantPrice } from "@/graphql/products";
 import { useAppDispatch } from "@/redux/hooks";
 import {
   deleteSelectionFromCart,
   setSelectionQuantity,
 } from "@/redux/slices/cart";
 import c from "classnames";
-import { debounce } from "lodash";
+import _, { debounce } from "lodash";
+import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -32,11 +32,12 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
+  const { quantityAvailable: quantityAvailable, loading } =
+    useQuantityAvailable(cartItem.selection);
+
   useEffect(() => {
     setCartItemQuantity(cartItem.quantity);
   }, [cartItem.quantity]);
-
-  const MAX_QUANTITY = 30;
 
   const onDeleteItemClick = () => {
     dispatch(deleteSelectionFromCart(cartItem.selection));
@@ -54,10 +55,11 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
   );
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = +event.target.value;
-
-    let quantity = inputValue > MAX_QUANTITY ? MAX_QUANTITY : inputValue;
-    quantity = quantity < 0 ? 0 : quantity;
+    const inputValue = parseInt(event.target.value);
+    if (loading || _.isNil(quantityAvailable)) {
+      return;
+    }
+    const quantity = clamp(inputValue, 0, quantityAvailable);
 
     if (quantity === 0) {
       setIsDeleting(true);
@@ -69,10 +71,10 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
   };
 
   const selection = cartItem.selection;
-  const productVariantImage = getSelectionThumbnail(selection);
+  const selectionThumbnail = getProductSelectionThumbnail(selection);
 
   return (
-    <Row className={styles.cartSidebarItem}>
+    <Row className={c(styles.cartSidebarItem, "mb-5")}>
       <Col xs={3}>
         <div
           className={c([
@@ -80,11 +82,12 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
             isDeleting ? styles.cartSidebarItemDeleting : "",
           ])}
         >
-          {productVariantImage && (
-            <StrapiResponsiveImage
+          {selectionThumbnail && (
+            <Image
               objectFit="contain"
               layout="fill"
-              image={productVariantImage}
+              src={selectionThumbnail.url}
+              alt={selectionThumbnail.alt}
             />
           )}
         </div>
@@ -105,12 +108,14 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
                 isDeleting ? styles.cartSidebarItemDeleting : ""
               )}
             >
-              <Form.NumberInput
-                value={cartItemQuantity}
-                onChange={handleQuantityChange}
-                min={0}
-                max={30}
-              />
+              {loading ? null : (
+                <Form.NumberInput
+                  value={cartItemQuantity}
+                  onChange={handleQuantityChange}
+                  min={0}
+                  max={quantityAvailable}
+                />
+              )}
             </div>
           </Col>
 
@@ -154,7 +159,7 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
 };
 
 interface CartSelectionDescriptionProps {
-  selection: CartSelection;
+  selection: ProductSelection;
   className: string;
 }
 
@@ -162,22 +167,13 @@ const CartSelectionDescription: React.FC<CartSelectionDescriptionProps> = ({
   selection,
   className,
 }) => {
-  const details =
-    selection.type === "product_variant" ? (
-      <>
-        {selection.color && <Text.P>Màu: {selection.color.name}</Text.P>}
-        {selection.size && <Text.P>Size: {selection.size.name}</Text.P>}
-      </>
-    ) : (
-      <></>
-    );
-
+  const variant = selection.variant;
   return (
     <div className={c(styles.cartSidebarItemDescription, className)}>
-      <h4>{getSelectionTitle(selection)}</h4>
-      {details}
+      <h4>{selection.product.name}</h4>
+      {variant.name !== variant.id && <p>{variant.name}</p>}
       <Text.P classNames={[styles.cartSidebarItemDescriptionPrice]}>
-        {formatCurrency(getSelectionPrice(selection))}
+        {formatCurrency(getProductVariantPrice(selection.variant))}
       </Text.P>
     </div>
   );

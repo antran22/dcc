@@ -32,11 +32,11 @@ $border-size: 2px;
 
           &-image {
             position: relative;
-            flex: 1;
+            flex-basis: 100px;
           }
 
           &-details {
-            flex: 2;
+            flex: 1;
             margin: 0 $s2;
 
             h2 {
@@ -45,7 +45,7 @@ $border-size: 2px;
           }
 
           &-price {
-            flex: 2;
+            flex-basis: 100px;
             text-align: right;
           }
         }

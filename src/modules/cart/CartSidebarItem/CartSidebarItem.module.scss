@@ -13,10 +13,11 @@
   }
 
   &-description {
-    &-price {
-      margin-bottom: $s4;
+    & > * {
+      width: 100%;
+      word-break: normal;
+      white-space: normal;
     }
-
     &-delete-prompt {
       & > p {
         width: 100%;
@@ -26,8 +27,8 @@
   }
 
   &-quantity {
-    height: 100px;
-    padding: $s3;
+    height: 80px;
+    width: 80px;
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
       -webkit-appearance: none;

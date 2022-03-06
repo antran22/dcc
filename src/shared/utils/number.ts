@@ -6,3 +6,13 @@ export function formatCurrency(amount: number) {
 
   return formatter.format(amount);
 }
+
+export function clamp(n: number, min: number, max: number) {
+  if (n > max) {
+    return max;
+  }
+  if (n < min) {
+    return min;
+  }
+  return n;
+}

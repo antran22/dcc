@@ -1,11 +1,8 @@
+import { CartItem, ProductSelection } from "#/types";
 import {
-  CartItem,
-  CartSelection,
-  getSelectionCrossSell,
-  getSelectionPrice,
-  getSelectionProductIds,
-  isEqualSelection,
-} from "#/types";
+  getProductCrossSellIds,
+  getProductVariantPrice,
+} from "@/graphql/products";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import _ from "lodash";
 import { RootState } from "../store";
@@ -21,18 +18,20 @@ export const initialCartState: CartState = {
 
 function findCartItemWithSelection(
   items: CartItem[],
-  selection: CartSelection
+  selection: ProductSelection
 ): CartItem | undefined {
   return items.find(
-    (item) => item && isEqualSelection(item.selection, selection)
+    (item) => item && item.selection.variant.id === selection.variant.id
   );
 }
 
 function cartItemListWithoutSelection(
   items: CartItem[],
-  selection: CartSelection
+  selection: ProductSelection
 ): CartItem[] {
-  return items.filter((_item) => !isEqualSelection(selection, _item.selection));
+  return items.filter(
+    (_item) => selection.variant.id !== _item.selection.variant.id
+  );
 }
 
 export const cartSlice = createSlice({
@@ -44,7 +43,7 @@ export const cartSlice = createSlice({
       state.hasAlreadyCrossSold = false;
     },
 
-    addSelectionToCart: (state, action: PayloadAction<CartSelection>) => {
+    addSelectionToCart: (state, action: PayloadAction<ProductSelection>) => {
       const item = findCartItemWithSelection(state.items, action.payload);
 
       if (item) {
@@ -57,7 +56,10 @@ export const cartSlice = createSlice({
       }
     },
 
-    reduceSelectionFromCart: (state, action: PayloadAction<CartSelection>) => {
+    reduceSelectionFromCart: (
+      state,
+      action: PayloadAction<ProductSelection>
+    ) => {
       const item = findCartItemWithSelection(state.items, action.payload);
 
       if (item && item.quantity > 0) {
@@ -75,7 +77,7 @@ export const cartSlice = createSlice({
     setSelectionQuantity: (
       state,
       action: PayloadAction<{
-        selection: CartSelection;
+        selection: ProductSelection;
         newQuantity: number;
       }>
     ) => {
@@ -96,7 +98,10 @@ export const cartSlice = createSlice({
       }
     },
 
-    deleteSelectionFromCart: (state, action: PayloadAction<CartSelection>) => {
+    deleteSelectionFromCart: (
+      state,
+      action: PayloadAction<ProductSelection>
+    ) => {
       state.items = cartItemListWithoutSelection(state.items, action.payload);
     },
 
@@ -122,7 +127,9 @@ export const cartItemsSelector = (state: RootState) => state.cart.items;
 
 export const cartSumSelector = createSelector([cartSelector], (state) => {
   return state.items.reduce((total, item) => {
-    return total + getSelectionPrice(item.selection) * item.quantity;
+    return (
+      total + getProductVariantPrice(item.selection.variant) * item.quantity
+    );
   }, 0);
 });
 
@@ -132,22 +139,22 @@ export const cartAmountSelector = createSelector([cartSelector], (state) => {
   }, 0);
 });
 
-export const crossSellProductSelector = createSelector(
+export const crossSellProductIdsSelector = createSelector(
   [cartSelector],
   (state) => {
-    const allProductIdInCart = state.items.flatMap((item) =>
-      getSelectionProductIds(item.selection)
+    const allProductIdInCart = state.items.flatMap(
+      (item) => item.selection.product.id
     );
 
-    const allCrossSellProducts = state.items.flatMap((item) =>
-      getSelectionCrossSell(item.selection)
+    const allCrossSellProductIds = state.items.flatMap((item) =>
+      getProductCrossSellIds(item.selection.product)
     );
 
-    const filteredCrossSellProducts = allCrossSellProducts.filter(
-      (product) => product && !allProductIdInCart.includes(product.id)
-    );
+    const uniqueCrossSellProductIds = _.uniq(allCrossSellProductIds);
 
-    return _.uniqBy(filteredCrossSellProducts, (product) => product.id);
+    return uniqueCrossSellProductIds.filter(
+      (productId) => !allProductIdInCart.includes(productId)
+    );
   }
 );
 
@@ -155,7 +162,7 @@ export const hasCrossSoldSelector = createSelector([cartSelector], (state) => {
   return state.hasAlreadyCrossSold;
 });
 
-export const getCartItemSelector = (selection?: CartSelection) =>
+export const getCartItemSelector = (selection?: ProductSelection) =>
   createSelector([cartSelector], (state) => {
     if (!selection) {
       return undefined;

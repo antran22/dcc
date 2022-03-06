@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   cartItemsSelector,
   cartSumSelector,
-  crossSellProductSelector,
+  crossSellProductIdsSelector,
   hasCrossSoldSelector,
   visitCrossSellPage,
 } from "@/redux/slices/cart";
@@ -28,7 +28,7 @@ const CartSidebar: React.FC = () => {
     useContext(CartSidebarContext);
   const dispatch = useAppDispatch();
 
-  const crossSellProducts = useAppSelector(crossSellProductSelector);
+  const crossSellProducts = useAppSelector(crossSellProductIdsSelector);
   const hasCrossSold = useAppSelector(hasCrossSoldSelector);
 
   const handleCheckout = () => {

@@ -1,8 +1,11 @@
 import Button from "#/components/Button";
 import ModalWrapper from "#/components/ModalWrapper";
 import Text from "#/components/Text";
-import { Combo } from "#/types";
-import { useMarkdownProcessor } from "#/utils/markdown";
+import {
+  extractRichTextAttributeValue,
+  RichTextRenderer,
+} from "#/utils/editorJS";
+import { getProductAttributeMap, Product } from "@/graphql/products";
 import c from "classnames";
 import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
@@ -10,13 +13,21 @@ import Row from "react-bootstrap/Row";
 import styles from "./ComboInformation.module.scss";
 
 interface ComboInformationProps {
-  combo: Combo;
+  combo: Product;
 }
 
 const ComboInformation: React.FC<ComboInformationProps> = ({ combo }) => {
   const [showMeaningModal, setShowMeaningModal] = useState(false);
-  const meaningProcessed = useMarkdownProcessor(combo.meaning);
-  const contentProcessed = useMarkdownProcessor(combo.content);
+
+  const comboAttribute = getProductAttributeMap(combo);
+
+  const descriptionBrief = extractRichTextAttributeValue(
+    comboAttribute["description-brief"]
+  );
+
+  const contentDescription = extractRichTextAttributeValue(
+    comboAttribute["combo-content-description"]
+  );
 
   return (
     <div className={styles.comboInformation}>
@@ -24,7 +35,9 @@ const ComboInformation: React.FC<ComboInformationProps> = ({ combo }) => {
         <Col xs={{ span: 10, offset: 1 }} lg={{ span: 5, offset: 0 }}>
           <div className={styles.comboInformationBox}>
             <Text.SpecialTitle color="cyan">Ý nghĩa</Text.SpecialTitle>
-            <Text.P thickness="thin">{combo.meaning_short}</Text.P>
+            <Text.P thickness="thin" as="div">
+              <RichTextRenderer input={descriptionBrief} />
+            </Text.P>
             <Button
               classNames={[styles["combo-information-box-btn"]]}
               color="black"
@@ -46,7 +59,7 @@ const ComboInformation: React.FC<ComboInformationProps> = ({ combo }) => {
             >
               <Text.SpecialTitle color="nude">Bao gồm</Text.SpecialTitle>
               <Text.P as="div" thickness="thin">
-                {contentProcessed}
+                <RichTextRenderer input={contentDescription} />
               </Text.P>
             </div>
           </div>
@@ -58,7 +71,7 @@ const ComboInformation: React.FC<ComboInformationProps> = ({ combo }) => {
         visible={showMeaningModal}
         onClose={() => setShowMeaningModal(false)}
       >
-        {meaningProcessed}
+        <RichTextRenderer input={combo.description} />
       </ModalWrapper>
     </div>
   );

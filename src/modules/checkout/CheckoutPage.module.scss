@@ -1,14 +1,7 @@
 @import "src/shared/styles/constants.scss";
 
 .checkout-page {
-  height: calc(100% - #{$header-height});
-
-  display: flex;
-  flex-direction: column;
-
   &-content {
-    flex: 1;
-
     display: flex;
 
     @media screen and (max-width: $breakpoint-tablet) {

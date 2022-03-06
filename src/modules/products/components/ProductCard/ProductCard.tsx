@@ -4,24 +4,24 @@ import React from "react";
 interface ProductCardProps {
   name: string;
   price: string;
-  slug: string;
   imageUrl?: string;
   imageAlt?: string;
   themeColorCode?: string;
+  href: string;
 }
 const ProductCard: React.FC<ProductCardProps> = ({
   name,
-  slug,
   price,
   imageUrl,
   themeColorCode,
   imageAlt,
+  href,
 }) => {
   return (
     <CarouselCard
       title={name}
       subtitle={price}
-      href={`products/${slug}`}
+      href={href}
       imageUrl={imageUrl}
       imageAlt={imageAlt}
       themeColorCode={themeColorCode}
