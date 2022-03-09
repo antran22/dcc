@@ -1,5 +1,6 @@
 @import "src/shared/styles/constants.scss";
 @import "src/shared/styles/colors.scss";
+@import "src/shared/styles/mixins.scss";
 
 $border-size: 2px;
 
@@ -22,8 +23,11 @@ $border-size: 2px;
         padding: $s5 0;
         border-bottom: $border-size solid $black;
 
-        max-height: 45vh;
-        overflow-y: auto;
+        @include tablet-upward {
+          overflow-y: auto;
+        }
+
+        @include no-scrollbar;
 
         &-wrapper {
           display: flex;

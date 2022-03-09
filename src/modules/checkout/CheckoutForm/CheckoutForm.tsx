@@ -5,8 +5,8 @@ import NumberBullet from "#/components/NumberBullet";
 import Spacer from "#/components/Spacer";
 import Text from "#/components/Text";
 import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
-import { Order, PaymentOptions } from "#/types";
 import { assets } from "@/assets";
+import { CreateOrderInput, PaymentMethod } from "@/graphql/order";
 import { useAppSelector } from "@/redux/hooks";
 import { cartItemsSelector } from "@/redux/slices/cart";
 import { Field, Form, Formik } from "formik";
@@ -15,7 +15,10 @@ import { AiOutlineArrowRight as ForwardIcon } from "react-icons/ai";
 import * as yup from "yup";
 import styles from "./CheckoutForm.module.scss";
 
-export type CheckoutHandler = (formDetails: Order, done: () => void) => void;
+export type CheckoutHandler = (
+  formDetails: CreateOrderInput,
+  done: () => void
+) => void;
 
 interface CheckoutFormProps {
   handleCheckout: CheckoutHandler;
@@ -32,13 +35,15 @@ const FORM_SCHEMA = (() => {
       .string()
       .email("Email không hợp lệ")
       .required("Yêu cầu nhập email"),
-    name: yup.string().required("Yêu cầu nhập tên"),
+    firstName: yup.string().required("Yêu cầu nhập tên"),
+    lastName: yup.string().required("Yêu cầu nhập họ"),
     phoneNumber: yup
       .string()
       .matches(phoneRegExp, "Số điện thoại không hợp lệ")
       .required("Yêu cầu nhập số điện thoại"),
+    city: yup.string().required("Yêu cầu nhập tỉnh/thành phố"),
     address: yup.string().required("Yêu cầu nhập địa chỉ"),
-    paymentOption: yup.string().required("Yêu cầu chọn phương thức thanh toán"),
+    paymentMethod: yup.string().required("Yêu cầu chọn phương thức thanh toán"),
   });
 })();
 
@@ -52,11 +57,13 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ handleCheckout }) => {
       <Formik
         initialValues={{
           email: "",
-          name: "",
+          firstName: "",
+          lastName: "",
           phoneNumber: "",
           address: "",
-          paymentOption: PaymentOptions.COD,
-          items: cartItems,
+          paymentMethod: "COD" as PaymentMethod,
+          city: "",
+          cartItems,
         }}
         validationSchema={FORM_SCHEMA}
         onSubmit={(values, { setSubmitting }) => {
@@ -109,13 +116,23 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ handleCheckout }) => {
               />
               <Field
                 type="text"
-                name="name"
-                label="Họ tên"
-                placeholder="Họ tên..."
+                name="lastName"
+                label="Họ"
+                placeholder="Họ..."
                 as={TextInput}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.name}
+                value={values.lastName}
+              />
+              <Field
+                type="text"
+                name="firstName"
+                label="Tên"
+                placeholder="Tên..."
+                as={TextInput}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.firstName}
               />
               <Field
                 type="text"
@@ -126,6 +143,16 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ handleCheckout }) => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.phoneNumber}
+              />
+              <Field
+                type="text"
+                name="city"
+                label="Tỉnh/TP"
+                placeholder="Tỉnh/Thành phố..."
+                as={TextInput}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.city}
               />
               <Field
                 type="text"
@@ -169,9 +196,9 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ handleCheckout }) => {
               >
                 <Field
                   type="radio"
-                  name="paymentOption"
+                  name="paymentMethod"
                   label="SHIP COD"
-                  value={PaymentOptions.COD}
+                  value="COD"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   classNames={[styles["checkout-form-section-radio-field"]]}
@@ -182,9 +209,9 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ handleCheckout }) => {
                 <Field
                   type="radio"
                   label="CHUYỂN KHOẢN"
-                  name="paymentOption"
+                  name="paymentMethod"
                   classNames={[styles["checkout-form-section-radio-field"]]}
-                  value={PaymentOptions.BANKING}
+                  value="BANK_TRANSFER"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   icon={assets.banking}

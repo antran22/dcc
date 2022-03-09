@@ -4,6 +4,7 @@ import {
   getProductSelectionThumbnail,
   ProductSelectionCrossSell,
 } from "#/types";
+import { formatCurrency } from "#/utils/number";
 import {
   CrossSellProductVariant,
   getProductVariantPrice,
@@ -70,10 +71,13 @@ const CrossSellItem: React.FC<CrossSellItemProps> = ({ product }) => {
         )}
       </div>
 
-      <div className={styles["cross-sell-item-description"]}>
-        <h2>{productSelectionName(selection)}</h2>
-        <Text.P thickness="thin">{`+${getProductVariantPrice(
-          firstAvailableVariant
+      <h2 className={styles.crossSellItemTitle}>
+        {productSelectionName(selection)}
+      </h2>
+
+      <div className={styles.crossSellItemDescription}>
+        <Text.P thickness="thin">{`+ ${formatCurrency(
+          getProductVariantPrice(firstAvailableVariant)
         )}`}</Text.P>
       </div>
 

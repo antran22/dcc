@@ -3,6 +3,7 @@ import Spacer from "#/components/Spacer";
 import Text from "#/components/Text";
 import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
 import { colors } from "#/styles/colors";
+import { CreateOrderInput, Order } from "@/graphql/order";
 import { useAppDispatch } from "@/redux/hooks";
 import { clearCart } from "@/redux/slices/cart";
 import React, { useContext } from "react";
@@ -13,13 +14,17 @@ import {
 import styles from "./CheckoutSuccess.module.scss";
 
 interface CheckoutSuccessProps {
-  order: any;
+  order: Order;
+  orderInput: CreateOrderInput;
 }
 
 const ICON_SIZE = 25;
 
-const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({ order }) => {
-  const { email, name, address, phoneNumber } = order;
+const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({
+  order,
+  orderInput,
+}) => {
+  const { number } = order;
   const { currentMode } = useContext(ViewportDimensionContext);
   const dispatch = useAppDispatch();
 
@@ -42,6 +47,7 @@ const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({ order }) => {
             </>
           )}
           <h1 style={{ color: colors.green }}>Đặt hàng thành công</h1>
+          <h3>Số đơn hàng: {number}</h3>
         </div>
         <Spacer />
         <Text.P thickness="thin">
@@ -57,7 +63,7 @@ const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({ order }) => {
               <Text.P thickness="thin">Email</Text.P>
             </div>
             <div className={styles["checkout-success-details-table-cell-big"]}>
-              <Text.P thickness="thin">{email}</Text.P>
+              <Text.P thickness="thin">{orderInput.email}</Text.P>
             </div>
           </div>
 
@@ -68,7 +74,9 @@ const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({ order }) => {
               <Text.P thickness="thin">Họ tên</Text.P>
             </div>
             <div className={styles["checkout-success-details-table-cell-big"]}>
-              <Text.P thickness="thin">{name}</Text.P>
+              <Text.P thickness="thin">
+                {orderInput.lastName + " " + orderInput.firstName}
+              </Text.P>
             </div>
           </div>
 
@@ -79,7 +87,7 @@ const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({ order }) => {
               <Text.P thickness="thin">SĐT</Text.P>
             </div>
             <div className={styles["checkout-success-details-table-cell-big"]}>
-              <Text.P thickness="thin">{phoneNumber}</Text.P>
+              <Text.P thickness="thin">{orderInput.phoneNumber}</Text.P>
             </div>
           </div>
 
@@ -90,7 +98,18 @@ const CheckoutSuccess: React.FC<CheckoutSuccessProps> = ({ order }) => {
               <Text.P thickness="thin">Địa chỉ</Text.P>
             </div>
             <div className={styles["checkout-success-details-table-cell-big"]}>
-              <Text.P thickness="thin">{address}</Text.P>
+              <Text.P thickness="thin">{orderInput.address}</Text.P>
+            </div>
+          </div>
+
+          <div className={styles["checkout-success-details-table-row"]}>
+            <div
+              className={styles["checkout-success-details-table-cell-small"]}
+            >
+              <Text.P thickness="thin">Tỉnh/Thành phố</Text.P>
+            </div>
+            <div className={styles["checkout-success-details-table-cell-big"]}>
+              <Text.P thickness="thin">{orderInput.city}</Text.P>
             </div>
           </div>
         </div>

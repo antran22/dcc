@@ -1,10 +1,9 @@
 import ButtonLink from "#/components/Button/ButtonLink";
-import Image from "next/image";
 import Text from "#/components/Text";
 import { ViewportDimensionContext } from "#/contexts/ViewportDimensionContext";
-import { colors } from "#/styles/colors";
 import { HEADER_HEIGHT } from "#/styles/constants";
 import c from "classnames";
+import Image from "next/image";
 import React, { useContext } from "react";
 import tinycolor from "tinycolor2";
 import styles from "./CarouselCard.module.scss";
@@ -26,7 +25,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
   imageAlt,
 }) => {
   if (!themeColorCode) {
-    themeColorCode = colors.darkGrey;
+    themeColorCode = "white";
   }
   const { height, currentMode } = useContext(ViewportDimensionContext);
   const PAGINATION_HEIGHT = currentMode === "desktop" ? 100 : 0;

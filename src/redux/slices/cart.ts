@@ -106,7 +106,7 @@ export const cartSlice = createSlice({
     },
 
     visitCrossSellPage: (state) => {
-      state.hasAlreadyCrossSold = false;
+      state.hasAlreadyCrossSold = true;
     },
   },
 });

@@ -2,10 +2,9 @@
 
 .cart-sidebar {
   height: 100%;
-
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   &-header {
     display: flex;
@@ -14,11 +13,13 @@
 
   &-body {
     padding-top: $s5;
-    height: 80%;
-    overflow-y: auto;
+    flex: 1;
   }
 
   &-footer {
+    display: flex;
+    flex-direction: column;
+    padding: $s5;
     &-total {
       display: flex;
       align-items: center;

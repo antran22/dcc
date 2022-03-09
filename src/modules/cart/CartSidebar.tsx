@@ -36,29 +36,24 @@ const CartSidebar: React.FC = () => {
       dispatch(visitCrossSellPage());
       setCurrentStep(1);
     } else {
-      router.push("/checkout");
-      setOpenCartBar(false);
-      setTimeout(() => {
+      router.push("/checkout").then(() => {
+        setOpenCartBar(false);
         setCurrentStep(0);
-      }, 600);
+      });
     }
   };
 
   return (
     <SidebarContainer
-      title={
-        <CartSidebarHeader
-          onBack={() => setCurrentStep(0)}
-          currentStep={currentStep}
-        />
-      }
+      title={<CartSidebarHeader />}
+      footer={<CartSidebarFooter handleCheckout={handleCheckout} />}
       setSidebarIsOpen={setOpenCartBar}
       sidebarIsOpen={openCartBar}
     >
       {cartItems.length > 0 ? (
-        <CartSidebarWithItem
+        <CartSidebarContent
           cartItems={cartItems}
-          onCheckout={handleCheckout}
+          handleCheckout={handleCheckout}
         />
       ) : (
         <EmptyCartSidebar />
@@ -67,23 +62,18 @@ const CartSidebar: React.FC = () => {
   );
 };
 
-interface CartSidebarHeaderProps {
-  currentStep: number;
-  onBack: () => void;
-}
-const CartSidebarHeader: React.FC<CartSidebarHeaderProps> = ({
-  currentStep,
-  onBack,
-}) => {
-  const BACK_SIZE = 20;
+export default CartSidebar;
+
+const CartSidebarHeader: React.FC = () => {
+  const { currentStep, setCurrentStep } = useContext(CartSidebarContext);
   if (currentStep === 0) {
     return <Text.P>Giỏ hàng</Text.P>;
   }
 
   return (
     <div className={styles["cart-sidebar-header"]}>
-      <Button color="white" onClick={onBack}>
-        <BackIcon size={BACK_SIZE} />
+      <Button color="white" onClick={() => setCurrentStep(0)}>
+        <BackIcon size={20} />
       </Button>
       <Spacer />
       <Text.P>Mua thêm</Text.P>
@@ -91,50 +81,51 @@ const CartSidebarHeader: React.FC<CartSidebarHeaderProps> = ({
   );
 };
 
-interface CartSidebarWithItemProps {
+interface CartSidebarContentProps {
   cartItems: CartItem[];
-  onCheckout: () => void;
+  handleCheckout: () => void;
 }
-const CartSidebarWithItem: React.FC<CartSidebarWithItemProps> = ({
+
+const CartSidebarContent: React.FC<CartSidebarContentProps> = ({
   cartItems,
-  onCheckout,
+  handleCheckout,
 }) => {
   const { currentStep } = useContext(CartSidebarContext);
-  const cartTotalSum = useAppSelector(cartSumSelector);
   return (
-    <div className={styles["cart-sidebar"]}>
+    <div className={styles.cartSidebar}>
       {currentStep === 0 ? (
-        <CartContent cartItems={cartItems} />
-      ) : (
-        <CrossSell handleCheckout={onCheckout} />
-      )}
-
-      <div className={styles["cart-sidebar-footer"]}>
-        <div className={styles["cart-sidebar-footer-total"]}>
-          <Text.P thickness="thin">Tổng:</Text.P>
-          <Text.P thickness="thick" size="large">
-            {formatCurrency(cartTotalSum)}
-          </Text.P>
+        <div className={styles["cart-sidebar-body"]}>
+          {cartItems.map((cartItem, index) => (
+            <CartSidebarItem cartItem={cartItem} key={index} />
+          ))}
         </div>
-        <Button color="red-soil" mode="fill-parent" onClick={onCheckout}>
-          TIẾN HÀNH THANH TOÁN
-        </Button>
-      </div>
+      ) : (
+        <CrossSell handleCheckout={handleCheckout} />
+      )}
     </div>
   );
 };
 
-interface CartContentProps {
-  cartItems: CartItem[];
+interface CartSidebarFooterProps {
+  handleCheckout: () => void;
 }
-const CartContent: React.FC<CartContentProps> = ({ cartItems }) => {
+
+const CartSidebarFooter: React.FC<CartSidebarFooterProps> = ({
+  handleCheckout,
+}) => {
+  const cartTotalSum = useAppSelector(cartSumSelector);
+
   return (
-    <div className={styles["cart-sidebar-body"]}>
-      {cartItems.map((cartItem, index) => (
-        <CartSidebarItem cartItem={cartItem} key={index} />
-      ))}
+    <div className={styles.cartSidebarFooter}>
+      <div className={styles.cartSidebarFooterTotal}>
+        <Text.P thickness="thin">Tổng:</Text.P>
+        <Text.P thickness="thick" size="large">
+          {formatCurrency(cartTotalSum)}
+        </Text.P>
+      </div>
+      <Button color="red-soil" mode="fill-parent" onClick={handleCheckout}>
+        TIẾN HÀNH THANH TOÁN
+      </Button>
     </div>
   );
 };
-
-export default CartSidebar;

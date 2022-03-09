@@ -40,6 +40,7 @@ const CartSidebarItem: React.FC<CartSidebarItemProps> = ({ cartItem }) => {
   }, [cartItem.quantity]);
 
   const onDeleteItemClick = () => {
+    setIsDeleting(false);
     dispatch(deleteSelectionFromCart(cartItem.selection));
   };
 

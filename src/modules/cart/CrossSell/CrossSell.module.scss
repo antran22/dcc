@@ -1,4 +1,5 @@
 @import "src/shared/styles/constants.scss";
+@import "src/shared/styles/mixins.scss";
 
 .cross-sell {
   text-align: center;
@@ -14,7 +15,8 @@
   &-items-wrapper {
     margin-top: $s5;
 
-    height: 50vh;
+    align-items: stretch;
     overflow-y: auto;
+    @include no-scrollbar;
   }
 }

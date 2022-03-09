@@ -1,5 +1,5 @@
 import PlainLayout from "#/layout/PlainLayout";
-import { Order } from "#/types";
+import { createOrder, CreateOrderInput, Order } from "@/graphql/order";
 import { NextPage } from "next";
 import React, { useState } from "react";
 import CartSummary from "./CartSummary";
@@ -10,15 +10,23 @@ import Footer from "./Footer";
 
 const CheckoutPage: NextPage = () => {
   const [order, setOrder] = useState<Order>();
+  const [orderInput, setOrderInput] = useState<CreateOrderInput>();
 
-  const onCheckout: CheckoutHandler = (order, done) => {};
+  const onCheckout: CheckoutHandler = (input, done) => {
+    setOrderInput(input);
+
+    createOrder(input).then((orderResult) => {
+      setOrder(orderResult);
+      done();
+    });
+  };
 
   return (
     <PlainLayout title="Thanh toán" headerSimple>
       <div className={styles.checkoutPageContent}>
         <section className={styles.checkoutPageContentSection}>
-          {order ? (
-            <CheckoutSuccess order={order} />
+          {order && orderInput ? (
+            <CheckoutSuccess order={order} orderInput={orderInput} />
           ) : (
             <CheckoutForm handleCheckout={onCheckout} />
           )}
