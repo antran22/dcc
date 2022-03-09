@@ -14,7 +14,7 @@ const Cart: React.FC = () => {
       onClick={() => setOpenCartBar(true)}
       classNames={[styles.cartButton]}
     >
-      <div className={styles["cart"]}>{cartCount}</div>
+      {cartCount}
     </Button>
   );
 };

@@ -2,7 +2,7 @@
 @import "../../styles/colors.scss";
 
 $cart-dimension: 40px;
-.cart {
+.cart-button {
   height: $cart-dimension;
   width: $cart-dimension;
 
@@ -13,8 +13,5 @@ $cart-dimension: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.cart-button {
   padding: 0;
 }

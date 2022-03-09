@@ -11,7 +11,7 @@
   padding: $s3 $s2;
 
   &:focus {
-    outline: $s1 solid $blue;
+    box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px, rgb(51, 51, 51) 0 0 0 3px;
   }
 
   &-disabled {
@@ -70,6 +70,8 @@ $highlight-rate: 30%;
         background-color: color.scale($color, $lightness: $highlight-rate);
       }
     }
+
+    overflow: hidden;
     transition: 0.5s;
     background-color: $color;
   }

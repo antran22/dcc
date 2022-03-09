@@ -1,1 +1,5 @@
-export { getServerSideProps, ComboDetailPage } from "./ComboDetailPage";
+export {
+  getStaticProps,
+  ComboDetailPage,
+  getStaticPaths,
+} from "./ComboDetailPage";

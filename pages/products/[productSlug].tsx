@@ -1,7 +1,8 @@
 import {
-  getServerSideProps,
+  getStaticProps,
   ProductDetailPage,
+  getStaticPaths,
 } from "@/modules/products/pages/ProductDetailPage";
 
 export default ProductDetailPage;
-export { getServerSideProps };
+export { getStaticProps, getStaticPaths };

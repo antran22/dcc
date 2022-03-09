@@ -1,7 +1,7 @@
 import LoadingScreen from "#/components/LoadingScreen";
-import { getProductDetail, Product } from "@/graphql/products";
+import { getProductDetail, getProductList, Product } from "@/graphql/products";
 import { ProductDetailPageTemplate } from "@/modules/products/components/ProductDetailPageTemplate";
-import { GetServerSideProps, NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import React from "react";
 import ComboInformation from "../../components/ComboInformation/ComboInformation";
 
@@ -21,10 +21,10 @@ export const ComboDetailPage: NextPage<ComboDetailPageProps> = ({ combo }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<
-  ComboDetailPageProps
-> = async (context) => {
-  const comboSlug = context.params?.comboSlug;
+export const getStaticProps: GetStaticProps<ComboDetailPageProps> = async (
+  context
+) => {
+  const comboSlug = context.params?.productSlug;
   if (!comboSlug) {
     return {
       notFound: true,
@@ -43,5 +43,17 @@ export const getServerSideProps: GetServerSideProps<
     props: {
       combo,
     },
+    revalidate: 900,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const combos = await getProductList("combo");
+  const pathsWithComboSlug = combos.map((combo) => ({
+    params: { comboSlug: combo.slug },
+  }));
+  return {
+    paths: pathsWithComboSlug,
+    fallback: true,
   };
 };

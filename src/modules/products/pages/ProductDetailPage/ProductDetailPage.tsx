@@ -1,7 +1,7 @@
-import { getProductDetail, Product } from "@/graphql/products";
-import { ProductDetailPageTemplate } from "../../components/ProductDetailPageTemplate";
-import { GetServerSideProps, NextPage } from "next";
+import { getProductDetail, getProductList, Product } from "@/graphql/products";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import React from "react";
+import { ProductDetailPageTemplate } from "../../components/ProductDetailPageTemplate";
 import ProductInformation from "../../components/ProductInformation/ProductInformation";
 
 interface ProductDetailPageProps {
@@ -18,9 +18,9 @@ export const ProductDetailPage: NextPage<ProductDetailPageProps> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps<
-  ProductDetailPageProps
-> = async (context) => {
+export const getStaticProps: GetStaticProps<ProductDetailPageProps> = async (
+  context
+) => {
   const productSlug = context.params?.productSlug;
   if (!productSlug) {
     return {
@@ -40,5 +40,17 @@ export const getServerSideProps: GetServerSideProps<
     props: {
       product,
     },
+    revalidate: 900,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const products = await getProductList("single-product");
+  const pathsWithProductSlug = products.map((product) => ({
+    params: { productSlug: product.slug },
+  }));
+  return {
+    paths: pathsWithProductSlug,
+    fallback: true,
   };
 };

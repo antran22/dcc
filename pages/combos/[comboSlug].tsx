@@ -1,7 +1,8 @@
 import {
-  getServerSideProps,
+  getStaticProps,
   ComboDetailPage,
+  getStaticPaths,
 } from "@/modules/combos/pages/ComboDetailPage";
 
 export default ComboDetailPage;
-export { getServerSideProps };
+export { getStaticProps, getStaticPaths };

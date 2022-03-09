@@ -1,1 +1,5 @@
-export { ProductDetailPage, getServerSideProps } from "./ProductDetailPage";
+export {
+  ProductDetailPage,
+  getStaticProps,
+  getStaticPaths,
+} from "./ProductDetailPage";

@@ -71,8 +71,12 @@ const CartSidebarHeader: React.FC = () => {
   }
 
   return (
-    <div className={styles["cart-sidebar-header"]}>
-      <Button color="white" onClick={() => setCurrentStep(0)}>
+    <div className={styles.cartSidebarHeader}>
+      <Button
+        color="white"
+        onClick={() => setCurrentStep(0)}
+        classNames={[styles.cartSidebarButton]}
+      >
         <BackIcon size={20} />
       </Button>
       <Spacer />

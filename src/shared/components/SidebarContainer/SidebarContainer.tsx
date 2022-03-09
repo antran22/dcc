@@ -78,6 +78,7 @@ const SidebarContainer: React.FC<SidebarContainerProps> = ({
             {title}
           </div>
           <Button
+            classNames={[styles.sidebarContainerButton]}
             onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
             color="white"
           >
