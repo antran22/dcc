@@ -17,7 +17,6 @@ $sidebar-width: 500px;
   &-open {
     background-color: opacify($black, 0.85);
   }
-
   &-close {
     background-color: opacify($black, 0);
   }
@@ -36,13 +35,17 @@ $sidebar-width: 500px;
 
     &-open {
       width: $sidebar-width;
-
-      @media screen and (max-width: $breakpoint-mobile) {
+      max-width: 100vw;
+      > * {
+        display: unset;
       }
     }
 
     &-close {
       width: 0;
+      > * {
+        display: none;
+      }
     }
 
     &-header {
@@ -76,11 +79,15 @@ $sidebar-width: 500px;
   }
 
   &-button {
+    border:none;
     border-radius: 50px;
     height: 50px;
     width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    &:focus {
+      box-shadow: none;
+    }
   }
 }

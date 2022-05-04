@@ -54,7 +54,7 @@ const SidebarContainer: React.FC<SidebarContainerProps> = ({
   return (
     <div
       className={c([
-        styles["sidebar-container"],
+        styles.sidebarContainer,
         styles[`sidebar-container-${sidebarIsOpen ? "open" : "close"}`],
       ])}
       style={{

@@ -30,11 +30,16 @@ $custom-btn-padding: 10vw;
   }
 
   &-title {
-    font-size: 8rem;
     transform: translateX(-4px);
-    @include mobile-upward {
+    @include tablet-upward {
+      font-size: 8rem;
       width: 50%;
     }
+    @include mobile-upward {
+      font-size: 6rem;
+      width: 80%;
+    }
+    font-size: 6rem;
     width: 100%;
   }
 
