@@ -5,6 +5,7 @@ import { colors } from "#/styles/colors";
 import c from "classnames";
 import Head from "next/head";
 import React from "react";
+import { Textfit } from "react-textfit";
 import tinycolor from "tinycolor2";
 import styles from "./DetailLayout.module.scss";
 
@@ -55,7 +56,14 @@ const DetailLayout: React.FC<DetailLayoutProps> = ({
                 color: titleColor,
               }}
             >
-              {title}
+              <Textfit
+                mode="multi"
+                style={{
+                  height: "100%",
+                }}
+              >
+                {title}
+              </Textfit>
             </h1>
           ) : (
             header

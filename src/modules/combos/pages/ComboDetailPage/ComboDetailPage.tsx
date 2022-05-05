@@ -24,7 +24,7 @@ export const ComboDetailPage: NextPage<ComboDetailPageProps> = ({ combo }) => {
 export const getStaticProps: GetStaticProps<ComboDetailPageProps> = async (
   context
 ) => {
-  const comboSlug = context.params?.productSlug;
+  const comboSlug = context.params?.comboSlug;
   if (!comboSlug) {
     return {
       notFound: true,

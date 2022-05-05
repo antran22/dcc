@@ -86,8 +86,6 @@ $sidebar-width: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
-    &:focus {
-      box-shadow: none;
-    }
+
   }
 }

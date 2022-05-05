@@ -1,4 +1,5 @@
 import "#/styles/globals.scss";
+import LoadingIndicator from "#/components/LoadingIndicator";
 import apolloClient from "@/graphql/apolloClient";
 import { ApolloProvider } from "@apollo/client";
 import type { AppProps } from "next/app";
@@ -51,6 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
             <CartSidebar />
             <MenuSidebar />
+            <LoadingIndicator/>
           </ContextWrapper>
         </ApolloProvider>
       </PersistGate>

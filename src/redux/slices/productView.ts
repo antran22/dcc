@@ -74,7 +74,7 @@ export const productViewSelector = (state: RootState) => state.productView;
 export const previewImageSelector = createSelector(
   [productViewSelector],
   ({ product, selectedColor, selectedSize }): ProductMedia[] => {
-    if (selectedColor && selectedSize) {
+    if (selectedColor || selectedSize) {
       if (!product) {
         return [];
       }

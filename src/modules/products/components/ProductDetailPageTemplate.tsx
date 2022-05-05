@@ -17,6 +17,9 @@ import {
 import _ from "lodash";
 import { NextPage } from "next";
 import React, { useEffect } from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 
 interface ProductDetailPageTemplateProps {
   product: Product;
@@ -52,10 +55,22 @@ export const ProductDetailPageTemplate: NextPage<
       themeColorCode={color}
       previewImages={previewProductImage}
       footer={
-        <div className={styles.productsDetailsPageContentFooter}>
-          <Text.P size="large">{getPriceStringFromProduct(product)}</Text.P>
-          <QuantityControl />
-        </div>
+        <Container>
+          <Row class={styles.footer}>
+            <Col
+              xs={12}
+              md={4}
+              className="d-flex justify-content-center align-items-center"
+            >
+              <Text.P size="large" style={{ textAlign: "center" }}>
+                {getPriceStringFromProduct(product)}
+              </Text.P>
+            </Col>
+            <Col xs={12} md={8}>
+              <QuantityControl />
+            </Col>
+          </Row>
+        </Container>
       }
     >
       {children}

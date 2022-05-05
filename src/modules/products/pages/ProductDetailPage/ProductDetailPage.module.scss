@@ -49,20 +49,21 @@
       }
       text-align: center;
     }
+  }
+}
 
-    &-footer {
-      display: flex;
-      height: 80px;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 $s5;
-      border-top: 1px solid $grey;
+.footer {
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+  padding: $s1 $s5;
+  border-top: 1px solid $grey;
 
-      @media screen and (max-width: $breakpoint-tablet) {
-        position: sticky;
-        bottom: 0;
-        background-color: $white;
-      }
-    }
+  @media screen and (max-width: $breakpoint-tablet) {
+    position: sticky;
+    bottom: 0;
+    background-color: $white;
+    height: 100px;
+    padding: $s1;
   }
 }

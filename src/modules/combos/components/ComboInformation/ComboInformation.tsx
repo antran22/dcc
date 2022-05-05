@@ -30,7 +30,7 @@ const ComboInformation: React.FC<ComboInformationProps> = ({ combo }) => {
   );
 
   return (
-    <div className={styles.comboInformation}>
+    <>
       <Row className={c("m-3", "px-3", styles.comboInformation)}>
         <Col xs={{ span: 10, offset: 1 }} lg={{ span: 5, offset: 0 }}>
           <div className={styles.comboInformationBox}>
@@ -73,7 +73,7 @@ const ComboInformation: React.FC<ComboInformationProps> = ({ combo }) => {
       >
         <RichTextRenderer input={combo.description} />
       </ModalWrapper>
-    </div>
+    </>
   );
 };
 

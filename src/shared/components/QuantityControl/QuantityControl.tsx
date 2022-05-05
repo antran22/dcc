@@ -55,7 +55,7 @@ const QuantityControl: React.FC<QuantityControlProps> = ({}) => {
 
   return (
     <div className={styles.quantityControl}>
-      <p>
+      <p className={styles.quantityControlAvailable}>
         <span>Có thể mua: </span>
         <span style={{ width: 20 }}>
           {loading ? (
@@ -70,7 +70,7 @@ const QuantityControl: React.FC<QuantityControlProps> = ({}) => {
           <Button onClick={onRemoveItemClick} color="white">
             <Minus size={16} />
           </Button>
-          <p>{cartItem.quantity}</p>
+          <p className={styles.quantityControlInCart}>{cartItem.quantity}</p>
           <Button
             onClick={onAddItemClick}
             color="white"

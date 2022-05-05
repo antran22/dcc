@@ -1,9 +1,5 @@
 import ListingLayout from "#/layout/ListingLayout";
-import {
-  getPriceStringFromProduct,
-  getProductAttributeMap,
-  ProductListItem,
-} from "@/graphql/products";
+import { getPriceStringFromProduct, getProductAttributeMap, ProductListItem } from "@/graphql/products";
 import ProductCard from "@/modules/products/components/ProductCard";
 import _ from "lodash";
 import React from "react";
@@ -14,9 +10,11 @@ interface ProductListPageTemplateProps {
   hrefFolder: string;
 }
 
-export const ProductListPageTemplate: React.FC<
-  ProductListPageTemplateProps
-> = ({ products, title, hrefFolder }) => {
+export const ProductListPageTemplate: React.FC<ProductListPageTemplateProps> = ({
+  products,
+  title,
+  hrefFolder,
+}) => {
   return (
     <ListingLayout title={title}>
       {products.map((productListItem) => {

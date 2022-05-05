@@ -11,7 +11,6 @@ import {
   getProductSizes,
   Product,
 } from "@/graphql/products";
-import { useAppDispatch } from "@/redux/hooks";
 import c from "classnames";
 // @ts-ignore
 import editorJSHTML from "editorjs-html";
@@ -32,8 +31,6 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
   const [showSizeGuidanceModal, setShowSizeGuidanceModal] = useState(false);
   const [showSpecModal, setShowSpecModal] = useState(false);
 
-  const dispatch = useAppDispatch();
-
   const productAttribute = getProductAttributeMap(product);
 
   const productDescriptionBrief = extractRichTextAttributeValue(
@@ -42,9 +39,6 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
   const productUsage = extractRichTextAttributeValue(productAttribute["usage"]);
 
   const productSpecs = extractRichTextAttributeValue(productAttribute["specs"]);
-  const productSpecsBrief = extractRichTextAttributeValue(
-    productAttribute["specs-brief"]
-  );
 
   const productSizeGuidance = extractRichTextAttributeValue(
     productAttribute["size-guidance"]
@@ -58,8 +52,8 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
       <Row className={c("m-3", "px-3", styles.itemInformation)}>
         {colors.length > 1 && (
           <Col
-            xs={{ offset: 3, span: 6 }}
-            lg={{ offset: 2, span: 8 }}
+            xs={{ offset: 1, span: 10 }}
+            lg={{ offset: 3, span: 6 }}
             xl={{ offset: 4, span: 4 }}
           >
             <ColorPicker colors={colors} />
@@ -120,8 +114,8 @@ const ProductInformation: React.FC<ItemInformationProps> = ({ product }) => {
               variant="outline"
             >
               <div className="d-flex justify-content-center flex-row align-items-center">
-                <Text.P thickness="thin" as="div">
-                  <RichTextRenderer input={productSpecsBrief} />
+                <Text.P thickness="thin" as="div" classNames={["me-2"]}>
+                  Xem thêm
                 </Text.P>
                 <Question color="grey" />
               </div>

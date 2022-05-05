@@ -52,6 +52,7 @@ const Carousel: React.FC<CarouselProps> = ({
         infinite
         autoplay={autoplay}
         slidesToShow={slidesToShow}
+        swipe
         slidesToScroll={slidesToScroll}
         speed={500}
         appendDots={CustomPagination}
