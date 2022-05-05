@@ -1,6 +1,6 @@
 import Text from "#/components/Text";
 import { CartItem, getProductSelectionThumbnail } from "#/types";
-import { formatCurrency } from "#/utils/number";
+import { formatCurrency } from "#/utils/misc";
 import {
   getProductVariantPrice,
   productSelectionName,

@@ -8,7 +8,7 @@ import {
   getProductSelectionThumbnail,
   ProductSelection,
 } from "#/types";
-import { clamp, formatCurrency } from "#/utils/number";
+import { clamp, formatCurrency } from "#/utils/misc";
 import { getProductVariantPrice } from "@/graphql/products";
 import { useAppDispatch } from "@/redux/hooks";
 import {

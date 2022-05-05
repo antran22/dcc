@@ -1,5 +1,5 @@
 import { ProductSelection } from "#/types";
-import { formatCurrency } from "#/utils/number";
+import { formatCurrency } from "#/utils/misc";
 import { ProductPricing } from "@/graphql/products/__generated__/ProductPricing";
 import { AttributeValue } from "./__generated__/AttributeValue";
 

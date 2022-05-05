@@ -1,4 +1,5 @@
 import { CartItem } from "#/types";
+import { at } from "#/utils/misc";
 import {
   AddressInput,
   CheckoutLineInput,
@@ -44,7 +45,7 @@ export async function createCheckout({
 
   const checkoutToken = checkout.token;
   const checkoutId = checkout.id;
-  const deliveryId = checkout.shippingMethods.at(0)?.id;
+  const deliveryId = at(checkout.shippingMethods, 0)?.id;
 
   if (!checkoutToken || !deliveryId || !checkoutId) {
     throw new Error("unable to create checkout");

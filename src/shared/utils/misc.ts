@@ -16,3 +16,13 @@ export function clamp(n: number, min: number, max: number) {
   }
   return n;
 }
+
+export function at<T>(
+  array: T[] | undefined | null,
+  index: number
+): T | undefined {
+  if (!array || array.length === 0) {
+    return undefined;
+  }
+  return array[index];
+}

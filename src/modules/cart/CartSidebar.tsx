@@ -4,7 +4,7 @@ import Spacer from "#/components/Spacer";
 import Text from "#/components/Text";
 import { CartSidebarContext } from "#/contexts/CartSidebarContext";
 import { CartItem } from "#/types";
-import { formatCurrency } from "#/utils/number";
+import { formatCurrency } from "#/utils/misc";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   cartItemsSelector,

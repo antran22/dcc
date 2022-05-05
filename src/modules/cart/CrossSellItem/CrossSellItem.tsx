@@ -4,7 +4,7 @@ import {
   getProductSelectionThumbnail,
   ProductSelectionCrossSell,
 } from "#/types";
-import { formatCurrency } from "#/utils/number";
+import { formatCurrency } from "#/utils/misc";
 import {
   CrossSellProductVariant,
   getProductVariantPrice,

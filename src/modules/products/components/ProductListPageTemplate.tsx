@@ -1,4 +1,5 @@
 import ListingLayout from "#/layout/ListingLayout";
+import { at } from "#/utils/misc";
 import { getPriceStringFromProduct, getProductAttributeMap, ProductListItem } from "@/graphql/products";
 import ProductCard from "@/modules/products/components/ProductCard";
 import _ from "lodash";
@@ -18,7 +19,7 @@ export const ProductListPageTemplate: React.FC<ProductListPageTemplateProps> = (
   return (
     <ListingLayout title={title}>
       {products.map((productListItem) => {
-        const firstImage = productListItem.media?.at(0);
+        const firstImage = at(productListItem.media, 0);
         const productAttributes = getProductAttributeMap(productListItem);
         const price = getPriceStringFromProduct(productListItem);
         const themeColorCode =
