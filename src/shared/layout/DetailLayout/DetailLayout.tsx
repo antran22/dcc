@@ -56,12 +56,7 @@ const DetailLayout: React.FC<DetailLayoutProps> = ({
                 color: titleColor,
               }}
             >
-              <Textfit
-                mode="multi"
-                style={{
-                  height: "100%",
-                }}
-              >
+              <Textfit mode="single" style={{ width: "100%" }} max={80}>
                 {title}
               </Textfit>
             </h1>
