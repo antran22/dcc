@@ -1,4 +1,5 @@
 import {
+  productAttributeFragment,
   productMediaFragment,
   productVariantFragment,
 } from "@/graphql/products/index";
@@ -28,10 +29,14 @@ export const crossSellQuery = gql`
             ...ProductVariant
             quantityAvailable
           }
+          attributes {
+            ...ProductAttribute
+          }
         }
       }
     }
   }
+  ${productAttributeFragment}
   ${productMediaFragment}
   ${productVariantFragment}
 `;

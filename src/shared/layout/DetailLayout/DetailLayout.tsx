@@ -11,6 +11,7 @@ import styles from "./DetailLayout.module.scss";
 
 interface DetailLayoutProps {
   title: string;
+  subtitle?: string;
   children?: React.ReactNode;
   header?: React.ReactNode;
   footer?: React.ReactNode;
@@ -20,6 +21,7 @@ interface DetailLayoutProps {
 
 const DetailLayout: React.FC<DetailLayoutProps> = ({
   title,
+  subtitle,
   children,
   header,
   footer,
@@ -62,6 +64,10 @@ const DetailLayout: React.FC<DetailLayoutProps> = ({
             </h1>
           ) : (
             header
+          )}
+
+          {subtitle && (
+            <p className={styles.detailLayoutSubtitle}>{subtitle}</p>
           )}
 
           <div className={styles.detailLayoutContent}>

@@ -124,6 +124,59 @@ export interface CrossSellProductsQuery_products_edges_node_variants {
   quantityAvailable: number | null;
 }
 
+export interface CrossSellProductsQuery_products_edges_node_attributes_attribute {
+  __typename: "Attribute";
+  /**
+   * Internal representation of an attribute name.
+   */
+  slug: string | null;
+  /**
+   * Name of an attribute displayed in the interface.
+   */
+  name: string | null;
+}
+
+export interface CrossSellProductsQuery_products_edges_node_attributes_values {
+  __typename: "AttributeValue";
+  id: string;
+  /**
+   * Name of a value displayed in the interface.
+   */
+  name: string | null;
+  /**
+   * Represent value of the attribute value (e.g. color values for swatch attributes).
+   */
+  value: string | null;
+  /**
+   * Represents the text (JSON) of the attribute value.
+   */
+  richText: any | null;
+  /**
+   * Represents the boolean value of the attribute value.
+   */
+  boolean: boolean | null;
+  /**
+   * Represents the date time value of the attribute value.
+   */
+  dateTime: any | null;
+  /**
+   * The ID of the attribute reference.
+   */
+  reference: string | null;
+}
+
+export interface CrossSellProductsQuery_products_edges_node_attributes {
+  __typename: "SelectedAttribute";
+  /**
+   * Name of an attribute displayed in the interface.
+   */
+  attribute: CrossSellProductsQuery_products_edges_node_attributes_attribute;
+  /**
+   * Values of an attribute.
+   */
+  values: (CrossSellProductsQuery_products_edges_node_attributes_values | null)[];
+}
+
 export interface CrossSellProductsQuery_products_edges_node {
   __typename: "Product";
   id: string;
@@ -137,6 +190,10 @@ export interface CrossSellProductsQuery_products_edges_node {
    * List of variants for the product.
    */
   variants: (CrossSellProductsQuery_products_edges_node_variants | null)[] | null;
+  /**
+   * List of attributes assigned to this product.
+   */
+  attributes: CrossSellProductsQuery_products_edges_node_attributes[];
 }
 
 export interface CrossSellProductsQuery_products_edges {

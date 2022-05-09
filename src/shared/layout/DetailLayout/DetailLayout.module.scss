@@ -48,6 +48,11 @@
     padding: 0 $s3;
   }
 
+  &-subtitle {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
   &-content {
     display: flex;
     flex: 1;

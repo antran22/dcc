@@ -17,7 +17,6 @@ $border-size: 2px;
     }
 
     &-details {
-      padding: $s3 $s5;
 
       &-items {
         padding: $s5 0;
@@ -32,7 +31,6 @@ $border-size: 2px;
         &-wrapper {
           display: flex;
           justify-content: space-between;
-          padding-bottom: $s5;
 
           &-image {
             position: relative;

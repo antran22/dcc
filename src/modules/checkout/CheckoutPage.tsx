@@ -2,9 +2,10 @@ import PlainLayout from "#/layout/PlainLayout";
 import { createOrder, CreateOrderInput, Order } from "@/graphql/order";
 import { NextPage } from "next";
 import React, { useState } from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import CartSummary from "./CartSummary";
 import CheckoutForm, { CheckoutHandler } from "./CheckoutForm";
-import styles from "./CheckoutPage.module.scss";
 import CheckoutSuccess from "./CheckoutSuccess";
 import Footer from "./Footer";
 
@@ -23,17 +24,19 @@ const CheckoutPage: NextPage = () => {
 
   return (
     <PlainLayout title="Thanh toán" headerSimple>
-      <div className={styles.checkoutPageContent}>
-        <section className={styles.checkoutPageContentSection}>
-          {order && orderInput ? (
-            <CheckoutSuccess order={order} orderInput={orderInput} />
-          ) : (
-            <CheckoutForm handleCheckout={onCheckout} />
-          )}
-        </section>
-        <section className={styles.checkoutPageContentSection}>
-          <CartSummary />
-        </section>
+      <div>
+        <Row className="flex-column-reverse flex-xl-row">
+          <Col as="section" xs={12} xl={6}>
+            {order && orderInput ? (
+              <CheckoutSuccess order={order} orderInput={orderInput} />
+            ) : (
+              <CheckoutForm handleCheckout={onCheckout} />
+            )}
+          </Col>
+          <Col as="section" xs={12} xl={6}>
+            <CartSummary />
+          </Col>
+        </Row>
       </div>
       <Footer />
     </PlainLayout>

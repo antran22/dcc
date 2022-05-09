@@ -49,14 +49,20 @@ export const ProductDetailPageTemplate: NextPage<
 
   const color = _.first(attributes["theme-color"])?.value ?? "#ffffff";
 
+  const giftNames = attributes["gift"]?.map((gift) => gift.name);
+  const subtitle = giftNames?.length
+    ? `Tặng kèm ${giftNames.join(", ")}`
+    : undefined;
+
   return (
     <DetailLayout
       title={product.name}
+      subtitle={subtitle}
       themeColorCode={color}
       previewImages={previewProductImage}
       footer={
         <Container>
-          <Row class={styles.footer}>
+          <Row className={styles.footer}>
             <Col
               xs={12}
               md={4}

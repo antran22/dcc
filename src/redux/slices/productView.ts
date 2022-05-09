@@ -85,11 +85,11 @@ export const previewImageSelector = createSelector(
         selectedSize
       );
 
-      if (!variant) {
+      if (!variant || !variant.media?.length) {
         return product.media ?? [];
       }
 
-      return variant.media ?? [];
+      return variant.media;
     }
     if (product) {
       return product.media ?? [];
