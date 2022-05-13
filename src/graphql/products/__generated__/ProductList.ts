@@ -137,6 +137,7 @@ export interface ProductList_category_products_edges_node {
   __typename: "Product";
   id: string;
   slug: string;
+  created: any;
   name: string;
   /**
    * List of attributes assigned to this product.

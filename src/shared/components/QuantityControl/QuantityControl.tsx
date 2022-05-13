@@ -56,14 +56,16 @@ const QuantityControl: React.FC<QuantityControlProps> = ({}) => {
   return (
     <div className={styles.quantityControl}>
       <p className={styles.quantityControlAvailable}>
-        <span>Có thể mua: </span>
-        <span style={{ width: 20 }}>
-          {loading ? (
-            <Spinner as="span" animation="border" size="sm" />
-          ) : (
-            quantityAvailable
-          )}
-        </span>
+        {loading ? (
+          <Spinner as="span" animation="border" size="sm" />
+        ) : !quantityAvailable || quantityAvailable <= 0 ? (
+          <span>Hết hàng</span>
+        ) : (
+          <>
+            <span>Còn lại: </span>
+            <span style={{ width: 20 }}>{quantityAvailable}</span>
+          </>
+        )}
       </p>
       {cartItem && cartItem.quantity > 0 ? (
         <>
