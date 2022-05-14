@@ -67,7 +67,6 @@ const ComboInformation: React.FC<ComboInformationProps> = ({ combo }) => {
       </Row>
 
       <ModalWrapper
-        className={styles.comboModal}
         visible={showMeaningModal}
         onClose={() => setShowMeaningModal(false)}
       >

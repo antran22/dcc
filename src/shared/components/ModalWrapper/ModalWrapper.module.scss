@@ -1,5 +1,6 @@
 @import "../../styles/colors.scss";
 @import "../../styles/constants.scss";
+@import "../../styles/mixins.scss";
 
 .modal-wrapper {
   background-color: opacify($black, 0.7);
@@ -26,15 +27,24 @@
     opacity: 0;
   }
 
+  &-inner-content {
+    max-height: 400px;
+    overflow-y: scroll;
+  }
+
   &-content {
+    max-height: 100vh;
     background-color: $white;
 
-    overflow: hidden;
+    @include mobile-downward {
+      padding: $s3;
+    }
     padding: $s6 $s6 $s4;
   }
 
   &-button-container {
     margin-top: $s5;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,6 +1,11 @@
+@import "src/shared/styles/mixins";
+
 .preview {
   height: 100%;
-  width: 70%;
+  @include tablet-upward {
+    width: 70%;
+  }
+  width: 100%;
 
   &-image-wrapper {
     position: relative;

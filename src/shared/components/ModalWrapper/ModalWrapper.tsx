@@ -64,7 +64,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
         ref={contentRef}
         className={c(styles["modal-wrapper-content"], className)}
       >
-        <div>{children}</div>
+        <div className={c(styles.modalWrapperInnerContent)}>{children}</div>
 
         <div className={styles.modalWrapperButtonContainer}>
           <Button

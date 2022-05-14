@@ -61,10 +61,14 @@
 }
 
 .item-modal {
-  width: 50%;
-  padding: $s6 $s6 $s4;
+  @include tablet-upward {
+    width: 50%;
+  }
+  width: 100%;
 
-  & h1,h2,h3 {
+  & h1,
+  h2,
+  h3 {
     text-align: center;
     margin-bottom: $s5;
   }

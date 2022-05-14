@@ -11,7 +11,10 @@
   background-color: $white;
   top: 0;
   z-index: 9999;
-  height: $header-height;
+  @include mobile-upward {
+    height: $header-height;
+  }
+  height: $mobile-header-height;
 
   padding: $header-vertical-padding $s5;
 
